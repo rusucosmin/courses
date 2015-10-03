@@ -1,0 +1,2 @@
+[9]
+For a given natural number n find the minimal natural number m formed with the same digits. E.g. n=3658, m=3568.
