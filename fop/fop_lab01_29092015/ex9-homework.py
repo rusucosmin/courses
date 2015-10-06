@@ -58,6 +58,13 @@ def solve(n):
 	print (''.join(str(x) for x in solveCase1(digits)))
 	print("Minimal number without beginnings 0:")
 	print (''.join(str(x) for x in solveCase2(digits)))
+	return int(''.join(str(x) for x in solveCase2(digits)))
+
+def testSolution():
+	assert solve(0) == 0
+	assert solve(1) == 1
+	assert solve(4321) == 1234
+	assert solve(400213) == 100234
 
 if __name__ == '__main__':
 	n = getInput()
