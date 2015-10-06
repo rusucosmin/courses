@@ -1,3 +1,4 @@
+__author__  = 'cosmin'
 
 def solveCase2(l):
 	if l == [0]:
@@ -44,17 +45,21 @@ def readInput():  # function that reads input and returns an integer or None if 
 def solveCase1(digits): #function that returns the nondecreasing sorted list of list "digits"
 	return sorted(digits)
 
-def main():
+def getInput():
 	n = None
 	while n is None:
 		n = readInput()
-	digits = extractDigits(n)
+	return n
+
+def solve(n):
 	#ambiguity in the problem statement
+	digits = extractDigits(n)
 	print ("Minimal number with beginning 0:")
 	print (''.join(str(x) for x in solveCase1(digits)))
 	print("Minimal number without beginnings 0:")
 	print (''.join(str(x) for x in solveCase2(digits)))
 
-
 if __name__ == '__main__':
-	main()
+	n = getInput()
+	solve(n)
+	
