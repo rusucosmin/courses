@@ -22,6 +22,15 @@ def solveCase2(l):
 	return ret
 
 def extractDigits(x):  #functions that returns a list containing the digits of a number
+	'''
+	Extracts the digits of a number to a list of integers
+
+	x - integer, the number to ext dig from, x >= 0
+
+	throws...
+
+	returns a list of x's dig
+	'''
 	digits = []
 	if x == 0:
 		return [0]
@@ -54,9 +63,6 @@ def getInput():
 def solve(n):
 	#ambiguity in the problem statement
 	digits = extractDigits(n)
-	print ("Minimal number with beginning 0:")
-	print (''.join(str(x) for x in solveCase1(digits)))
-	print("Minimal number without beginnings 0:")
 	print (''.join(str(x) for x in solveCase2(digits)))
 	return int(''.join(str(x) for x in solveCase2(digits)))
 
