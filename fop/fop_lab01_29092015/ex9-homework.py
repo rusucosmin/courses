@@ -38,13 +38,13 @@ def extractDigits(x):  #functions that returns a list containing the digits of a
 		digits.append(x % 10)
 		x = x // 10
 	return digits
-	
+
 def readInput():  # function that reads input and returns an integer or None if the user did not type a number
 	try:
 		ret = int(input("Please input a natural number "))
 		if ret >= 0:
 			return ret
-		else: 
+		else:
 			print("You did not enter a valid number.")
 			return None
 	except:
@@ -75,4 +75,4 @@ def testSolution():
 if __name__ == '__main__':
 	n = getInput()
 	solve(n)
-	
+print ("ceva")

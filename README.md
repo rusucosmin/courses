@@ -1,4 +1,4 @@
-###Contents
+#Contents
 **Here are all my courses from the Faculty of Mathematics and Computer Science, Babes-Bolyai University**
 
 ##First semester
