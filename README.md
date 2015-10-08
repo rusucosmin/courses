@@ -8,7 +8,7 @@ First semester:
 		</ul>
 	<li>Fundamentals of programming - folder fop</li>
 		<ul>
-			<li><a href = "http://www.cs.ubbcluj.ro/~arthur/Fundamentals%20of%20Programming/"</a></li>
+			<li><a href = "http://www.cs.ubbcluj.ro/~arthur/Fundamentals%20of%20Programming/">Link</a></li>
 			<li><a href = "https://drive.google.com/folderview?id=0BzPcPEjc_dEBOW1WWG5uRXkyb00&usp=sharing">Grades</a></li>
 		</ul>
 	<li>Computer Systems Architecture - folder asc</li>
