@@ -1,4 +1,4 @@
-n = int(input())
+n = int(input("Cosmin"))
 print ('the first prime number larger than ' + str(n))
 while True:
     i = 2
@@ -7,7 +7,7 @@ while True:
     while i * i <= n and prime:
         if n % i == 0:
             prime = False;
-        i += 1 
+        i += 1
     if prime == True:
         break
     n += 1
