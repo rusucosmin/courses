@@ -112,7 +112,7 @@ def addTransaction(transactionList):
 
 def removeTransactionDay(transactionList):
     transactionDay = getDate()
-    return [transaction for transaction in transactionList if transaction[0] ==transactionDay]
+    return [transaction for transaction in transactionList if transaction[0] != transactionDay]
 
 def removeTransactionInterval(transactionList):
     startDate = getDate()
@@ -120,10 +120,10 @@ def removeTransactionInterval(transactionList):
     while startDate > endDate:
         print("Not an interval")
         endDate = getDate()
-    return [transaction for transaction in transactionList if startDate <= transaction[0] <= endDate]
+    return [transaction for transaction in transactionList if not startDate <= transaction[0] <= endDate]
 
 def removeInTransaction(transactionList):
-    return [transaction for transaction in transactionList if transaction[2] == 'in']
+    return [transaction for transaction in transactionList if transaction[2] != 'in']
 
 def replaceTransaction(transactionList):
     print("Please input the day, type and description for the transaction you want to update")
@@ -156,6 +156,12 @@ def modifyTransaction(transactionList):
         transactionList = removeInTransaction(transactionList)
     elif modifyTransactionType == 4:
         transactionList = replaceTransaction(transactionList)
+    return transactionList
+
+def assertions:
+    assert representsInt(getDate()) == True
+    assert representsInt(getAmount()) == True
+    assert representsInt(getType())
 
 def main():
     '''
