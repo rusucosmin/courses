@@ -16,8 +16,8 @@ Feature no.   | Description                                             | Comman
 1             | Add a new transaction into the list.				    | * add X,Y,description * insert X, Y, in/out, * description>
 2             | Modify transactions from the list                       | * remove X * remove from X to Y * remove in/out * replace X, in/out, description with Y
 3             | Write the transactions having different properties.     | * greater than X * less than X before Y * all in/out * list * balance X
-4             | Obtain different characteristics of transactions        | * avg X Y * min X Y * mul X Y Z
-5             | Filter transactions.                                    | * filter mul X * filter greater X
+4             | Obtain different characteristics of transactions        | * sum in/out * max in/out X * asc sort day * desc sort type
+5             | Filter transactions.                                    | * filter in/out * filter in/out X
 6             | Undo the last operation.                                | * undo
 
 ## Iteration plan
@@ -54,7 +54,7 @@ Iteration no. | Planned features
         </tr>
         <tr>
             <td>2</td>
-            <td>`help`</td>
+            <td>help</td>
             <td></td>
             <td></td>
         </tr>
