@@ -1,4 +1,6 @@
 #  BANK ACCOUNT MANAGEMENT
+Author: Cosmin Rusu
+Date: 13 October 2015
 
 ## Problem statement
 John wants to **manage his bank account**. In order to complete this task, John needs an application to
@@ -110,3 +112,17 @@ Iteration no. | Planned features
         </tr>
     </tbody>
 </table>
+
+## Work items/tasks
+
+|Options |Description|
+|--------|-----------|
+|   T1   |Implement user interface                                  |
+|   T2   |Display menu              	 							|
+|   T3   |Display transactions          							|
+|   T4   |Test whether the commands are correct          			|
+|   T5   |Test whether the command's arguments are valid 			|
+|   T6   |Implement the add transaction functionality          		|	
+|   T7   |Implement the insert transaction functionality         	|
+|   T8   |Implement the remove transaction functionality            |
+|   T9   |Implement the replace transaction functionality           |
