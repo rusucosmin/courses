@@ -62,14 +62,16 @@ Iteration no. | Planned features
             <td>3</td>
             <td></td>
 			<td>Here are all the command you can use:<br>
-			 list - displays the list of all transactions <br>
-			 add X,Y,description - adds to the current day an in/out transaction of X RON with the given description<br>
-			 insert X, Y, in/out, description – inserts in day X an in/out transaction of Y RON with the given description<br>
-			 remove X – removes all the transactions from day X<br>
-			 remove from X to Y – removes all the transactions from day X until day Y<br>
-			 remove in/out – removes all the in/out transactions from the current month<br>
-			 replace X, in/out, description with Y – replaces the amount for the in/out transaction having the specified description from day X with Y RON<br>
-			 exit - to quit the application<br>
+			<ul>
+		<li> list - displays the list of all transactions </li>
+		<li> add X,Y,description - adds to the current day an in/out transaction of X RON with the given description</li>
+		<li>insert X, Y, in/out, description – inserts in day X an in/out transaction of Y RON with the given description</li>
+		<li>remove X – removes all the transactions from day X</li>
+		<li>remove from X to Y – removes all the transactions from day X until day Y</li>
+		<li>remove in/out – removes all the in/out transactions from the current month</li>
+		<li>replace X, in/out, description with Y – replaces the amount for the in/out transaction having the specified description from day X with Y RON</li>
+		<li>exit - to quit the application</li>
+			</ul>
 			</td>
             <td>Application show all the commands that can be made.</td>
         </tr>
