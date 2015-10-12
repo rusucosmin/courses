@@ -13,12 +13,12 @@ functionality is exemplified):
 
 Feature no.   | Description                                             | Commands
 :------------:|:-------------------------------------------------------:|:----------------------------------------------------------------------
-1             | Add a new transaction into the list.				    | * add X,Y,description * insert X, Y, in/out, * description>
-2             | Modify transactions from the list                       | * remove X * remove from X to Y * remove in/out * replace X, in/out, description with Y
-3             | Write the transactions having different properties.     | * greater than X * less than X before Y * all in/out * list * balance X
-4             | Obtain different characteristics of transactions        | * sum in/out * max in/out X * asc sort day * desc sort type
-5             | Filter transactions.                                    | * filter in/out * filter in/out X
-6             | Undo the last operation.                                | * undo
+1             | Add a new transaction into the list.				    | <ul><li>add X,Y,description</li><li>insert X,Y,in/out,description</li></ul>
+2             | Modify transactions from the list                       | <ul><li>remove X</li><li>remove from X to Y</li><li>remove in/out</li><li>replace X, in/out, description with Y</li></ul>
+3             | Write the transactions having different properties.     | <ul><li>greater than X</li><li>less than X before Y</li><li>all in/out</li><li>balance X</li></ul>
+4             | Obtain different characteristics of transactions        | <ul><li>sum in/out</li><li>max in/out X</li><li>asc sort day</li><li>desc sort type</li></ul>
+5             | Filter transactions.                                    | <ul><li>filter in/out</li><li>filter in/out X</li></ul>
+6             | Undo the last operation.                                | <ul><li>undo</li></ul>
 
 ## Iteration plan
 
@@ -62,14 +62,14 @@ Iteration no. | Planned features
             <td>3</td>
             <td></td>
 			<td>Here are all the command you can use:<br>
-			* list - displays the list of all transactions
-			* add X,Y,description - adds to the current day an in/out transaction of X RON with the given description
-			* insert X, Y, in/out, description – inserts in day X an in/out transaction of Y RON with the given description
-			* remove X – removes all the transactions from day X
-			* remove from X to Y – removes all the transactions from day X until day Y
-			* remove in/out – removes all the in/out transactions from the current month
-			* replace X, in/out, description with Y – replaces the amount for the in/out transaction having the specified description from day X with Y RON
-			* exit - to quit the application
+			 list - displays the list of all transactions <br>
+			 add X,Y,description - adds to the current day an in/out transaction of X RON with the given description<br>
+			 insert X, Y, in/out, description – inserts in day X an in/out transaction of Y RON with the given description<br>
+			 remove X – removes all the transactions from day X<br>
+			 remove from X to Y – removes all the transactions from day X until day Y<br>
+			 remove in/out – removes all the in/out transactions from the current month<br>
+			 replace X, in/out, description with Y – replaces the amount for the in/out transaction having the specified description from day X with Y RON<br>
+			 exit - to quit the application<br>
 			</td>
             <td>Application show all the commands that can be made.</td>
         </tr>
