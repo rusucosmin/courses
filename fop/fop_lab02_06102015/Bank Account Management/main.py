@@ -158,7 +158,7 @@ def modifyTransaction(transactionList):
         transactionList = replaceTransaction(transactionList)
     return transactionList
 
-def assertions:
+def assertions():
     assert representsInt(getDate()) == True
     assert representsInt(getAmount()) == True
     assert representsInt(getType())
