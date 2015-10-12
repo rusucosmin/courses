@@ -30,6 +30,7 @@ def displayCommands():
     print("     remove from X to Y – removes all the transactions from day X until day Y")
     print("     remove in/out – removes all the in/out transactions from the current month")
     print("     replace X, in/out, description with Y – replaces the amount for the in/out transaction having the specified description from day X with Y RON")
+    print("     exit - to quit the application")
 
 def printTransactions(transactionList):
     '''
@@ -306,6 +307,9 @@ def main():
             transactionList = removeTransaction(command, transactionList)
         elif command[0] == "replace":
             transactionList = replaceTransaction(command, transactionList)
+        elif command[0] == "exit":
+            print("Exiting")
+            break
         else:
             print('command not recognized')
 
