@@ -2,6 +2,12 @@ __author__ = 'cosmin'
 
 import datetime
 
+class SyntaxError(Exception):
+    pass
+
+class InvalidParameters(Exception):
+    pass
+
 def displayStartMenu():
     '''
     Function to display the START MENU
@@ -50,7 +56,7 @@ def representsInt(s):
     Function to return True if the :param s can be converted to int
 
     :param s: the string that the user has given
-    :rtype : boolean1
+    :rtype : boolean
     :return: True if string s is an integer
              False is string s is not an integer
     '''
@@ -70,26 +76,40 @@ def getAddTransaction(command):
             or None if there is a command syntax error
     '''
     if len(command) < 2:
-        print("invalid syntax")
-        return None
+        raise SyntaxError("Add command - Syntax Error!")
     argsList = command[1].split(',')
     if len(argsList) < 3:
-        print("not enough parameters, please input the amount, the type (in/out) and the description")
-        return None
-    if representsInt(argsList[0]) == False:
-        print("amount not an integer")
-        return None
+        raise InvalidParameters("Add command - Not enough parameters!")
+    if not representsInt(argsList[0]):
+        raise ValueError("Add command - The amount of money not an integer!")
     if int(argsList[0]) <= 0:
-        print('amount cannot be negative or nul')
-        return None
+        raise ValueError("Add command - The amount of money should be strictly positive!")
     if argsList[1].lower() not in ["in", "out"]:
-        print('the only known transaction types are in and out')
-        return None
+        raise InvalidParameters("Add command - The only known types are in and out!")
     description = ','.join(argsList[2:])
     if len(command) > 2:
         description = description + ' ' + ' '.join(command[2:])
     transaction = (datetime.datetime.now().day, int(argsList[0]), argsList[1], description)
     return transaction
+
+def addTransaction(command, transactionList):
+    '''
+    :param command: a list representing the command the user wants to make, which is the string splitted by spaces
+    :param transactionList: a list of touples where each transaction are stored
+    :return: a new transaction list which is the updated one, if the command is correctly inputted, or transactionList if the command is not good
+    '''
+    newTransaction = None
+    try:
+        newTransaction = getAddTransaction(command)
+    except ValueError as ve:
+        print(str(ve))
+    except SyntaxError as se:
+        print(str(se))
+    except InvalidParameters as ie:
+        print(str(ie))
+    if newTransaction is not None:
+        transactionList.append(newTransaction)
+    return transactionList
 
 def getInsertTransaction(command):
     '''
@@ -101,43 +121,25 @@ def getInsertTransaction(command):
             or None if there is a command syntax error
     '''
     if len(command) < 2:
-        print('invalid syntax')
-        return None
+        raise SyntaxError("Insert Command - Syntax Error!")
     argsList = command[1].split(',')
     if len(argsList) < 4:
-        print('not enough parameters, please input the day, amount, the type(in/out) and the description')
-        return None
-    if representsInt(argsList[0]) == False:
-        print('day not an integer')
-        return None
+        raise InvalidParameters("Insert Command - Not enough parameters!")
+    if not representsInt(argsList[0]):
+        raise ValueError("Insert Command - Day not an integer!")
     if int(argsList[0]) <= 0:
-        print('day cannot be negative or nul')
-        return None
-    if representsInt(argsList[1]) == False:
-        print('amount not an integer')
-        return None
+        raise ValueError("Insert Command - Day should be strictly positive!")
+    if not representsInt(argsList[1]):
+        raise ValueError("Insert Command - Amount not an integer!")
     if int(argsList[1]) <= 0:
-        print('amount cannot be negative or nul')
-        return None
+        raise ValueError("Insert Command - Amount cannot be negative or nul!")
     if argsList[2].lower() not in ["in", "out"]:
-        print('the only known transaction types are in and out')
-        return None
+        raise InvalidParameters("Insert Command - The only known transaction types are in and out")
     description = ','.join(argsList[3:])
     if len(command) > 2:
         description = description + ' ' + ' '.join(command[2:])
     transaction = (int(argsList[0]), int(argsList[1]), argsList[2], description)
     return transaction
-
-def addTransaction(command, transactionList):
-    '''
-    :param command: a list representing the command the user wants to make, which is the string splitted by spaces
-    :param transactionList: a list of touples where each transaction are stored
-    :return: a new transaction list which is the updated one, if the command is correctly inputted, or transactionList if the command is not good
-    '''
-    newTransaction = getAddTransaction(command)
-    if newTransaction is not None:
-        transactionList.append(newTransaction)
-    return transactionList
 
 def insertTransaction(command, transactionList):
     '''
@@ -147,10 +149,31 @@ def insertTransaction(command, transactionList):
     :param transactionList: a list of touples where each transaction are stored
     :return: a new transaction list which is the updated one, if the command is correctly inputted, or transactionList if the command is not good
     '''
-    newTransaciton = getInsertTransaction(command)
-    if newTransaciton is not None:
-        transactionList.append(newTransaciton)
+    newTransaction = None
+    try:
+        newTransaction = getInsertTransaction(command)
+    except ValueError as ve:
+        print(str(ve))
+    except SyntaxError as se:
+        print(str(se))
+    except InvalidParameters as ie:
+        print(str(ie))
+    if newTransaction is not None:
+        transactionList.append(newTransaction)
     return transactionList
+
+def getRemoveTransactionDay(command):
+    '''
+        Function to parse the remove command and to return the transaction day that needs to be removed
+    :param command:
+    :return: an integer - the date parsed from the command
+    '''
+    if representsInt(command[1]) == False:
+        raise ValueError("Remove Command - Day not an integer!")
+    if int(command[1]) <= 0:
+        raise InvalidParameters("Remove Command - Date should be strictly positive")
+    return int(command[1])
+
 
 def removeTransactionDay(command, transactionList):
     '''
@@ -160,15 +183,29 @@ def removeTransactionDay(command, transactionList):
     :param transactionList: a list of touples where each transaction are stored
     :return: a new transaction list which is the updated one, if the command is correctly inputted, or transactionList if the command is not good
     '''
-    if representsInt(command[1]) == False:
-        print("Day is not an interger")
-        return transactionList
-    if int(command[1]) <= 0:
-        print("Day cannot be negative or null")
-        return transactionList
-    day = int(command[1])
+    day = None
+    try:
+        day = getRemoveTransactionDay(command)
+    except ValueError as ve:
+        print(str(ve))
+    except SyntaxError as se:
+        print(str(se))
+    except InvalidParameters as ie:
+        print(str(ie))
     return [transaction for transaction in transactionList if transaction[0] != day]
 
+def getRemoveTransactionInterval(command, transactionList):
+    if command[1] != 'from' or command[3] != 'to':
+        raise SyntaxError("Remove command - Syntax Error!")
+    if representsInt(command[2]) == False or representsInt(command[4]) == False:
+        raise ValueError("Remove command - Dates should be integers!")
+    if int(command[2]) <= 0:
+        raise ValueError("Remove command - Days should be strictly!")
+    startDate = int(command[2])
+    endDate = int(command[4])
+    if startDate > endDate:
+        raise InvalidParameters("Remove command - Dates do not form an interval!")
+    return (startDate, endDate)
 def removeTransactionInterval(command, transactionList):
     '''
     Function to remove all the transaction from a specific interval of days
@@ -177,21 +214,14 @@ def removeTransactionInterval(command, transactionList):
     :param transactionList: a list of touples where each transaction are stored
     :return: a new transaction list which is the updated one, if the command is correctly inputted, or transactionList if the command is not good
     '''
-    if command[1] != 'from' or command[3] != 'to':
-        print("invalid syntax")
-        return transactionList
-    if representsInt(command[2]) == False or representsInt(command[4]) == False:
-        print("Day is not an interger")
-        return transactionList
-    if int(command[2]) <= 0:
-        print("Day cannot be negative or null")
-        return transactionList
-    startDate = int(command[2])
-    endDate = int(command[4])
-    if startDate > endDate:
-        print("Not an interval of dates")
-        return transactionList
+
+    (startDate, endDate) = getRemoveTransactionInterval(command)
     return [transaction for transaction in transactionList if not startDate <= transaction[0] <= endDate]
+
+def getRemoveTypeTransaction(command):
+    if command[1] != 'in' and command[1] != 'out':
+        raise ValueError("Remove command - The only known types of transactions are in and out!")
+    return command[1]
 
 def removeTypeTransaction(command, transactionList):
     '''
@@ -201,9 +231,12 @@ def removeTypeTransaction(command, transactionList):
     :param transactionList: a list of touples where each transaction are stored
     :return: a new transaction list which is the updated one, if the command is correctly inputted, or transactionList if the command is not good
     '''
-    if command[1] != 'in' and command[1] != 'out':
-        return transactionList
-    return [transaction for transaction in transactionList if transaction[2] != command[1]]
+    arg = None
+    try:
+        arg = getRemoveTransactionDay(command)
+    except ValueError as ve:
+        print(str(ve))
+    return [transaction for transaction in transactionList if transaction[2] != arg]
 
 def removeTransaction(command, transactionList):
     '''
@@ -230,6 +263,31 @@ def removeTransaction(command, transactionList):
         print('syntax error')
         return transactionList
 
+def getReplaceTransaction(command):
+    if len(command) < 4:
+        raise SyntaxError("Replace command - Syntax error!")
+    if command[-2] != 'with':
+        raise SyntaxError("Replace command - Syntax error!")
+    if representsInt(command[-1]) == False:
+        raise ValueError("Replace command - Amount not an integer!")
+    if int(command[-1]) <= 0:
+        raise ValueError('Replace command - Amount cannot be negative or null!')
+    argsList = command[1].split(',')
+    if len(argsList) < 3:
+        raise SyntaxError("Replace command - Not enough parameters!")
+    if representsInt(argsList[0]) == False:
+        raise ValueError("Replace command - Date not an integer!")
+    if int(argsList[0]) <= 0:
+        raise ValueError("Replace command - Date should be strictly positive!")
+    if argsList[1] not in ['in', 'out']:
+        raise ValueError('Replace command - Transaction type unknown, should be only in or out')
+    newAmount = int(command[-1])
+    day = int(argsList[0])
+    description = ','.join(argsList[2:])
+    if len(command) > 4:
+        description = description + ' ' + ' '.join(command[3:-3])
+    return (day, argsList[1], newAmount, description)
+
 def replaceTransaction(command, transactionList):
     '''
     Function to replace a transaction's amount of money.
@@ -238,44 +296,18 @@ def replaceTransaction(command, transactionList):
     :param transactionList: a list of touples where each transaction are stored
     :return: a new transaction list which is the updated one, if the command is correctly inputted, or transactionList if the command is not good
     '''
-
-    if len(command) < 4:
-        print("command syntax error")
-        return transactionList
-    if command[-2] != 'with':
-        print("command syntax error")
-        return transactionList
-    if representsInt(command[-1]) == False:
-        print("amount not an integer")
-        return transactionList
-    if int(command[-1]) <= 0:
-        print('amount cannot be negative or null')
-        return transactionList
-    argsList = command[1].split(',')
-    if len(argsList) < 3:
-        print("not enough arguments")
-        return transactionList
-    if representsInt(argsList[0]) == False:
-        print("date not an integers")
-        return transactionList
-    if int(argsList[0]) <= 0:
-        print("date cannot be negative or nul")
-        return transactionList
-    if argsList[1] not in ['in', 'out']:
-        print("transaction type unknown, should be only in or out")
-        return transactionList
-
-
-    newAmount = int(command[-1])
-    day = int(argsList[0])
-    description = ','.join(argsList[2:])
-    if len(command) > 4:
-        description = description + ' ' + ' '.join(command[3:-3])
-
+    (day, type, newAmount, description) = (None, None, None, None)
+    try:
+        (day, type, newAmount, description) = getReplaceTransaction(command)
+    except ValueError as ve:
+        print(str(ve))
+    except SyntaxError as se:
+        print(str(se))
+    except InvalidParameters as ie:
+        print(str(ie))
     for i in range(len(transactionList)):
-        if transactionList[i][0] == day and transactionList[i][2] == argsList[1] and transactionList[i][3] == description:
+        if transactionList[i][0] == day and transactionList[i][2] == type and transactionList[i][3] == description:
             transactionList[i] = (transactionList[i][0], newAmount, transactionList[i][2], transactionList[i][3])
-
     return transactionList
 
 def getCommand():
@@ -296,7 +328,7 @@ def main():
     transactionList = None #todo: getTheTransactionList from a file or db
     displayStartMenu()
     while True:
-        if transactionList == None:
+        if transactionList is None:
             transactionList = []
         command = getCommand()
         if len(command) == 0:
