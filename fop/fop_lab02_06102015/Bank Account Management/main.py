@@ -106,13 +106,16 @@ def getInsertTransaction(command):
     argsList = command[1].split(',')
     if len(argsList) < 4:
         print('not enough parameters, please input the day, amount, the type(in/out) and the description')
+        return None
     if representsInt(argsList[0]) == False:
         print('day not an integer')
+        return None
     if int(argsList[0]) <= 0:
         print('day cannot be negative or nul')
         return None
     if representsInt(argsList[1]) == False:
         print('amount not an integer')
+        return None
     if int(argsList[1]) <= 0:
         print('amount cannot be negative or nul')
         return None
@@ -244,6 +247,9 @@ def replaceTransaction(command, transactionList):
         return transactionList
     if representsInt(command[-1]) == False:
         print("amount not an integer")
+        return transactionList
+    if int(command[-1]) <= 0:
+        print('amount cannot be negative or null')
         return transactionList
     argsList = command[1].split(',')
     if len(argsList) < 3:
