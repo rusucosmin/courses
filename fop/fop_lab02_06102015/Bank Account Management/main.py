@@ -1,12 +1,10 @@
+import datetime
+from exceptions import SyntaxError, InvalidParameters
+from commands import filterPropertyTransactions, filterAllTransactions, computeBalance
+from tests import representsInt
+
 __author__ = 'cosmin'
 
-import datetime
-
-class SyntaxError(Exception):
-    pass
-
-class InvalidParameters(Exception):
-    pass
 
 def displayStartMenu():
     '''
@@ -44,27 +42,21 @@ def printTransactions(transactionList):
     :param  transactionList: the list of transaction
             each transaction is, in fact, a touple (day-integer, amount of money - integer, transaction type - can be "in" or "out", description - string
     '''
-    if transactionList is None or len(transactionList) == 0:
+    if transactionList is None:
+        return
+    if len(transactionList) == 0:
         print("There are no transactions made!")
     else:
         print("These are the stored transactions:")
         for i in range(len(transactionList)):
             print(str(1 + i) + ". " + ', '.join([str(x) for x in transactionList[i]]))
 
-def representsInt(s):
-    '''
-    Function to return True if the :param s can be converted to int
-
-    :param s: the string that the user has given
-    :rtype : boolean
-    :return: True if string s is an integer
-             False is string s is not an integer
-    '''
-    try:
-        int(s)
-        return True
-    except ValueError:
-        return False
+def testRepresentsInt():
+    assert representsInt(100) == True
+    assert not representsInt("Python is nice.")
+    assert representsInt(0) == True
+    assert representsInt(-100) == True
+    assert not representsInt("Python cannot convert string to int.")
 
 def getAddTransaction(command):
     '''
@@ -91,6 +83,26 @@ def getAddTransaction(command):
         description = description + ' ' + ' '.join(command[2:])
     transaction = (datetime.datetime.now().day, int(argsList[0]), argsList[1], description)
     return transaction
+
+def testGetAddTransaction():
+    assert getAddTransaction(["add", "10,in,cool", "description"]) == (datetime.datetime.now().day, 10, "in", "cool description")
+    assert getAddTransaction(["add", "100,out,cosmin", "rusu"]) == (datetime.datetime.now().day, 100,"out","cosmin rusu")
+    try:
+        getAddTransaction(["add"])
+        assert False
+    except SyntaxError:
+        pass
+    try:
+        getAddTransaction(["add", "15,inout,salary"])
+        assert False
+    except InvalidParameters:
+        pass
+    try:
+        getAddTransaction(["add", "in,in,salary"])
+        assert False
+    except ValueError:
+        pass
+
 
 def addTransaction(command, transactionList):
     '''
@@ -141,12 +153,47 @@ def getInsertTransaction(command):
     transaction = (int(argsList[0]), int(argsList[1]), argsList[2], description)
     return transaction
 
+def testGetInsertTransaction():
+    assert getInsertTransaction(["insert", "12,10,in,desc", "ription"]) == (12, 10, "in", "desc ription")
+    assert getInsertTransaction(["insert", "13,100,in,desc", "ription"]) == (13, 100, "in", "desc ription")
+    assert getInsertTransaction(["insert", "1,5,out,desc", "ription"]) == (1, 5, "out", "desc ription")
+    try:
+        getInsertTransaction(["insert"])
+        assert False
+    except SyntaxError:
+        pass
+    try:
+        getInsertTransaction(["insert", "data,12,description"])
+        assert False
+    except InvalidParameters:
+        pass
+    try:
+        getInsertTransaction(["insert", "-1,12,in,description"])
+        assert False
+    except ValueError:
+        pass
+    try:
+        getInsertTransaction(["insert", "1,in,out,description"])
+        assert False
+    except ValueError:
+        pass
+    try:
+        getInsertTransaction(["insert", "-1,-12,in,description"])
+        assert False
+    except ValueError:
+        pass
+    try:
+        getInsertTransaction(["insert", "1,12,input,description"])
+        assert False
+    except InvalidParameters:
+        pass
+
 def insertTransaction(command, transactionList):
     '''
     Function to update the list with the correct new insert transaction
 
-    :param command: a list representing the command the user wants to make, which is the string splitted by spaces
-    :param transactionList: a list of touples where each transaction are stored
+    :param command: a list representing the command the user wants to make, which is the string split by spaces
+    :param transactionList: a list of tuples where each transaction are stored
     :return: a new transaction list which is the updated one, if the command is correctly inputted, or transactionList if the command is not good
     '''
     newTransaction = None
@@ -174,6 +221,19 @@ def getRemoveTransactionDay(command):
         raise InvalidParameters("Remove Command - Date should be strictly positive")
     return int(command[1])
 
+def testGetRemoveTransactionDay():
+    assert getRemoveTransactionDay(["remove", "1"]) == 1
+    assert getRemoveTransactionDay(["remove", "128"]) == 128
+    try:
+        getRemoveTransactionDay(["remove", "amount"])
+        assert False
+    except ValueError:
+        pass
+    try:
+        getRemoveTransactionDay(["remove", "-1"])
+        assert False
+    except InvalidParameters:
+        pass
 
 def removeTransactionDay(command, transactionList):
     '''
@@ -194,7 +254,7 @@ def removeTransactionDay(command, transactionList):
         print(str(ie))
     return [transaction for transaction in transactionList if transaction[0] != day]
 
-def getRemoveTransactionInterval(command, transactionList):
+def getRemoveTransactionInterval(command):
     if command[1] != 'from' or command[3] != 'to':
         raise SyntaxError("Remove command - Syntax Error!")
     if representsInt(command[2]) == False or representsInt(command[4]) == False:
@@ -206,6 +266,26 @@ def getRemoveTransactionInterval(command, transactionList):
     if startDate > endDate:
         raise InvalidParameters("Remove command - Dates do not form an interval!")
     return (startDate, endDate)
+
+def testGetRemoveTransactionInterval():
+    assert getRemoveTransactionInterval(["remove", "from", "3", "to", "4"]) == (3, 4)
+    assert getRemoveTransactionInterval(["remove", "from", "5", "to", "15"]) == (5, 15)
+    try:
+        getRemoveTransactionInterval(["remove", "to", "5", "to", "15"])
+        assert False
+    except SyntaxError:
+        pass
+    try:
+        getRemoveTransactionInterval(["remove", "from", "-5", "to", "15"])
+        assert False
+    except ValueError:
+        pass
+    try:
+        getRemoveTransactionInterval(["remove", "from", "5", "to", "1"])
+        assert False
+    except InvalidParameters:
+        pass
+
 def removeTransactionInterval(command, transactionList):
     '''
     Function to remove all the transaction from a specific interval of days
@@ -222,6 +302,15 @@ def getRemoveTypeTransaction(command):
     if command[1] != 'in' and command[1] != 'out':
         raise ValueError("Remove command - The only known types of transactions are in and out!")
     return command[1]
+
+def testGetRemoveTypeTransaction():
+    assert getRemoveTypeTransaction(["remove", "in"]) == "in"
+    assert getRemoveTypeTransaction(["remove", "out"]) == "out"
+    try:
+        getRemoveTypeTransaction(["remove", "inout"])
+        assert False
+    except ValueError:
+        pass
 
 def removeTypeTransaction(command, transactionList):
     '''
@@ -288,6 +377,50 @@ def getReplaceTransaction(command):
         description = description + ' ' + ' '.join(command[3:-3])
     return (day, argsList[1], newAmount, description)
 
+def testReplaceTransaction():
+    assert getReplaceTransaction(["replace", "12,in,description", "with", "200"]) == (12, "in", 200, "description")
+    assert getReplaceTransaction(["replace", "13,out,description", "with", "700"]) == (13, "out", 700, "description")
+    try:
+        getReplaceTransaction(["replace", "13,out,description", "with"])
+        assert False
+    except SyntaxError:
+        pass
+    try:
+        getReplaceTransaction(["replace", "13,out,description", "to", "amount"])
+        assert False
+    except SyntaxError:
+        pass
+    try:
+        getReplaceTransaction(["replace", "13,out,description", "with", "newAmount"])
+        assert False
+    except ValueError:
+        pass
+    try:
+        getReplaceTransaction(["replace", "13,out,description", "with", "-700"])
+        assert False
+    except ValueError:
+        pass
+    try:
+        getReplaceTransaction(["replace", "13,description", "with", "700"])
+        assert False
+    except SyntaxError:
+        pass
+    try:
+        getReplaceTransaction(["replace", "day,out,description", "with", "700"])
+        assert False
+    except ValueError:
+        pass
+    try:
+        getReplaceTransaction(["replace", "-13,in,description", "with", "700"])
+        assert False
+    except ValueError:
+        pass
+    try:
+        getReplaceTransaction(["replace", "13,inout,description", "with", "700"])
+        assert False
+    except ValueError:
+        pass
+
 def replaceTransaction(command, transactionList):
     '''
     Function to replace a transaction's amount of money.
@@ -325,11 +458,21 @@ def main():
     This is the function that controls the whole application.
     :return:
     '''
-    transactionList = None #todo: getTheTransactionList from a file or db
+    transactionList = [(1, 100, "in", "cosmin"), (2, 1000, "out", "raluca"), (3, 150, "in", "ok"), (15, 123, "out", "bine acolo")] #todo: getTheTransactionList from a file or db
     displayStartMenu()
+
+    testRepresentsInt()
+    testGetAddTransaction()
+    testGetInsertTransaction()
+    testGetRemoveTransactionDay()
+    testGetRemoveTypeTransaction()
+    testGetRemoveTransactionInterval()
+    testReplaceTransaction()
+
     while True:
         if transactionList is None:
             transactionList = []
+            print('transactionlist was none')
         command = getCommand()
         if len(command) == 0:
             continue
@@ -345,6 +488,12 @@ def main():
             transactionList = removeTransaction(command, transactionList)
         elif command[0] == "replace":
             transactionList = replaceTransaction(command, transactionList)
+        elif command[0] == "greater" or command[0] == "less":
+            printTransactions(filterPropertyTransactions(command, transactionList))
+        elif command[0] == "all":
+            printTransactions(filterAllTransactions(command, transactionList))
+        elif command[0] == "balance":
+            print("Balance on the given day was ", computeBalance(command, transactionList))
         elif command[0] == "exit":
             print("Exiting")
             break
