@@ -1,6 +1,6 @@
 __author__ = 'cosmin'
 
-class SyntaxError(Exception):
+class CommandError(Exception):
     pass
 
 class InvalidParameters(Exception):

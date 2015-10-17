@@ -122,7 +122,7 @@ Iteration no. | Planned features
 |   T3   |Display transactions          							|
 |   T4   |Test whether the commands are correct          			|
 |   T5   |Test whether the command's arguments are valid 			|
-|   T6   |Implement the add transaction functionality          		|	
+|   T6   |Implement the add transaction functionality          		|
 |   T7   |Implement the insert transaction functionality         	|
 |   T8   |Implement the remove transaction functionality            |
 |   T9   |Implement the replace transaction functionality           |
