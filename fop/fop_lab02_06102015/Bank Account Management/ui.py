@@ -6,13 +6,12 @@ def displayStartMenu():
     '''
     Function to display the START MENU
     '''
-    print("Hello. Please insert a command. Type 'help' to show menu")
+    print("Hello. Please insert a command. Type 'help' to show menu.")
 
 def clearWindow():
     '''
     Function to clear the terminal in Ubuntu
     '''
-    print(chr(27) + "[2J")
 
 def displayCommands():
     '''
@@ -21,14 +20,22 @@ def displayCommands():
     clearWindow()
 
     print("Here are all the command you can use:")
-    print("    list - displays the list of all transactions")
-    print("    add X,in/out,description - adds to the current day an in/out transaction of X RON with the given description")
-    print("    insert X, Y, in/out, description – inserts in day X an in/out transaction of Y RON with the given description")
-    print("    remove X – removes all the transactions from day X")
-    print("    remove from X to Y – removes all the transactions from day X until day Y")
-    print("    remove in/out – removes all the in/out transactions from the current month")
-    print("    replace X, in/out, description with Y – replaces the amount for the in/out transaction having the specified description from day X with Y RON")
-    print("    exit - to quit the application")
+    print("     'list' - displays the list of all transactions")
+    print("     'add X,in/out,description' - adds to the current day an in/out transaction of X RON with the given description")
+    print("     'insert X,Y,in/out,description' – inserts in day X an in/out transaction of Y RON with the given description")
+    print("     'remove X' – removes all the transactions from day X")
+    print("     'remove from X to Y' – removes all the transactions from day X until day Y")
+    print("     'remove in/out' – removes all the in/out transactions from the current month")
+    print("     'replace X,in/out,description with Y' – replaces the amount for the in/out transaction having the specified description from day X with Y RON")
+    print("     'greater than X' - writes all transactions greater than X")
+    print("     'less than X before Y' - writes all transactions less than X which were made before day Y")
+    print("     'all in/out' – writes all the in transactions.")
+    print("     'balance X' – computes the account’s balance on day X - should be integer")
+    print("     'sum in/out' – writes the total amount from in transactions")
+    print("     'max out day' – writes the day with the maximum amount in an out transaction")
+    print("     'asc sort day' – sorts the total daily transactions in an ascending order")
+    print("     'desc sort type' - sorts the total daily transactions per type (in/out) in a descending order")
+    print("     'exit' - to quit the application")
 
 def printTransactions(transactionList):
     '''
@@ -41,7 +48,7 @@ def printTransactions(transactionList):
     if len(transactionList) == 0:
         print("There are no transactions made!")
     else:
-        print("These are the stored transactions:")
+        print("These are the transactions:")
         for i in range(len(transactionList)):
             print(str(1 + i) + ". " + ', '.join([str(x) for x in transactionList[i]]))
 
@@ -56,12 +63,13 @@ def getCommand():
     return command
 
 def runUi():
-    transactionList = [(1, 100, "in", "cosmin"), (2, 1000, "out", "description"), (3, 150, "in", "ok"), (15, 123, "out", "salary"), (17,2000,"in","a year salary"), (11,2500, "in", "saled the car"), (11,5000,"out", "bought a macbook")] #todo: getTheTransactionList from a file or db
+    #transactionList = [(1, 100, "in", "cosmin"), (2, 1000, "out", "description"), (3, 150, "in", "ok"), (15, 123, "out", "salary"), (17,2000,"in","a year salary"), (11,2500, "in", "saled the car"), (11,5000,"out", "bought a macbook")] #todo: getTheTransactionList from a file or db
+    transactionList = []
     displayStartMenu()
     while True:
         if transactionList is None:
             transactionList = []
-            print('transactionlist was none')
+            print('Transactionlist was none!')
         command = getCommand()
         if len(command) == 0:
             continue
@@ -82,7 +90,7 @@ def runUi():
         elif command[0] == "all":
             printTransactions(filterAllTransactions(command, transactionList))
         elif command[0] == "balance":
-            print("Balance on the given day was ", computeBalance(command, transactionList))
+            print("Balance on the given day was ", computeBalance(command, transactionList), ".")
         elif command[0] == "sum":
             print(getSum(command, transactionList))
         elif command[0] == "max":
@@ -90,7 +98,7 @@ def runUi():
         elif command[0] == "asc" or command[0] == "desc":
             printTransactions(sortTransactions(command, transactionList))
         elif command[0] == "exit":
-            print("Exiting")
+            print("Exiting...")
             break
         else:
-            print('command not recognized')
+            print("Command not recognized. Try 'help'!")

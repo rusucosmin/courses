@@ -126,3 +126,48 @@ Iteration no. | Planned features
 |   T7   |Implement the insert transaction functionality         	|
 |   T8   |Implement the remove transaction functionality            |
 |   T9   |Implement the replace transaction functionality           |
+|   T10  |Implement the filter by properies functionality           |
+|   T11  |Implement the get balance function                        |
+|   T12  |Implement the get sum function                            |
+|   T13  |Implement the get max function                            |
+|   T14  |Implement the get sort function                           |
+
+### Iteration 2
+|Step   |User                                   |Program                             |Description                                           |
+|-------|---------------------------------------|------------------------------------|------------------------------------------------------|
+|1      |salut                                  |           |the user first started the app, does not know what is doing            |
+|2      |                                       |command not recognized           |tells the user that the command do not exist, reminds him about the 'help' command           |
+|3      |help                                   |shows the list of the whole available commands (shown in the ui module)           |the user asks for help           |
+|4      |                                       |shows the list of the whole available commands (shown in the ui module)           |the programs shows the available commands|
+|5      |add 100,out,bought milk                | |the user inserts a 100 RON out transaction with the 'bought milk' description|
+|6      |add 10000,out,money for the university | |the user inserts a 10000 RON out transaction with the 'money for the university' description|
+|7      |list                                   |           |the user wans to have the whole transaction list printed           |
+|8      |                                       |These are the stored transactions:<br>1. 20, 100, in, bought milk<br>2. 20, 10000, out, money for the university        | The app shows the user all the transaction stored right now in the list   |
+|9      |insert 15,200,in,groceries             |           |The user insert a 200RON-out transaction on day 15 with the description 'groceries'  |
+|10     |greater than 100                       | These are the transactions:<br>1. 20, 100, out, bought milk<br>2. 20, 10000, out, money for the university<br>3. 15, 200, in, groceries      |  The app shows the user all the transaction he asked for         |
+|11     |less than 200 before 20                | | The user asks for all the transaction less than 100 before the 20th day of the week|
+|12     |                                       |These are the transactions:<br>1. 20, 100, out, bought milk<br>2. 15, 200, in, groceries       |      The app shows the user all the transaction he asked for     |
+|13     |all in                                 |           |           |
+|14     |                                       |   These are the transactions:<br>1. 15, 200, in, groceries        |           |
+|15     |all out                                |           |           |
+|16     |                                       |      These are the transactions:<br>1. 20, 100, out, bought milk<br>2. 20, 10000, out, money for the university     |           |
+|17     |balance 15                             |           |           |
+|18     |                                       |      Balance on the given day was  200     |           |
+|19     |balance 20                             |           |           |
+|20     |                                       |      Balance on the given day was  -9900     |           |
+|21     |sum in                                 |           |           |
+|22     |                                       |      200     |           |
+|23     |sum out                                |           |           |
+|24     |                                       |10100           |           |
+|25     |max out day                            |           |           |
+|26     |                                       |     20      |           |
+|27     |max in day                             |           |           |
+|28     |                                       |     15      |           |
+|29     |asc sort day                           |        |           |
+|30     |                                       |     These are the transactions:<br>1. 20, 100, out, bought milk<br>2. 15, 200, in, groceries<br>3. 20, 10000, out, money for the university         |           |
+|31     |desc sort in                           |           |           |
+|32     |                                       |      These are the transactions:<br>1. 15, 200, in, groceries     |           |
+|33     |desc sort out                          |           |           |
+|34     |                           |           |    These are the transactions:<br>1. 20, 10000, out, money for the university<br>2. 20, 100, out, bought milk       |
+|35     |exit                                   |               | The user wants to exit the application |
+|36     |                                       |Exiting...| |

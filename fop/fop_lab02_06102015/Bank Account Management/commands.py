@@ -274,7 +274,7 @@ def replaceTransaction(command, transactionList):
     Function to replace a transaction's amount of money.
 
     :param command: a list representing the command the user wants to make, which is the string splitted by spaces
-    :param transactionList: a list of touples where each transaction are stored
+    :param transactionList: a list of tuples where each transaction are stored
     :return: a new transaction list which is the updated one, if the command is correctly inputted, or transactionList if the command is not good
     '''
     (day, type, newAmount, description) = (None, None, None, None)
@@ -445,7 +445,7 @@ def getMaxArguments(command):
     '''
     Function to get the arguments of Max command
     :param command: a list containing the whitespace-split command from the user
-    :return: an string from the set {"in", "out"} which is the argumet of the max command
+    :return: an string from the set {"in", "out"} which is the argument of the max command
     :raises exception whenever there is a syntax error, a value error or an invalid parameter error.
     '''
     if len(command) < 3:
@@ -468,7 +468,6 @@ def getMax(command, transactionList):
         args = getMaxArguments(command)
         maximum = -1
         day = 0
-        print(args)
         for transaction in transactionList:
             if transaction[2] == args and maximum < transaction[1]:
                 maximum = transaction[1]

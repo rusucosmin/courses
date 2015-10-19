@@ -1,5 +1,14 @@
 __author__ = 'cosmin'
 
+'''
+Module to test all the functions from the module commands.py.
+The name of the test functions are according to the function they test.
+That is, if a function is called myFunction(), then the test function will be named
+testMyFunction()
+
+It also checks for raise Exception, edge cases and so on.
+'''
+
 from exceptions import CommandError, InvalidParameters
 from commands import *
 
@@ -150,6 +159,128 @@ def testReplaceTransaction():
     except ValueError:
         pass
 
+def testGetProperties():
+    assert getProperties(["greater", "than", "100"]) == ["greater", 100]
+    assert getProperties(["greater", "than", "10"]) == ["greater", 10]
+    assert getProperties(["less", "than", "100"]) == ["less", 100]
+    assert getProperties(["less", "than", "100", "before", "25"]) == ["less", 100, 25]
+    try:
+        getProperties(["less", "tham", "100", "before", "25""greater tham 100"])
+        assert False
+    except CommandError:
+        pass
+    try:
+        getProperties(["less", "than", "100", "befoe", "25"])
+        assert False
+    except CommandError:
+        pass
+    try:
+        getProperties(["less", "than"])
+        assert False
+    except CommandError:
+        pass
+    try:
+        getProperties(["less", "than", "100", "25"])
+        assert False
+    except CommandError:
+        pass
+    try:
+        getProperties(["less", "than", "-1", "before", "25"])
+        assert False
+    except ValueError:
+        pass
+    try:
+        getProperties(["less", "than", "100", "before", "-25"])
+        assert False
+    except ValueError:
+        pass
+
+def testAllArguments():
+    assert getAllArguments(["all", "in"]) == "in"
+    assert getAllArguments(["all", "out"]) == "out"
+    try:
+        getAllArguments(["all", "100"])
+        assert False
+    except InvalidParameters:
+        pass
+    try:
+        getAllArguments(["all"])
+        assert False
+    except CommandError:
+        pass
+
+def testGetBalanceArguments():
+    assert getBalanceArguments(["balance", "100"]) == 100
+    assert getBalanceArguments(["balance", "10000"]) == 10000
+    try:
+        getBalanceArguments(["balance"])
+        assert False
+    except CommandError:
+        pass
+    try:
+        getBalanceArguments(["balance", "day"])
+        assert False
+    except ValueError:
+        pass
+    try:
+        getBalanceArguments(["balance", "-1"])
+        assert False
+    except ValueError:
+        pass
+
+def testGetSumArgument():
+    assert getSumArgument(["sum", "in"]) == "in"
+    assert getSumArgument(["sum", "out"]) == "out"
+    try:
+        getSumArgument(["sum"])
+        assert False
+    except CommandError:
+        pass
+    try:
+        getSumArgument(["sum", "100"])
+        assert False
+    except ValueError:
+        pass
+
+def testGetMaxArguments():
+    assert getMaxArguments(["max", "in", "day"]) == "in"
+    assert getMaxArguments(["max", "out", "day"]) == "out"
+    try:
+        getMaxArguments(["max"])
+        assert False
+    except CommandError:
+        pass
+    try:
+        getMaxArguments(["max", "inout", "day"])
+        assert False
+    except ValueError:
+        pass
+    try:
+        getMaxArguments(["max", "in", "150"])
+        assert False
+    except CommandError:
+        pass
+
+def testGetSortArguments():
+    assert getSortArguments(["asc", "sort", "day"]) == ("asc", "day")
+    assert getSortArguments(["desc", "sort", "in"]) == ("desc", "in")
+    assert getSortArguments(["desc", "sort", "out"]) == ("desc", "out")
+    try:
+        getSortArguments(["asc"])
+        assert False
+    except CommandError:
+        pass
+    try:
+        getSortArguments(["asc", "sorteaza", "day"])
+        assert False
+    except CommandError:
+        pass
+    try:
+        getSortArguments(["desc", "sort", "150"])
+        assert False
+    except CommandError:
+        pass
+
 def runTests():
     testRepresentsInt()
     testGetAddTransaction()
@@ -158,3 +289,9 @@ def runTests():
     testGetRemoveTypeTransaction()
     testGetRemoveTransactionInterval()
     testReplaceTransaction()
+    testGetProperties()
+    testAllArguments()
+    testGetBalanceArguments()
+    testGetSumArgument()
+    testGetMaxArguments()
+    testGetSortArguments()
