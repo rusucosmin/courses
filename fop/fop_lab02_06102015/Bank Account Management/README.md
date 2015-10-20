@@ -147,15 +147,15 @@ Iteration no. | Planned features
 |10     |greater than 100                       | These are the transactions:<br>1. 20, 100, out, bought milk<br>2. 20, 10000, out, money for the university<br>3. 15, 200, in, groceries      |  The app shows the user all the transaction he asked for         |
 |11     |less than 200 before 20                | | The user asks for all the transaction less than 100 before the 20th day of the week|
 |12     |                                       |These are the transactions:<br>1. 20, 100, out, bought milk<br>2. 15, 200, in, groceries       |      The app shows the user all the transaction he asked for     |
-|13     |all in                                 |           |           |
-|14     |                                       |   These are the transactions:<br>1. 15, 200, in, groceries        |           |
-|15     |all out                                |           |           |
-|16     |                                       |      These are the transactions:<br>1. 20, 100, out, bought milk<br>2. 20, 10000, out, money for the university     |           |
-|17     |balance 15                             |           |           |
+|13     |all in                                 |           | The user asks all the in transaction          |
+|14     |                                       |   These are the transactions:<br>1. 15, 200, in, groceries        |   :))The program brings the date the user wants        |
+|15     |all out                                |           |    The user asks for all the out transaction       |
+|16     |                                       |      These are the transactions:<br>1. 20, 100, out, bought milk<br>2. 20, 10000, out, money for the university     |   The program brings the information        |
+|17     |balance 15                             |           |The users asks to compute the balance           |
 |18     |                                       |      Balance on the given day was  200     |           |
-|19     |balance 20                             |           |           |
+|19     |balance 20                             |           |The users asks to compute the balance          |
 |20     |                                       |      Balance on the given day was  -9900     |           |
-|21     |sum in                                 |           |           |
+|21     |sum in                                 |           |The users tries different command       |
 |22     |                                       |      200     |           |
 |23     |sum out                                |           |           |
 |24     |                                       |10100           |           |
