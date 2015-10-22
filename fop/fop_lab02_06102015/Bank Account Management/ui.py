@@ -63,8 +63,9 @@ def getCommand():
     return command
 
 def runUi():
-    #transactionList = [(1, 100, "in", "cosmin"), (2, 1000, "out", "description"), (3, 150, "in", "ok"), (15, 123, "out", "salary"), (17,2000,"in","a year salary"), (11,2500, "in", "saled the car"), (11,5000,"out", "bought a macbook")] #todo: getTheTransactionList from a file or db
-    transactionList = []
+    transactionList = [(1, 100, "in", "cosmin"), (2, 1000, "out", "description"), (3, 150, "in", "ok"), (15, 123, "out", "salary"), (17,2000,"in","a year salary"), (11,2500, "in", "saled the car"), (11,5000,"out", "bought a macbook")] #todo: getTheTransactionList from a file or db
+    #transactionList = []
+    #todo add the transactions having the same values
     displayStartMenu()
     while True:
         if transactionList is None:
