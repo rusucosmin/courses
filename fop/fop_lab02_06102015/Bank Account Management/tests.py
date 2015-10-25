@@ -35,7 +35,7 @@ def testGetAddTransaction():
     try:
         getAddTransaction(["add", "in,in,salary"])
         assert False
-    except ValueError:
+    except InvalidParameters:
         pass
 
 def testGetInsertTransaction():
@@ -55,17 +55,17 @@ def testGetInsertTransaction():
     try:
         getInsertTransaction(["insert", "-1,12,in,description"])
         assert False
-    except ValueError:
+    except InvalidParameters:
         pass
     try:
         getInsertTransaction(["insert", "1,in,out,description"])
         assert False
-    except ValueError:
+    except InvalidParameters:
         pass
     try:
         getInsertTransaction(["insert", "-1,-12,in,description"])
         assert False
-    except ValueError:
+    except InvalidParameters:
         pass
     try:
         getInsertTransaction(["insert", "1,12,input,description"])
@@ -79,7 +79,7 @@ def testGetRemoveTransactionDay():
     try:
         getRemoveTransactionDay(["remove", "amount"])
         assert False
-    except ValueError:
+    except InvalidParameters:
         pass
     try:
         getRemoveTransactionDay(["remove", "-1"])
@@ -98,7 +98,7 @@ def testGetRemoveTransactionInterval():
     try:
         getRemoveTransactionInterval(["remove", "from", "-5", "to", "15"])
         assert False
-    except ValueError:
+    except InvalidParameters:
         pass
     try:
         getRemoveTransactionInterval(["remove", "from", "5", "to", "1"])
@@ -112,7 +112,7 @@ def testGetRemoveTypeTransaction():
     try:
         getRemoveTypeTransaction(["remove", "inout"])
         assert False
-    except ValueError:
+    except InvalidParameters:
         pass
 
 def testReplaceTransaction():
@@ -131,12 +131,12 @@ def testReplaceTransaction():
     try:
         getReplaceTransaction(["replace", "13,out,description", "with", "newAmount"])
         assert False
-    except ValueError:
+    except InvalidParameters:
         pass
     try:
         getReplaceTransaction(["replace", "13,out,description", "with", "-700"])
         assert False
-    except ValueError:
+    except InvalidParameters:
         pass
     try:
         getReplaceTransaction(["replace", "13,description", "with", "700"])
@@ -146,17 +146,17 @@ def testReplaceTransaction():
     try:
         getReplaceTransaction(["replace", "day,out,description", "with", "700"])
         assert False
-    except ValueError:
+    except InvalidParameters:
         pass
     try:
         getReplaceTransaction(["replace", "-13,in,description", "with", "700"])
         assert False
-    except ValueError:
+    except InvalidParameters:
         pass
     try:
         getReplaceTransaction(["replace", "13,inout,description", "with", "700"])
         assert False
-    except ValueError:
+    except InvalidParameters:
         pass
 
 def testGetProperties():
@@ -187,12 +187,12 @@ def testGetProperties():
     try:
         getProperties(["less", "than", "-1", "before", "25"])
         assert False
-    except ValueError:
+    except InvalidParameters:
         pass
     try:
         getProperties(["less", "than", "100", "before", "-25"])
         assert False
-    except ValueError:
+    except InvalidParameters:
         pass
 
 def testAllArguments():
@@ -220,12 +220,12 @@ def testGetBalanceArguments():
     try:
         getBalanceArguments(["balance", "day"])
         assert False
-    except ValueError:
+    except InvalidParameters:
         pass
     try:
         getBalanceArguments(["balance", "-1"])
         assert False
-    except ValueError:
+    except InvalidParameters:
         pass
 
 def testGetSumArgument():
@@ -239,7 +239,7 @@ def testGetSumArgument():
     try:
         getSumArgument(["sum", "100"])
         assert False
-    except ValueError:
+    except InvalidParameters:
         pass
 
 def testGetMaxArguments():
@@ -253,7 +253,7 @@ def testGetMaxArguments():
     try:
         getMaxArguments(["max", "inout", "day"])
         assert False
-    except ValueError:
+    except InvalidParameters:
         pass
     try:
         getMaxArguments(["max", "in", "150"])
@@ -281,6 +281,16 @@ def testGetSortArguments():
     except CommandError:
         pass
 
+def testUndoRedo():
+    transactionPack = [[(1, 1, 'in', 'a'), (2, 2, 'out', 'b'), (3, 3, 'in', 'c'), (4, 4, 'out', 'd')], [[], [(1, 1, 'in', 'a')], [(1, 1, 'in', 'a'), (2, 2, 'out', 'b')], [(1, 1, 'in', 'a'), (2, 2, 'out', 'b'), (3, 3, 'in', 'c')]]]
+    transactionPack = undo(transactionPack)
+    assert transactionPack == [[(1, 1, 'in', 'a'), (2, 2, 'out', 'b'), (3, 3, 'in', 'c')], [ [], [(1, 1, 'in', 'a')], [(1, 1, 'in', 'a'), (2, 2, 'out', 'b')] ], [(1, 1, 'in', 'a'), (2, 2, 'out', 'b'), (3, 3, 'in', 'c'), (4, 4, 'out', 'd')]]
+    transactionPack = undo(transactionPack)
+    print(transactionPack)
+    assert transactionPack == [[(1, 1, 'in', 'a'), (2, 2, 'out', 'b')], [[], [(1, 1, 'in', 'a')]], [(1, 1, 'in', 'a'), (2, 2, 'out', 'b'), (3, 3, 'in', 'c')]]
+    transactionPack = redo(transactionPack)
+    assert transactionPack == [[(1, 1, 'in', 'a'), (2, 2, 'out', 'b'), (3, 3, 'in', 'c')], [ [], [(1, 1, 'in', 'a')], [(1, 1, 'in', 'a'), (2, 2, 'out', 'b')] ]]
+
 def runTests():
     testRepresentsInt()
     testGetAddTransaction()
@@ -295,3 +305,4 @@ def runTests():
     testGetSumArgument()
     testGetMaxArguments()
     testGetSortArguments()
+    testUndoRedo()
