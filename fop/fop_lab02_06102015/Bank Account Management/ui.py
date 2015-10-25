@@ -98,9 +98,9 @@ def printHistory(transactionPack):
         print(list)
 
 def runUi():
-    transactionPack = [[(1, 100, "in", "cosmin"), (2, 1000, "out", "description"), (3, 150, "in", "ok"), (15, 123, "out", "salary"), (17,2000,"in","a year salary"), (11,2500, "in", "saled the car"), (11,5000,"out", "bought a macbook")], []] #todo: getTheTransactionList from a file or db
+    #transactionPack = [[(1, 100, "in", "cosmin"), (2, 1000, "out", "description"), (3, 150, "in", "ok"), (15, 123, "out", "salary"), (17,2000,"in","a year salary"), (11,2500, "in", "saled the car"), (11,5000,"out", "bought a macbook")], []] #todo: getTheTransactionList from a file or db
     #transactionPack = [[(1,1,'in','a'), (2,2,'in','b'), (3,3,'in','c'), (4,4,'out','d'), (5,5,'in','e')], []]
-    #transactionPack = [[], []]
+    transactionPack = [[], []]
     #todo add the transactions having the same values
     displayStartMenu()
     while True:
