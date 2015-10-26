@@ -281,9 +281,23 @@ def replaceTransaction(command, transactionPack):
     try:
         (day, type, newAmount, description) = getReplaceTransaction(command)
         transactionPack[1].append(transactionPack[0][:])
+        list = []
         for i in range(len(transactionPack[0])):
             if transactionPack[0][i][0] == day and transactionPack[0][i][2] == type and transactionPack[0][i][3] == description:
-                transactionPack[0][i] = (transactionPack[0][i][0], newAmount, transactionPack[0][i][2], transactionPack[0][i][3])
+                list.append(i)
+        if len(list) > 1:
+            print("Error - There are more than 1 such transaction. Please choose which one to replace.")
+            print("These are the transactions:")
+            for i in range(len(list)):
+                print(str(1 + i) + ". " + ', '.join([str(x) for x in transactionPack[0][list[i]]]))
+            x = input(">")
+            while not representsInt(x) or int(x) < 1 or int(x) > len(list):
+                print("Please insert an integer between 1 and ", len(list))
+                x = input(">")
+            x = int(x)
+            transactionPack[0][list[x - 1]] = (transactionPack[0][list[x - 1]][0], newAmount, transactionPack[0][list[x - 1]][2], transactionPack[0][list[x - 1]][3])
+        elif len(list) == 1:
+            transactionPack[0][list[0]] = (transactionPack[0][list[0]][0], newAmount, transactionPack[0][list[0]][2], transactionPack[0][list[0]][3])
         return (None, transactionPack)
     except CommandError as se:
         return (se, None)
