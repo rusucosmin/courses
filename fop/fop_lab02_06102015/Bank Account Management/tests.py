@@ -286,7 +286,6 @@ def testUndoRedo():
     transactionPack = undo(transactionPack)
     assert transactionPack == [[(1, 1, 'in', 'a'), (2, 2, 'out', 'b'), (3, 3, 'in', 'c')], [ [], [(1, 1, 'in', 'a')], [(1, 1, 'in', 'a'), (2, 2, 'out', 'b')] ], [(1, 1, 'in', 'a'), (2, 2, 'out', 'b'), (3, 3, 'in', 'c'), (4, 4, 'out', 'd')]]
     transactionPack = undo(transactionPack)
-    print(transactionPack)
     assert transactionPack == [[(1, 1, 'in', 'a'), (2, 2, 'out', 'b')], [[], [(1, 1, 'in', 'a')]], [(1, 1, 'in', 'a'), (2, 2, 'out', 'b'), (3, 3, 'in', 'c')]]
     transactionPack = redo(transactionPack)
     assert transactionPack == [[(1, 1, 'in', 'a'), (2, 2, 'out', 'b'), (3, 3, 'in', 'c')], [ [], [(1, 1, 'in', 'a')], [(1, 1, 'in', 'a'), (2, 2, 'out', 'b')] ]]
