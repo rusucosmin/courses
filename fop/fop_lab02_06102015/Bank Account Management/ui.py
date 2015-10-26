@@ -30,7 +30,7 @@ def displayCommands():
     print("     'greater than X' - writes all transactions greater than X")
     print("     'less than X before Y' - writes all transactions less than X which were made before day Y")
     print("     'all in/out' - writes all the in transactions.")
-    print("     'balance X' - computes the account’s balance on day X - should be integer")
+    print("     'balance X' - computes the account's balance on day X - should be integer")
     print("     'sum in/out' - writes the total amount from in transactions")
     print("     'max out day' - writes the day with the maximum amount in an out transaction")
     print("     'asc sort day' - sorts the total daily transactions in an ascending order")
