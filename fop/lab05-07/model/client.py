@@ -11,12 +11,34 @@ class Client:
         self._cnp = cnp
         self._name = name
 
-    def __repr__(self): return "Client Name: %s\nCNP: %s" % (self._name, self._cnp)
+    def __repr__(self):
+        '''
+        Function to print the Object in a nice way
+        '''
+        return "Client Name: %s\nCNP: %s" % (self._name, self._cnp)
 
-    def get_cnp(self): return self._cnp
+    def getCnp(self):
+        '''
+        Getter for the cnp property
+        :return: the cnp of the client
+        '''
+        return self._cnp
 
-    def set_cnp(self, cnp): self._cnp = cnp
+    def setCnp(self, cnp):
+        '''
+        Setter for the cnp property
+        '''
+        self._cnp = cnp
 
-    def get_name(self): return self._name
+    def getName(self):
+        '''
+        Getter for the name property
+        :return: the name of the client (string)
+        '''
+        return self._name
 
-    def set_name(self, name): self._name = name
+    def setName(self, name):
+        '''
+        Setter for the name of a client
+        '''
+        self._name = name

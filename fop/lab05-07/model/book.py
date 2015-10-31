@@ -1,6 +1,5 @@
 __author__ = 'cosmin'
 
-from repository.LibraryRepository import *
 
 class Book:
     """
@@ -16,20 +15,64 @@ class Book:
         self._description = description
         self._author = author
 
-    def __repr__(self): return "Book Title: %s\nDescription: %s\nAuthor: %s\n" % (self._title, self._description, self._author)
+    def __repr__(self):
+        '''
+        Function to print the Book in a nice way
+        '''
+        return "Book #%d:\nTitle: %s\nDescription: %s\nAuthor: %s\n" % (self._id, self._title, self._description, self._author)
 
-    def get_id(self): return self._id
+    def getId(self):
+        '''
+        Getter for the id of the book
+        :return: an integer representing the id of the book
+        '''
+        return self._id
 
-    def set_id(self, id): self._id = id
+    def setId(self, id):
+        '''
+        Setter for the id of the book
+        :param id: the new id of the book
+        '''
+        self._id = id
 
-    def get_title(self): return self._title
+    def getTitle(self):
+        '''
+        Getter for the title of the book
+        :return: a string: the title of the book
+        '''
+        return self._title
 
-    def set_title(self, title): self._title = title
+    def setTitle(self, title):
+        '''
+        Setter for the title of the book
+        :return: a string: the title of the book
+        '''
+        self._title = title
 
-    def get_description(self): return self._description
+    def getDescription(self):
+        '''
+        Getter for the description of the book
+        :return: a string: the description of the book
+        '''
+        return self._description
 
-    def set_description(self, description): self._description = description
+    def setDescription(self, description):
+        '''
+        Setter for the description of the book
+        :param description: the new description of the book
+        '''
+        self._description = description
 
-    def get_author(self): return self._author
+    def getAuthor(self):
+        '''
+        Getter for the author of the book
+        :return: a string representing the author of the book
+        '''
+        return self._author
 
-    def set_author(self, author): self._author = author
+    def setAuthor(self, author):
+        '''
+        Setter for the author of the book
+        :param description: the new author of the book
+        '''
+        self._author = author
