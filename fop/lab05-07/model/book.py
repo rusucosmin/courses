@@ -2,13 +2,13 @@ __author__ = 'cosmin'
 
 
 class Book:
-    """
+    '''
     Represents an entity Book, with the properties:
         -id - a uniquely determined id, random using uuid4() function
         -title - the title of the book
         -description - the description of the book
         -author - the name of the book's author
-    """
+    '''
     def __init__(self, id, title, description, author):
         self._id = id
         self._title = title;

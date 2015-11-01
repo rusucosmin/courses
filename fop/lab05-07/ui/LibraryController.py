@@ -15,7 +15,6 @@ class LibraryController:
                 _history["now"] = the index in the above list where we are now.
                     - this way we can easily make a undo/redo operation
     '''
-
     def __init__(self):
         '''
         Constructor: initialises the Controller with the saved one (if exists) or starts a fresh (empty) Library
