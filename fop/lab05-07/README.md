@@ -4,17 +4,17 @@
 
 ## Problem statement
 Write an application for a book library. The application will store:
-*Books: <id>, <title>, <description>, <author>.
-*Clients: <clientId>, <name>, <CNP>.
+1 Books: id, title, description, author
+2 Clients: clientId, name, CNP.
 Create an application which allows the user to:
-*Manage the list of books and clients.
-*Add, remove, update and list books and clients.
-*Search for a book; search for a client.
-*Rent/return book.
-*Reporting. The reporting part of the application will allow generating a list of clients or books (maybe of certain type) ordered based on the user preference. Examples: most rented book,
+3 Manage the list of books and clients.
+4 Add, remove, update and list books and clients.
+5 Search for a book; search for a client.
+6 Rent/return book.
+7 Reporting. The reporting part of the application will allow generating a list of clients or books (maybe of certain type) ordered based on the user preference. Examples: most rented book,
 most active clients, clients with rented books ordered alphabetically, by number of rents, by
 year of publishing, etc.
-*Unlimited undo/redo functionality. Each step will undo/redo the previous operation that modified the data structure.
+8 Unlimited undo/redo functionality. Each step will undo/redo the previous operation that modified the data structure.
 
 ## Feature list
 |Feature no.    | Description                                           | Commands                                                                                                                              |
