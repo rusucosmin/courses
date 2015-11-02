@@ -1,11 +1,11 @@
-from model.book import Book
-from model.client import Client
-from model.loan import Loan
-from model.command import Command
+import model
+import repository
+import tests
+import ui
 
 from repository.LibraryRepository import LibraryRepository
 
-from tests.test import Tester
+from tests.tester import Tester
 
 from ui.LibraryApplication import LibraryApplication
 from ui.LibraryController import LibraryController

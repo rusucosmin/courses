@@ -1,0 +1,139 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module ui.LibraryController</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="ui.html"><font color="#ffffff">ui</font></a>.LibraryController</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/cosmin/courses/fop/lab05-07/ui/LibraryController.py">/home/cosmin/courses/fop/lab05-07/ui/LibraryController.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="pickle.html">pickle</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="ui.LibraryController.html#LibraryController">LibraryController</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="LibraryController">class <strong>LibraryController</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Class&nbsp;<a href="#LibraryController">LibraryController</a>&nbsp;which&nbsp;is&nbsp;a&nbsp;bridge&nbsp;between&nbsp;the&nbsp;ui&nbsp;and&nbsp;the&nbsp;backend&nbsp;code<br>
+It&nbsp;has&nbsp;all&nbsp;the&nbsp;old&nbsp;and&nbsp;new&nbsp;states&nbsp;of&nbsp;the&nbsp;Library&nbsp;Repository<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Properties:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_history&nbsp;-&nbsp;a&nbsp;dictionary&nbsp;where<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_history["states"]&nbsp;=&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;LibraryRepository&nbsp;objects,&nbsp;representing&nbsp;all&nbsp;the&nbsp;states<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;application&nbsp;has&nbsp;gone&nbsp;through<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_history["now"]&nbsp;=&nbsp;the&nbsp;index&nbsp;in&nbsp;the&nbsp;above&nbsp;list&nbsp;where&nbsp;we&nbsp;are&nbsp;now.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;this&nbsp;way&nbsp;we&nbsp;can&nbsp;easily&nbsp;make&nbsp;a&nbsp;undo/redo&nbsp;operation<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="LibraryController-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>Constructor:&nbsp;initialises&nbsp;the&nbsp;Controller&nbsp;with&nbsp;the&nbsp;saved&nbsp;one&nbsp;(if&nbsp;exists)&nbsp;or&nbsp;starts&nbsp;a&nbsp;fresh&nbsp;(empty)&nbsp;Library</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-addBook"><strong>addBook</strong></a>(self, book)</dt><dd><tt>Function&nbsp;to&nbsp;add&nbsp;a&nbsp;new&nbsp;Book<br>
+:param&nbsp;book:&nbsp;the&nbsp;book&nbsp;we&nbsp;want&nbsp;to&nbsp;add</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-addClient"><strong>addClient</strong></a>(self, client)</dt><dd><tt>Function&nbsp;to&nbsp;add&nbsp;a&nbsp;new&nbsp;Client<br>
+:param&nbsp;client:&nbsp;the&nbsp;new&nbsp;client&nbsp;we&nbsp;want&nbsp;to&nbsp;add<br>
+:return:</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-createFreshLibrary"><strong>createFreshLibrary</strong></a>(self)</dt><dd><tt>Function&nbsp;to&nbsp;create&nbsp;a&nbsp;fresh&nbsp;new&nbsp;Library</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-createFuture"><strong>createFuture</strong></a>(self, newRepo)</dt><dd><tt>Function&nbsp;to&nbsp;append&nbsp;the&nbsp;newRpo&nbsp;to&nbsp;the&nbsp;states&nbsp;list&nbsp;and&nbsp;to&nbsp;update&nbsp;the&nbsp;"now"&nbsp;pointer</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-createNewRepo"><strong>createNewRepo</strong></a>(self, newRepo)</dt><dd><tt>Function&nbsp;to&nbsp;create&nbsp;a&nbsp;new&nbsp;Repository&nbsp;based&nbsp;on&nbsp;the&nbsp;altered&nbsp;one.<br>
+:param&nbsp;newRepo:&nbsp;the&nbsp;altered&nbsp;repository&nbsp;(the&nbsp;one&nbsp;with&nbsp;the&nbsp;latest&nbsp;command&nbsp;made</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-forgetFuture"><strong>forgetFuture</strong></a>(self)</dt><dd><tt>Function&nbsp;to&nbsp;erase&nbsp;all&nbsp;the&nbsp;states&nbsp;that&nbsp;are&nbsp;irrelevant&nbsp;from&nbsp;now&nbsp;on.&nbsp;:)</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-getBooksSize"><strong>getBooksSize</strong></a>(self)</dt><dd><tt>Function&nbsp;to&nbsp;return&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;actual&nbsp;book&nbsp;repository<br>
+:return:&nbsp;an&nbsp;integer&nbsp;representing&nbsp;the&nbsp;number&nbsp;of&nbsp;books&nbsp;in&nbsp;the&nbsp;library</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-getCloneRepository"><strong>getCloneRepository</strong></a>(self)</dt><dd><tt>Function&nbsp;to&nbsp;create&nbsp;a&nbsp;new&nbsp;LibraryRepository&nbsp;Object&nbsp;with&nbsp;the&nbsp;same&nbsp;values&nbsp;as&nbsp;the&nbsp;latest&nbsp;one.<br>
+We&nbsp;basically&nbsp;create&nbsp;a&nbsp;new&nbsp;LibraryRepository&nbsp;and&nbsp;we&nbsp;alterate&nbsp;it,&nbsp;and&nbsp;add&nbsp;it&nbsp;to&nbsp;the&nbsp;states&nbsp;list.<br>
+:return:&nbsp;newRepo&nbsp;-&nbsp;a&nbsp;deepCopy&nbsp;LibraryRepository&nbsp;of&nbsp;the&nbsp;latest&nbsp;repository</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-getLatestRepository"><strong>getLatestRepository</strong></a>(self)</dt><dd><tt>Function&nbsp;to&nbsp;return&nbsp;the&nbsp;actual&nbsp;state&nbsp;of&nbsp;the&nbsp;application<br>
+:return:&nbsp;a&nbsp;LibraryRepository&nbsp;object&nbsp;-&nbsp;which&nbsp;is&nbsp;the&nbsp;"now"&nbsp;state&nbsp;of&nbsp;the&nbsp;application</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-getNowIndex"><strong>getNowIndex</strong></a>(self)</dt><dd><tt>Function&nbsp;to&nbsp;return&nbsp;the&nbsp;now&nbsp;index,&nbsp;described&nbsp;above<br>
+:return:&nbsp;an&nbsp;integer&nbsp;representing&nbsp;the&nbsp;pointer&nbsp;the&nbsp;the&nbsp;state&nbsp;of&nbsp;the&nbsp;application&nbsp;at&nbsp;a&nbsp;given&nbsp;time.</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-listBooks"><strong>listBooks</strong></a>(self)</dt><dd><tt>Function&nbsp;to&nbsp;list&nbsp;all&nbsp;the&nbsp;books&nbsp;at&nbsp;this&nbsp;moment&nbsp;in&nbsp;the&nbsp;Library</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-listClients"><strong>listClients</strong></a>(self)</dt><dd><tt>Function&nbsp;to&nbsp;list&nbsp;all&nbsp;the&nbsp;clients&nbsp;at&nbsp;this&nbsp;moment&nbsp;in&nbsp;the&nbsp;Library</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-listLibrary"><strong>listLibrary</strong></a>(self)</dt><dd><tt>Function&nbsp;to&nbsp;list&nbsp;all&nbsp;the&nbsp;books&nbsp;and&nbsp;the&nbsp;clients&nbsp;at&nbsp;this&nbsp;moment&nbsp;in&nbsp;the&nbsp;Library</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-listLoans"><strong>listLoans</strong></a>(self)</dt><dd><tt>Function&nbsp;to&nbsp;list&nbsp;all&nbsp;the&nbsp;loans&nbsp;&nbsp;at&nbsp;this&nbsp;moment&nbsp;in&nbsp;the&nbsp;Library</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-redo"><strong>redo</strong></a>(self)</dt><dd><tt>Function&nbsp;to&nbsp;handle&nbsp;the&nbsp;redo&nbsp;command</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-removeBook"><strong>removeBook</strong></a>(self, bookId)</dt><dd><tt>Function&nbsp;to&nbsp;remove&nbsp;a&nbsp;Book<br>
+Raises&nbsp;exception&nbsp;if&nbsp;no&nbsp;book&nbsp;was&nbsp;found.<br>
+:param&nbsp;bookId:<br>
+:raise:&nbsp;TypeError&nbsp;if&nbsp;the&nbsp;given&nbsp;Book&nbsp;was&nbsp;not&nbsp;found&nbsp;in&nbsp;the&nbsp;Library</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-removeClient"><strong>removeClient</strong></a>(self, clientCNP)</dt><dd><tt>Function&nbsp;to&nbsp;remove&nbsp;a&nbsp;Client<br>
+:param&nbsp;clientCNP:&nbsp;the&nbsp;new&nbsp;client&nbsp;we&nbsp;want&nbsp;to&nbsp;remove<br>
+:return:</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-restoreHistory"><strong>restoreHistory</strong></a>(self)</dt><dd><tt>Function&nbsp;to&nbsp;restore&nbsp;the&nbsp;latest&nbsp;known&nbsp;history&nbsp;(pickled&nbsp;in&nbsp;the&nbsp;history.bin&nbsp;file)<br>
+:return&nbsp;the&nbsp;_history&nbsp;dictionary&nbsp;pickled&nbsp;from&nbsp;the&nbsp;the&nbsp;history.bin&nbsp;file.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;a&nbsp;new&nbsp;empty&nbsp;dictionary&nbsp;if&nbsp;there&nbsp;is&nbsp;no&nbsp;such&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-saveHistory"><strong>saveHistory</strong></a>(self)</dt><dd><tt>Function&nbsp;to&nbsp;save&nbsp;the&nbsp;whole&nbsp;application&nbsp;information&nbsp;in&nbsp;the&nbsp;history.bin&nbsp;file</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-undo"><strong>undo</strong></a>(self)</dt><dd><tt>Function&nbsp;to&nbsp;handle&nbsp;the&nbsp;undo&nbsp;command</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-updateAuthor"><strong>updateAuthor</strong></a>(self, bookPack)</dt><dd><tt>Function&nbsp;to&nbsp;update&nbsp;the&nbsp;Author&nbsp;of&nbsp;a&nbsp;given&nbsp;book<br>
+:param&nbsp;bookPack:&nbsp;a&nbsp;tuple&nbsp;where&nbsp;the&nbsp;first&nbsp;element&nbsp;is&nbsp;the&nbsp;id&nbsp;of&nbsp;the&nbsp;book&nbsp;and&nbsp;the&nbsp;second&nbsp;element&nbsp;is&nbsp;the&nbsp;new&nbsp;Author&nbsp;of&nbsp;the&nbsp;book</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-updateClientCnp"><strong>updateClientCnp</strong></a>(self, clientPack)</dt><dd><tt>Function&nbsp;to&nbsp;update&nbsp;the&nbsp;CNP&nbsp;of&nbsp;a&nbsp;client.<br>
+:param&nbsp;clientPack:&nbsp;a&nbsp;tuple&nbsp;where&nbsp;the&nbsp;first&nbsp;element&nbsp;is&nbsp;the&nbsp;clientCnp&nbsp;and&nbsp;the&nbsp;second&nbsp;one&nbsp;is&nbsp;the&nbsp;new&nbsp;cnp&nbsp;of&nbsp;the&nbsp;client<br>
+:raise&nbsp;TypeError&nbsp;if&nbsp;there&nbsp;is&nbsp;no&nbsp;client&nbsp;with&nbsp;the&nbsp;given&nbsp;CNP,&nbsp;or&nbsp;the&nbsp;newCNP&nbsp;already&nbsp;exist</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-updateClientName"><strong>updateClientName</strong></a>(self, clientPack)</dt><dd><tt>Function&nbsp;to&nbsp;update&nbsp;the&nbsp;Name&nbsp;of&nbsp;a&nbsp;client.<br>
+:param&nbsp;clientPack:&nbsp;a&nbsp;tuple&nbsp;where&nbsp;the&nbsp;first&nbsp;element&nbsp;is&nbsp;the&nbsp;clientCnp&nbsp;and&nbsp;the&nbsp;second&nbsp;one&nbsp;is&nbsp;the&nbsp;new&nbsp;name&nbsp;of&nbsp;the&nbsp;client<br>
+:raise&nbsp;TypeError&nbsp;if&nbsp;there&nbsp;is&nbsp;no&nbsp;client&nbsp;with&nbsp;the&nbsp;given&nbsp;CNP</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-updateDescription"><strong>updateDescription</strong></a>(self, bookPack)</dt><dd><tt>Function&nbsp;to&nbsp;update&nbsp;the&nbsp;Description&nbsp;of&nbsp;a&nbsp;given&nbsp;book<br>
+:param&nbsp;bookPack:&nbsp;a&nbsp;tuple&nbsp;where&nbsp;the&nbsp;first&nbsp;element&nbsp;is&nbsp;the&nbsp;id&nbsp;of&nbsp;the&nbsp;book&nbsp;and&nbsp;the&nbsp;second&nbsp;element&nbsp;is&nbsp;the&nbsp;new&nbsp;Description&nbsp;of&nbsp;the&nbsp;book</tt></dd></dl>
+
+<dl><dt><a name="LibraryController-updateTitle"><strong>updateTitle</strong></a>(self, bookPack)</dt><dd><tt>Function&nbsp;to&nbsp;update&nbsp;the&nbsp;Title&nbsp;of&nbsp;a&nbsp;book<br>
+:param&nbsp;bookPack:&nbsp;a&nbsp;tuple&nbsp;where&nbsp;the&nbsp;first&nbsp;element&nbsp;is&nbsp;the&nbsp;id&nbsp;of&nbsp;the&nbsp;book&nbsp;and&nbsp;the&nbsp;second&nbsp;element&nbsp;is&nbsp;the&nbsp;new&nbsp;Title&nbsp;of&nbsp;the&nbsp;book</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__author__</strong> = 'cosmin'</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">cosmin</td></tr></table>
+</body></html>
