@@ -92,6 +92,13 @@ class LibraryRepository:
         '''
         return self._books
 
+    def getBooksSize(self):
+        '''
+        Getter for the size of the _books list
+        :return: an integer representing the list of the _books list
+        '''
+        return len(self._books)
+
     def addClient(self, client):
         '''
         Function to add a new Client

@@ -24,7 +24,7 @@ class LibraryApplication:
                 if arg == "help":
                     self.showMenu()
                 elif arg == "addBook".lower():
-                    self._controller.addBook(opt.toAddBook(self.getBooksSize()))
+                    self._controller.addBook(opt.toAddBook(self._controller.getBooksSize()))
                 elif arg == "addClient".lower():
                     self._controller.addClient(opt.toAddClient())
                 elif arg == "removeBook".lower():
@@ -38,7 +38,7 @@ class LibraryApplication:
                 elif arg == "updateTitle".lower():
                     self._controller.updateTitle(opt.toUpdateTitle())
                 elif arg == "updateDescription".lower():
-                    self._controller.updateTitle(opt.toUpdateDescription())
+                    self._controller.updateDescription(opt.toUpdateDescription())
                 elif arg == "updateAuthor".lower():
                     self._controller.updateAuthor(opt.toUpdateAuthor())
                 elif arg == "listBooks".lower():
@@ -54,6 +54,7 @@ class LibraryApplication:
                 elif arg == "save":
                     self._controller.saveHistory()
                 elif arg == "exit":
+                    print("Exiting...")
                     break
                 elif arg == 'delete':
                     self._controller.createFreshLibrary()

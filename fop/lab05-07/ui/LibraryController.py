@@ -54,6 +54,13 @@ class LibraryController:
         newRepo.addBook(book)
         self.createNewRepo(newRepo)
 
+    def getBooksSize(self):
+        '''
+        Function to return the size of the actual book repository
+        :return: an integer representing the number of books in the library
+        '''
+        return self.getLatestRepository().getBooksSize()
+
     def removeBook(self, bookId):
         '''
         Function to remove a Book
