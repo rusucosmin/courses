@@ -19,6 +19,10 @@ class Loan:
         '''
         return "Client %s has the book #%d with the Title: %s" % (self._client.get_name(), self._book.get_id(), self._book.get_title())
 
+    def __eq__(self, other):
+        return (isinstance(other, self.__class__)
+            and self.__dict__ == other.__dict__)
+
     def getClient(self):
         '''
         Function to get the Client from a specific Loan

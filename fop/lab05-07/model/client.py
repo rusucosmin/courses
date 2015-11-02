@@ -17,6 +17,10 @@ class Client:
         '''
         return "Client Name: %s\nCNP: %s" % (self._name, self._cnp)
 
+    def __eq__(self, other):
+        return (isinstance(other, self.__class__)
+            and self.__dict__ == other.__dict__)
+
     def getCnp(self):
         '''
         Getter for the cnp property

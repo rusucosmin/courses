@@ -11,21 +11,39 @@ class Command:
     It has only one property:
         -a list of string containing the command arguments
     '''
-    ADD_BOOK_ARGS = 3 + 1                   # +1 for the command type
-    ADD_CLIENT_ARGS = 2 + 1
-    REMOVE_BOOK_ARGS = 1 + 1
-    REMOVE_CLIENT_ARGS = 1 + 1
-    UPDATE_CLIENT_CNP = 2 + 1
-    UPDATE_CLIENT_NAME = 2 + 1
-    UPDATE_BOOK_TITLE = 2 + 1
-    UPDATE_BOOK_AUTHOR = 2 + 1
-    UPDATE_BOOK_DESCRIPTION = 2 + 1
+    ARGS = {
+        "addbook":4,
+        "addclient":3,
+        "removebook":2,
+        "removeclient":2,
+        "updatecnp":3,
+        "updatename":3,
+        "updatetitle":3,
+        "updateauthor":3,
+        "updatedescription":3,
+        "list": 1,
+        "save": 1,
+        "exit": 1,
+        "delete": 1,
+        "listbooks": 1,
+        "listclients": 1,
+        "undo": 1,
+        "redo": 1
+    }
     def __init__(self, stringInput):
         self._args = stringInput.split('|')
         self._args[0] = self._args[0].lower()
+        if not self._args[0] in Command.ARGS.keys():
+            raise SyntaxError("CommandError - Unknown command!")
+        if len(self._args) != Command.ARGS[self._args[0]]:
+            raise SyntaxError("CommandError - Argument size do not match!")
         for arg in self._args:
             if arg == "":
                 raise SyntaxError("CommandError - Empty parameters!")
+
+    def __eq__(self, other):
+        return (isinstance(other, self.__class__)
+            and self.__dict__ == other.__dict__)
 
     def getArgs(self):
         return self._args
@@ -38,64 +56,52 @@ class Command:
             raise SyntaxError("Command error - Not enough parameters.")
         return self._args[pos]
 
-    def testArgsSize(self, actualSize, wantedSize):
-        if actualSize != wantedSize:
-            raise SyntaxError("Command error - Wrong parameters.")
-
     def toAddBook(self, id):
-        self.testArgsSize(self.getArgsSize(), Command.ADD_BOOK_ARGS)
         return Book(id, self.getArg(1), self.getArg(2), self.getArg(3))
 
     def toAddClient(self):
-        self.testArgsSize(self.getArgsSize(), Command.ADD_CLIENT_ARGS)
         try:
             return Client(int(self.getArg(1)), self.getArg(2))
         except ValueError as ve:
             raise ValueError("Client CNP should be an integer.")
 
     def toRemoveClient(self):
-        self.testArgsSize(self.getArgsSize(), Command.REMOVE_CLIENT_ARGS)
         try:
             return int(self.getArg(1))
         except ValueError as ve:
             raise ValueError("Client CNP should be an integer.")
 
     def toRemoveBook(self):
-        self.testArgsSize(self.getArgsSize(), Command.REMOVE_BOOK_ARGS)
         try:
             return int(self.getArg(1))
         except ValueError as ve:
             raise ValueError("Book number should be an integer.")
 
     def toUpdateCnp(self):
-        self.testArgsSize(self.getArgsSize(), Command.UPDATE_CLIENT_CNP)
         try:
             return (int(self.getArg(1)), int(self.getArg(2)))
         except ValueError:
             raise ValueError("Client CNP should be an integer.")
+
     def toUpdateName(self):
-        self.testArgsSize(self.getArgsSize(), Command.UPDATE_CLIENT_NAME)
         try:
             return (int(self.getArg(1)), self.getArg(2))
         except ValueError:
             raise ValueError("Client CNP should be an integer.")
 
     def toUpdateTitle(self):
-        self.testArgsSize(self.getArgsSize(), Command.UPDATE_BOOK_TITLE)
         try:
             return (int(self.getArg(1)), self.getArg(2))
         except ValueError:
             raise ValueError("Book ID should be an integer.")
 
     def toUpdateDescription(self):
-        self.testArgsSize(self.getArgsSize(), Command.UPDATE_BOOK_TITLE)
         try:
             return (int(self.getArg(1)), self.getArg(2))
         except ValueError:
             raise ValueError("Book ID should be an integer.")
 
     def toUpdateAuthor(self):
-        self.testArgsSize(self.getArgsSize(), Command.UPDATE_BOOK_TITLE)
         try:
             return (int(self.getArg(1)), self.getArg(2))
         except ValueError:

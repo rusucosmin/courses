@@ -11,7 +11,7 @@ class Book:
     '''
     def __init__(self, id, title, description, author):
         self._id = id
-        self._title = title;
+        self._title = title
         self._description = description
         self._author = author
 
@@ -20,6 +20,10 @@ class Book:
         Function to print the Book in a nice way
         '''
         return "Book #%d:\nTitle: %s\nDescription: %s\nAuthor: %s\n" % (self._id, self._title, self._description, self._author)
+
+    def __eq__(self, other):
+        return (isinstance(other, self.__class__)
+            and self.__dict__ == other.__dict__)
 
     def getId(self):
         '''
