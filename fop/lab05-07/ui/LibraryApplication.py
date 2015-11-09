@@ -1,4 +1,5 @@
 from model.command import Command
+from model.exception import LibraryException
 
 __author__ = 'cosmin'
 
@@ -24,50 +25,50 @@ class LibraryApplication:
                 if arg == "help":
                     self.showMenu()
                 elif arg == "addBook".lower():
-                    self._controller.addBook(opt.toAddBook(self._controller.getBooksSize()))
+                    self._controller.addBook(opt.toAddBook(len(self._controller.getBooks())))
                 elif arg == "addClient".lower():
                     self._controller.addClient(opt.toAddClient())
                 elif arg == "removeBook".lower():
-                    self._controller.removeBook(opt.toRemoveBook())
+                    self._controller.removeBook(int(opt.getArg(1)))
                 elif arg == "removeClient".lower():
-                    self._controller.removeClient(opt.toRemoveClient())
+                    self._controller.removeClient(int(opt.getArg(1)))
                 elif arg == "updateCnp".lower():
-                    self._controller.updateClientCnp(opt.toUpdateCnp())
+                    self._controller.updateClientCnp(int(opt.getArg(1)), int(opt.getArg(2)))
                 elif arg == "updateName".lower():
-                    self._controller.updateClientName(opt.toUpdateName())
+                    self._controller.updateClientName(int(opt.getArg(1)), opt.getArg(2))
                 elif arg == "updateTitle".lower():
-                    self._controller.updateTitle(opt.toUpdateTitle())
+                    self._controller.updateTitle(int(opt.getArg(1)), opt.getArg(2))
                 elif arg == "updateDescription".lower():
-                    self._controller.updateDescription(opt.toUpdateDescription())
+                    self._controller.updateDescription(int(opt.getArg(1)), opt.getArg(2))
                 elif arg == "updateAuthor".lower():
-                    self._controller.updateAuthor(opt.toUpdateAuthor())
+                    self._controller.updateAuthor(int(opt.getArg(1)), opt.getArg(2))
                 elif arg == "listBooks".lower():
-                    self._controller.listBooks()
+                    print(self._controller.getBooks())
                 elif arg == "listClients".lower():
-                    self._controller.listClients()
+                    print(self._controller.getClients())
+                elif arg == "list":
+                    print(self._controller.getLibrary())
+                elif arg == "rentBook".lower():
+                    self._controller.rentBook(int(opt.getArg(1)), int(opt.getArg(2)))
+                elif arg == "returnBook".lower():
+                    self._controller.returnBook(int(opt.getArg(1)), int(opt.getArg(2)))
                 elif arg == "undo":
                     self._controller.undo()
                 elif arg == "redo":
                     self._controller.redo()
-                elif arg == "list":
-                    self._controller.listLibrary()
                 elif arg == "save":
-                    self._controller.saveHistory()
+                    self._controller.save()
                 elif arg == "exit":
                     print("Exiting...")
                     break
                 elif arg == 'delete':
-                    self._controller.createFreshLibrary()
+                    self._controller.recreate()
                 else:
                     print("Command not recognized!")
-            except SyntaxError as se:
-                print(str(se))
             except ValueError as ve:
-                print(str(ve))
-            except TypeError as te:
-                print(str(te))
-            except Exception as e:
-                print(str(e))
+                print("ValueError - Argument should be integer!")
+            except LibraryException as le:
+                print(str(le))
 
     def showMenu(self):
         '''
@@ -85,6 +86,8 @@ class LibraryApplication:
         print("     'updateAuthor|ID_BOOK|NEW_AUTH' - update the author of a specific book")
         print("     'listBooks' - print all books")
         print("     'listClients' - print all clients")
+        print("     'rentBook|CNP|BOOK_ID' - rent the BOOK_ID to the client with the given CNP")
+        print("     'returnBOOK|CNP|BOOK_ID' - the client with the given CNP returns the BOOK_ID book")
         print("     'undo' - undo the last operation")
         print("     'redo' - reverse of undo")
         print("     'save' - save current library state")

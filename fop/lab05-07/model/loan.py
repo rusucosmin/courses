@@ -17,7 +17,7 @@ class Loan:
         '''
         Function to print the Object in a nice way
         '''
-        return "Client %s has the book #%d with the Title: %s" % (self._client.get_name(), self._book.get_id(), self._book.get_title())
+        return "Client %s has the book #%d with the Title: %s" % (self._client.getName(), self._book.getId(), self._book.getTitle())
 
     def __eq__(self, other):
         return (isinstance(other, self.__class__)

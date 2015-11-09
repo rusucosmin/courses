@@ -1,29 +1,69 @@
-from model.book import Book
-from model.client import Client
-from model.loan import Loan
+import pickle
+
+from model.exception import LibraryException
+from model.library import Library
 
 __author__ = 'cosmin'
 
 
 class LibraryRepository:
     '''
-    Represents an actual state of a library at a given moment in time.
-        properties:
-            _books - list of all the books
-            _clients - list of all the clients
-            -loans - list of all the loans
+    Class LibraryRepository which is a bridge between the ui and the backend code
+    It has all the old and new states of the Library Repository
+        Properties:
+            _states = a list of all LibraryRepository objects, representing all the states
+                                        the application has gone through
+            _now = the index in the above list where we are now.
+                    - this way we can easily make a undo/redo operation
     '''
-    def __init__(self):
-        self._books = []
-        self._clients = []
-        self._loans = []
+    def __init__(self, restore = True):
+        '''
+        Constructor: initialises the Repository with the saved one (if exists) or starts a fresh (empty) Library
+        '''
+        if restore:
+            self.restoreHistory()
+        else:
+            self.createFreshLibrary()
+
+    def getNowIndex(self):
+        '''
+        Function to return the now index, described above
+        :return: an integer representing the pointer the the state of the application at a given time.
+        '''
+        return self._now
+
+    def getLibrary(self):
+        '''
+        Function to return the actual state of the application
+        :return: a LibraryRepository object - which is the "now" state of the application
+        '''
+        return self._states[self.getNowIndex()]
+
+    def getStateClone(self):
+        '''
+        Function to create a new LibraryRepository Object with the same values as the latest one.
+        We basically create a new LibraryRepository and we alter it, and add it to the states list.
+        :return: newState - a deepCopy LibraryRepository of the latest repository
+        '''
+        newState = Library()
+        newState.deepCopy(self.getLibrary())
+        return newState
 
     def addBook(self, book):
         '''
         Function to add a new Book
         :param book: the book we want to add
         '''
-        self._books.append(book)
+        newState = self.getStateClone()
+        newState.addBook(book)
+        self.createNewRepo(newState)
+
+    def getBooksSize(self):
+        '''
+        Function to return the size of the actual book repository
+        :return: an integer representing the number of books in the library
+        '''
+        return self.getLibrary().getBooksSize()
 
     def removeBook(self, bookId):
         '''
@@ -32,72 +72,36 @@ class LibraryRepository:
         :param bookId:
         :raise: TypeError if the given Book was not found in the Library
         '''
-        for i in range(len(self._books)):
-            book = self._books[i]
-            if book.getId() == bookId:
-                del self._books[i]
-                return
-        raise TypeError("Book not found!")
+        newState = self.getStateClone()
+        newState.removeBook(bookId)
+        self.createNewRepo(newState)
 
-    def updateTitle(self, bookId, newBookTitle):
+    def updateTitle(self, bookId, newTitle):
         '''
         Function to update the Title of a book
         :param bookPack: a tuple where the first element is the id of the book and the second element is the new Title of the book
         '''
-        for book in self.getBooks():
-            if book.getId() == bookId:
-                book.setTitle(newBookTitle)
-                return
-        raise TypeError("Book not found!")
+        newState = self.getStateClone()
+        newState.updateTitle(bookId, newTitle)
+        self.createNewRepo(newState)
 
-    def updateDescription(self, bookId, newBookDescription):
+    def updateDescription(self, bookId, newDescr):
         '''
         Function to update the Description of a given book
         :param bookPack: a tuple where the first element is the id of the book and the second element is the new Description of the book
         '''
-        for book in self.getBooks():
-            if book.getId() == bookId:
-                book.setDescription(newBookDescription)
-                return
-        raise TypeError("Book not found!")
+        newState = self.getStateClone()
+        newState.updateDescription(bookId, newDescr)
+        self.createNewRepo(newState)
 
-    def updateAuthor(self, bookId, newBookAuthor):
+    def updateAuthor(self, bookId, newAuthor):
         '''
         Function to update the Author of a given book
         :param bookPack: a tuple where the first element is the id of the book and the second element is the new Author of the book
         '''
-        for book in self.getBooks():
-            if book.getId() == bookId:
-                book.setAuthor(newBookAuthor)
-                return
-        raise TypeError("Book not found!")
-
-    def searchBook(self, bookId):
-        '''
-        Function to search for a book in the list
-        :param bookId: the id of the book we want to search for
-        :return: the unique given book (since the id is unique)
-        :raise TypeError Exception if the book was not found in the array
-        '''
-        for i in range(len(self._books)):
-            book = self._books[i];
-            if book.getId() == bookId:
-                return book
-        raise TypeError("Book not found!")
-
-    def getBooks(self):
-        '''
-        Getter for the _books list of the LibraryRepository Class
-        :return: the list _books
-        '''
-        return self._books
-
-    def getBooksSize(self):
-        '''
-        Getter for the size of the _books list
-        :return: an integer representing the list of the _books list
-        '''
-        return len(self._books)
+        newState = self.getStateClone()
+        newState.updateAuthor(bookId, newAuthor)
+        self.createNewRepo(newState)
 
     def addClient(self, client):
         '''
@@ -105,87 +109,135 @@ class LibraryRepository:
         :param client: the new client we want to add
         :return:
         '''
-        try:
-            self.searchClient(client.getCnp())
-            raise ValueError("Client CNP already exists!")
-        except TypeError:
-            self._clients.append(client)
-
-    def updateClientName(self, clientCnp, clientNewName):
-        '''
-        Function to update the Name of a client.
-        :param clientPack: a tuple where the first element is the clientCnp and the second one is the new name of the client
-        :raise TypeError if there is no client with the given CNP
-        '''
-        for client in self.getClients():
-            if client.getCnp() == clientCnp:
-                client.setName(clientNewName)
-                return
-        raise TypeError("Client not found!")
-
-    def updateClientCnp(self, clientCnp, clientNewCnp):
-        '''
-        Function to update the CNP of a client.
-        :param clientPack: a tuple where the first element is the clientCnp and the second one is the new cnp of the client
-        :raise TypeError if there is no client with the given CNP, or the newCNP already exist
-        '''
-        try:
-            self.searchClient(clientNewCnp)
-            raise ValueError("Client CNP already exists!")
-        except TypeError:
-            for client in self.getClients():
-                if client.getCnp() == clientCnp:
-                    client.setCnp(clientNewCnp)
-                    return
-        raise TypeError("Client not found!")
+        newState = self.getStateClone()
+        newState.addClient(client)
+        self.createNewRepo(newState)
 
     def removeClient(self, clientCNP):
         '''
         Function to remove a Client
         :param clientCNP: the new client we want to remove
-        :return:
         '''
-        for i in range(len(self._clients)):
-            client = self._clients[i]
-            if client.getCnp() == clientCNP:
-                del self._clients[i]
-                return
-        raise TypeError("Client not found!")
+        newState = self.getStateClone()
+        newState.removeClient(clientCNP)
+        self.createNewRepo(newState)
 
-    def searchClient(self, clientCNP):
+    def updateClientCnp(self, clientCNP, newCNP):
         '''
-        Function to search for a client by his CNP
-        :param clientCNP: an integer representing the CNP of the client we want to search for
-        :return: the unique Client (since the CNP is unique)
-        :raise TypeError if there is no client with the given CNP.
+        Function to update the CNP of a client.
+        :param clientPack: a tuple where the first element is the clientCnp and the second one is the new cnp of the client
+        :raise TypeError if there is no client with the given CNP, or the newCNP already exist
         '''
-        for i in range(len(self._clients)):
-            client = self._clients[i]
-            if client.getCnp() == clientCNP:
-                return client
-        raise TypeError("Client not found!")
+        newState = self.getStateClone()
+        newState.updateClientCnp(clientCNP, newCNP)
+        self.createNewRepo(newState)
+
+    def updateClientName(self, clientCNP, newName):
+        '''
+        Function to update the Name of a client.
+        :param clientPack: a tuple where the first element is the clientCnp and the second one is the new name of the client
+        :raise TypeError if there is no client with the given CNP
+        '''
+        newState = self.getStateClone()
+        newState.updateClientName(clientCNP, newName)
+        self.createNewRepo(newState)
+
+    def rentBook(self, clientCNP, bookID):
+        newState = self.getStateClone()
+        newState.rentBook(clientCNP, bookID)
+        self.createNewRepo(newState)
+
+    def returnBook(self, clientCNP, bookID):
+        newState = self.getStateClone()
+        newState.returnBook(clientCNP, bookID)
+        self.createNewRepo(newState)
+
+    def getBooks(self):
+        '''
+        Function to list all the books at this moment in the Library
+        '''
+        return self.getLibrary().getBooks()
 
     def getClients(self):
         '''
-        Getter for the _clients list
-        :return: the _clients list from the main class
+        Function to list all the clients at this moment in the Library
         '''
-        return self._clients
+        return self.getLibrary().getClients()
 
     def getLoans(self):
         '''
-        Getter for the _loans list
-        :return: the _loans list from the main class
+        Function to list all the loans  at this moment in the Library
         '''
-        return self._loans
+        return self.getLibrary().getLoans()
 
-    def deepCopy(self, other):
+    def createNewRepo(self, newRepo):
         '''
-        Function to deepCopy another LibraryRepository to this (self) one
-        It copies all the data from another Repository to this one with no references of the objects (so that the states do not
-            depend at all)
-        :param other: another LibraryRepository
+        Function to create a new Repository based on the altered one.
+        :param newRepo: the altered repository (the one with the latest command made
         '''
-        self._books = [Book(book.getId(), book.getTitle(), book.getDescription(), book.getAuthor()) for book in other.getBooks()]
-        self._clients = [Client(client.getCnp(), client.getName()) for client in other.getClients()]
-        self._loans = [Loan(loan.getBook(), loan.getClient()) for loan in other.getLoans()]
+        self.forgetFuture()
+        self.createFuture(newRepo)
+
+    def forgetFuture(self):
+        '''
+        Function to erase all the states that are irrelevant from now on. :)
+        '''
+        self._states = self._states[:self.getNowIndex() + 1]
+
+    def createFuture(self, newRepo):
+        '''
+        Function to append the newRpo to the states list and to update the "now" pointer
+        '''
+        self._states.append(newRepo)
+        self._now += 1
+
+    def undo(self):
+        '''
+        Function to handle the undo command
+        '''
+        if self._now == 0:
+            raise LibraryException("Already at earliest state!")
+        else:
+            self._now -= 1
+
+    def redo(self):
+
+        '''
+        Function to handle the redo command
+        '''
+        if self._now == len(self._states) - 1:
+            raise LibraryException("Already at newest state!")
+        else:
+            self._now += 1
+
+    def restoreHistory(self):
+        '''
+        Function to restore the latest known history (pickled in the history.bin file)
+        :return the _history dictionary pickled from the the history.bin file.
+                    or a new empty dictionary if there is no such file.
+        '''
+        try:
+            with open("repository/history.bin", "rb") as f:
+                lastState = pickle.load(f)
+                self._states = lastState._states
+                self._now = lastState._now
+        except IOError:
+            self.createFreshLibrary()
+
+    def saveHistory(self):
+        '''
+        Function to save the whole application information in the history.bin file
+        '''
+        try:
+            with open("repository/history.bin", "wb") as f:
+                pickle.dump(self, f)
+            return "Successfully saved current state!"
+        except IOError:
+            raise LibraryException("Could not save the current state!")
+
+    def createFreshLibrary(self):
+        '''
+        Function to create a fresh new Library
+        '''
+        self._states =  [Library()]
+        self._now = 0
