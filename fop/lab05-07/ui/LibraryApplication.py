@@ -43,9 +43,11 @@ class LibraryApplication:
                 elif arg == "updateAuthor".lower():
                     self._controller.updateAuthor(int(opt.getArg(1)), opt.getArg(2))
                 elif arg == "listBooks".lower():
-                    print(self._controller.getBooks())
+                    print('\n\n'.join(str(book) for book in self._controller.getBooks()))
                 elif arg == "listClients".lower():
-                    print(self._controller.getClients())
+                    print('\n\n'.join(str(client) for client in self._controller.getClients()))
+                elif arg == "listLoans".lower():
+                    print('\n\n'.join(str(loan) for loan in self._controller.getLoans()))
                 elif arg == "list":
                     print(self._controller.getLibrary())
                 elif arg == "rentBook".lower():

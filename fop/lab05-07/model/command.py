@@ -30,6 +30,7 @@ class Command:
         "delete": 1,
         "listbooks": 1,
         "listclients": 1,
+        "listloans": 1,
         "undo": 1,
         "redo": 1,
         "help": 1
