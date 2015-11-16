@@ -24,6 +24,8 @@ class Command:
         "updatedescription":3,
         "rentbook": 3,
         "returnbook": 3,
+        "rentedbookssorted": 1,
+        "mostactiveusers": 1,
         "list": 1,
         "save": 1,
         "exit": 1,

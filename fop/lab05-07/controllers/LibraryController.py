@@ -1,6 +1,8 @@
 import pickle
 from repository.LibraryRepository import LibraryRepository
 
+import operator
+
 __author__ = 'cosmin'
 
 
@@ -12,7 +14,7 @@ class LibraryController:
     '''
     def __init__(self, repo):
         '''
-        Constructor: initialises the Controller with the repositorys
+        Constructor: initialises the Controller with the repositories
         '''
         self._repo = repo
 
@@ -145,3 +147,20 @@ class LibraryController:
         Function to create a fresh new Library
         '''
         self._repo.createFreshLibrary()
+
+    def getRentedBooksSorted(self):
+        loans = self._repo.getLoans()
+        rentedbooks = []
+        for loan in loans:
+            rentedbooks.append(loan.getBook())
+        return sorted(rentedbooks, key=operator.attrgetter('_title'))
+
+    def getMostActiveUsers(self):
+        loans = self._repo.getLoans()
+        many = {}
+        for loan in loans:
+            if str(loan.getClient()) in many.keys():
+                many[str(loan.getClient())] += 1
+            else:
+                many[str(loan.getClient())] = 1
+        return sorted(many.items(), key=operator.itemgetter(1), reverse=True)

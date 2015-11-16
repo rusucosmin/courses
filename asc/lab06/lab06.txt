@@ -1,0 +1,4 @@
+4. A byte string S of length l is given. Obtain the string D of length l-1 so that the elements of D represent the difference between every two consecutive elements of S.
+Exemple:
+S: 1, 2, 4, 6, 10, 20, 25
+D: 1, 2, 2, 4, 10, 5
