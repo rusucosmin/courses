@@ -1,5 +1,6 @@
 import pickle
 from repository.LibraryRepository import LibraryRepository
+from model.exception import LibraryException
 
 import operator
 
@@ -32,6 +33,9 @@ class LibraryController:
         :param bookId:
         :raise: TypeError if the given Book was not found in the Library
         '''
+        for book in [loan.getBook() for loan in self._repo.getLoans()]:
+            if book.getId() == bookId:
+                raise LibraryException("Book rented...")
         self._repo.removeBook(bookId)
 
     def updateTitle(self, bookId, newTitle):
@@ -70,6 +74,9 @@ class LibraryController:
         :param clientCNP: the new client we want to remove
         :return:
         '''
+        for client in [loan.getClient() for loan in self._repo.getLoans()]:
+            if client.getCnp() == clientCNP:
+                raise LibraryException("Client has rented book, please return them and then remove him.")
         self._repo.removeClient(clientCNP)
 
     def updateClientCnp(self, clientCNP, newCNP):
