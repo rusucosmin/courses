@@ -55,9 +55,10 @@ start:
 		mov di, 1
 		mov cx, lc - 1
 		for_loop:
-			CMPSB
+			mov al, c[si]
+			mov bl, c[di]
+			cmp al, bl
 			jle lower_label
-
 				mov al, c[si]
 				mov bl, c[di]
 				mov c[si], bl
