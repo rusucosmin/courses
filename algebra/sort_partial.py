@@ -56,8 +56,7 @@ names = []
 grades = []
 
 for i in range(0, len(all_names), 2):
-	print(all_names[i].contents)
-	names.append(all_names[i].contents + [u" "] +  all_names[i + 1].contents)
+	names.append(all_names[i].getText() + " " +  all_names[i + 1].getText())
 
 for i in range(4, len(all_grades), 5):
 	if all_grades[i].getText() == "":
@@ -77,9 +76,9 @@ with open("main.html", 'w') as f:
 	cnt = 0
 	for student in students:
 		cnt += 1
-		student._name = u''.join([x for x in student._name])
-		line = str(cnt) + " " + student._name + " " + str(student._grade) + '<br>\n'
-		f.write(line)
+		line = str(cnt) + " " + student._name + " " + str(student._grade) + '<br>'
+		f.write(line.decode('unicode-escape').encode('utf-8'))
+		f.write('\n')
 
 with open("main.html", 'r') as f:
 	print(f.read())
