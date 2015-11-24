@@ -12,8 +12,8 @@ assume cs:code, ds:data
 data segment
 	s dw 0abcdh, 1123h, 77abh, 0ab77h, 7788h
 	ls equ ($ - s) / 2
-	s1 db ls * 2 dup(00h)
-	s2 db ls * 2 dup(00h)
+	s1 db ls dup(00h)
+	s2 db ls dup(00h)
 	nb1 db 0
 	nb2 db 0
 	bmask db 0
@@ -60,6 +60,7 @@ start:
 				loop bits_al
 			
 			mov cx, 8
+
 			bits_ah:
 				dec cx
 				mov bl, 1
@@ -72,15 +73,29 @@ start:
 				bit_is_zero_ah:
 				inc cx
 				loop bits_ah
-
+			; s1->ah 
+			; s2->al
+			; s1->the byte with the most 1 bits
+			; s2->the byte with the least 1 bits
+		mov dl, nb1
+		cmp dl, nb2 ; if(bits(al) > 
+		je _equal ;if(bits(al) == bits(ah))
+		ja _above  ;if(bits(al) > bits(ah))
+			;else bits(al) < bits(AH)
+			jmp _end_if
+		_above:
+			xchg al, ah
+			jmp _end_if
+		_equal:
+			mov ah, nb1
+			mov al, 0
+		_end_if:
+			mov s1[si], ah
+			mov s2[si], al
+			inc si
 		pop cx
-;		mov [s1 + si], al
-;		mov [s2 + di], ah
-;		inc si
-;		inc di
 		add bp, 2
 		loop main_loop
-
 	end_label:
 
 	mov ax, 4c00h
