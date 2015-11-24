@@ -18,6 +18,11 @@ class LibraryApplication:
         Main function which handles the ui menu:
             - handles the user inputted commands: it's the bridge between the ui and the backend application
         '''
+        answer = input("Would you like to continue?")
+        while answer != "yes" and answer != "no":
+            answer = input("yes / no")
+        if answer == "no":
+            self._controller.recreate()
         while True:
             try:
                 opt = Command(input("Type a command. Press 'help' for the available commands: "))
@@ -95,9 +100,13 @@ class LibraryApplication:
         print("     'updateAuthor|ID_BOOK|NEW_AUTH' - update the author of a specific book")
         print("     'listBooks' - print all books")
         print("     'listClients' - print all clients")
+        print("     'listLoans' - print all the loans")
         print("     'rentBook|CNP|BOOK_ID' - rent the BOOK_ID to the client with the given CNP")
         print("     'returnBOOK|CNP|BOOK_ID' - the client with the given CNP returns the BOOK_ID book")
         print("     'undo' - undo the last operation")
         print("     'redo' - reverse of undo")
         print("     'save' - save current library state")
         print("     'exit' - save and exit")
+        print("     'delete' - delete the current library")
+        print("     'most active users'")
+        print("     'rentedBooksSorted'")

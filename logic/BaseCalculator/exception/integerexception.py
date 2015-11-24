@@ -1,0 +1,2 @@
+class IntegerException(BaseException):
+    pass
