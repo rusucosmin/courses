@@ -1,4 +1,4 @@
-;Rusu Cosmin, gr. 917, 23.10.2015, homework for lab07, problem 15
+;Rusu Cosmin, gr. 917, 23.11.2015, homework for lab07, problem 15
 
 ;15. A string of words is given. Build two strings of bytes, s1 and s2, in the following way: for each word, 
 ;- if the number of bits 1 from the high byte of the word is larger than the number of bits 1 from its low byte, 
