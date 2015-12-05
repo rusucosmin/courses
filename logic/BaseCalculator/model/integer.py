@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 __author__ = 'cosmin'
 
 from exception.integerexception import IntegerException
@@ -304,10 +306,29 @@ class Integer:
     def __ge__(self, other):
         return self._compare(other) >= 0
 
-    def convertToBase(self, destBase):
+    def substitutionMethod(self, destBase):
         destNumber = Integer(destBase, "0")
         power = Integer(destBase, "1")
         for i in range(len(self)):
             destNumber = destNumber + power * Integer(destBase, Integer.Symbols[self[i]])
             power = power * Integer(destBase, Integer.Symbols[self._base])
         return destNumber
+
+    def succesiveDivisons(self, destBase):
+        destNumber = Integer(destBase, "0")
+        power = Integer(destBase, "1")
+        aux = Integer(destBase, "10")
+        copyOfSelf = deepcopy(self)
+        while len(copyOfSelf) != 0:
+            destNumber = destNumber + power * Integer(destBase, Integer.Symbols[copyOfSelf % destBase])
+            copyOfSelf = copyOfSelf // destBase
+            power = power * aux
+        return destNumber
+
+    def convertToBase(self, destBase):
+        if self._base <= destBase:
+            return self.substitutionMethod(destBase)
+        else:
+            return self.succesiveDivisons(destBase)
+
+
