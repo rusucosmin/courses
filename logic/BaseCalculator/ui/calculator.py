@@ -30,18 +30,22 @@ class Calculator:
                 op = int(input("Please input the type of operation you want to do: "))
                 if op == 1:
                     x, y = self.getOperands()
-                    print(self._controller.add(x, y))
+                    print(x + y)
                 elif op == 2:
                     x, y = self.getOperands()
-                    print(self._controller.sub(x, y))
+                    print(x - y)
                 elif op == 3:
                     x, y = self.getOperands()
-                    print(self._controller.mul(x, y))
+                    print(x * y)
                 elif op == 4:
                     x = self.getInteger()
                     y = self.getOneDigitInteger()
-                    print("quotient: ", self._controller.div(x, y))
-                    print("remainder: ", self._controller.mod(x, y))
+                    print("quotient: ", x // y)
+                    print("remainder: ", x % y)
+                elif op == 5:
+                    x = self.getInteger()
+                    y = int(input("Input the destination base: "))
+                    print(x.convertToBase(y))
             except ValueError:
                 print("Value should be integer.")
             except IntegerException as ie:

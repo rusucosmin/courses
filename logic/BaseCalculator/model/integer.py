@@ -83,7 +83,7 @@ class Integer:
         return number_repr
 
     def __str__(self):
-        return repr(self)
+        return repr(self) + " (" + str(self._base) + ")"
 
     def clearIsb(self):
         while len(self) > 0 and self[-1] == 0:
@@ -303,3 +303,11 @@ class Integer:
 
     def __ge__(self, other):
         return self._compare(other) >= 0
+
+    def convertToBase(self, destBase):
+        destNumber = Integer(destBase, "0")
+        power = Integer(destBase, "1")
+        for i in range(len(self)):
+            destNumber = destNumber + power * Integer(destBase, Integer.Symbols[self[i]])
+            power = power * Integer(destBase, Integer.Symbols[self._base])
+        return destNumber
