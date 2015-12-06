@@ -2,16 +2,17 @@ from copy import deepcopy
 
 __author__ = 'cosmin'
 
-from exception.integerexception import IntegerException
+from model.exceptions import IntegerException
 
 
 class Integer:
     '''
     Class to represent a number
 
-    self._length: the number of digits of the number
-    self._digits
-    self._base : the base of the number
+    self._length:   -the number of digits
+    self._digits:   -the list of the number's digits
+                    -the less significant digits are on the lower index of the array
+    self._base :    -the base of the number
     '''
     AllowedBases = [2, 3, 4, 5, 6, 7, 8, 9, 10, 16]
     Values = {
@@ -51,12 +52,14 @@ class Integer:
         15: 'F'
     }
 
-    def valueOf(number_repr):
-        if number_repr in Integer.Values.keys():
-            return Integer.Values[number_repr]
-        raise ValueError("Not a digit...")
-
     def __init__(self, base, number_repr):
+        '''
+        Constructor for the Integer class
+        :param base: an integer - the base in which the number is represented
+        :param number_repr: a string - the representation of the number in that base
+        :raises IntegerException if the base is not one of the allowed base
+        :raises IntegerException if the number has less than one digit
+        '''
         if base not in Integer.AllowedBases:
             raise IntegerException("Not allowed base.")
         if number_repr == "":
@@ -71,11 +74,29 @@ class Integer:
                 raise IntegerException("Unknown base symbols.")
             self.append(Integer.Values[ch])
 
+    def valueOf(number_repr):
+        '''
+        Function to get the value of a symbol (digit)
+        :return: the value of the symbol (digit) number_repr
+        :raises: ValueError if the symbol is not recognised
+        '''
+        if number_repr in Integer.Values.keys():
+            return Integer.Values[number_repr]
+        raise ValueError("Not a digit...")
+
     def append(self, value):
-        self._digits.append(value);
+        '''
+        Function to append a digit to the most significant position
+        :param: value:the value of the appended digit
+        '''
+        self._digits.append(value)
         self._length += 1
 
     def __repr__(self):
+        '''
+        Converts the number in it's representation in base self._base
+        :return: a string - the representation of the number
+        '''
         self.clearIsb()
         number_repr = ""
         for digit in self._digits[::-1]:
@@ -85,55 +106,73 @@ class Integer:
         return number_repr
 
     def __str__(self):
+        '''
+        Same as __repr__, but much more human-readable (it also contains the base in parenthesis)
+        :return: a string - the representation of the number
+        '''
         return repr(self) + " (" + str(self._base) + ")"
 
     def clearIsb(self):
+        '''
+        Removes the leading zeros from the number. Function needed for the basic operations to make sense.
+        Ex: 1999 - 1000 = 999 (not 0999)
+        '''
         while len(self) > 0 and self[-1] == 0:
             self._digits.pop()
             self._length -= 1
 
     def __getitem__(self, item):
+        '''
+        Getter for the [] operator
+        Ex: x = Integer(10, 12345)
+        print(x[0]) will print the unit digit of the number
+        :param: item: an integer - the position of the digit we want to obtain
+        :return: an integer - the value of the digit at position item (0-indexed array)
+        :raises: IndexError if the index is not within the index range of the number
+        '''
+        if item >= self._length:
+            raise IndexError("Index out of range.")
         return self._digits[item]
 
     def __setitem__(self, key, value):
+        '''
+        Setter for the [] operator
+        Ex: x = Integer(10, 12345)
+        x[0] = 0 will put on the unit digit of the number the value 0
+        :param: key: an integer - the position of the digit we want to obtain
+        :param: value: an integer - the new value for the digit
+        :return: an integer - the value of the digit at position item (0-indexed array)
+        :raises: IndexError if the index is not within the index range of the number
+        '''
+        if key >= self._length:
+            raise IndexError("Index out of range.")
         self._digits[key] = value
 
     def __len__(self):
-        return self._length
-
-    def append(self, val):
-        self._length += 1
-        self._digits.append(val)
-
-    def getLength(self):
+        '''
+        Function to return the number of digits in the number
+        :return: an integer - the number of digits on the representation of the number in base self._baseX
+        '''
         return self._length
 
     def getBase(self):
+        '''
+        Getter for the base of the number
+        :return: an integer: the self._base property of the number
+        '''
         return self._base
 
     def __add__(self, other):
         '''
-        void Add(Huge A, Huge B)
-        /* A <- A+B */
-        { int i,T=0;
-
-          if (B[0]>A[0])
-            { for (i=A[0]+1;i<=B[0];) A[i++]=0;
-              A[0]=B[0];
-            }
-            else for (i=B[0]+1;i<=A[0];) B[i++]=0;
-          for (i=1;i<=A[0];i++)
-            { A[i]+=B[i]+T;
-              T=A[i]/10;
-              A[i]%=10;
-            }
-          if (T) A[++A[0]]=T;
-        }
+        Function to implement the addition on two Integer objects
+        :param other - the second operand of addition (the first one is self)
+        :return an Integer representing the sum of self and other
+        :raises ValueError if other is not of type Integer or if they are not in the same base
         '''
         if not isinstance(other, Integer):
             raise ValueError("Error - Addition on two different objects.")
         if self._base != other._base:
-            raise ValueError("Error - Addition on two Integgers with different bases.")
+            raise ValueError("Error - Addition on two Integers with different bases.")
         base = self.getBase()
         new = Integer(base, repr(self))
         if len(new) < len(other):
@@ -153,25 +192,15 @@ class Integer:
 
     def __sub__(self, other):
         '''
-        void Subtract(Huge A, Huge B)
-            /* A <- A-B */
-            { int i, T=0;
-
-              for (i=B[0]+1;i<=A[0];) B[i++]=0;
-              for (i=1;i<=A[0];i++)
-                A[i]+= (T=(A[i]-=B[i]+T)<0) ? 10 : 0;
-                /* Adica A[i]=A[i]-(B[i]+T);
-                   if (A[i]<0) T=1; else T=0;
-                   if (T) A[i]+=10; */
-              while (!A[A[0]]) A[0]--;
-            }
-        :param other:
-        :return:
+        Function to implement the subtraction of an Integer from self.
+        :param other - the subtrahend of subtraction (the Minuend is self)
+        :return an Integer representing the difference between self and other
+        :raises ValueError if other is not of type Integer or if they are not in the same base
         '''
         if not isinstance(other, Integer):
             raise ValueError("Error - Subtraction on two different objects.")
         if self.getBase() != other.getBase():
-            raise ValueError("Error - Subtraction on two words with different bases.")
+            raise ValueError("Error - Subtraction on two numbers with different bases.")
         new = Integer(self._base, repr(self))
         t = 0
         for i in range(len(new) - len(other)):
@@ -191,21 +220,10 @@ class Integer:
 
     def __mul__(self, other):
         '''
-      void MultHuge(Huge A, Huge B, Huge C)
-            /* C <- A x B */
-            { int i,j,T=0;
-
-              C[0]=A[0]+B[0]-1;
-              for (i=1;i<=A[0]+B[0];) C[i++]=0;
-              for (i=1;i<=A[0];i++)
-                for (j=1;j<=B[0];j++)
-                  C[i+j-1]+=A[i]*B[j];
-              for (i=1;i<=C[0];i++)
-                { T=(C[i]+=T)/10;
-                  C[i]%=10;
-                }
-              if (T) C[++C[0]]=T;
-            }
+        Function to implement the multiplication of an Integer with another Integer
+        :param other - the Multiplier (the Multiplicand is self)
+        :return an Integer representing the product of self and other
+        :raises ValueError if other is not of type Integer or if they are not in the same base
         '''
         if not isinstance(other, Integer):
             raise ValueError("Error - Multiplication only allowed between Integers.")
@@ -229,20 +247,10 @@ class Integer:
 
     def __floordiv__(self, other):
         '''
-        unsigned long Divide(Huge A, unsigned long X)
-            /* A <- A/X si intoarce A%X */
-            { int i;
-              unsigned long R=0;
-
-              for (i=A[0];i;i--)
-                { A[i]=(R=10*R+A[i])/X;
-                  R%=X;
-                }
-              while (!A[A[0]] && A[0]>1) A[0]--;
-              return R;
-            }
-            :param other:
-            :return:
+        Function to implement the division of an Integer with a one digit Integer
+        :param other - the Divisor (the Dividend is self)
+        :return an Integer representing the quotient of the division of self and other
+        :raises ValueError if other is not a one digit integer
         '''
         if not isinstance(other, int):
             raise ValueError("Error - Can only divide with small integers.")
@@ -257,17 +265,10 @@ class Integer:
 
     def __mod__(self, other):
         '''
-        unsigned long Mod(Huge A, unsigned long X)
-            /* Intoarce A%X */
-            { int i;
-              unsigned long R=0;
-
-              for (i=A[0];i;i--)
-                R=(10*R+A[i])%X;
-              return R;
-            }
-        :param other:
-        :return:
+        Function to implement the division of an Integer with a one digit Integer
+        :param other - the Divisor (the Dividend is self)
+        :return an Integer representing the remainder of the division of self and other
+        :raises ValueError if other is not a one digit integer
         '''
         if not isinstance(other, int):
             raise ValueError("Error - Modulo only defined on integers.")
@@ -277,6 +278,13 @@ class Integer:
         return r
 
     def _compare(self, other):
+        '''
+        Comparator function for the Integer class.
+        :param other: an Integer
+        :return: 1 if self > other
+                 0 if self == other
+                -1 if self < other
+        '''
         self.clearIsb()
         other.clearIsb()
         if len(self) > len(other):
@@ -292,21 +300,63 @@ class Integer:
             return 0
 
     def __eq__(self, other):
+        '''
+        == operator on self and other
+        return the boolean value of the expression:
+        self == other
+        :param other: an Integer
+        :return: True or False
+        '''
         return self._compare(other) == 0
 
     def __lt__(self, other):
+        '''
+        < operator on self and other
+        return the boolean value of the expression:
+        self < other
+        :param other: an Integer
+        :return: True or False
+        '''
         return self._compare(other) == -1
 
     def __le__(self, other):
+        '''
+        <= operator on self and other
+        return the boolean value of the expression:
+        self <= other
+        :param other: an Integer
+        :return: True or False
+        '''
         return self._compare(other) <= 0
 
     def __gt__(self, other):
+        '''
+        > operator on self and other
+        return the boolean value of the expression:
+        self > other
+        :param other: an Integer
+        :return: True or False
+        '''
         return self._compare(other) == 1
 
     def __ge__(self, other):
+        '''
+        >= operator on self and other
+        return the boolean value of the expression:
+        self >= other
+        :param other: an Integer
+        :return: True or False
+        '''
         return self._compare(other) >= 0
 
     def substitutionMethod(self, destBase):
+        '''
+        Function to convert self in another base using the Substitution Method (recommended when the
+            source base is less than the destination base)
+        :param destBase: an integer from the set [2, 3, 4, 5, 6, 7, 8, 9, 10, 16] representing the base we want to
+            convert our number
+        :return: an Integer representing self in the destination base
+        '''
         destNumber = Integer(destBase, "0")
         power = Integer(destBase, "1")
         for i in range(len(self)):
@@ -314,7 +364,14 @@ class Integer:
             power = power * Integer(destBase, Integer.Symbols[self._base])
         return destNumber
 
-    def succesiveDivisons(self, destBase):
+    def successiveDivison(self, destBase):
+        '''
+        Function to convert self in another base using the Successive Division Method (recommended when the
+            source base is greater than the destination base)
+        :param destBase: an integer from the set [2, 3, 4, 5, 6, 7, 8, 9, 10, 16] representing the base we want to
+            convert our number
+        :return: an Integer representing self in the destination base
+        '''
         destNumber = Integer(destBase, "0")
         power = Integer(destBase, "1")
         aux = Integer(destBase, "10")
@@ -326,9 +383,16 @@ class Integer:
         return destNumber
 
     def convertToBase(self, destBase):
+        '''
+        Function to decide which method from the following to choose:
+            1. Rapid conversions - when one of the base is a power of the other one
+            2. Substitution method - recommended when source base < destination base
+            3. Successive Division method - recommended when source base > destination base
+        :param destBase: an integer from the set [2, 3, 4, 5, 6, 7, 8, 9, 10, 16] representing the base we want to
+            convert our number
+        :return: an Integer representing self in the destination base
+        '''
         if self._base <= destBase:
             return self.substitutionMethod(destBase)
         else:
             return self.succesiveDivisons(destBase)
-
-

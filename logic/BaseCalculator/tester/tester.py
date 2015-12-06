@@ -5,6 +5,11 @@ from random import randint
 import random
 
 class Tester:
+    '''
+    Class used to unit-test the application
+
+    Tester.AllowedBases - static array containing the allowed bases for the numbers.
+    '''
     AllowedBases = [2, 3, 4, 5, 6, 7, 8, 9, 10, 16]
     def __init__(self):
         pass

@@ -1,7 +1,12 @@
 from model.integer import Integer
-from exception.integerexception import IntegerException
+from model.exceptions import IntegerException
 
 class Calculator:
+    '''
+    Class to control the whole UI interaction.
+
+    Calculator.Menu = a list of all allowed type of operations the user can use
+    '''
     Menu = [1, 2, 3, 4, 5]
     def __init__(self, controller):
         self._controller = controller
