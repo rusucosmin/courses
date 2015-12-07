@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>tester.py</title>
+  <link rel="stylesheet" href="pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>tester.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;cosmin&#39;</span>
+
+<span class="kn">from</span> <span class="nn">model.integer</span> <span class="kn">import</span> <span class="n">Integer</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<span class="kn">import</span> <span class="nn">random</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      <h3><span id="tester-class" href="tester-class">Tester class</span></h3>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      <p>Class used to unit-test the application</p>
+<p><strong>Tester.AllowedBases</strong> - static array containing the allowed bases for the numbers.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">class</span> <span class="nc">Tester</span><span class="p">:</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-3'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-3'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">AllowedBases</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-4'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-4'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-5'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-5'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">getRandomInteger</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="n">xrepr</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+            <span class="n">xrepr</span> <span class="o">+=</span> <span class="n">Integer</span><span class="o">.</span><span class="n">Symbols</span><span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">base</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">xrepr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-6'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-6'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">testIntegerAddition</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">testConversions</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-7'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-7'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">testConversions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s">&quot;33221100&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">convertToBase</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="o">==</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="s">&quot;106810&quot;</span><span class="p">))</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s">&quot;123032122&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">convertToBase</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="o">==</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="s">&quot;1B39A&quot;</span><span class="p">))</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s">&quot;33221100&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s">&quot;123032122&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s">&quot;222313222&quot;</span><span class="p">))</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="s">&quot;1230056&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">convertToBase</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s">&quot;212230223&quot;</span><span class="p">))</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="s">&quot;445566&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">convertToBase</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s">&quot;103033320&quot;</span><span class="p">))</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="s">&quot;ABCDE1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">convertToBase</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s">&quot;222330313201&quot;</span><span class="p">))</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="s">&quot;7&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">convertToBase</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="o">==</span>  <span class="n">Integer</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s">&quot;7&quot;</span><span class="p">))</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s">&quot;54321&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">convertToBase</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s">&quot;214330&quot;</span><span class="p">))</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s">&quot;3&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">convertToBase</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&quot;11&quot;</span><span class="p">))</span>
+
+        <span class="k">assert</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="s">&quot;1230056&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="s">&quot;445566&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="s">&quot;451160&quot;</span><span class="p">))</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="s">&quot;ABCDE1&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="s">&quot;7&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="s">&quot;4B2A127&quot;</span><span class="p">))</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s">&quot;54321&quot;</span><span class="p">)</span> <span class="o">//</span> <span class="mi">3</span> <span class="o">==</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s">&quot;15304&quot;</span><span class="p">))</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s">&quot;54321&quot;</span><span class="p">)</span> <span class="o">//</span> <span class="mi">4</span> <span class="o">==</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s">&quot;12350&quot;</span><span class="p">))</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s">&quot;120&quot;</span><span class="p">)</span> <span class="o">%</span> <span class="mi">7</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">Integer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s">&quot;17&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s">&quot;7&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s">&quot;1&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s">&quot;120&quot;</span><span class="p">))</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-8'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-8'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">testIntegerAddition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">Tester</span><span class="o">.</span><span class="n">AllowedBases</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getRandomInteger</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getRandomInteger</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+        <span class="k">assert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">convertToBase10</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">base</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">convertToBase10</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">base</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">convertToBase10</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="n">base</span><span class="p">))</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-9'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-9'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">convertToBase10</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">number</span><span class="p">)):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">base</span> <span class="o">+</span> <span class="n">Integer</span><span class="o">.</span><span class="n">Values</span><span class="p">[</span><span class="n">number</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>

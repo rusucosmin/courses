@@ -1,14 +1,24 @@
+# ===The application coordinator: it starts the application and it let it run===
+
+"""
+It instantiate two objects:
+
+1. a **tester** to run the unit tests
+2. an **app** and runs the run() method
+"""
+
 __author__ = 'cosmin'
 
-from tester.tester import Tester
-from controller.controller import Controller
-from ui.calculator import Calculator
+import model
+import tester
+import ui
 
+from tester.tester import Tester
+from ui.calculator import Calculator
 
 if __name__ == '__main__':
     t = Tester()
     t.test()
 
-    controller = Controller()
-    app = Calculator(controller)
+    app = Calculator()
     app.run()

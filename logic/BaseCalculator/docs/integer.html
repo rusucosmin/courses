@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>integer.py</title>
+  <link rel="stylesheet" href="pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>integer.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;cosmin&#39;</span>
+
+<span class="kn">from</span> <span class="nn">model.exceptions</span> <span class="kn">import</span> <span class="n">IntegerException</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      <h3><span id="integer-class" href="integer-class">Integer class</span></h3>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      <p>Class to represent a number</p>
+<ol>
+<li><strong>self._base</strong>       -the base of the number</li>
+<li><strong>self._length</strong>     -the number of digits</li>
+<li><strong>self._digits</strong>     -the list of the number's digits
+                    -the less significant digits are on the lower index of the array</li>
+</ol>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">class</span> <span class="nc">Integer</span><span class="p">:</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-3'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-3'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">AllowedBases</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
+    <span class="n">Values</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&#39;0&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s">&#39;1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s">&#39;2&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s">&#39;3&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s">&#39;4&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="s">&#39;5&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s">&#39;6&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+        <span class="s">&#39;7&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+        <span class="s">&#39;8&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="s">&#39;9&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+        <span class="s">&#39;A&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="s">&#39;B&#39;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+        <span class="s">&#39;C&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="s">&#39;D&#39;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
+        <span class="s">&#39;E&#39;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+        <span class="s">&#39;F&#39;</span><span class="p">:</span> <span class="mi">15</span>
+    <span class="p">}</span>
+    <span class="n">Symbols</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="mi">0</span><span class="p">:</span> <span class="s">&#39;0&#39;</span><span class="p">,</span>
+        <span class="mi">1</span><span class="p">:</span> <span class="s">&#39;1&#39;</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">:</span> <span class="s">&#39;2&#39;</span><span class="p">,</span>
+        <span class="mi">3</span><span class="p">:</span> <span class="s">&#39;3&#39;</span><span class="p">,</span>
+        <span class="mi">4</span><span class="p">:</span> <span class="s">&#39;4&#39;</span><span class="p">,</span>
+        <span class="mi">5</span><span class="p">:</span> <span class="s">&#39;5&#39;</span><span class="p">,</span>
+        <span class="mi">6</span><span class="p">:</span> <span class="s">&#39;6&#39;</span><span class="p">,</span>
+        <span class="mi">7</span><span class="p">:</span> <span class="s">&#39;7&#39;</span><span class="p">,</span>
+        <span class="mi">8</span><span class="p">:</span> <span class="s">&#39;8&#39;</span><span class="p">,</span>
+        <span class="mi">9</span><span class="p">:</span> <span class="s">&#39;9&#39;</span><span class="p">,</span>
+        <span class="mi">10</span><span class="p">:</span> <span class="s">&#39;A&#39;</span><span class="p">,</span>
+        <span class="mi">11</span><span class="p">:</span> <span class="s">&#39;B&#39;</span><span class="p">,</span>
+        <span class="mi">12</span><span class="p">:</span> <span class="s">&#39;C&#39;</span><span class="p">,</span>
+        <span class="mi">13</span><span class="p">:</span> <span class="s">&#39;D&#39;</span><span class="p">,</span>
+        <span class="mi">14</span><span class="p">:</span> <span class="s">&#39;E&#39;</span><span class="p">,</span>
+        <span class="mi">15</span><span class="p">:</span> <span class="s">&#39;F&#39;</span>
+    <span class="p">}</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-4'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-4'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">number_repr</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Constructor for the Integer class</span>
+<span class="sd">        :param base: an integer - the base in which the number is represented</span>
+<span class="sd">        :param number_repr: a string - the representation of the number in that base</span>
+<span class="sd">        :raises IntegerException if the base is not one of the allowed base</span>
+<span class="sd">        :raises IntegerException if the number has less than one digit</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">base</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Integer</span><span class="o">.</span><span class="n">AllowedBases</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">IntegerException</span><span class="p">(</span><span class="s">&quot;Not allowed base.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">number_repr</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">IntegerException</span><span class="p">(</span><span class="s">&quot;Number should have at least one digit.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_base</span> <span class="o">=</span> <span class="n">base</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_length</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_digits</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">number_repr</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">Integer</span><span class="o">.</span><span class="n">Values</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="n">IntegerException</span><span class="p">(</span><span class="s">&quot;Unknown base symbols.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">Integer</span><span class="o">.</span><span class="n">Values</span><span class="p">[</span><span class="n">ch</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">base</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">IntegerException</span><span class="p">(</span><span class="s">&quot;Unknown base symbols.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Integer</span><span class="o">.</span><span class="n">Values</span><span class="p">[</span><span class="n">ch</span><span class="p">])</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-5'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-5'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">valueOf</span><span class="p">(</span><span class="n">number_repr</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Function to get the value of a symbol (digit)</span>
+<span class="sd">        :return: the value of the symbol (digit) number_repr</span>
+<span class="sd">        :raises: ValueError if the symbol is not recognised</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">number_repr</span> <span class="ow">in</span> <span class="n">Integer</span><span class="o">.</span><span class="n">Values</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">Integer</span><span class="o">.</span><span class="n">Values</span><span class="p">[</span><span class="n">number_repr</span><span class="p">]</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Not a digit...&quot;</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-6'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-6'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Function to append a digit to the most significant position</span>
+<span class="sd">        :param: value:the value of the appended digit</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_digits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_length</span> <span class="o">+=</span> <span class="mi">1</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-7'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-7'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Converts the number in it&#39;s representation in base self._base</span>
+<span class="sd">        :return: a string - the representation of the number</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clearIsb</span><span class="p">()</span>
+        <span class="n">number_repr</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">digit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_digits</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">number_repr</span> <span class="o">+=</span> <span class="n">Integer</span><span class="o">.</span><span class="n">Symbols</span><span class="p">[</span><span class="n">digit</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">number_repr</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">number_repr</span> <span class="o">=</span> <span class="s">&quot;0&quot;</span>
+        <span class="k">return</span> <span class="n">number_repr</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-8'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-8'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Same as __repr__, but much more human-readable (it also contains the base in parenthesis)</span>
+<span class="sd">        :return: a string - the representation of the number</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; (&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_base</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;)&quot;</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-9'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-9'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">clearIsb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Removes the leading zeros from the number. Function needed for the basic operations to make sense.</span>
+<span class="sd">        Ex: 1999 - 1000 = 999 (not 0999)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_digits</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_length</span> <span class="o">-=</span> <span class="mi">1</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-10'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-10'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Getter for the [] operator</span>
+<span class="sd">        Ex: x = Integer(10, 12345)</span>
+<span class="sd">        print(x[0]) will print the unit digit of the number</span>
+<span class="sd">        :param: item: an integer - the position of the digit we want to obtain</span>
+<span class="sd">        :return: an integer - the value of the digit at position item (0-indexed array)</span>
+<span class="sd">        :raises: IndexError if the index is not within the index range of the number</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_length</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s">&quot;Index out of range.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_digits</span><span class="p">[</span><span class="n">item</span><span class="p">]</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-11'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-11'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Setter for the [] operator</span>
+<span class="sd">        Ex: x = Integer(10, 12345)</span>
+<span class="sd">        x[0] = 0 will put on the unit digit of the number the value 0</span>
+<span class="sd">        :param: key: an integer - the position of the digit we want to obtain</span>
+<span class="sd">        :param: value: an integer - the new value for the digit</span>
+<span class="sd">        :return: an integer - the value of the digit at position item (0-indexed array)</span>
+<span class="sd">        :raises: IndexError if the index is not within the index range of the number</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_length</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s">&quot;Index out of range.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_digits</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-12'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-12'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Function to return the number of digits in the number</span>
+<span class="sd">        :return: an integer - the number of digits on the representation of the number in base self._baseX</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_length</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-13'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-13'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">getBase</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Getter for the base of the number</span>
+<span class="sd">        :return: an integer: the self._base property of the number</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_base</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-14'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-14'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Function to implement the addition on two Integer objects</span>
+<span class="sd">        :param other - the second operand of addition (the first one is self)</span>
+<span class="sd">        :return an Integer representing the sum of self and other</span>
+<span class="sd">        :raises ValueError if other is not of type Integer or if they are not in the same base</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Integer</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Error - Addition on two different objects.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_base</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">_base</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Error - Addition on two Integers with different bases.&quot;</span><span class="p">)</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getBase</span><span class="p">()</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">new</span><span class="p">)):</span>
+                <span class="n">new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">new</span><span class="p">)</span><span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">)):</span>
+                <span class="n">other</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span> <span class="c">#will handle the transport</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">new</span><span class="o">.</span><span class="n">_length</span><span class="p">):</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">other</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">t</span>
+            <span class="n">new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span> <span class="o">%</span> <span class="n">base</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">val</span> <span class="o">//</span> <span class="n">base</span>
+        <span class="k">if</span> <span class="n">t</span><span class="p">:</span>
+            <span class="n">new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-15'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-15'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Function to implement the subtraction of an Integer from self.</span>
+<span class="sd">        :param other - the subtrahend of subtraction (the Minuend is self)</span>
+<span class="sd">        :return an Integer representing the difference between self and other</span>
+<span class="sd">        :raises ValueError if other is not of type Integer or if they are not in the same base</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Integer</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Error - Subtraction on two different objects.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">getBase</span><span class="p">()</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">getBase</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Error - Subtraction on two numbers with different bases.&quot;</span><span class="p">)</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_base</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">)):</span>
+            <span class="n">other</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)):</span>
+            <span class="n">new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">other</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">t</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">t</span><span class="p">:</span>
+                <span class="n">new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">new</span><span class="o">.</span><span class="n">getBase</span><span class="p">()</span>
+
+        <span class="n">new</span><span class="o">.</span><span class="n">clearIsb</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">new</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-16'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-16'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Function to implement the multiplication of an Integer with another Integer</span>
+<span class="sd">        :param other - the Multiplier (the Multiplicand is self)</span>
+<span class="sd">        :return an Integer representing the product of self and other</span>
+<span class="sd">        :raises ValueError if other is not of type Integer or if they are not in the same base</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Integer</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Error - Multiplication only allowed between Integers.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">getBase</span><span class="p">()</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">getBase</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Error - Multipliaction on Integers with different bases.&quot;</span><span class="p">)</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_base</span><span class="p">,</span> <span class="s">&quot;0&quot;</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">)):</span>
+                    <span class="n">new</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">other</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">new</span><span class="p">)):</span>
+            <span class="n">new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">t</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">getBase</span><span class="p">()</span>
+            <span class="n">new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">getBase</span><span class="p">()</span>
+
+        <span class="k">while</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_base</span><span class="p">)</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">_base</span>
+
+        <span class="k">return</span> <span class="n">new</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-17'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-17'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">__floordiv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Function to implement the division of an Integer with a one digit Integer</span>
+<span class="sd">        :param other - the Divisor (the Dividend is self)</span>
+<span class="sd">        :return an Integer representing the quotient of the division of self and other</span>
+<span class="sd">        :raises ValueError if other is not a one digit integer</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Error - Can only divide with small integers.&quot;</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getBase</span><span class="p">(),</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">new</span><span class="p">))):</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="n">getBase</span><span class="p">()</span> <span class="o">*</span> <span class="n">r</span> <span class="o">+</span> <span class="n">new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span> <span class="o">//</span> <span class="n">other</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">r</span> <span class="o">%</span> <span class="n">other</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">clearIsb</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">new</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-18'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-18'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">__mod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Function to implement the division of an Integer with a one digit Integer</span>
+<span class="sd">        :param other - the Divisor (the Dividend is self)</span>
+<span class="sd">        :return an Integer representing the remainder of the division of self and other</span>
+<span class="sd">        :raises ValueError if other is not a one digit integer</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Error - Modulo only defined on integers.&quot;</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">))):</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">getBase</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">%</span> <span class="n">other</span>
+        <span class="k">return</span> <span class="n">r</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-19'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-19'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">_compare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Comparator function for the Integer class.</span>
+<span class="sd">        :param other: an Integer</span>
+<span class="sd">        :return: 1 if self &gt; other</span>
+<span class="sd">                 0 if self == other</span>
+<span class="sd">                -1 if self &lt; other</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clearIsb</span><span class="p">()</span>
+        <span class="n">other</span><span class="o">.</span><span class="n">clearIsb</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">):</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">):</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">))):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">other</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="k">return</span> <span class="mi">1</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">other</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="k">return</span> <span class="mi">0</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-20'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-20'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        == operator on self and other</span>
+<span class="sd">        return the boolean value of the expression:</span>
+<span class="sd">        self == other</span>
+<span class="sd">        :param other: an Integer</span>
+<span class="sd">        :return: True or False</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compare</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-21'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-21'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        &lt; operator on self and other</span>
+<span class="sd">        return the boolean value of the expression:</span>
+<span class="sd">        self &lt; other</span>
+<span class="sd">        :param other: an Integer</span>
+<span class="sd">        :return: True or False</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compare</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-22'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-22'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        &lt;= operator on self and other</span>
+<span class="sd">        return the boolean value of the expression:</span>
+<span class="sd">        self &lt;= other</span>
+<span class="sd">        :param other: an Integer</span>
+<span class="sd">        :return: True or False</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compare</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-23'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-23'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        &gt; operator on self and other</span>
+<span class="sd">        return the boolean value of the expression:</span>
+<span class="sd">        self &gt; other</span>
+<span class="sd">        :param other: an Integer</span>
+<span class="sd">        :return: True or False</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compare</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-24'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-24'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        &gt;= operator on self and other</span>
+<span class="sd">        return the boolean value of the expression:</span>
+<span class="sd">        self &gt;= other</span>
+<span class="sd">        :param other: an Integer</span>
+<span class="sd">        :return: True or False</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compare</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-25'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-25'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">substitutionMethod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destBase</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Function to convert self in another base using the Substitution Method (recommended when the</span>
+<span class="sd">            source base is less than the destination base)</span>
+<span class="sd">        :param destBase: an integer from the set [2, 3, 4, 5, 6, 7, 8, 9, 10, 16] representing the base we want to</span>
+<span class="sd">            convert our number</span>
+<span class="sd">        :return: an Integer representing self in the destination base</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">destNumber</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="n">destBase</span><span class="p">,</span> <span class="s">&quot;0&quot;</span><span class="p">)</span>
+        <span class="n">power</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="n">destBase</span><span class="p">,</span> <span class="s">&quot;1&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)):</span>
+            <span class="n">destNumber</span> <span class="o">=</span> <span class="n">destNumber</span> <span class="o">+</span> <span class="n">power</span> <span class="o">*</span> <span class="n">Integer</span><span class="p">(</span><span class="n">destBase</span><span class="p">,</span> <span class="n">Integer</span><span class="o">.</span><span class="n">Symbols</span><span class="p">[</span><span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+            <span class="n">power</span> <span class="o">=</span> <span class="n">power</span> <span class="o">*</span> <span class="n">Integer</span><span class="p">(</span><span class="n">destBase</span><span class="p">,</span> <span class="n">Integer</span><span class="o">.</span><span class="n">Symbols</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_base</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">destNumber</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-26'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-26'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">successiveDivison</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destBase</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Function to convert self in another base using the Successive Division Method (recommended when the</span>
+<span class="sd">            source base is greater than the destination base)</span>
+<span class="sd">        :param destBase: an integer from the set [2, 3, 4, 5, 6, 7, 8, 9, 10, 16] representing the base we want to</span>
+<span class="sd">            convert our number</span>
+<span class="sd">        :return: an Integer representing self in the destination base</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">destNumber</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="n">destBase</span><span class="p">,</span> <span class="s">&quot;0&quot;</span><span class="p">)</span>
+        <span class="n">power</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="n">destBase</span><span class="p">,</span> <span class="s">&quot;1&quot;</span><span class="p">)</span>
+        <span class="n">aux</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="n">destBase</span><span class="p">,</span> <span class="s">&quot;10&quot;</span><span class="p">)</span>
+        <span class="n">copyOfSelf</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">copyOfSelf</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">destNumber</span> <span class="o">=</span> <span class="n">destNumber</span> <span class="o">+</span> <span class="n">power</span> <span class="o">*</span> <span class="n">Integer</span><span class="p">(</span><span class="n">destBase</span><span class="p">,</span> <span class="n">Integer</span><span class="o">.</span><span class="n">Symbols</span><span class="p">[</span><span class="n">copyOfSelf</span> <span class="o">%</span> <span class="n">destBase</span><span class="p">])</span>
+            <span class="n">copyOfSelf</span> <span class="o">=</span> <span class="n">copyOfSelf</span> <span class="o">//</span> <span class="n">destBase</span>
+            <span class="n">power</span> <span class="o">=</span> <span class="n">power</span> <span class="o">*</span> <span class="n">aux</span>
+        <span class="k">return</span> <span class="n">destNumber</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-27'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-27'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">def</span> <span class="nf">convertToBase</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destBase</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Function to decide which method from the following to choose:</span>
+<span class="sd">            1. Rapid conversions - when one of the base is a power of the other one</span>
+<span class="sd">            2. Substitution method - recommended when source base &lt; destination base</span>
+<span class="sd">            3. Successive Division method - recommended when source base &gt; destination base</span>
+<span class="sd">        :param destBase: an integer from the set [2, 3, 4, 5, 6, 7, 8, 9, 10, 16] representing the base we want to</span>
+<span class="sd">            convert our number</span>
+<span class="sd">        :return: an Integer representing self in the destination base</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_base</span> <span class="o">&lt;=</span> <span class="n">destBase</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">substitutionMethod</span><span class="p">(</span><span class="n">destBase</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">successiveDivison</span><span class="p">(</span><span class="n">destBase</span><span class="p">)</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>

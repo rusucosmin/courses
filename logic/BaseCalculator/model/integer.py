@@ -1,19 +1,22 @@
 from copy import deepcopy
+from math import log
 
 __author__ = 'cosmin'
 
 from model.exceptions import IntegerException
 
+#===Integer class===
+
 
 class Integer:
-    '''
-    Class to represent a number
+    """
+Class to represent a number
 
-    self._length:   -the number of digits
-    self._digits:   -the list of the number's digits
-                    -the less significant digits are on the lower index of the array
-    self._base :    -the base of the number
-    '''
+1. **self._base**       -the base of the number
+2. **self._length**     -the number of digits
+3. **self._digits**     -the list of the number's digits
+                        -the less significant digits are on the lower index of the array
+    """
     AllowedBases = [2, 3, 4, 5, 6, 7, 8, 9, 10, 16]
     Values = {
         '0': 0,
@@ -58,12 +61,11 @@ class Integer:
         :param base: an integer - the base in which the number is represented
         :param number_repr: a string - the representation of the number in that base
         :raises IntegerException if the base is not one of the allowed base
-        :raises IntegerException if the number has less than one digit
         '''
         if base not in Integer.AllowedBases:
             raise IntegerException("Not allowed base.")
         if number_repr == "":
-            raise IntegerException("Number should have at least one digit.")
+            number_repr = "0"
         self._base = base
         self._length = 0
         self._digits = []
@@ -213,7 +215,7 @@ class Integer:
             else:
                 t = 0
             if t:
-                new[i] += new.getBae()
+                new[i] += new.getBase()
 
         new.clearIsb()
         return new
@@ -228,7 +230,7 @@ class Integer:
         if not isinstance(other, Integer):
             raise ValueError("Error - Multiplication only allowed between Integers.")
         if self.getBase() != other.getBase():
-            raise ValueError("Error - Multipliaction on Integers with different bases.")
+            raise ValueError("Error - Multiplication on Integers with different bases.")
         new = Integer(self._base, "0" * (len(self) + len(other) - 1))
         t = 0
         for i in range(0, len(self)):
@@ -349,6 +351,11 @@ class Integer:
         '''
         return self._compare(other) >= 0
 
+    def intermediateBase(self, destBase):
+        x = self.substitutionMethod(10)
+        x = x.successiveDivison(destBase)
+        return x
+
     def substitutionMethod(self, destBase):
         '''
         Function to convert self in another base using the Substitution Method (recommended when the
@@ -382,6 +389,31 @@ class Integer:
             power = power * aux
         return destNumber
 
+    def rapidConversions(self, destBase):
+        ret = ""
+        representation = repr(self)
+        representation = representation[::-1]
+        if self._base < destBase:
+            many = int(log(destBase, self._base))
+            i = 0
+            while i < self._length:
+                curr = representation[i:i + many]
+                curr = curr[::-1]
+                digit = Integer(self._base, curr)
+                digit = digit.substitutionMethod(destBase)
+                ret += repr(digit)
+                i += many
+        else:
+            many = int(log(self._base, destBase))
+            for i in range(len(self)):
+                curr = Integer(self._base, Integer.Symbols[self[i]])
+                curr = curr.successiveDivison(destBase)
+                for j in range(0, len(curr)):
+                    ret = ret + Integer.Symbols[curr[j]]
+                for j in range(many - len(curr)):
+                    ret = ret + "0"
+        return Integer(destBase, ret[::-1])
+
     def convertToBase(self, destBase):
         '''
         Function to decide which method from the following to choose:
@@ -392,7 +424,13 @@ class Integer:
             convert our number
         :return: an Integer representing self in the destination base
         '''
-        if self._base <= destBase:
+        if self._base == destBase:
+            return self
+        smallBase = min(self._base, destBase)
+        bigBase = max(self._base, destBase)
+        if bigBase in [smallBase, smallBase ** 2, smallBase ** 3, smallBase ** 4]:
+            return self.rapidConversions(destBase)
+        elif self._base <= destBase:
             return self.substitutionMethod(destBase)
         else:
-            return self.succesiveDivisons(destBase)
+            return self.successiveDivison(destBase)
