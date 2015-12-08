@@ -1,3 +1,17 @@
-1. Rusu Cosmin
-hw: [(nr + 6) % 15] + 1
-hw = [7] + 1 = 8
+1. This year, as freshman I managed to complete the following:
+	a. Had a skype interview at Palantir
+		-> went well and they invited me in London for onsite interviews
+		-> got rejected after the interviews because I am too young
+	b. Had two interviews at Google
+		-> got rejectected without any feedback, advised to reapply next year
+	c. Will have an interview at Amazon:
+		-> really simple 3 problems on Codility
+	d. Should have an interview with Microsoft
+		-> hope I will do good there and get an internship...
+
+asdfasjfkjklj dsfs afdsfj adsf dsfhjewiuriowf jkdsf cxnvmn fkjas 
+fadsf joewjf sdfk asfkj dsfjadsfa ds ahsdifa sdf adsf asd asd a s
+ dfad 
+ adfg tr h 
+ tyj tyj tyj
+ ntyh jdfgfh adsfj adsf a
