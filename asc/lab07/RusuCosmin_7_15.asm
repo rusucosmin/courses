@@ -10,7 +10,7 @@
 assume cs:code, ds:data
 
 data segment
-	s dw 0abcdh, 1123h, 77abh, 0ab77h, 7788h
+	s dw 0ff88h, 88ffh, 0AAAAh, 753ah, 3a75h
 	ls equ ($ - s) / 2
 	s1 db ls dup(00h)
 	s2 db ls dup(00h)

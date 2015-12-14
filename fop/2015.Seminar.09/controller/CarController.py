@@ -65,8 +65,3 @@ class CarController:
         
     def getCarCount(self):
         return len(self._repository)
-        
-    
-        
-            
-        
