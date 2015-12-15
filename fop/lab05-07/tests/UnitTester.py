@@ -20,7 +20,7 @@ class UnitTester(unittest.TestCase):
         Method to test the getter and the setter of the Book class
         '''
         book = Book(1, "Introduction to algorithms", "The Bible", "Thomas H Cormen")
-        assert book.getId() == 1
+        self.assertEqual(self.getId(), 1)
         assert book.getTitle() == "Introduction to algorithms"
         assert book.getDescription() == "The Bible"
         assert book.getAuthor() == "Thomas H Cormen"
@@ -47,11 +47,7 @@ class UnitTester(unittest.TestCase):
         '''
         Method to test the getter and the setter of the Command class
         '''
-        try:
-            Command("addBook|||")
-            assert False
-        except LibraryException:
-            pass
+        self.assertRaises(LibraryException, Command, "addBook|||")
 
         try:
             Command("addBook|Title||")

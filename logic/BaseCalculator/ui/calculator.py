@@ -93,7 +93,7 @@ class Calculator:
                     print(x, " = ", x.convertToBase(y))
                 elif op == 6:
                     print("Thank you for using this software. Have a nice day!\nCosmin Rusu")
-                    break;
+                    break
                 else:
                     print("\n\nPlease choose only 1, 2, 3, 4 or 5.\n\n")
             except ValueError:
