@@ -80,3 +80,12 @@ class Book:
         :param description: the new author of the book
         '''
         self._author = author
+
+    @staticmethod
+    def cmpByTitle(x, y):
+        if x.getTitle() < y.getTitle():
+            return -1
+        elif x.getTitle() > y.getTitle():
+            return 1
+        else:
+            return 0

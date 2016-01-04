@@ -60,12 +60,14 @@ class LibraryApplication:
                 elif arg == "returnBook".lower():
                     self._controller.returnBook(int(opt.getArg(1)), int(opt.getArg(2)))
                 elif arg == "rentedBooksSorted".lower():
-                    print("List of rented books ordered alphabetically" + '\n\n'.join(str(book) for book in self._controller.getRentedBooksSorted()))
+                    print("List of rented books ordered alphabetically\n\n" + "\n\n".join(str(book) for book in self._controller.getRentedBooksSorted()))
                 elif arg == "mostActiveUsers".lower():
                     many = self._controller.getMostActiveUsers()
                     print("The most active users are:\n\n")
                     for x in many:
-                        print(x[0] + " has " + str(x[1]) + " rented books.\n")
+                        print(str(x[0]) + " has " + str(x[1]) + " rented books.\n")
+                elif arg == "filterBooks".lower():
+                    x = self._controller.filterBooks(self._controller.getBooks())
                 elif arg == "undo":
                     self._controller.undo()
                 elif arg == "redo":
@@ -108,5 +110,5 @@ class LibraryApplication:
         print("     'save' - save current library state")
         print("     'exit' - save and exit")
         print("     'delete' - delete the current library")
-        print("     'most active users'")
+        print("     'mostActiveUsers'")
         print("     'rentedBooksSorted'")

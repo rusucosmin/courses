@@ -1,4 +1,16 @@
 class Multime:
+    '''
+    COLECTIE de numere întregi (asemănător mulţimii)
+
+    Specificaţi şi implementaţi tipurile abstracte de date menţionate mai jos.
+        La toate tipurile de date vor exista operaţii pentru:
+
+        a) creare de valori din domeniul tipului respectiv;
+        b) operaţii aritmetice
+        c) comparare de valori
+        d) extragere de componente
+        e) eventual conversii din alte tipuri mentionate.
+    '''
     def __init__(self, arr=[]):
         self.el = arr
 

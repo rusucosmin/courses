@@ -1,6 +1,8 @@
 import pickle
 from repository.LibraryRepository import LibraryRepository
 from model.exception import LibraryException
+from model.sort import gnomeSort, myFilter
+from model.book import Book
 
 import operator
 
@@ -156,18 +158,51 @@ class LibraryController:
         self._repo.createFreshLibrary()
 
     def getRentedBooksSorted(self):
+        '''
+        Function to return the books sorted by title
+        :return:
+        '''
         loans = self._repo.getLoans()
         rentedbooks = []
         for loan in loans:
             rentedbooks.append(loan.getBook())
-        return sorted(rentedbooks, key=operator.attrgetter('_title'))
+        return gnomeSort(rentedbooks, Book.cmpByTitle, False)
+
+    @staticmethod
+    def cmpActive(x, y):
+        '''
+        Static method to compare two tuples (Client, nr_of_books_rented)
+        It compares first by the number of rented books, then by name.
+        :return:
+        '''
+        if x[1] < y[1]:
+            return -1
+        elif x[1] > y[1]:
+            return 1
+        else:
+            if x[0].getName() > y[0].getName():
+                return 1
+            elif x[0].getName() < y[0].getName():
+                return -1
+            else:
+                return 0
 
     def getMostActiveUsers(self):
         loans = self._repo.getLoans()
-        many = {}
+        users = []
         for loan in loans:
-            if str(loan.getClient()) in many.keys():
-                many[str(loan.getClient())] += 1
+            if loan.getClient() in [x[0] for x in users]:
+                for i in range(len(users)):
+                    if users[i][0] == loan.getClient():
+                        users[i] = (users[i][0], users[i][1] + 1)
             else:
-                many[str(loan.getClient())] = 1
-        return sorted(many.items(), key=operator.itemgetter(1), reverse=True)
+                users.append((loan.getClient(), 1))
+        return gnomeSort(users, LibraryController.cmpActive, True)
+       # return sorted(many.items(), key=operator.itemgetter(1), reverse=True)
+
+    @staticmethod
+    def filterFct(book):
+        return book.getId() < 3
+
+    def filterBooks(self, iterable):
+        return myFilter(iterable, LibraryController.filterFct)

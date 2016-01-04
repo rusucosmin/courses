@@ -33,6 +33,7 @@ class Command:
         "listbooks": 1,
         "listclients": 1,
         "listloans": 1,
+        "filterbooks": 1,
         "undo": 1,
         "redo": 1,
         "help": 1

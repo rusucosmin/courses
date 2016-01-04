@@ -19,7 +19,7 @@ class Tester:
         '''
         Method to test the getter and the setter of the Book class
         '''
-        book = Book(1, "Introduction to algorithms", "The Bible", "Thomas H Cormen");
+        book = Book(1, "Introduction to algorithms", "The Bible", "Thomas H Cormen")
         assert book.getId() == 1
         assert book.getTitle() == "Introduction to algorithms"
         assert book.getDescription() == "The Bible"
