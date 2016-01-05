@@ -114,7 +114,7 @@ def testIntegerSort():
     Function to test the sorting of random generated integer list
     '''
     for test in range(10):
-        l = randint(1, 100)
+        l = randint(1, 1000)
         x = [randint(1, 10000) for x in range(l)]
         gnomeSort(x, intLess, False)
         if not isSorted(x, intLess, False):
