@@ -1,1 +1,8 @@
-#.exe
+#Vim swap files
+*.swp
+
+#Assembly
+*.MAP
+*.OBJ
+*.exe
+*.EXE
