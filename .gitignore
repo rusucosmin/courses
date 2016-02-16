@@ -6,3 +6,5 @@
 *.OBJ
 *.exe
 *.EXE
+
+.idea/
