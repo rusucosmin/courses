@@ -1,8 +1,8 @@
 #Vim swap files
-**.swp
+*.swp
 
 #Assembly
-**.MAP
-**.OBJ
-**.exe
-**.EXE
+*.MAP
+*.OBJ
+*.exe
+*.EXE
