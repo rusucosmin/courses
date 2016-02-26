@@ -1,0 +1,28 @@
+# depslib dependency file v1.0
+1456326331 source:/home/cosmin/work/courses/oop/lab03/Bakeryv4/ui/ui.c
+	<stdio.h>
+	"ui.h"
+
+1456326298 /home/cosmin/work/courses/oop/lab03/Bakeryv4/ui/ui.h
+
+1456327060 source:/home/cosmin/work/courses/oop/lab03/Bakeryv4/main.c
+	<stdio.h>
+	<stdlib.h>
+	"ui/ui.h"
+	"utils/vector.h"
+	"model/material.h"
+
+1456325667 /home/cosmin/work/courses/oop/lab03/Bakeryv4/utils/vector.h
+	"../model/material.h"
+
+1456325761 source:/home/cosmin/work/courses/oop/lab03/Bakeryv4/utils/vector.c
+	"vector.h"
+
+1456326677 /home/cosmin/work/courses/oop/lab03/Bakeryv4/model/material.h
+	<time.h>
+	<stdio.h>
+
+1456326911 source:/home/cosmin/work/courses/oop/lab03/Bakeryv4/model/material.c
+	<string.h>
+	"material.h"
+

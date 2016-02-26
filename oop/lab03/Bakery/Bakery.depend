@@ -16,10 +16,11 @@
 1456267392 /home/cosmin/work/courses/oop/lab03/Bakery/Domain/Material.c
 	"Material.h"
 
-1456269049 source:/home/cosmin/work/courses/oop/lab03/Bakery/main.c
+1456319217 source:/home/cosmin/work/courses/oop/lab03/Bakery/main.c
 	<iostream>
 	"domain/material.h"
 	"domain/material.c"
+	"ui/ui.h"
 	<stdio.h>
 	<malloc.h>
 
@@ -30,14 +31,27 @@
 	<time.h>
 	<stdio.h>
 
-1456268300 source:/home/cosmin/work/courses/oop/lab03/Bakery/domain/material.c
+1456319294 source:/home/cosmin/work/courses/oop/lab03/Bakery/domain/material.c
+	<string.h>
 	"material.h"
 
-1456269908 /home/cosmin/work/courses/oop/lab03/Bakery/domain/material.h
+1456319303 /home/cosmin/work/courses/oop/lab03/Bakery/domain/material.h
 	<time.h>
 	<stdio.h>
 
-1456269926 /home/cosmin/work/courses/oop/lab03/Bakery/domain/material.c
+1456319294 /home/cosmin/work/courses/oop/lab03/Bakery/domain/material.c
 	<string.h>
 	"material.h"
+
+1456269981 source:/home/cosmin/work/courses/oop/lab03/Bakery/repository/repository.c
+
+1456319280 /home/cosmin/work/courses/oop/lab03/Bakery/ui/ui.h
+
+1456318746 source:/home/cosmin/work/courses/oop/lab03/Bakery/ui/ui.c
+	<stdio.h>
+	"ui.h"
+
+1456318746 /home/cosmin/work/courses/oop/lab03/Bakery/ui/ui.c
+	<stdio.h>
+	"ui.h"
 
