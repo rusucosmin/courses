@@ -15,22 +15,24 @@
 
 typedef struct {
     char *name, *supplier;
-    double quantity;
+    float quantity;
     time_t expiration;
 } Material;
 
 static const Material NULL_MATERIAL;
 
-void material_init(Material* self, char* name, char* supplier, double quantity, time_t expiration);
+void material_init(Material* self, char* name, char* supplier, float quantity, time_t expiration);
 
 void material_destroy(Material* self);
 
-char* get_name(Material* self);
+char* material_getName(Material* self);
 
-char* get_supplier(Material* self);
+char* material_getSupplier(Material* self);
 
-double get_quantity(Material* self);
+double material_getQuantity(Material* self);
 
-time_t get_expiration(Material* self);
+time_t material_getExpiration(Material* self);
+
+int material_equal(Material *a, Material *b);
 
 #endif // MATERIAL_H_INCLUDED

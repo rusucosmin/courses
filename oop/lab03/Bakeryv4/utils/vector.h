@@ -25,6 +25,7 @@ void vector__setCapacity(vector *self, int capacity);
 void vector_pushBack(vector *self, Material m);
 void vector_removeAt(vector *self, int pos);
 int vector_getLen(vector *self);
+void vector_setAt(vector *self, int i, Material m);
 Material vector_getAt(vector *self, int pos);
 
 #endif // VECTOR_H_INCLUDED

@@ -9,7 +9,7 @@ void vector_init(vector *self) {
     vector__setLen(self, 0);
     vector__setCapacity(self, VECTOR_INITIAL_CAPACITY);
 
-    self->arr = malloc(self->capacity * sizeof(Material));
+    self->arr = (Material *) malloc(self->capacity * sizeof(Material));
 }
 
 void vector_distroy(vector *self) {
@@ -75,6 +75,17 @@ Material vector_getAt(vector *self, int pos){
     }
     return self->arr[pos];
 }
+
+
+void vector_setAt(vector *self, int pos, Material m) {
+    int len = vector_getLen(self);
+    if(pos > len - 1) {
+        printf("Error: Attemt to acces invalit position. Vector size %d, position %d!\n", len, pos);
+        return NULL_MATERIAL;;
+    }
+    self->arr[pos] = m;
+}
+
 
 
 #endif // VECTOR_C_INCLUDED

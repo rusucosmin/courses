@@ -4,16 +4,16 @@
 #include <string.h>
 #include "material.h"
 
-void material_init(Material *self, char* name, char* supplier, double quantity, time_t expiration) {
+void material_init(Material *self, char* name, char* supplier, float quantity, time_t expiration) {
     if(!self) {
         printf("Error: Material is NULL at creation, ABORT CREATION\n");
         return ;
     }
 
-    self->name = malloc(sizeof(char) * (strlen(name) + 1));
+    self->name = (char *)malloc(sizeof(char) * (1 + strlen(name)));
     strcpy(self->name, name);
 
-    self->supplier = malloc(sizeof(char) * (strlen(supplier) + 1));
+    self->supplier = (char *)malloc(sizeof(char) * (1 + strlen(supplier)));
     strcpy(self->supplier, supplier);
 
     self->quantity = quantity;
@@ -34,21 +34,26 @@ void material_destroy(Material *self) {
     self->quantity = -1;
 }
 
-char* get_name(Material* self) {
+char* material_getName(Material* self) {
     return self->name;
 }
 
-char* get_supplier(Material* self) {
+char* material_getSupplier(Material* self) {
     return self->supplier;
 }
 
-double get_quantity(Material *self) {
+double material_getQuantity(Material *self) {
     return self->quantity;
 }
 
-time_t get_expiration(Material *self) {
+time_t material_getExpiration(Material *self) {
     return self->expiration;
 }
 
+int material_equal(Material *a, Material *b) {
+    if(strcmp(a->name, b->name) == 0)
+        return 1;
+    return 0;
+}
 
 #endif // MATERIAL_C_INCLUDED

@@ -3,6 +3,8 @@
 #include "ui/ui.h"
 #include "utils/vector.h"
 #include "model/material.h"
+#include "repository/repository.h"
+#include "controller/controller.h"
 
 void test() {
    /**Test *t = malloc(sizeof(Tester));
@@ -12,49 +14,20 @@ void test() {
 }
 
 void app() {
-    UI * ui = malloc(sizeof(UI));
-    ui_init(ui);
+    Repository *repo = (Repository *) malloc(sizeof(Repository));
+    Controller *ctrl = (Controller *) malloc(sizeof(Controller));
+    repo_init(repo);
+    controller_init(ctrl, repo);
+    UI * ui = (UI *) malloc(sizeof(UI));
+
+    ui_init(ui, ctrl);
     run(ui);
-}
-
-void materialPrint(Material a) {
-    printf("Material name: %s\nSupplier: %s\nQuality %2f\n", a.name, a.supplier, a.quantity);
-}
-
-void vectorTest() {
-    vector v;
-    vector_init(&v);
-
-    Material m;
-    time_t aux;
-    time(&aux);
-    material_init(&m, "Pita", "Sandana", 100.0, aux);
-    vector_pushBack(&v, m);
-
-    material_init(&m, "Faina", "Cineva, cine nu-i de mutra ta!", 11.0, aux);
-    vector_pushBack(&v, m);
-
-
-    material_init(&m, "Bolovani", "SC Bolovani SRL", 15.5, aux);
-    vector_pushBack(&v, m);
-
-
-    material_init(&m, "Orez", "Bunatati de la bunica", 14.2, aux);
-    vector_pushBack(&v, m);
-
-    int i = 0;
-    for(i = 0 ; i < vector_getLen(&v) ; ++ i)
-        materialPrint(vector_getAt(&v, i));
-
-    vector_removeAt(&v, 2);
-
-    for(i = 0 ; i < vector_getLen(&v) ; ++ i)
-        materialPrint(vector_getAt(&v, i));
+    ui_destroy(ui);
+    controller_destroy(ctrl);
+    repo_destroy(repo);
 }
 
 int main() {
-    vectorTest();
-    test();
-    //app();
+    app();
     return 0;
 }
