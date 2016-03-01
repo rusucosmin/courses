@@ -1,15 +1,16 @@
 # depslib dependency file v1.0
-1456607025 source:/home/cosmin/work/courses/oop/lab03/Bakeryv4/ui/ui.c
+1456746118 source:/home/cosmin/work/courses/oop/lab03/Bakeryv4/ui/ui.c
 	<stdio.h>
 	"ui.h"
 	"../model/material.h"
 	"../controller/controller.h"
+	"../utils/vector.h"
 
-1456607065 /home/cosmin/work/courses/oop/lab03/Bakeryv4/ui/ui.h
+1456741978 /home/cosmin/work/courses/oop/lab03/Bakeryv4/ui/ui.h
 	"../controller/controller.h"
 	"../model/material.h"
 
-1456600175 source:/home/cosmin/work/courses/oop/lab03/Bakeryv4/main.c
+1456743584 source:/home/cosmin/work/courses/oop/lab03/Bakeryv4/main.c
 	<stdio.h>
 	<stdlib.h>
 	"ui/ui.h"
@@ -24,25 +25,27 @@
 1456604966 source:/home/cosmin/work/courses/oop/lab03/Bakeryv4/utils/vector.c
 	"vector.h"
 
-1456601965 /home/cosmin/work/courses/oop/lab03/Bakeryv4/model/material.h
+1456737190 /home/cosmin/work/courses/oop/lab03/Bakeryv4/model/material.h
 	<time.h>
 	<stdio.h>
 
-1456604915 source:/home/cosmin/work/courses/oop/lab03/Bakeryv4/model/material.c
+1456738008 source:/home/cosmin/work/courses/oop/lab03/Bakeryv4/model/material.c
 	<string.h>
+	<time.h>
 	"material.h"
 
-1456606203 source:/home/cosmin/work/courses/oop/lab03/Bakeryv4/controller/controller.c
+1456746152 source:/home/cosmin/work/courses/oop/lab03/Bakeryv4/controller/controller.c
 	"controller.h"
 	"../model/material.h"
 
-1456598345 /home/cosmin/work/courses/oop/lab03/Bakeryv4/controller/controller.h
+1456743353 /home/cosmin/work/courses/oop/lab03/Bakeryv4/controller/controller.h
 	"../repository/repository.h"
 
-1456598356 /home/cosmin/work/courses/oop/lab03/Bakeryv4/repository/repository.h
+1456743261 /home/cosmin/work/courses/oop/lab03/Bakeryv4/repository/repository.h
 	"../utils/vector.h"
 
-1456606188 source:/home/cosmin/work/courses/oop/lab03/Bakeryv4/repository/repository.c
+1456744447 source:/home/cosmin/work/courses/oop/lab03/Bakeryv4/repository/repository.c
 	"repository.h"
 	"../utils/vector.h"
+	"../model/material.h"
 

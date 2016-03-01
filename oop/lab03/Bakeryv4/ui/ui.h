@@ -10,6 +10,10 @@ typedef enum enum_Commands
 	CMD_ADD_OBJECT,
 	CMD_DELETE_OBJECT,
 	CMD_UPDATE_OBJECT,
+	CMD_FILTER_EXPIRED,
+	CMD_FILTER_SUPPLIER,
+	CMD_UNDO,
+	CMD_REDO,
 	MAX_COMMANDS,
 
 	EXIT_CMD 					= 0,
@@ -37,6 +41,10 @@ void ui_execCMDShowAll(UI *self);
 void ui_execCMDAddMaterial(UI *self);
 void ui_execCMDDeleteMaterial(UI *self);
 void ui_execCMDUpdateMaterial(UI *self);
+void ui_execCMDFilterExpired(UI *self);
+void ui_execCMDFilterSupplier(UI *self);
+void ui_execCMDUndo(UI *self);
+void ui_execCMDRedo(UI *self);
 
 
 #endif // UI_H_INCLUDED

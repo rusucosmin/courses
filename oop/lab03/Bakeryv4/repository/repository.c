@@ -1,10 +1,23 @@
 #include "repository.h"
 #include "../utils/vector.h"
+#include "../model/material.h"
 
 ///Constructors and destructors
 void repo_init(Repository *self) {
     self->arr = (vector *) malloc(sizeof(vector));
     vector_init(self->arr);
+    FILE *fin = fopen("database.in", "r");
+    int n;
+    Material aux;
+    fscanf(fin, "%d", &n);
+    for(int i = 0 ; i < n ; ++ i) {
+        char name[105], supplier[105];
+        float quantity;
+        m_time expDate;
+        fscanf(fin, "%s%s%f%d%d%d", name, supplier, &quantity, &expDate.tm_year, &expDate.tm_mon, &expDate.tm_mday);
+        material_init(&aux, name, supplier, quantity, expDate);
+        repo_addMaterial(self, aux);
+    }
 }
 
 void repo_destroy(Repository *self){

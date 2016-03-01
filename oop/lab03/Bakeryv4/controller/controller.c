@@ -47,3 +47,22 @@ int controller_updateMaterial(Controller *self, Material m) {
     repo_updateMaterial(self->repo, m);
     return 1;
 }
+
+
+vector *controller_filterExpired(Controller *self, char *s) {
+    vector *ret = (vector *) malloc(sizeof(vector));
+    vector_init(ret);
+    vector *all = repo_getMaterials(self->repo);
+    int n = vector_getLen(all);
+    s[strlen(s) - 1] = '\0';
+    for(int i = 0 ; i < n ; ++ i) {
+        Material m = vector_getAt(all, i);
+        if(strstr(material_getName(&m), s) != NULL && material_expired(&m))
+            vector_pushBack(ret, m);
+    }
+    return ret;
+}
+
+vector *controller_filterSupplier(Controller *self, char *s, int bound) {
+
+}
