@@ -1,0 +1,151 @@
+Plan
+----
+- flags
+- behavior of open/close/read/write with pipe/fifo
+- deadlock at FIFO opening
+- stubbornRead
+- server with fork
+- signals
+- threads
+  - api
+  - argument passing
+  - memori allocation issues
+  - race condition
+  - mutex synchronization
+- dup2
+- bash-like pipe implementation
+
+Flags
+-----
+
+- hypothetical file opening function
+
+  int open(path, create_if_it_doesn't_exist,
+                 open_exclusively,
+                 open_for_reading,
+                 open_for_writing,
+                 truncate_upon_opening,
+                 append,
+                 ...);
+
+- instead of having a LOT of parameters, we could
+  use one single parameter interpreted bitwise
+- for instance, let's make
+  O_RDONLY = 0
+  O_WRONLY = 1
+  O_...    = 2
+  O_...    = 4
+  O_...    = 8
+  O_NDELAY = ...
+
+  int fd = open("fifo.fifo", O_RDONLY | O_NDELAY);
+
+- flags are usually int values that have only one
+  bit set to 1 (their values are powers of 2)
+- multiple flags are combined using the bit-wise
+  OR operator |
+
+Behavior of open/close/read/write with pipe/fifo
+------------------------------------------------
+- when working on a pipe/FIFO, the read system
+  call is actually consuming the data by removing
+  it form the pipe/FIFO
+- when working on a pipe/FIFO, the write system
+  call is actually producing data by appendin git
+  to the end of the pipe/FIFO
+- the O_NDELAY flag, determines whether the
+  opn/close/read/write operations hsould block
+  (wait until something happens) in certain
+  situations
+
+Stubborn Reading
+----------------
+
+int stubborn_read(int fd, void* buf, int size,
+                  int trials) {
+    int total = 0;
+    int round = 0;
+    int k;
+
+    while(total < size && round < trials) {
+        k = read(fd, buf+total, size-total);
+        if(k < 0) {
+            return k;
+        }
+        total += k;
+        round++;
+    }
+    return total;
+}
+
+Server with FORK
+----------------
+- every child process will send SIGCHLD to the
+  parent upon termination
+
+void handler(int sgn) {
+    wait(0);
+    signal(SIGCHLD, handler);
+}
+
+int main() {
+    ...
+    signal(SIGCHLD, handler);
+    while(1) {
+        // get a connection request
+        if(fork() == 0) {
+            // serve request
+            exit(0);
+        }
+    }
+    ...
+}
+
+Signals
+-------
+- they are software interrupts
+- some of them are mapped to key combinations (eg
+  Ctrl-C is SIGINT)
+- each signal has a number and a name which you
+  can find it in "man 7 signal"
+- you can easily override the default handler of a
+  signal using the "signal" system call. please
+  note that the "signal" system call does not send
+  a signal to anybody, it only sets the handler
+  for a signal. to send a signal to a process use
+  "kill"
+- the default handler of SIGKILL (9) cannot be
+  overwritten
+
+Threads
+-------
+- POSIX threads are the default threading library
+  in Linux. They are usually called PThreads
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+

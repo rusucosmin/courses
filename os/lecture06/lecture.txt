@@ -1,0 +1,44 @@
+PIPE and FIFO
+-------------
+- communication channels between processes on the
+  same machine
+
+- PIPEs are structures in the kernel memory,
+  without a name and without any way of addressing
+  it, except for handlers inherited from ancestor
+  process that created the PIPE => can be accessed
+  only by related processes
+
+- FIFOs are special files the reside on the disk
+  and consequently have a name. They can be
+  accessed by any process that knows that name and
+  has the permissions
+
+PIPE creation:
+
+   int fd[2];
+   pipe(fd)
+
+   fd[0] - the PIPE end from which you can read
+   fd[1] - the PIPE end to which you can write
+
+   Reading and writing is done with the usual file
+   I/O functions: open/close/read/write
+
+FIFO creation:
+- from command line using "mkfifo name"
+- form C using mkfifo(name, 0600)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

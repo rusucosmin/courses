@@ -25,7 +25,7 @@ void ui_destroy(UI *self) {
 int ui__getInteger(const char *message) {
     char s[100];
     int ret = 0;
-    printf(message);
+    printf("%s", message);
     scanf("%s", s);
     while(sscanf(s, "%d", &ret) != 1) {
         printf(message);
@@ -34,10 +34,10 @@ int ui__getInteger(const char *message) {
     return ret;
 }
 
-float ui__getDouble(const char *message) {
+float ui__getFloat(const char *message) {
     char s[100];
     float ret = 0;
-    printf(message);
+    printf("%s", message);
     scanf("%s", s);
     while(sscanf(s, "%f", &ret) != 1) {
         printf(message);
@@ -48,8 +48,7 @@ float ui__getDouble(const char *message) {
 
 void ui__getString(char *s, const char *message) {
     printf(message);
-    fgets(s, 100, stdin);
-    fgets(s, 100, stdin);
+    scanf("%s", s);
     return ;
 }
 
@@ -83,7 +82,7 @@ Material ui__getMaterial(UI *ui, int readName, int readSupplier, int readQuantit
     if(readSupplier)
         ui__getString(supplier, "Please input the name of the supplier: ");
     if(readQuantity)
-        quantity = ui__getDouble("Please input the quantity: ");
+        quantity = ui__getFloat("Please input the quantity: ");
     if(readTime) {
         expDate.tm_year = ui__getInteger("Expiration year: ");
         expDate.tm_mon = ui__getInteger("Expiration month: ");
@@ -98,6 +97,8 @@ void ui__printMaterial(Material act) {
     printf("Name: %s\n", material_getName(&act));
     printf("Supplier: %s\n", material_getSupplier(&act));
     printf("Quantity: %f\n", material_getQuantity(&act));
+    m_time date = material_getExpiration(&act);
+    printf("Exp Date: day:%d month:%d year:%d\n", date.tm_mday, date.tm_mon, date.tm_year);
     printf("\n");
 }
 
@@ -115,7 +116,6 @@ void ui_execCMDShowAll(UI *self) {
             ui__printMaterial(act);
         }
     }
-    vector_distroy(arr);
 }
 
 void ui_execCMDAddMaterial(UI *self) {
@@ -141,13 +141,14 @@ void ui_execCMDUpdateMaterial(UI *self) {
 
 void ui_execCMDFilterExpired(UI *self) {
     char s[100];
-    ui__getString(s, "Please insert the string you want to search for: ");
-    printf("%s", s);
+    ui__getString(s, "Please insert the string you want to search for (* for all): ");
+    if(s[0] == '*')
+        s[0] = '\0';
     vector *arr;
     arr = controller_filterExpired(self->ctrl, s);
     int n = vector_getLen(arr);
     if(n == 0) {
-        printf("There are no materials past their expiration date!\n");
+        printf("There are no materials with that criteria!\n");
     }
     else {
         for(int i = 0 ; i < n;  ++ i)
@@ -157,12 +158,31 @@ void ui_execCMDFilterExpired(UI *self) {
 }
 
 void ui_execCMDFilterSupplier(UI *self) {
+    char s[100];
+    ui__getString(s, "Please insert the supplier: ");
+    float q;
+    q = ui__getFloat("Please insert the lower bound quantity: ");
+    vector *arr;
+    arr = controller_filterSupplier(self->ctrl, s, q);
+    int n = vector_getLen(arr);
+    if(n == 0) {
+        printf("There are no materials with that criteria!\n");
+    }
+    else {
+        for(int i = 0 ; i < n ; ++ i) {
+            ui__printMaterial(vector_getAt(arr, i));
+        }
+    }
 }
 
 void ui_execCMDUndo(UI *self) {
+    if(!controller_undo(self))
+        printf("Cannot undo!\n");
 }
 
 void ui_execCMDRedo(UI *self) {
+    if(!controller_redo(self))
+        printf("Cannot redo!\n");
 }
 
 void run(UI *self) {
@@ -201,7 +221,7 @@ void run(UI *self) {
             ui_execCMDRedo(self);
             break;
         default:
-            printf("Default\n");
+            printf("Not implemented yet\n");
         }
     }
 }

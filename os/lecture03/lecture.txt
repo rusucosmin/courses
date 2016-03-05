@@ -1,0 +1,134 @@
+Plan
+----
+- quotes vs apostrophes
+- IF
+- Shell scripts
+- chmod and permissions
+- FOR
+- WHILE
+- Command line arguments and other predefined
+  variables
+- Environment variables: PATH
+- BASH customization
+
+Quotes/apostrophes
+------------------
+- strings specified between apostrophes are left
+  as they are. those specified between quotes, are
+  parsed and the variables references and embedded
+  commands are replaced with their value/result
+
+Quotes and apostrophes in strings
+---------------------------------
+echo Joe's cat     --> not ok
+echo "Joe's cat"   --> ok
+echo Joe\'s cat    --> ok
+echo Joe\"s cat    --> ok
+echo "Joe\"s cat"  --> ok
+echo 'Joe"s cat'   --> ok
+echo 'Joe\'s cat'  --> strangely not ok ???
+
+IF
+--
+- DO NOT IGNORE THE SPACES
+
+if [ ... ]; then
+    ...
+fi
+
+if [ ... ]; then
+    ...
+else
+    ...
+fi
+
+if [ ... ]; then
+    ...
+elif [ ... ]; then
+    ...
+elif [ ... ]; then
+    ...
+else
+    ...
+fi
+
+Shell scripts
+-------------
+- text files containing Shell commands and
+  preferably butnot mandatorily a initial line
+  that gice the path to the interpreter
+
+- schell do not have to have any special
+  extension, but using ".sh" won't hurt
+
+a.sh
+----
+#!/bin/bash
+
+
+chmod
+-----
+
+111    000    000
+rwx    rwx    rwx
+user   group  other
+7      0      0
+
+chmod 700 a.sh
+
+FOR
+---
+- similar to the Python foreach
+
+for A in cat dog pig; do
+    echo $A
+done
+
+
+chmod 700 a.sh
+
+Command line arguments
+----------------------
+- $1, $2, ..., $9 - the first 9 arguments (Bash
+  lets go higher with these numbers, but I don't
+  advise it)
+- $0 - the command name itself
+- $* or $@ - all arguments
+- $# - number of arguments
+- $? - exit status of the previous command
+
+shift n - shifts arguments with n positions to the
+          left
+
+WHILE
+-----
+while [ ... ]; do
+    ...
+done
+
+Environment variables
+---------------------
+- comamnd env - see your environment variables
+
+- PATH - contains a list of directories where the
+         command line interpreter searches for
+         commands. the first directory where it
+         finds it, it stops
+       - the directories are separated by colon 
+
+- PS1 - prompt
+
+BASH Config files
+-----------------
+/etc/profile
+~/.profile
+~/.bashrc
+~/.bash_profile
+
+For editors
+~/.vimrc
+~/.emacs
+
+
+
+

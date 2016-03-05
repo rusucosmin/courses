@@ -1,0 +1,88 @@
+Plan
+----
+- tranfering files from VirtualBox to the host OS
+- C memory allocation
+  - static
+  - dinamic
+  - confusing
+- valgrind
+- Windows BAT
+
+Transfer files VirtualBox to host OS
+------------------------------------
+- Share a directory form the host machine and
+  mount it on the guest Linux (the one installed
+  in VirtualBox). If the host is Windows, look
+  into Samba on Linux
+
+- Email ... but how do you do that from the
+  command line: mail, mutt, pine
+
+- SCP - secure copy
+      - copy files over SSH (which is what you use
+        to connect to the server with Putty)
+      - how do you ssh to your guest os?
+      - 127.0.0.1 - localhost (always assigned to
+                    the local machine)
+      - use NAT and port forwarding to connect
+        Linux guest port 22 to 127.0.0.1 port
+        2222 or any other over 1000
+      - command line: pscp.exe form the Putty webpage
+      - WinSCP
+
+Memory Allocation in C
+----------------------
+- static
+  - ex: int n
+        int a[10]
+        float f[5][5]
+  - THE SIZE OF THE STATICALLY ALLOCATED MEMORY IS
+    _KNOW_ AND _SET_ BEFORE COMPILING THE PROGRAM
+  - the amount allocated is limited by the stack size
+  - does not have to be freed
+  - BECAUSE THE SIZE MUST BE KNOW BEFORE COMPILING
+    YOU CANNOT USE A VARIABLE TO SET IT. You can
+    at most use a macro
+  - ex: #define LEN 10
+        int a[LEN];
+
+        int n=10;
+        int arr[n]; // NOT STATIC but accepted by GCC
+
+- dynamic
+  - uses pointers
+  - can allocate a lot more than the static version
+  - must be freed explicitely
+  - malloc, calloc, realloc
+  - use "-g" with gcc
+  - run your program with valgrind
+
+Windows BAT
+-----------
+- a BAT script is a file with the .bat extension
+- help press F1 on the desktop, and search for
+  "Command Reference Overview"
+- cd, mkdir, dir, type (like Linux cat), copy, rename
+- "rem" is actually the way you add comments to a
+  BAT script
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,176 @@
+New students: send me an email at
+              rares@cs.ubbcluj.ro telling with
+              which subgroup (913-2) you will go
+              to the lab. Put "AMS" in the subject
+
+UNIX Shell Programming
+----------------------
+- generic file specifications and "rm" warnings
+- multiple commands on the same command line
+- input/out redirection
+- a bit of AWK
+- Shell variables
+
+Generic File Specifications
+---------------------------
+- "*" is a wildcard for anything
+- ls *.txt
+- ls a*b
+
+Multiple Commands in the Command Line
+-------------------------------------
+- ; - simply separates a sequence of commands, all
+      of which will be executed in their turn
+
+- | (pipe) - transfers the standard output of the
+             command on the left to the standard
+             input of the command on the write
+- && (and) - logical and
+- || (or) - logical or
+
+Standard in/out/err
+-------------------
+- 0 - standard input (things typed by the user in
+      the console)
+- 1 - standard output (printf/cout/print to the
+      console)
+- 2 - standard error (use perror for error messages)
+
+Truth Values
+------------
+- the truth value of a command execution is its
+  return code (this not printed or visible in the
+  console)
+- 0 - SUCESS/TRUE
+- >0 - ERROR/FALSE
+
+I/O Redirection
+---------------
+
+- > - redirects standard output to a file
+      overwriting it. do NOT ever redirect output
+      in a file that you use as input, because you
+      will lose all its content
+
+- >> - just like ">" but it appends to the end of
+       the file instead of overwriting it
+
+- < - redirect the command's standard input to come
+      from a file
+
+- << - redirect the command's standard input with
+       what is typed in the console, up until the
+       ending word is typed.
+
+sort << EOF
+sadf
+wrt
+456
+xcvb
+EOF
+
+- /dev/null - anything written there is lost forever
+            - anything read from there is void 
+
+- 2> - redirect standard error
+
+- > somefile.txt 2>&1 - redirect both the standard
+                        output and the standard
+                        error to somefile.txt
+
+AWK
+---
+- AWK works an text files formated as tables:
+  every line is a table row, and ther eis a
+  separator character that separates columns on
+  each line
+- An AWK program is very similar to C code, but
+  not fully, and it is made of blocks of code
+  betwee { and }, optionally prefixed with a
+  selector.
+- Each block of code executes for each line in the
+  input that matches the selector
+- Selectors can be boolean conditions like (NR ==
+  2) or a regular expression, or BEGIN or END
+- BEGIN makes a block execute before any input
+  line is processed
+- END makes a block execute after all input
+  lines are processed
+- $1, $2, ... represent fields on the line
+- $0 - the whole line
+- NR - line number
+- NF - number of fields on the line
+- ex
+  - inline AWK program: awk '{print $1}' grades.txt
+  - running an AWK program from a  file
+            awk -f prog.awk grades.txt
+
+    prog.awk: {print $1}
+
+UNIX Shells
+-----------
+- sh - Bourne shell
+- bash - Bourne Again Shell
+- csh, tcsh, ksh, zsh
+
+UNIX Shell Variables
+--------------------
+- setting: A=5 or B=asdf
+- referring: $A or ${A}
+
+Embedded Commands
+-----------------
+- specified between backquotes `...` (shift ~)
+- the output of the command replaces the `...` and
+  can be assigned ot a variable
+
+Control Structures
+------------------
+- if ... fi
+- for ... done
+- while ... done
+- case ... esac
+
+Conditions (IF)
+---------------
+- all conditions in the UNIX shell are handled by
+  the "test" command and the logical operators
+
+- numeric operators: -eq, -le, -lt, -gt, -ge
+
+     test 5 -eq 5 && echo yes
+
+     if [ 5 -eq 5 ]; then
+         echo yes
+     fi
+
+- string operators: ==, !=
+    -z - string is empty
+    -n - string is not empty
+
+    if [ "asdf" == "asdf" ]; then
+        echo yes
+    fi
+
+    if [ ! "qwer" == "asdf" ]; then
+        echo yes
+    fi
+
+- file operators:
+  -e - file exists
+  -f - file is a regular and it exists
+  -d - file is a directory and it exists
+  -r - file exists and it is readable
+  -w - file exists and it is writable
+  -x - file exists and it is executable
+
+
+
+
+
+
+
+
+
+
+

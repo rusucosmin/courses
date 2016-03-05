@@ -5,6 +5,8 @@
 ///Constructors and destructors
 void repo_init(Repository *self) {
     self->arr = (vector *) malloc(sizeof(vector));
+    self->redo = (vector *) NULL;
+    self->undo = (vector *) NULL;
     vector_init(self->arr);
     FILE *fin = fopen("database.in", "r");
     int n;
@@ -33,6 +35,7 @@ vector *repo_getMaterials(Repository *self) {
 }
 
 void repo_addMaterial(Repository *self, Material m) {
+    repo__saveRepo(&self);
     vector_pushBack(self->arr, m);
 }
 
@@ -48,6 +51,7 @@ int repo_findMaterial(Repository *self, Material m) {
 }
 
 void repo_deleteMaterial(Repository *self, Material m) {
+    repo__saveRepo(&self);
     int n = vector_getLen(self->arr), i;
     for(i = 0 ; i < n ; ++ i) {
         Material act;
@@ -58,6 +62,7 @@ void repo_deleteMaterial(Repository *self, Material m) {
 }
 
 void repo_updateMaterial(Repository *self, Material m) {
+    repo__saveRepo(&self);
     int n = vector_getLen(self->arr), i;
     for(i = 0 ; i < n ; ++ i) {
         Material act;
@@ -65,4 +70,46 @@ void repo_updateMaterial(Repository *self, Material m) {
         if(material_equal(&act, &m))
             vector_setAt(self->arr, i, m);
     }
+}
+
+int repo_undo(Repository **self) {
+    if((*self)->undo == (vector *)NULL)
+        return 0;
+    if((*self)->redo != (vector *) NULL)
+        vector_distroy((*self)->redo);
+    (*self)->redo = (vector *)malloc(sizeof(vector));
+    vector_init((*self)->redo);
+    for(int i = 0 ; i < vector_getLen((*self)->arr) ; ++ i)
+        vector_pushBack((*self)->redo, vector_getAt((*self)->arr, i));
+    vector_distroy((*self)->arr);
+    (*self)->arr = (*self)->undo;
+    (*self)->undo = (vector *)NULL;
+    return 1;
+}
+
+int repo_redo(Repository **self) {
+    if((*self)->redo == (vector *) NULL)
+        return 0;
+    if((*self)->undo != (vector *) NULL)
+        vector_distroy((*self)->undo);
+    (*self)->undo = (vector *)malloc(sizeof(vector));
+    vector_init((*self)->undo);
+    for(int i = 0 ; i < vector_getLen((*self)->arr) ; ++ i)
+        vector_pushBack((*self)->undo, vector_getAt((*self)->arr, i));
+    vector_distroy((*self)->arr);
+    (*self)->arr = (*self)->redo;
+    (*self)->redo = (vector * )NULL;
+    return 1;
+}
+
+void repo__saveRepo(Repository **self) {
+    if((*self)->redo != (vector *) NULL)
+        vector_distroy((*self)->redo);
+    (*self)->redo = (vector *)NULL;
+    if((*self)->undo != (vector *) NULL)
+        vector_distroy((*self)->undo);
+    (*self)->undo = (vector *)malloc(sizeof(vector));
+    vector_init((*self)->undo);
+    for(int i = 0 ; i < vector_getLen((*self)->arr) ; ++ i)
+        vector_pushBack((*self)->undo, vector_getAt((*self)->arr, i));
 }

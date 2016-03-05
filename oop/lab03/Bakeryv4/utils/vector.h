@@ -3,13 +3,16 @@
 
 #include "../model/material.h"
 
+/**
+    My own implementation of a dynamically allocated array.
+    The idea is that, when the array reaches it's capacity, we double its size,
+        reallocate another memory and copy the content to that memory.
+*/
 
 typedef struct {
     Material *arr;
     int len, capacity;
 } vector;
-
-/// emptyStruct
 
 /// constructor & destructor
 void vector_init(vector *self);
@@ -27,5 +30,7 @@ void vector_removeAt(vector *self, int pos);
 int vector_getLen(vector *self);
 void vector_setAt(vector *self, int i, Material m);
 Material vector_getAt(vector *self, int pos);
+
+void vector_sort(vector *self, int (*cmp)(Material a, Material b), int reversed);
 
 #endif // VECTOR_H_INCLUDED

@@ -13,12 +13,30 @@ void material_init(Material *self, char* name, char* supplier, float quantity, m
 
     self->name = (char *)malloc(sizeof(char) * (1 + strlen(name)));
     strcpy(self->name, name);
+    self->name[strlen(name)] = '\0';
 
     self->supplier = (char *)malloc(sizeof(char) * (1 + strlen(supplier)));
     strcpy(self->supplier, supplier);
+    self->supplier[strlen(supplier)] = '\0';
 
     self->quantity = quantity;
     self->expiration = expiration;
+}
+
+int material_cmp_quantity(Material a, Material b) {
+    return material_getQuantity(&a) < material_getQuantity(&b);
+}
+
+int material_filter_expired(Material a) {
+    return !material_expired(&a);
+}
+
+int material_filter_expired_and_contains_string(Material a, char *s) {
+    return strstr(material_getName(&a), s) != NULL && material_expired(&a);
+}
+
+int material_filter_supplier_and_bound_quantity(Material a, char *s, float bound) {
+    return strcmp(material_getSupplier(&a), s) == 0 && material_getQuantity(&a) <= bound;
 }
 
 void material_destroy(Material *self) {
@@ -43,7 +61,7 @@ char* material_getSupplier(Material* self) {
     return self->supplier;
 }
 
-double material_getQuantity(Material *self) {
+float material_getQuantity(Material *self) {
     return self->quantity;
 }
 

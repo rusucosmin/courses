@@ -1,0 +1,77 @@
+Plan
+----
+- threads
+  - create and join
+  - undefined execution order
+  - same funciton in many threads, many functions in many threads
+  - paramater passing
+  - process vs thread
+  - race condition, critical resource/section
+  - mutex
+  - deadlock
+
+Create/join
+-----------
+- pthread_create creates _and_ starts a thread
+- pthread_join waits for the completion of the
+  thread given as argument
+- not joining a thread before ending the main
+  function will lead to __undefined__ behavior
+- if the main function ends before other threads
+  finish, all those threads (that are not
+  detached) will also end.
+
+Parameter Passing
+-----------------
+- a thread can get a single parameter, which is a
+  pointer
+- if you want to pass more than one thing, you
+  should use structure
+
+Process vs thread
+-----------------
+
+- fork duplicates the entire impure area of the
+  parent, and need special mechanisms for
+  exchanging data
+
+- threads get an area of ht eprocesses memory to
+  be used as stack, and have acess to the same
+  heap and global variables as all the other
+  threads in the process.
+
+- when a thread fails with an error, the whole
+  process will probably fail, whereas when a child
+  process fails, the rest of the processes keep
+  living
+
+What could happen if the follwoing threads are
+executed concurrently
+
+  pthread_mutex_t m1, m2
+
+  f() {
+     pthread_mutex_lock(m1)
+     pthread_mutex_lock(m2)
+     ...
+     pthread_mutex_unlock(m1)
+     pthread_mutex_unlock(m2)
+  }
+
+  g() {
+     pthread_mutex_lock(m2)
+     pthread_mutex_lock(m1)
+     ...
+     pthread_mutex_unlock(m2)
+     pthread_mutex_unlock(m1)
+  }
+
+
+
+
+
+
+
+
+
+

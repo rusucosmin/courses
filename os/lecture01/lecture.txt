@@ -1,0 +1,78 @@
+Commands: ls, mkdir, pwd, cd, vi, man, ps, cat, less,
+          sort, rm, chmod, bg, fg, kill, file, find,
+          finger, who, w, cp, mv, df, du, comm, diff,
+          write, mesg, grep, sed, awk, zip, unzip,
+          gzip, gunzip, tar, gcc
+
+Writing a program:
+  vi a.c
+  gcc -Wall -o a a.c
+  ./a
+
+Regular Expressions
+-------------------
+. - any character (but just one)
+* - the previous expression, 0 or more times
++ - the previous expression, 1 or more times
+? - the previous expression, 0 or 1 times
+.* - any sequence of characters, even the void one
+.\+ - any sequence of characters, not the void one
+\ - escape for special characters to be treated as
+     normal ones, and for normal characters to be
+     treated as special ones
+^ - begining of the line
+$ - end of the line
+[...] - range of characters that could match one
+        characters
+      - ex [123] - any of 1, 2, or 3
+           [aeiou] - any vowel (lower case)
+           [aeiouAEIOU] - any vowel
+           [a-z] - any lower case letter (range)
+           [A-Za-z] - any letter
+           [0-9] - any digit
+[^...] - negated range
+       - [^0-9] - anything except digits
+
+Homework: Choose an editor from the following vi, emacs, joe, nano, pico, mc and describe the key combinations for the following operations:
+- save
+- exit
+- copy
+- paste
+- go to line
+- delte a line
+- delete a character
+- navigation: up, down, left, right, page up,
+            page down, begin/end of line
+- search, search/replace
+- delete word
+- exit without saving
+- save as
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

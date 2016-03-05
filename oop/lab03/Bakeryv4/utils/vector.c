@@ -70,7 +70,7 @@ int vector_getLen(vector *self){
 Material vector_getAt(vector *self, int pos){
     int len = vector_getLen(self);
     if(pos > len - 1) {
-        printf("Error: Attemt to acces invalit position. Vector size %d, position %d!\n", len, pos);
+        printf("Error: Attempt to access invalid position. Vector size %d, position %d!\n", len, pos);
         return NULL_MATERIAL;;
     }
     return self->arr[pos];
@@ -80,12 +80,26 @@ Material vector_getAt(vector *self, int pos){
 void vector_setAt(vector *self, int pos, Material m) {
     int len = vector_getLen(self);
     if(pos > len - 1) {
-        printf("Error: Attemt to acces invalit position. Vector size %d, position %d!\n", len, pos);
-        return NULL_MATERIAL;;
+        printf("Error: Attempt to access invalid position. Vector size %d, position %d!\n", len, pos);
+        return ;
     }
     self->arr[pos] = m;
 }
 
-
+void vector_sort(vector *self, int (*cmp)(Material a, Material b), int reversed) {
+    int n = self->len;
+    int sorted = 0;
+    while(sorted == 0) {
+        sorted = 1;
+        for(int i = 0 ; i + 1 < n ; ++ i) {
+            if(cmp(self->arr[i], self->arr[i + 1]) == reversed) {
+                sorted = 0;
+                Material aux = self->arr[i];
+                self->arr[i] = self->arr[i + 1];
+                self->arr[i + 1] = aux;
+            }
+        }
+    }
+}
 
 #endif // VECTOR_C_INCLUDED
