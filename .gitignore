@@ -8,3 +8,6 @@
 *.EXE
 
 .idea/
+
+*.in
+*.out
