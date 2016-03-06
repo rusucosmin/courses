@@ -22,7 +22,7 @@ void material_init(Material *self, char* name, char* supplier, float quantity, m
     self->quantity = quantity;
     self->expiration = expiration;
 }
-
+/*
 int material_cmp_quantity(Material a, Material b) {
     return material_getQuantity(&a) < material_getQuantity(&b);
 }
@@ -37,7 +37,7 @@ int material_filter_expired_and_contains_string(Material a, char *s) {
 
 int material_filter_supplier_and_bound_quantity(Material a, char *s, float bound) {
     return strcmp(material_getSupplier(&a), s) == 0 && material_getQuantity(&a) <= bound;
-}
+}*/
 
 void material_destroy(Material *self) {
     if(!self) {
@@ -75,7 +75,7 @@ int material_equal(Material *a, Material *b) {
     return 0;
 }
 
-int material_expired(Material *a) {
+double material_to_expire(Material *a) {
     time_t raw_time;
     m_time tmp;
     time ( &raw_time );
@@ -100,6 +100,11 @@ int material_expired(Material *a) {
 
     seconds = difftime(start_time, end_time);
 
+    return seconds;
+}
+
+int material_expired(Material *a) {
+    double seconds = material_to_expire(a);
     if(seconds < 0)
         return 1;
     return 0;

@@ -60,8 +60,10 @@ void ui__printMenu() {
     printf("4. Update object in bakery\n");
     printf("5. Filter expired\n");
     printf("6. Filter supplier\n");
-    printf("7. Undo\n");
-    printf("8. Redo\n");
+    printf("7. Filter empty stock\n");
+    printf("8. Filter will expire in 7 days\n");
+    printf("9. Undo\n");
+    printf("10. Redo\n");
     printf("\n0. Exit\n");
 }
 
@@ -163,7 +165,36 @@ void ui_execCMDFilterSupplier(UI *self) {
     float q;
     q = ui__getFloat("Please insert the lower bound quantity: ");
     vector *arr;
-    arr = controller_filterSupplier(self->ctrl, s, q);
+    int reversed = ui__getInteger("Increasing or Decreasing? (0/1): ");
+    arr = controller_filterSupplier(self->ctrl, s, q, reversed);
+    int n = vector_getLen(arr);
+    if(n == 0) {
+        printf("There are no materials with that criteria!\n");
+    }
+    else {
+        for(int i = 0 ; i < n ; ++ i) {
+            ui__printMaterial(vector_getAt(arr, i));
+        }
+    }
+}
+
+void ui_execCMDFilterWillExpire(UI *self) {
+    vector *arr;
+    arr = controller_filter(self->ctrl, &material_filter_expireIn7Days);
+    int n = vector_getLen(arr);
+    if(n == 0) {
+        printf("There are no materials with that criteria!\n");
+    }
+    else {
+        for(int i = 0 ; i < n ; ++ i) {
+            ui__printMaterial(vector_getAt(arr, i));
+        }
+    }
+}
+
+void ui_execCMDFIlterEmptyStock(UI *self) {
+    vector *arr;
+    arr = controller_filter(self->ctrl, &material_filter_emptyStock);
     int n = vector_getLen(arr);
     if(n == 0) {
         printf("There are no materials with that criteria!\n");
@@ -213,6 +244,12 @@ void run(UI *self) {
             break;
         case CMD_FILTER_SUPPLIER:
             ui_execCMDFilterSupplier(self);
+            break;
+        case CMD_FILTER_EMPTYSTOCK:
+            ui_execCMDFIlterEmptyStock(self);
+            break;
+        case CMD_FILTER_WILLEXPIRE:
+            ui_execCMDFilterWillExpire(self);
             break;
         case CMD_UNDO:
             ui_execCMDUndo(self);

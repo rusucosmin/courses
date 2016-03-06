@@ -48,19 +48,33 @@ int controller_updateMaterial(Controller *self, Material m) {
     return 1;
 }
 
-static int material_cmp_quantity(Material a, Material b) {
-    return material_getQuantity(&a) < material_getQuantity(&b);
+int material_cmp_quantity(Material a, Material b) {
+    if(material_getQuantity(&a) < material_getQuantity(&b))
+        return -1;
+    else if(material_getQuantity(&a) > material_getQuantity(&b))
+        return 1;
+    else
+        return 0;
 }
 
-static int material_filter_expired(Material a) {
+int material_filter_expired(Material a) {
     return !material_expired(&a);
 }
 
-static int material_filter_expired_and_contains_string(Material a, char *s) {
+int material_filter_expireIn7Days(Material a) {
+    double days_to_expire = material_to_expire(&a) / (24 * 60 * 60);
+    return 0 <= days_to_expire && days_to_expire <= 7;
+}
+
+int material_filter_emptyStock(Material a) {
+    return material_getQuantity(&a) == 0;
+}
+
+int material_filter_expired_and_contains_string(Material a, char *s) {
     return strstr(material_getName(&a), s) != NULL && material_expired(&a);
 }
 
-static int material_filter_supplier_and_bound_quantity(Material a, char *s, float bound) {
+int material_filter_supplier_and_bound_quantity(Material a, char *s, float bound) {
     return strcmp(material_getSupplier(&a), s) == 0 && material_getQuantity(&a) <= bound;
 }
 
@@ -91,7 +105,7 @@ vector *controller_filterExpired(Controller *self, char *s) {
     return ret;
 }
 
-vector *controller_filterSupplier(Controller *self, char *s, float bound) {
+vector *controller_filterSupplier(Controller *self, char *s, float bound, int reversed) {
     vector *ret = (vector *) malloc(sizeof(vector));
     vector_init(ret);
     vector *all = repo_getMaterials(self->repo);
@@ -102,7 +116,7 @@ vector *controller_filterSupplier(Controller *self, char *s, float bound) {
         if(material_filter_supplier_and_bound_quantity(m, s, bound))
             vector_pushBack(ret, m);
     }
-    vector_sort(ret, &material_cmp_quantity, 0);
+    vector_sort(ret, &material_cmp_quantity, reversed);
     return ret;
 }
 

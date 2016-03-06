@@ -43,6 +43,7 @@ int material_equal(Material *a, Material *b);
     Returns 1 if the material has expire
             0 otherwise
 */
+double material_to_expire(Material *a);
 int material_expired(Material *a);
 
 #endif // MATERIAL_H_INCLUDED

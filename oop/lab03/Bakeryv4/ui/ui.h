@@ -12,6 +12,8 @@ typedef enum enum_Commands
 	CMD_UPDATE_OBJECT,
 	CMD_FILTER_EXPIRED,
 	CMD_FILTER_SUPPLIER,
+	CMD_FILTER_EMPTYSTOCK,
+	CMD_FILTER_WILLEXPIRE,
 	CMD_UNDO,
 	CMD_REDO,
 	MAX_COMMANDS,
@@ -43,6 +45,8 @@ void ui_execCMDDeleteMaterial(UI *self);
 void ui_execCMDUpdateMaterial(UI *self);
 void ui_execCMDFilterExpired(UI *self);
 void ui_execCMDFilterSupplier(UI *self);
+void ui_execCMDFilterWillExpire(UI *self);
+void ui_execCMDFIlterEmptyStock(UI *self);
 void ui_execCMDUndo(UI *self);
 void ui_execCMDRedo(UI *self);
 

@@ -40,7 +40,7 @@ vector *controller_filterExpired(Controller *self, char *s);
 /**
     Method to get the Materials from a specific supplier which are in quantity less than bound
 */
-vector *controller_filterSupplier(Controller *self, char *s, float bound);
+vector *controller_filterSupplier(Controller *self, char *s, float bound, int reversed);
 
 /**
     Method to filter the Materials
@@ -56,5 +56,19 @@ int controller_undo(Controller *self);
     Method to redo the last performed undo
 */
 int controller_redo(Controller *self);
+
+/// Filters
+
+int material_cmp_quantity(Material a, Material b);
+
+int material_filter_expired(Material a);
+
+int material_filter_expireIn7Days(Material a);
+
+int material_filter_emptyStock(Material a);
+
+int material_filter_expired_and_contains_string(Material a, char *s);
+
+int material_filter_supplier_and_bound_quantity(Material a, char *s, float bound);
 
 #endif // CONTROLLER_H_INCLUDED

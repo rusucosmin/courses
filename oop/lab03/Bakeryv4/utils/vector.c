@@ -88,11 +88,15 @@ void vector_setAt(vector *self, int pos, Material m) {
 
 void vector_sort(vector *self, int (*cmp)(Material a, Material b), int reversed) {
     int n = self->len;
+    if(reversed)
+        reversed = -1;
+    else
+        reversed = 1;
     int sorted = 0;
     while(sorted == 0) {
         sorted = 1;
         for(int i = 0 ; i + 1 < n ; ++ i) {
-            if(cmp(self->arr[i], self->arr[i + 1]) == reversed) {
+            if(reversed * cmp(self->arr[i], self->arr[i + 1]) > 0) {
                 sorted = 0;
                 Material aux = self->arr[i];
                 self->arr[i] = self->arr[i + 1];
