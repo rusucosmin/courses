@@ -5,38 +5,43 @@
 
 /**
     Structure Controller;
-    Propertis:
+    Properties:
         Repository *repo -> pointer to the Medication Repository
 */
 typedef struct {
     Repository *repo;
 } Controller;
 
-/// Constructors and destructors
+/// Constructors and destructor
 void controller_init(Controller *self, Repository *repo);
 void controller_destroy(Controller *self);
 
 /// Public
 /// Method returns all the available Materials
 vector *controller_getMaterials(Controller *self);
+
 /// Method adds a Material to the Repository
 int controller_addMaterial(Controller *self, Material m);
+
 /**
     Method to delete a Material
     Returns 0 if the material to be deleted it is not in the Repository
             1 otherwise
 */
 int controller_deleteMaterial(Controller *self, Material m);
+
 /**
     Method to update a Material
     Returns 0 if the material to be updated it is not in the Repository
             1 otherwise
 */
 int controller_updateMaterial(Controller *self, Material m);
+
 /**
     Method to get the expired Materials that contains a given string
 */
 vector *controller_filterExpired(Controller *self, char *s);
+
 /**
     Method to get the Materials from a specific supplier which are in quantity less than bound
 */
@@ -57,8 +62,7 @@ int controller_undo(Controller *self);
 */
 int controller_redo(Controller *self);
 
-/// Filters
-
+/// Filter functions
 int material_cmp_quantity(Material a, Material b);
 
 int material_filter_expired(Material a);

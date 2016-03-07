@@ -52,7 +52,7 @@ void vector_removeAt(vector *self, int pos) {
     int len = vector_getLen(self);
 
     if(pos > len - 1) {
-        printf("Error: Attempt to remove from invalid position. Vector len (%d) at position: %d!\n", len, pos);
+        printf("Error removeAt: Attempt to remove from invalid position. Vector len (%d) at position: %d!\n", len, pos);
         return ;
     }
     int i;
@@ -70,7 +70,7 @@ int vector_getLen(vector *self){
 Material vector_getAt(vector *self, int pos){
     int len = vector_getLen(self);
     if(pos > len - 1) {
-        printf("Error: Attempt to access invalid position. Vector size %d, position %d!\n", len, pos);
+        printf("Error getAt: Attempt to access invalid position. Vector size %d, position %d!\n", len, pos);
         return NULL_MATERIAL;;
     }
     return self->arr[pos];
@@ -80,7 +80,7 @@ Material vector_getAt(vector *self, int pos){
 void vector_setAt(vector *self, int pos, Material m) {
     int len = vector_getLen(self);
     if(pos > len - 1) {
-        printf("Error: Attempt to access invalid position. Vector size %d, position %d!\n", len, pos);
+        printf("Error setAt: Attempt to access invalid position. Vector size %d, position %d!\n", len, pos);
         return ;
     }
     self->arr[pos] = m;

@@ -8,7 +8,10 @@ void repo_init(Repository *self) {
     self->redo = (vector *) NULL;
     self->undo = (vector *) NULL;
     vector_init(self->arr);
-    FILE *fin = fopen("database.in", "r");
+}
+
+void repo_initFromFile(Repository *self, char *filename) {
+    FILE *fin = fopen(filename, "r");
     int n;
     Material aux;
     fscanf(fin, "%d", &n);
@@ -20,9 +23,19 @@ void repo_init(Repository *self) {
         material_init(&aux, name, supplier, quantity, expDate);
         repo_addMaterial(self, aux);
     }
+    fclose(fin);
 }
 
-void repo_destroy(Repository *self){
+void repo_destroy(Repository *self, char *filename){
+    Material *arr = repo_getMaterials(self);
+    int n = vector_getLen(arr);
+    FILE *fout = fopen(filename, "w");
+    for(int i = 0 ; i < n ; ++ i) {
+        Material m = vector_getAt(arr, i);
+        fprintf(fout, "%s %s %f %d %d %d\n", material_getName(&m), material_getSupplier(&m), material_getQuantity(&m),
+                material_getExpiration(&m).tm_year, material_getExpiration(&m).tm_mon, material_getExpiration(&m).tm_mday);
+    }
+    fclose(fout);
     free(self->arr);
     self->arr = NULL;
     free(self);
@@ -56,8 +69,10 @@ void repo_deleteMaterial(Repository *self, Material m) {
     for(i = 0 ; i < n ; ++ i) {
         Material act;
         act = vector_getAt(self->arr, i);
-        if(material_equal(&act, &m))
+        if(material_equal(&act, &m)) {
             vector_removeAt(self->arr, i);
+            return ;
+        }
     }
 }
 

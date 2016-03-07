@@ -4,13 +4,11 @@
 #include "utils/vector.h"
 #include "model/material.h"
 #include "repository/repository.h"
+#include "tests/test.h"
 #include "controller/controller.h"
 
-void test() {
-   /**Test *t = malloc(sizeof(Tester));
-    testInit(t);
-    testRun(t);
-    testDistroy(t);*/
+void init_test() {
+    test();
 }
 
 void app() {
@@ -24,10 +22,11 @@ void app() {
     run(ui);
     ui_destroy(ui);
     controller_destroy(ctrl);
-    repo_destroy(repo);
+    repo_destroy(repo, "backup.db");
 }
 
 int main() {
+    ///init_test();
     app();
     return 0;
 }

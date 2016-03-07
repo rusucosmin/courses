@@ -49,6 +49,7 @@ float ui__getFloat(const char *message) {
 void ui__getString(char *s, const char *message) {
     printf(message);
     scanf("%s", s);
+    s[strlen(s)] = '\0';
     return ;
 }
 
@@ -95,6 +96,9 @@ Material ui__getMaterial(UI *ui, int readName, int readSupplier, int readQuantit
 }
 
 void ui__printMaterial(Material act) {
+    printf("| %15s | %18s | %16.5f |  %4d: %2d: %2d | \n", act.name, act.supplier, act.quantity,
+           act.expiration.tm_year, act.expiration.tm_mon, act.expiration.tm_mday);
+    return ;
     printf("Material\n");
     printf("Name: %s\n", material_getName(&act));
     printf("Supplier: %s\n", material_getSupplier(&act));
@@ -112,6 +116,7 @@ void ui_execCMDShowAll(UI *self) {
         printf("There are no material to show!\n");
     else {
         printf("These are the materials:\n");
+        printf("|------Name-------|------Supplier------|-----Quantity-----|----ExpDate----|\n");
         for(i = 0 ; i < n ; ++ i) {
             Material act;
             act =  vector_getAt(arr, i);
@@ -217,6 +222,9 @@ void ui_execCMDRedo(UI *self) {
 }
 
 void run(UI *self) {
+    int op = ui__getInteger("Would you like to continue with the old repository? (0/1) ");
+    if(op)
+        repo_initFromFile(self->ctrl->repo, "database.in");
     while(1) {
         ui__printMenu();
         int cmd = ui__getCmd(self);
