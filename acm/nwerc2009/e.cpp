@@ -1,50 +1,45 @@
 #include <iostream>
-#include <vector>
-#include <string.h>
-
+#include <cstdio>
+#define DN 205
+#define LL long long
+#define x first
+#define y second
 using namespace std;
 
-#define t first
-#define d second
+typedef pair<int,int> per;
 
-const int maxn = 205;
+int c,n,bst[205][205][2],la,lb;
+per a[DN],b[DN];
 
-vector <pair<int, int> > q[2];
-int dp[maxn][maxn][2];
 
 int main() {
-    #ifndef ONLINE_JUDGE
-    freopen("input.in", "r", stdin);
-    #endif
-    int test;
-    cin >> test;
-    while(test -- ) {
-        int n;
-        cin >> n;
-        q[0].push_back(make_pair(0, 0));
-        q[1].push_back(make_pair(0, 0));
-        for(int i = 1 ; i <= n ; ++ i) {
-            char c;
-            int t, d;
-            cin >> c >> t >> d;
-            q[c - 'A'].push_back(make_pair(t, d));
-        }
-        memset(dp, 0x3f3f3f3f, sizeof(dp));
-        n = q[0].size() - 1;
-        int m = q[1].size() - 1;
-        dp[0][1][1] = q[1][1].t + q[1][1].d;
-        dp[1][0][0] = q[0][1].t + q[0][1].d;
-        for(int i = 1 ; i <= n ; ++ i)
-            for(int j = 1 ; j <= m ; ++ j) {
-                dp[i][j][0] = max(dp[i - 1][j][1], q[0][i].t) + q[0][i].d;
-                dp[i][j][1] = max(dp[i][j - 1][0], q[1][j].t) + q[1][j].d;
-                if(i >= 2)
-                    dp[i][j][0] = min(dp[i][j][0], max(dp[i - 1][j][0] + 10, max(q[0][i].t, dp[i - 1][j][0] - q[0][i - 1].d + 10) + q[0][i].d));
-                if(j >= 2)
-                    dp[i][j][1] = min(dp[i][j][1], max(dp[i][j - 1][1] + 10, max(q[1][j].t, dp[i][j - 1][1] - q[1][j - 1].d + 10) + q[1][j].d));
-            }
-        cout << min(dp[n][m][0], dp[n][m][1]) << '\n';
-        q[0].clear();
-        q[1].clear();
+  freopen("input.in","r",stdin);
+  cin.sync_with_stdio(false);
+  for(cin>>c;c--;) {
+    la=lb=0;
+    for(cin>>n;n--;) {
+      char c; int t,d;
+      cin>>c>>t>>d;
+      if(c=='A') a[++la]=make_pair(t,d);
+      else b[++lb]=make_pair(t,d);
     }
+    for(int i=0; i<=la; ++i) for(int j=0; j<=lb; ++j) bst[i][j][0]=bst[i][j][1]=(1<<29);
+    bst[0][0][0]=bst[0][0][1]=0;
+    for(int i=0; i<=la; ++i) for(int j=0; j<=lb; ++j) {
+      int smin=bst[i][j][0]-10,fmin=0;
+      for(int jj=j+1; jj<=lb; ++jj) {
+        smin=max(smin+10,b[jj].x);
+        fmin=max(fmin+10,smin+b[jj].y);
+        bst[i][jj][1]=min(bst[i][jj][1],max(smin+b[jj].y,fmin+10));
+      }
+      smin=bst[i][j][1]-10; fmin=0;
+      for(int ii=i+1; ii<=la; ++ii) {
+        smin=max(smin+10,a[ii].x);
+        fmin=max(fmin+10,smin+a[ii].y);
+        bst[ii][j][0]=min(bst[ii][j][0],max(smin+a[ii].y,fmin+10));
+      }
+    }
+    cout<<min(bst[la][lb][0],bst[la][lb][1])<<'\n';
+  }
 }
+
