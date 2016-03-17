@@ -8,6 +8,7 @@
 *.EXE
 
 .idea/
+.vscode/
 
 *.in
 *.out
