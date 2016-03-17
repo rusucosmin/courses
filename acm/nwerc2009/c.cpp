@@ -6,7 +6,6 @@ using namespace std;
 
 unordered_map<int, int>  fr;
 
-
 int main() {
     #ifndef ONLINE_JUDGE
     freopen("input.in", "r", stdin);

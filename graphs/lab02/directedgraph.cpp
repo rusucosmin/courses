@@ -82,10 +82,10 @@ int main() {
     DirectedGraph g("ctc.in");
     ofstream fout("ctc.out");
     vector <vector <int> > scc = g.getStronglyConnectedCompoentents();
-    fout << scc.size() << '\n';
+    cerr << scc.size() << '\n';
     for(auto it : scc) {
         for(auto el : it)
-            fout << el + 1 << ' ';
-        fout << '\n';
+            cerr << el + 1 << ' ';
+        cerr << '\n';
     }
 }

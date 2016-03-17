@@ -110,6 +110,6 @@ private:
 };
 
 int main() {
-    Graph <int> g("input.in");
-    cerr << g.getNoVertices() << '\n';
+    Graph <int> g("graph1k.txt");
+    cerr << getInDegree(0) << '\n';
 }
