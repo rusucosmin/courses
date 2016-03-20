@@ -8,6 +8,7 @@ class Controller {
     public:
         /** Default constructor */
         Controller(Repository &repo);
+        /** Method to add tutorial to the Repository*/
         bool addTutorial(Tutorial t);
         bool removeTutorial(Tutorial t);
         bool updateTutorial(Tutorial t);
