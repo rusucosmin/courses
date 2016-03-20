@@ -14,11 +14,11 @@ Repository::Repository(string fileName) {
 }
 
 void Repository::addTutorial(Tutorial t) {
-    this->_list.push_back(t);
+    this->_list = this->_list + t;
 }
 
 void Repository::removeTutorial(Tutorial t) {
-    this->_list.erase(remove(this->_list.begin(), this->_list.end(), t), this->_list.end());
+    this->_list = this->_list - t;
 }
 
 void Repository::updateTutorial(Tutorial t) {
@@ -30,6 +30,7 @@ void Repository::updateTutorial(Tutorial t) {
 vector<Tutorial> &Repository::getAll() {
     return this->_list;
 }
+
 void Repository::saveToFile(string fileName) {
     ofstream fout(fileName.c_str());
     for(auto it : this->_list)
@@ -39,4 +40,22 @@ void Repository::saveToFile(string fileName) {
                 to_string(it.getDuration()) + "|" +
                 to_string(it.getLikes()) << '\n';
 
+}
+
+vector <Tutorial> operator + (const vector <Tutorial> &a, const Tutorial &b) {
+    vector <Tutorial> ret = a;
+    ret.push_back(b);
+    return ret;
+}
+
+vector <Tutorial> operator + (const Tutorial &b, const vector <Tutorial> &a) {
+        vector <Tutorial> ret = a;
+    ret.push_back(b);
+    return ret;
+}
+
+vector <Tutorial> operator - (const vector <Tutorial> &a, const Tutorial &b) {
+    vector <Tutorial> ret = a;
+    ret.erase(remove(ret.begin(), ret.end(), b), ret.end());
+    return ret;
 }

@@ -80,7 +80,6 @@ void UI::_admin_show_all() {
 
 string UI::_read_string(string msg) {
     cout << msg;
-    cin.ignore();
     string text;
     getline(cin, text);
     return text;
@@ -97,6 +96,7 @@ int UI::_read_int(string msg) {
         cin.ignore(256, '\n');
         cin >> value;
     }
+    cin.ignore();
     return value;
 }
 

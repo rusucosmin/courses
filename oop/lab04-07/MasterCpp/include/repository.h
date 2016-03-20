@@ -19,4 +19,7 @@ class Repository {
         vector <Tutorial> _list;
 };
 
+vector <Tutorial> operator + (const vector <Tutorial> &a, const Tutorial &b);
+vector <Tutorial> operator + (const Tutorial &b, const vector <Tutorial> &a);
+vector <Tutorial> operator - (const vector <Tutorial> &a, const Tutorial &b);
 #endif // REPOSITORY_H
