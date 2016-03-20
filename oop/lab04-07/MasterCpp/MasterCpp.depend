@@ -1,0 +1,50 @@
+# depslib dependency file v1.0
+1458476025 source:/home/cosmin/work/courses/oop/lab04-07/MasterCpp/main.cpp
+	<iostream>
+	<vector>
+	<tutorial.h>
+	<controller.h>
+	<repository.h>
+	<ui.h>
+
+1458486105 source:/home/cosmin/work/courses/oop/lab04-07/MasterCpp/src/repository.cpp
+	"repository.h"
+	<algorithm>
+	<fstream>
+	<cassert>
+
+1458479608 /home/cosmin/work/courses/oop/lab04-07/MasterCpp/include/repository.h
+	<tutorial.h>
+	<vector>
+
+1458484953 /home/cosmin/work/courses/oop/lab04-07/MasterCpp/include/tutorial.h
+	<string>
+
+1458479202 source:/home/cosmin/work/courses/oop/lab04-07/MasterCpp/src/tutorial.cpp
+	"tutorial.h"
+	<string>
+	<vector>
+
+1458485187 source:/home/cosmin/work/courses/oop/lab04-07/MasterCpp/src/controller.cpp
+	"controller.h"
+	<repository.h>
+	<iostream>
+
+1458479624 /home/cosmin/work/courses/oop/lab04-07/MasterCpp/include/controller.h
+	<repository.h>
+
+1458500914 source:/home/cosmin/work/courses/oop/lab04-07/MasterCpp/src/ui.cpp
+	<ui.h>
+	<controller.h>
+	<iostream>
+	<string>
+	<iomanip>
+
+1458499556 /home/cosmin/work/courses/oop/lab04-07/MasterCpp/include/ui.h
+	<controller.h>
+	<tutorial.h>
+
+1458420933 /home/cosmin/work/courses/oop/lab04-07/MasterCpp/src/repository.cpp
+	"repository.h"
+	<algorithm>
+
