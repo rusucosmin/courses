@@ -86,6 +86,7 @@ string UI::_read_string(string msg) {
 }
 
 int UI::_read_int(string msg) {
+    /// TODO: negative numbers
     cout << msg;
     int value;
     cin >> value;

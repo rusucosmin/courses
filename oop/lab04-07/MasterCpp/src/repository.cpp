@@ -49,7 +49,7 @@ vector <Tutorial> operator + (const vector <Tutorial> &a, const Tutorial &b) {
 }
 
 vector <Tutorial> operator + (const Tutorial &b, const vector <Tutorial> &a) {
-        vector <Tutorial> ret = a;
+    vector <Tutorial> ret = a;
     ret.push_back(b);
     return ret;
 }
