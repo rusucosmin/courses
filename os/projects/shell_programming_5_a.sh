@@ -1,2 +1,23 @@
 #!/bin/bash
-ps aux | tail -n +2 | awk '{print $1}' | sort | uniq -c | sort -n -r
+S=$1
+
+echo $S
+if [ ! `echo "$S" | grep -q '[0-9]\+'` ]; then
+    echo "Not a number!"
+    exit 1
+fi
+
+while true; do
+    read -p "n = " N
+    if [ `echo $N | grep -q "[0-9]\+"` ]; then
+        break
+    fi
+    echo "Not a number!";
+done
+
+
+while true; do
+    clear
+    ps aux | tail -n +2 | awk '{print $1}' | sort | uniq -c | sort -n -r | head -n $N
+    sleep $S
+done
