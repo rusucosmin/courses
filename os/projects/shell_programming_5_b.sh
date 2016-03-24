@@ -1,7 +1,7 @@
 #!/bin/bash
 
 while [ "$1" != "" ]; do
-    if [ ! `echo $1 | grep -q '[0-9]\+'` ]; then
+    if [ ! `echo $1 | grep '[0-9]\+'` ]; then
         echo "Not a number. I can't take the primality test on non-numbers...";
     else
         prime=1;

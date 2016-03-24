@@ -1,15 +1,14 @@
 #!/bin/bash
 S=$1
 
-echo $S
-if [ ! `echo "$S" | grep -q '[0-9]\+'` ]; then
+if [ ! `echo "$S" | grep '[0-9]\+'` ]; then
     echo "Not a number!"
     exit 1
 fi
 
 while true; do
     read -p "n = " N
-    if [ `echo $N | grep -q "[0-9]\+"` ]; then
+    if [ `echo $N | grep "[0-9]\+"` ]; then
         break
     fi
     echo "Not a number!";
