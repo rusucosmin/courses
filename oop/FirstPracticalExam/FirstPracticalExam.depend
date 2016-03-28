@@ -1,0 +1,54 @@
+# depslib dependency file v1.0
+1459158627 source:/home/cosmin/work/courses/oop/FirstPracticalExam/main.cpp
+	<iostream>
+	<controller.h>
+	<repository.h>
+	<ui.h>
+	<tester.h>
+
+1459159949 source:/home/cosmin/work/courses/oop/FirstPracticalExam/src/club.cpp
+	"club.h"
+
+1459159887 /home/cosmin/work/courses/oop/FirstPracticalExam/include/club.h
+	<string>
+
+1459159200 source:/home/cosmin/work/courses/oop/FirstPracticalExam/src/controller.cpp
+	"controller.h"
+	<fstream>
+	<algorithm>
+
+1459160265 /home/cosmin/work/courses/oop/FirstPracticalExam/include/controller.h
+	<repository.h>
+	<club.h>
+
+1459160382 source:/home/cosmin/work/courses/oop/FirstPracticalExam/src/ui.cpp
+	"ui.h"
+	<iostream>
+
+1459158556 /home/cosmin/work/courses/oop/FirstPracticalExam/include/ui.h
+	<controller.h>
+
+1459157089 source:/home/cosmin/work/courses/oop/FirstPracticalExam/src/repository.cpp
+	"repository.h"
+	<fstream>
+	<vector>
+	<iostream>
+	<club.h>
+	<algorithm>
+
+1459159409 /home/cosmin/work/courses/oop/FirstPracticalExam/include/repository.h
+	<string>
+	<club.h>
+	<vector>
+
+1459160448 source:/home/cosmin/work/courses/oop/FirstPracticalExam/src/tester.cpp
+	"tester.h"
+	<cassert>
+	<repository.h>
+	<vector>
+	<club.h>
+	<iostream>
+	<controller.h>
+
+1459157230 /home/cosmin/work/courses/oop/FirstPracticalExam/include/tester.h
+
