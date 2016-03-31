@@ -10,6 +10,7 @@ class Tutorial {
     public:
         Tutorial();
         Tutorial(string title, string presenter, string link, int duration, int likes = 0);
+        ~Tutorial();
         string getTitle();
         string getPresenter();
         string getLink();

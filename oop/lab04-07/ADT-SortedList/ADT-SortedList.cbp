@@ -2,28 +2,26 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="MasterCpp" />
+		<Option title="ADT-SortedList" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/MasterCpp" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/ADT-SortedList" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/MasterCpp" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/ADT-SortedList" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -34,19 +32,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="database.in" />
-		<Unit filename="include/controller.h" />
-		<Unit filename="include/dynamicvector.h" />
-		<Unit filename="include/repository.h" />
-		<Unit filename="include/tester.h" />
-		<Unit filename="include/tutorial.h" />
-		<Unit filename="include/ui.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/controller.cpp" />
-		<Unit filename="src/repository.cpp" />
-		<Unit filename="src/tester.cpp" />
-		<Unit filename="src/tutorial.cpp" />
-		<Unit filename="src/ui.cpp" />
 		<Extensions>
 			<envvars />
 			<code_completion />

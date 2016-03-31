@@ -6,6 +6,9 @@ using namespace std;
 Tutorial::Tutorial() {
 }
 
+Tutorial::~Tutorial() {
+}
+
 Tutorial::Tutorial(string title, string presenter, string link, int duration, int likes = 0) {
     this->_title = title;
     this->_presenter = presenter;

@@ -52,6 +52,52 @@ void UI::_run_admin() {
 }
 
 void UI::_run_user() {
+    while(1) {
+        _show_active_list();
+        _show_user_menu();
+        int op = _read_int("> ");
+        string pres;
+        switch(op) {
+        case 1:
+            pres = _read_string("Presenter: ");
+            this->_ctrl.filterActive(pres);
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            this->_ctrl.nextTutorial();
+            break;
+        case 5:
+            break;
+        case 6:
+            this->_ctrl.saveToFile("database.in");
+            cout << "Successfully saved!\n";
+            return ;
+        default:
+            cout << "Not an option!\n";
+        }
+    }
+}
+
+void UI::_show_active_list() {
+    if(this->_ctrl.getActiveList().size() == 0)
+        cout << "No list selected\n";
+    else
+        cout << this->_ctrl.getActiveTutorial().repr() << '\n';
+}
+
+void UI::_show_user_menu() {
+    cout << "\n";
+    cout << "User mode\n";
+    cout << "1. Search for tutorials\n";
+    cout << "2. Add to Watch List\n";
+    cout << "3. Delete from Watch List\n";
+    cout << "4. Next active tutorial\n";
+    cout << "5. See the Watch List\n";
+    cout << "6. Exit\n";
+    cout << "\n";
 }
 
 void UI::_show_admin_menu() {
@@ -68,7 +114,9 @@ void UI::_show_admin_menu() {
 void UI::_admin_show_all() {
     cout << "|----------------Title----------------|-------------Presenter------------|------------------------------Link---------------------------|---Duration---|----Likes-----|\n";
     cout << setfill(' ');
-    for(auto it : this->_ctrl.getAll()) {
+    DynamicVector <Tutorial> all = this->_ctrl.getAll();
+    for(int i = 0 ; i < all.size() ; ++ i) {
+        Tutorial it = all[i];
         cout << "|" << setw(37) << it.getTitle() << "|";
         cout << setw(34) << it.getPresenter() << "|";
         cout << setw(61) << it.getLink() << "|";
@@ -85,19 +133,24 @@ string UI::_read_string(string msg) {
     return text;
 }
 
-int UI::_read_int(string msg) {
-    /// TODO: negative numbers
-    cout << msg;
+int UI::_read_int(string msg, bool negative = false) {
     int value;
-    cin >> value;
-    while(cin.fail()) {
-        cout << "Please input an integer!\n";
+    bool been = false;
+    do {
+        if(been)
+            cout << "The number must be positive!\n";
         cout << msg;
-        cin.clear();
-        cin.ignore(256, '\n');
         cin >> value;
-    }
-    cin.ignore();
+        while(cin.fail()) {
+            cout << "Please input an integer!\n";
+            cout << msg;
+            cin.clear();
+            cin.ignore(256, '\n');
+            cin >> value;
+        }
+        cin.ignore();
+        been = true;
+    } while(negative && value <= 0);
     return value;
 }
 
@@ -111,7 +164,7 @@ Tutorial UI::_read_tutorial(bool readTitle = 1, bool readPresenter = 1, bool rea
     if(readLink)
         link = _read_string("Insert link: ");
     if(readDuration)
-        duration = _read_int("Insert duration: ");
+        duration = _read_int("Insert duration: ", true);
     if(readLikes)
         likes = _read_int("Insert likes: ");
     Tutorial t(title, presenter, link, duration, likes);

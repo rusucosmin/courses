@@ -27,35 +27,38 @@ void Repository::updateTutorial(Tutorial t) {
             this->_list[i] = t;
 }
 
-vector<Tutorial> &Repository::getAll() {
+DynamicVector<Tutorial> &Repository::getAll() {
     return this->_list;
 }
 
 void Repository::saveToFile(string fileName) {
     ofstream fout(fileName.c_str());
-    for(auto it : this->_list)
+    for(int i = 0 ; i < this->_list.size() ; ++ i) {
+        Tutorial it = this->_list[i];
         fout << it.getTitle() + "|" +
                 it.getPresenter() + "|" +
                 it.getLink() + "|" +
                 to_string(it.getDuration()) + "|" +
                 to_string(it.getLikes()) << '\n';
+    }
 
 }
 
-vector <Tutorial> operator + (const vector <Tutorial> &a, const Tutorial &b) {
-    vector <Tutorial> ret = a;
+DynamicVector <Tutorial> operator + (const DynamicVector <Tutorial> &a, const Tutorial &b) {
+    DynamicVector <Tutorial> ret = a;
     ret.push_back(b);
     return ret;
 }
 
-vector <Tutorial> operator + (const Tutorial &b, const vector <Tutorial> &a) {
-    vector <Tutorial> ret = a;
+DynamicVector <Tutorial> operator + (const Tutorial &b, const DynamicVector <Tutorial> &a) {
+    DynamicVector <Tutorial> ret = a;
     ret.push_back(b);
     return ret;
 }
 
-vector <Tutorial> operator - (const vector <Tutorial> &a, const Tutorial &b) {
-    vector <Tutorial> ret = a;
-    ret.erase(remove(ret.begin(), ret.end(), b), ret.end());
+DynamicVector <Tutorial> operator - (const DynamicVector <Tutorial> &a, const Tutorial &b) {
+    DynamicVector <Tutorial> ret = a;
+    ret.remove(b);
+    //ret.erase(remove(ret.begin(), ret.end(), b), ret.end());
     return ret;
 }
