@@ -62,3 +62,11 @@ DynamicVector <Tutorial> operator - (const DynamicVector <Tutorial> &a, const Tu
     //ret.erase(remove(ret.begin(), ret.end(), b), ret.end());
     return ret;
 }
+
+bool Repository::findTutorial(Tutorial t) {
+    for(int i = 0 ; i < _list.size() ; ++ i)
+        if(_list[i] == t)
+            return 1;
+    return 0;
+}
+

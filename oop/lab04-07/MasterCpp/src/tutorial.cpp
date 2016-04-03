@@ -70,9 +70,9 @@ static Tutorial Tutorial::fromString(string obj) {
 }
 
 string Tutorial::repr() {
-    return "Title: " + this->_title + "\n" +
-            "Presenter: " + this->_presenter + "\n" +
-            "Link: " + this->_link + "\n" +
-            "Duration: " + to_string(this->_duration) + "\n" +
+    return "Title: " + this->_title + "  " +
+            "Presenter: " + this->_presenter + "  " +
+            "Link: " + this->_link + "  " +
+            "Duration: " + to_string(this->_duration) + "  " +
             "Likes: " + to_string(this->_likes) + "\n";
 }

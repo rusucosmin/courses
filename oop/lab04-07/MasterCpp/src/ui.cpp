@@ -10,17 +10,22 @@ UI::UI(Controller &ctrl): _ctrl(ctrl) {
 }
 
 void UI::run() {
-    cout << "Choose mode:\n";
-    cout << "   1. Administrator\n";
-    cout << "   2. User\n";
-    int op = _read_int("> ");
-    if(op == 1)
-        _run_admin();
-    else if(op == 2)
-        _run_user();
-    else {
-        cout << "Not an option!\n";
-        run();
+    while(1) {
+        cout << "\nChoose mode:\n";
+        cout << "   1. Administrator\n";
+        cout << "   2. User\n";
+        cout << "   3. Exit\n";
+        int op = _read_int("> ");
+        if(op == 1)
+            _run_admin();
+        else if(op == 2)
+            _run_user();
+        else if(op == 3)
+            break ;
+        else {
+            cout << "Not an option!\n";
+            run();
+        }
     }
 }
 
@@ -57,19 +62,40 @@ void UI::_run_user() {
         _show_user_menu();
         int op = _read_int("> ");
         string pres;
+        DynamicVector <Tutorial> v;
         switch(op) {
         case 1:
             pres = _read_string("Presenter: ");
             this->_ctrl.filterActive(pres);
             break;
         case 2:
+            /// add to watchlist
+            if(!_ctrl.addToWatch(_ctrl.getActiveTutorial()))
+                cout << "Already added to WatchList\n";
+            else
+                cout << "Successfully added\n";
             break;
         case 3:
+            /// remove from watchlist
+            if(!_ctrl.removeFromWatch(_ctrl.getActiveTutorial()))
+                cout << "Not on the WatchList\n";
+            else
+                cout << "Successfully removed\n";
+            pres = _read_string("Would you like to rate one like?");
+            if(pres == "yes")
+                _ctrl.rate(_ctrl.getActiveTutorial());
             break;
         case 4:
             this->_ctrl.nextTutorial();
             break;
         case 5:
+            /// print the watchlist
+            this->printWatchList();
+            v = _ctrl.getWatchList();
+            break;
+            for(int i = 0 ; i < v.size() ; ++ i)
+                cout << v[i].repr() << '\n';
+            cout << "\n";
             break;
         case 6:
             this->_ctrl.saveToFile("database.in");
@@ -81,22 +107,39 @@ void UI::_run_user() {
     }
 }
 
+void UI::printWatchList() {
+    cout << "|----------------Title----------------|-------------Presenter------------|------------------------------Link---------------------------|---Duration---|----Likes-----|\n";
+    cout << setfill(' ');
+    DynamicVector <Tutorial> all = this->_ctrl.getWatchList();
+    for(int i = 0 ; i < all.size() ; ++ i) {
+        Tutorial it = all[i];
+        cout << "|" << setw(37) << it.getTitle() << "|";
+        cout << setw(34) << it.getPresenter() << "|";
+        cout << setw(61) << it.getLink() << "|";
+        cout << setw(14) << it.getDuration() << "|";
+        cout << setw(14) << it.getLikes() << "|";
+        cout << '\n';
+    }
+}
+
 void UI::_show_active_list() {
+    cout << "\n\n-------------------------------------ACTIVE TUTORIAL-------------------------------------\n";
     if(this->_ctrl.getActiveList().size() == 0)
         cout << "No list selected\n";
     else
-        cout << this->_ctrl.getActiveTutorial().repr() << '\n';
+        cout << this->_ctrl.getActiveTutorial().repr();
+    cout << "-----------------------------------------------------------------------------------------\n\n";
 }
 
 void UI::_show_user_menu() {
     cout << "\n";
     cout << "User mode\n";
-    cout << "1. Search for tutorials\n";
-    cout << "2. Add to Watch List\n";
-    cout << "3. Delete from Watch List\n";
-    cout << "4. Next active tutorial\n";
-    cout << "5. See the Watch List\n";
-    cout << "6. Exit\n";
+    cout << "   1. Search for tutorials\n";
+    cout << "   2. Add to Watch List\n";
+    cout << "   3. Delete from Watch List\n";
+    cout << "   4. Next active tutorial\n";
+    cout << "   5. See the Watch List\n";
+    cout << "   6. Exit\n";
     cout << "\n";
 }
 
