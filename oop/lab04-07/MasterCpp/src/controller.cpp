@@ -85,19 +85,12 @@ bool Controller::removeFromWatch(Tutorial t) {
 }
 
 void Controller::rate(Tutorial t) {
-    DynamicVector <Tutorial> v = this->_repo.getAll();
-    for(int i = 0 ; i < v.size() ; ++ i)
-        if(v[i] == t)
-            v[i].setLikes(v[i].getLikes() + 1);
-    v = this->_watchList.getAll();
-    for(int i = 0 ; i < v.size() ; ++ i)
-        if(v[i] == t)
-            v[i].setLikes(v[i].getLikes() + 1);
-        v = this->_watchList.getAll();
-    v = _active;
-    for(int i = 0 ; i < v.size() ; ++ i)
-        if(v[i] == t)
-            v[i].setLikes(v[i].getLikes() + 1);
+    t.setLikes(t.getLikes() + 1);
+    this->_repo.updateTutorial(t);
+    this->_watchList.updateTutorial(t);
+    for(int i = 0 ; i < _active.size() ; ++ i)
+        if(_active[i] == t)
+            _active[i] = t;
 }
 DynamicVector <Tutorial> & Controller::getWatchList() {
     return this->_watchList.getAll();
