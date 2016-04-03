@@ -12,13 +12,18 @@ class Controller {
         bool addTutorial(Tutorial t);
         bool removeTutorial(Tutorial t);
         bool updateTutorial(Tutorial t);
-        bool findTutorial(Tutorial t);
+        //bool findTutorial(Tutorial t);
         DynamicVector <Tutorial> &getAll();
+        DynamicVector <Tutorial> &getWatchList();
         void saveToFile(string fileName);
         void filterActive(string presenter);
         DynamicVector <Tutorial> getActiveList();
         Tutorial getActiveTutorial();
         void nextTutorial();
+        bool addToWatch(Tutorial t);
+        bool removeFromWatch(Tutorial t);
+        void rate(Tutorial t);
+
     private:
         Repository &_repo, &_watchList;
         DynamicVector <Tutorial> _active;

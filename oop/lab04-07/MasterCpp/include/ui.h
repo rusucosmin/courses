@@ -13,6 +13,7 @@ class UI {
 
     private:
         Controller &_ctrl;
+        void printWatchList();
         void _run_admin();
         void _run_user();
         void _show_active_list();

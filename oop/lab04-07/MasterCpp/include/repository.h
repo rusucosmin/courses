@@ -15,6 +15,7 @@ class Repository {
         //vector <Tutorial> getAll();
         DynamicVector <Tutorial>& getAll();
         void saveToFile(string fileName);
+        bool findTutorial(Tutorial t);
 
     private:
         DynamicVector <Tutorial> _list;
