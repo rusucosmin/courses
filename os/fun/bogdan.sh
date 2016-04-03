@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#bogdan.sh Se primeste ca parametrii un n Si mai multe foldere 
+#Sa se afiseze folderele care au dimensiunea peste n
+
 if [ $# -lt 2 ]
 then
 	echo "Not enough args"

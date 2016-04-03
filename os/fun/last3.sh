@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# last3.sh: Se dau nume de utilizatori in linia de comanda pe care 
+#eu trebuie sa le citesc , si pt fiecare, trebuie sa afisez ultimele 3 logari
+
 while true
 do
 	read -p "username: " U

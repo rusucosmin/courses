@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#miriam.sh: sa monitorizez procesele si daca un utilizator folosea vim 
+#sau man sa se afiseze un mesaj ca este o operatie ilegala,ceva de genul:))
+
 while true
 do
 	clear

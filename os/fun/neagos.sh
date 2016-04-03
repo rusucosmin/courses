@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#neagos.sh 
+#Sa se scrie un script care tot citeste de la utilizator (nu neaparat numere) 
+#pana se introduce de trei ori consecuvtiv un numar par mai mare decat 10.
+
+#tananana SO
+
 cnt=0
 
 while true

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# count.sh ceva de genu sa verifici daca argumentele sunt fisiere sau numere
+# si sa numeri cate sunt fisiere
+
 files=0
 numbers=0
 for arg in $@
