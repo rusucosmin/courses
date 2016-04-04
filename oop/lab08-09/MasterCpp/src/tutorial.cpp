@@ -74,5 +74,5 @@ string Tutorial::repr() {
             "Presenter: " + this->_presenter + "    " +
             "Link: " + this->_link + "    " +
             "Duration: " + to_string(this->_duration) + "    " +
-            "Likes: " + to_string(this->_likes / 60) + ":" + to_string(this->_likes % 60) + "    |\n";
+            "Likes: " + to_string(this->_likes) + "    |\n";
 }

@@ -4,6 +4,7 @@
 #include <controller.h>
 #include <repository.h>
 #include <ui.h>
+#include <dynamicvector.h>
 #include <tester.h>
 
 using namespace std;

@@ -28,14 +28,14 @@ bool Controller::updateTutorial(Tutorial t) {
 
 /*
 bool Controller::findTutorial(Tutorial t) {
-    vector <Tutorial> &all = this->_repo.getAll();
+    DynamicVector <Tutorial> &all = this->_repo.getAll();
     for(int i = 0 ; i < all.size() ; ++ i)
         if(all[i] == t)
             return true;
     return false;
 }*/
 
-vector <Tutorial> & Controller::getAll() {
+DynamicVector <Tutorial> & Controller::getAll() {
     return this->_repo.getAll();
 }
 
@@ -44,7 +44,7 @@ void Controller::saveToFile(string fileName) {
 }
 
 void Controller::filterActive(string presenter) {
-    vector <Tutorial> all = this->_repo.getAll();
+    DynamicVector <Tutorial> all = this->_repo.getAll();
     this->_active.clear();
     this->_pos = 0;
     for(int i = 0 ; i < all.size() ; ++ i) {
@@ -56,7 +56,7 @@ void Controller::filterActive(string presenter) {
     }
 }
 
-vector <Tutorial> Controller::getActiveList() {
+DynamicVector <Tutorial> Controller::getActiveList() {
     return this->_active;
 }
 
@@ -92,7 +92,7 @@ void Controller::rate(Tutorial t) {
         if(_active[i] == t)
             _active[i] = t;
 }
-vector <Tutorial> & Controller::getWatchList() {
+DynamicVector <Tutorial> & Controller::getWatchList() {
     return this->_watchList.getAll();
 }
 

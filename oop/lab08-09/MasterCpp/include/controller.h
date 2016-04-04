@@ -13,11 +13,11 @@ class Controller {
         bool removeTutorial(Tutorial t);
         bool updateTutorial(Tutorial t);
         //bool findTutorial(Tutorial t);
-        vector <Tutorial> &getAll();
-        vector <Tutorial> &getWatchList();
+        DynamicVector <Tutorial> &getAll();
+        DynamicVector <Tutorial> &getWatchList();
         void saveToFile(string fileName);
         void filterActive(string presenter);
-        vector <Tutorial> getActiveList();
+        DynamicVector <Tutorial> getActiveList();
         Tutorial getActiveTutorial();
         void nextTutorial();
         bool addToWatch(Tutorial t);
@@ -26,7 +26,7 @@ class Controller {
 
     private:
         Repository &_repo, &_watchList;
-        vector <Tutorial> _active;
+        DynamicVector <Tutorial> _active;
         int _pos;
 };
 

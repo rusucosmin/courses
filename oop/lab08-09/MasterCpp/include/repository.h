@@ -3,6 +3,7 @@
 
 #include <tutorial.h>
 #include <vector>
+#include <dynamicvector.h>
 
 class Repository {
     public:
@@ -12,15 +13,15 @@ class Repository {
         void removeTutorial(Tutorial t);
         void updateTutorial(Tutorial t);
         //vector <Tutorial> getAll();
-        vector <Tutorial>& getAll();
+        DynamicVector <Tutorial>& getAll();
         void saveToFile(string fileName);
         bool findTutorial(Tutorial t);
 
     private:
-        vector <Tutorial> _list;
+        DynamicVector <Tutorial> _list;
 };
 
-vector <Tutorial> operator + (const vector <Tutorial> &a, const Tutorial &b);
-vector <Tutorial> operator + (const Tutorial &b, const vector <Tutorial> &a);
-vector <Tutorial> operator - (const vector <Tutorial> &a, const Tutorial &b);
+DynamicVector <Tutorial> operator + (const DynamicVector <Tutorial> &a, const Tutorial &b);
+DynamicVector <Tutorial> operator + (const Tutorial &b, const DynamicVector <Tutorial> &a);
+DynamicVector <Tutorial> operator - (const DynamicVector <Tutorial> &a, const Tutorial &b);
 #endif // REPOSITORY_H

@@ -63,7 +63,7 @@ void UI::_run_user() {
         _show_user_menu();
         int op = _read_int("> ");
         string pres;
-        vector <Tutorial> v;
+        DynamicVector <Tutorial> v;
         switch(op) {
         case 1:
             pres = _read_string("Presenter: ");
@@ -118,7 +118,7 @@ void UI::_run_user() {
 }
 
 void UI::printWatchList() {
-    vector <Tutorial> all = this->_ctrl.getWatchList();
+    DynamicVector <Tutorial> all = this->_ctrl.getWatchList();
     if(all.size() == 0) {
         cout << "\nThere are no tutorials here\n";
         return ;
@@ -168,7 +168,7 @@ void UI::_show_admin_menu() {
 }
 
 void UI::_admin_show_all() {
-    vector <Tutorial> all = this->_ctrl.getAll();
+    DynamicVector <Tutorial> all = this->_ctrl.getAll();
     if(all.size() == 0) {
         cout << "\nThere are no tutorials here\n";
         return ;
