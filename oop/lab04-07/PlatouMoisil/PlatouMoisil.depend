@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1460800344 source:/home/cosmin/work/courses/oop/lab04-07/PlatouMoisil/main.cpp
+	<iostream>
+	<fstream>
+
