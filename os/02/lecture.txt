@@ -1,0 +1,62 @@
+Regular expressions
+-------------------
+
+\{m,n\} - previous expression atleast m times and at most n times
+\{p\} - previous expression exactly p times <=> \{p,p\}
+\(...\) - group things in an expression
+
+SED
+---
+- text processing filter
+- has multiple commands, we will rely on command "s" for now
+- command syntax
+
+       sed "s/   /   /g" a.txt
+AWK
+---
+- program structure: a sequence of selectors followed by blocks of instructions
+
+- selectors - boolean expression (eg NR ==3 or NR %2 == 1)
+            - regular expression (eg /^a/ or /^[0-9]/)
+            - BEGIN or END - the corresponding block is executed before/after all lines
+
+- field variable - $1 - $NF  every field on the current line
+                 - $0 the entire line
+                 - NF - the number of fields on the line
+                 - NR - the number of the current line
+
+Shell Programming
+-----------------
+
+- work program - write a program that take two
+                 numbers as command line arguments
+                 and calculates something really
+                 heavy with them
+
+
+Redirecting
+-----------
+
+>  redirects standard output to file
+>>  redirects standard output to file (appends, does not overwrite)
+<  redirects standard input
+<<  redirects standard input (weird)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

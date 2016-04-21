@@ -76,7 +76,7 @@ int main(int argc, char ** argv) {
             }
         }
     }
-    for(i = 1 ; i < argc / 2 ; ++ i)
+    for(i = 1 ; i <= argc / 2 ; ++ i)
         for(j = 0 ; j < 2 ; ++ j) {
             Package p;
             read(c2p[j][0], &p, sizeof(Package));
@@ -87,7 +87,7 @@ int main(int argc, char ** argv) {
     close(c2p[0][1]);
     close(c2p[1][0]);
     close(c2p[1][1]);
-    for(i = 1 ; i < argc / 2 ; ++ i) {
+    for(i = 1 ; i <= argc ; ++ i) {
         for(j = 0 ; j < 2 ; ++ j) {
             wait(0);
         }

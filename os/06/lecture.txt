@@ -1,0 +1,32 @@
+Mechanisms for communicating between processes
+- pipe
+- FIFO
+- IPC - shared memory (shm)
+      - message queues (msg)
+      - semaphores (sem)
+
+Pipe and FIFO
+- communication channels
+- work similarly to actual pipes - they have an
+  end wher eyou can write, and an end from where
+  you can read, and what is written will be read
+  in order form the other end
+- we will use a pipe/fifo for communicating in a single direction
+
+Pipe - anonymous structure (it does not of a
+       system-wide unique identifier) in the
+       kernel memory
+     - can be used only by processes that inherit
+       the pipe from a common ancestor which
+       created it
+     - created by the system call pipe()
+
+FIFO - file on disk (its path serves as a unique
+       system-wide identifier)
+     - can be used by any processes that know this path
+     - can be created using
+       - system calls mkfifo or mknod
+       - command lind commands mkfifo or mknod
+     - they need to be opened after creation,
+       using open, in a specific order or else we
+       will get a deadlock (nothing will move)

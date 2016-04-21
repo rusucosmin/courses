@@ -1,0 +1,55 @@
+AWK
+---
+
+Structura unui program este o secventa de:
+
+   selector-de-linie { cod }
+
+selector-de-linie - orice expresie boooleana
+                  - NR == 2
+                  - NR % 3 == 1
+                  - expresie regulara
+                  - BEGIN - blocul se proceaseaza inaintea linilor
+                  - END - blocul se proceseaza dupa toate liniile
+
+$1 - $9, $10, ... $NF- campul (valoare de pe coloana) 1 -9, 10,... $NF
+$0 - toata linia
+NR - numarul liniei
+NF - numarulde campuri al liniei
+
+Programare Shell
+----------------
+- program de lucru - primeste doua numere ca argumente in linia de comanda si face doua for-uri imbricate care calculeaza ceva complicat si afiseaza rezultatul
+
+& - la sfarsitul unei comenzi o ruleaz ain background
+
+Redirectari
+
+> redirecteaza iesirea standard
+>> redirecteaza iesirea standard adaugand (nu suprascrie)
+< redirecteaza intrarea standard
+<< redirecteaza intrarea standard dar e ciudat
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

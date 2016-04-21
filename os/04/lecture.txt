@@ -1,0 +1,72 @@
+- UNIX is case sensitive
+- file wildcards
+  - * - anything
+  - [0-9] or [a-z] - ranges similar to regular expressions
+- commands to know
+  - bg
+  - cat
+  - cd
+  - chmod
+  - comm
+  - cp
+  - cut
+  - df
+  - diff
+  - du
+  - fg
+  - file
+  - find
+  - finger
+  - head
+  - jobs
+  - kill
+  - last
+  - less
+  - ln
+  - ls
+  - man
+  - mesg
+  - mkdir
+  - more
+  - mv
+  - passwd
+  - ps
+  - rm
+  - sleep
+  - sort
+  - tail
+  - talk
+  - uniq
+  - w
+  - who
+  - write
+
+Referring variables
+- $V
+- ${V}
+- ${V-something} - if V exists, return $V, otherwise "something"
+- ${V=something} - if V does not exist, V="something", return $V
+- ${V+something} - if V exists, return "something", otherwise return
+                   nothing
+- ${V?some text} - if V exists, return $V, otherwise error with 
+                   message "some text"
+
+Quotes vs apostrophes
+- content between quotes (on the command line) is
+  processed by the shell to substitute variable
+  references and embedded commands
+- content between apostrophes wil lnot be processed
+
+Special variable in Shell scripts
+- $0 - the command
+- $1 to $9 - arguments
+- $# - number of arguments
+- $* or $@ - all arguments
+- $? - the exit code of the previous command
+- $! - the PID of the program previously executed in the background
+- $$ - PID of the parent process
+
+Command "shift" moves arguments to the left
+Ex: shift
+    shift 1 (same as shift)
+    shift 2
