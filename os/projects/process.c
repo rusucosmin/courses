@@ -51,6 +51,7 @@ int main(int argc, char ** argv) {
                     fgets(p.result, sizeof(p.result), f);
                     sleep(rand() % 5);
                     write(c2p[j][1], &p, sizeof(Package));
+                    fclose(f);
                 }
                 else {
                     strcpy(cmd, "test -d ");
@@ -64,6 +65,7 @@ int main(int argc, char ** argv) {
                         fgets(p.result, sizeof(p.result), f);
                         sleep(rand() % 5);
                         write(c2p[j][1], &p, sizeof(Package));
+                        fclose(f);
                     }
                     else {
                         strcpy(p.result, "The arg is not a file, neither a directory");
