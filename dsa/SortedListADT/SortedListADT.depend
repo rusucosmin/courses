@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1462619766 source:/home/cosmin/work/courses/dsa/SortedListADT/main.cpp
+	<iostream>
+	<tester.h>
+	<sortedsllist.h>
+
+1462622197 /home/cosmin/work/courses/dsa/SortedListADT/include/sortedsllist.h
+	<abstractsortedlist.h>
+	<cassert>
+
+1462621099 /home/cosmin/work/courses/dsa/SortedListADT/include/abstractsortedlist.h
+
+1462621156 /home/cosmin/work/courses/dsa/SortedListADT/include/tester.h
+	<sortedsllist.h>
+	<iostream>
+

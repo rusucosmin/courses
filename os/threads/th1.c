@@ -1,10 +1,3 @@
-/*
-Implement a program that writes a number between 0 and 9 in a global variable and then creates 10 threads.
-Each thread will check the global variable and if its value is the order number of the thread (given from
-main at creation time), the thread writes in the global variable another number between 0 and 9 (different
-than its own). The program ends when the global variable is changed 20 times.
-*/
-
 #include <stdio.h>
 #include <pthread.h>
 #include <stdlib.h>
