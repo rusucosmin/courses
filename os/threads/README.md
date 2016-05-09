@@ -20,10 +20,11 @@ thread that counts its appearances in the given file.  Print out the sum of the 
     - **FILE: stana.c - Andra Stana's implementation (ugly, right?)**
 
 ###Extra
-5. Write a program that creates 4 threads and had 3 global variables v5, v2, v3. Each thread generates a random number and:
+5.  Write a program that creates 4 threads and had 3 global variables v5, v2, v3. Each thread generates a random number and:
     - if the number is multiple of 2 increments v2
     - if the number is multiple of 3, increments v3
     - if the number is multiple of 5 increments v5
+
 The number can be a multiple of more numbers (ex. for 10 we will increment both V2 and V5)
 Threads print the generated numbers and stop when 30 numbers have been generated.
 The main program prints the 3 global variables.
