@@ -19,9 +19,7 @@
     - if the number is multiple of 3, increments v3
     - if the number is multiple of 5 increments v5
 
-    The number can be a multiple of more numbers (ex. for 10 we will increment both V2 and V5)
-    Threads print the generated numbers and stop when 30 numbers have been generated.
-    The main program prints the 3 global variables.
+    The number can be a multiple of more numbers (ex. for 10 we will increment both V2 and V5). Threads print the generated numbers and stop when 30 numbers have been generated. The main program prints the 3 global variables.
 
 6. Write a program that creates threads and increments a global variable n=0 with the values from a struct given as argument to each thread until it is greater than 20. The struct contains for each thread 2 random numbers generated in the main program.
 
