@@ -39,7 +39,6 @@
 		<Unit filename="include/sortedsllist.h" />
 		<Unit filename="include/tester.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/tester.cpp" />
 		<Extensions>
 			<envvars />
 			<code_completion />

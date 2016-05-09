@@ -47,9 +47,10 @@ int main() {
     int i;
     srand(time(NULL));
     var = randT();
+    printf("Initially var = %d\n", var);
     pthread_mutex_init(&mtx, NULL);
     for(i = 0; i < T; ++ i) {
-        int* x = (int*) malloc(sizeof(int *));
+        int* x = (int*) malloc(sizeof(int));
         *x = i;
         pthread_create(&t[i], NULL, doIt, (void*) x);
     }
