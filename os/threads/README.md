@@ -25,9 +25,9 @@
 
 ###Instructions
 -   For compiling, run the following command in a terminal:
-        `gcc -Wall -pthread cosmin.c`
+    -   `gcc -Wall -pthread cosmin.c`
 -   This command will compile the file cosmin.c and if everything is good, it will create an executable file a.out on the current directory.
 -   Now just run the exectubale file as follows
-        `./a.out`
+    -   `./a.out`
 -   If you want to check your program for memory leaks run:
-        `valgrind ./a.out` and carefully read everything
+    -   `valgrind ./a.out` and carefully read everything
