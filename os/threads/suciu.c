@@ -1,0 +1,2 @@
+/* 3. Write a C program that receives as arguments file names and processes them simultaneously using threads. The program transforms the files so that all words will begin with a capital letter. The modified files (containing the first letter words capitalized) will have the same name as the original files and will end with the number N (N is the thread id). You will create a thread for each file.
+*/

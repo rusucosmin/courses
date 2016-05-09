@@ -22,12 +22,17 @@
 ###Extra
 1.  Write a program that creates 4 threads and had 3 global variables v5, v2, v3. Each thread generates a random number and:
     - if the number is multiple of 2 increments v2
-    - if the number is multiple of 3, increments v3
+    - if the number is multiple of 3 increments v3
     - if the number is multiple of 5 increments v5
 
     The number can be a multiple of more numbers (ex. for 10 we will increment both V2 and V5). Threads print the generated numbers and stop when 30 numbers have been generated. The main program prints the 3 global variables.
+    - **FILE: var.c**
 
 2. Write a program that creates threads and increments a global variable n=0 with the values from a struct given as argument to each thread until it is greater than 20. The struct contains for each thread 2 random numbers generated in the main program.
+    - **FILE: inc.c**
+
+3. Write a C program that receives as arguments file names and processes them simultaneously using threads. The program transforms the files so that all words will begin with a capital letter. The modified files (containing the first letter words capitalized) will have the same name as the original files and will end woth the number N (N is the thread id). You will create a thread for each file.
+    - **FILE: suciu.c**
 
 ###Instructions
 -   For compiling, run the following command in a terminal:
