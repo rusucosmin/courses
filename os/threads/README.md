@@ -5,6 +5,27 @@
 - [Mihai Suciu](https://www.cs.ubbcluj.ro/~mihai-suciu/)
 - [Daniel](https://www.cs.ubbcluj.ro/~daniel/so/)
 
+###Test - 25 min
+Username impar:
+
+1. Sa se scrie un program care primeste numere intregi ca si argumente in linia de comanda. Pentru fiecare argument, programul lanseaza un thread   care verifica daca numarul e divizibil cu 2, 3, 5 sau 7, afiseaza rezultatul    in caz afirmativ si incrementeaza una din variabilele globale comune ce contorizeaza    cate numere sunt divizibile cu 2, 3, 5 sau 7.   Programul principal afiseaza rezultatul final obtinut (cate numere sunt divizibile   cu 2, 3, 5 sau 7) si se termina.
+
+EX: ./program1  2 3 4 5 6 11
+    Divizibile cu 2: 3
+    Divizibile cu 3: 2
+    Divizibile cu 5: 1
+    Divizibile cu 7: 0
+
+Username par:
+
+2. Sa se scrie un program care creeaza 7 thread-uri si are 3 variabile globale ce contorizeaza numerele cu o cifra, cu doua cifre sau mai mari.   Fiecare thread va genera numere aleatoare intre 0 si 1000, si in functie de numarul obtinut   incrementeaza contorul globasl corespunzator si printeaza valoarea obtinuta. Thread-urile se opresc cand   s-au generat cel putin 5 numere din fiecare categorie. Programul principal afiseaza cele 3 variabile  globale si apoi se termina.
+
+EX: ./prog2
+    Numere generate: 2 45 760 4 9 609 76 107 56 425 39 5 78 999 549 8
+    1 cifra: 5
+    2 cifre: 5
+    mai mari: 6
+
 ###Projects
 1. Implement a program that writes a number between 0 and 9 in a global variable and then creates 10 threads. Each thread will check the global variable and if its value is the order number of the thread (given from main at creation time), the thread writes in the global variable another number between 0 and 9 (different than its own). The program ends when the global variable is changed 20 times.
     - **FILE: cosmin.c**

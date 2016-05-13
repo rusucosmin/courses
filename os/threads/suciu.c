@@ -28,6 +28,8 @@ void* capitalize(void* arg) {
         fprintf(g, "%c", c);
         last = c;
     }
+    fclose(f);
+    fclose(g);
     free(arg);
     return NULL;
 }
