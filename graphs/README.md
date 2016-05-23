@@ -62,3 +62,24 @@ for(int k = 1; k <= n; ++ k)
         for(int j = 1; j <= n; ++ j)
             dp[i][j] = min(dp[i][j], dp[i][k]+ dp[k][j]);
 ```
+
+###A\*
+Graph algorithms - A\* algorithm
+
+Problem
+
+Given a graph with non-negative costs, two vertices s and t, and, for each vertex x, an estimation h(x) of the distance from x to t find a minimum cost walk from s to t.
+
+Idea
+
+The goal of the A\* algorithm is to avoid computing paths that start from s but go in a direction opposite to t. For instance, if we want to go from Cluj to Paris, we won't try a route through Moscow.
+
+To be able to exclude such unpromising routes, we need, in addition to the graph itself, an estimation of the distance from each vertex to the target vertex. This estimation is part of the input data.
+
+Of course, not any estimation function will work. There are two conditions on the estimation function:
+
+(strong condition): for all edges (x,y), we have c(x,y) ≥ h(x) - h(y) (in other words, the estimation does not decrease, along an edge, faster than the cost of that edge); in addition, h(t)=0;
+(weak condition): for all vertices x, we have h(x) ≤ d(x,t) (in other words, the estimation is always an underestimation).
+If the graph represents places in space (cities, intersections, etc), then the estimation function could be the euclidian distance.
+
+Essentially, the A\* algorithm is identical with Dijkstra's algorithm, with one difference: the priority of a vertex x in the priority queue is not dist[x] but rather dist[x]+h(x).
