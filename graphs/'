@@ -1,0 +1,11 @@
+#Exam
+
+##Minimum cost walk by dynamic programming
+- Let `dp[k][x]` = the minimum cost walk of at most k edges from s to x
+- So `dp[0][s] = 0` and `dp[0][x] = oo for every x != s`
+- dp[k][x] = min({dp[k - 1][y] | (y, x) is an edges in the Graph)
+- Small piece of code:
+
+```c++
+memset(dp, 0, sizeof(dp));
+```
