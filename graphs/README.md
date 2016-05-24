@@ -1,6 +1,9 @@
 #Exam
 
 ##Minimum cost walk by dynamic programming
+- Find minimum cost walk in presence of negative cost edges (but no negative cost cycles).
+- Note: if there is a negative cost cycle that can be inserted into the walk from start to end, then there is no minimum cost walk - by repeating the cycle, we can obtain walks of cost as small as we want
+- Let s = starting vertex, t = ending (target) vertex.
 - Let `dp[k][x] = the minimum cost walk of at most k edges from s to x`
 - So `dp[0][s] = 0` and `dp[0][x] = oo for every x != s`
 - `dp[k][x] = min({dp[k - 1][y] | (y, x) is an edges in the Graph)`
@@ -16,6 +19,14 @@ for(int k = 1; k < n; ++ k)
 ```
 
 ##Bellman-Ford
+- The algorithm keeps two mappings:
+    - dist[x] = the cost of the minimum cost walk from s to x known so far
+    - prev[x] = the vertex just before x on the walk above.
+- Initially, dist[s]=0 and dist[x]=∞ for x ≠ s; this reflects the fact that we only know a zero-length walk from s to itself.
+- Then, we repeatedly performs a relaxation operation defined as follows: if (x,y) is an edge such that dist[y] > dist[x] + c(x,y), then we set:
+    - dist[y] = dist[x] + c(x,y)
+    - prev[y] = x
+- The idea of the relaxation operation is that, if we realize that we have a better walk leading to y by using (x,y) as its last edge, compared to what we know so far, we update our knowledge.
 
 ```c++
 #include <bits/stdc++.h>
@@ -54,6 +65,10 @@ int main() {
 }
 ```
 
+###Dijkstra
+- Dijkstra's algorithm still relies on Bellman's optimality principle; however, it computes distances from the starting vertex in increasing order of the distances. This way, the distance from start to a given vertex doesn't have to be recomputed after the vertex is processed.
+- This way, Dijkstra's algorithm looks a bit like the breadth-first traversal; however, the queue is replaced by a priority queue where the top vertex is the closest to the starting vertex.
+
 ###RoyFloyd
 
 ```c++
@@ -83,3 +98,6 @@ Of course, not any estimation function will work. There are two conditions on th
 If the graph represents places in space (cities, intersections, etc), then the estimation function could be the euclidian distance.
 
 Essentially, the A\* algorithm is identical with Dijkstra's algorithm, with one difference: the priority of a vertex x in the priority queue is not dist[x] but rather dist[x]+h(x).
+
+###Matrix multiplcation
+- [wiki](https://en.wikipedia.org/wiki/Min-plus_matrix_multiplication)

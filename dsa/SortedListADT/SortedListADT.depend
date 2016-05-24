@@ -1,8 +1,9 @@
 # depslib dependency file v1.0
-1462619766 source:/home/cosmin/work/courses/dsa/SortedListADT/main.cpp
+1464082283 source:/home/cosmin/work/courses/dsa/SortedListADT/main.cpp
 	<iostream>
 	<tester.h>
 	<sortedsllist.h>
+	<sortedlistbst.h>
 
 1462622197 /home/cosmin/work/courses/dsa/SortedListADT/include/sortedsllist.h
 	<abstractsortedlist.h>
@@ -10,7 +11,15 @@
 
 1462621099 /home/cosmin/work/courses/dsa/SortedListADT/include/abstractsortedlist.h
 
-1462621156 /home/cosmin/work/courses/dsa/SortedListADT/include/tester.h
+1464093574 /home/cosmin/work/courses/dsa/SortedListADT/include/tester.h
 	<sortedsllist.h>
+	<sortedlistbst.h>
 	<iostream>
+	<time.h>
+	<stdlib.h>
+
+1464093366 /home/cosmin/work/courses/dsa/SortedListADT/include/sortedlistbst.h
+	<iostream>
+	<tester.h>
+	<abstractsortedlist.h>
 

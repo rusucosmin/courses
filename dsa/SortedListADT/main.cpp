@@ -1,6 +1,7 @@
 #include <iostream>
 #include <tester.h>
 #include <sortedsllist.h>
+#include <sortedlistbst.h>
 
 using namespace std;
 
