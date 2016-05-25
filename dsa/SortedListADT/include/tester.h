@@ -5,6 +5,7 @@
 #include <sortedlistbst.h>
 #include <iostream>
 #include <time.h>
+#include <set>
 #include <stdlib.h>
 
 class Tester {
@@ -84,6 +85,12 @@ void Tester::unitTestSortedListBSTRemove() {
         sList.removeAtIndex(rand() % sList.size());
     assert(sList.size() == 0);
     ///todo continu
+    std::set <int> s = {1, 2, 3, 4};
+    std::set <int> :: iterator it = s.begin();
+    std::advance(it, 2);
+    s.erase(it);
+    for(auto it : s)
+        std::cerr << it << '\n';
 }
 
 void Tester::unitTestSortedListBSTGet() {
