@@ -1,4 +1,33 @@
 #Exam
+- Shortest path:
+    - BFS x
+    - Dijkstra x
+    - A\* x
+        - Dijkstra with the priority being dist(x) + h(x) x
+    - Bellman Ford x
+    - Bellman Kalaba x
+    - Floyd Warshall x
+    - [Matrix multiplication](https://en.wikipedia.org/wiki/Min-plus_matrix_multiplication) x
+- Connected Components
+    - DFS x
+- Strongly connected Components
+    - Kosaraju x
+    - Tarjan x
+- DAGs
+    - Topological Sort
+        - BFS x
+        - DFS x
+    - DFS x
+    - Critical Path Method (Activity planification)
+    - Longest path x
+- Minimum spanning tree
+    - Kruskal x
+    - Prim x
+- Maximum Flow
+    - Ford Fulkerson 'method' x
+    - Edmond Kard – while(bfs()) x
+    - Dinic - push every blocking flow (dag of the minimum distances) x
+- Maximum Matching
 
 ##Minimum cost walk by dynamic programming
 - Find minimum cost walk in presence of negative cost edges (but no negative cost cycles).
