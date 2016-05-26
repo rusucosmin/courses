@@ -5,6 +5,17 @@
 - [Mihai Suciu](https://www.cs.ubbcluj.ro/~mihai-suciu/)
 - [Daniel](https://www.cs.ubbcluj.ro/~daniel/so/)
 
+###Practical Processes and Threads
+1. *Suciu* Sa se scrie un program care primeste ca si argumente nume de programe urmate de argumente. Numele unui program este de separat de ultimul argument al progrmaului precedent prin -. Programul va rula programele primilte ca argumente cu parametrii corespunzatori in procese fiu simultane folosing apelurile sistem exec. In cazul in care apelul exec esaueaza, se va raporta un mesaj de eroare si codul de eroare.
+Ex: `./aprog /bin/ls /etc - /usr/bin/wc /etc/passwd - /bin/grep aa /etc/passwd`
+    - **FILE: `cacat.c`**
+
+Grebla:
+Faci 10 procese, fiecare proces face 2 thread-uri
+Un thread citeste si celalat aduna la o suma numere random
+In final, procesul principal afiseaza pid-uirle fiilor si sumele.
+
+
 ###Test - 25 min
 Username impar:
 
