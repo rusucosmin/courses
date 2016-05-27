@@ -13,12 +13,18 @@ Ex: `./aprog /bin/ls /etc - /usr/bin/wc /etc/passwd - /bin/grep aa /etc/passwd`
 2. *Grebla(?)* Implement two processes in C that communicate through PIPE. Process A sends a string to process B, B eliminates maximum 3 vowels from it and sends it back to A, which eliminates also maximum 3 vowels, and sends it back to B and so on. The processes stop when they either receive or send a string that does not contain vowels.
     - **FIlE: `vowel.c`**
 
-Grebla:
-3. Se creeaza un subproces. Se creeaza 2 thread-uri in subproces. Threadurile citesc cate un numar (alternativ) si il aduna la o suma. Se repeta cat timp suma < 100. Din subproces, se transmite printr-un pipe rezultatul la procesul principat. Procesul principal afiseaza rezultatul.
+4. *Greba* Se creeaza un subproces. Se creeaza 2 thread-uri in subproces. Threadurile citesc cate un numar (alternativ) si il aduna la o suma. Se repeta cat timp suma < 100. Din subproces, se transmite printr-un pipe rezultatul la procesul principat. Procesul principal afiseaza rezultatul.
     - **FILE `grebla.c`**
-3. Mai jegos: Faci 10 procese, fiecare proces face 2 thread-uri
+
+5. Mai jegos: Faci 10 procese, fiecare proces face 2 thread-uri
 Un thread citeste si celalat aduna la o suma numere random
 In final, procesul principal afiseaza pid-uirle fiilor si sumele.
+
+6. Creezi un subproces care creeaza 10 threaduri si in thread se genereaza numere random pana cand is cel putin 5 intre 1-300, 5 intre 301-600, 5 intre 601-900, si la final trimiti cate s-au generat din fiecare in procesul principal prin fifo.
+    - **FILE `varan.c`** - The moment when you compile a reptile
+
+7. Implementati un program C care are un tablou global de 10 int-uri numti "suma\_dupa\_rest". Programul va crea 7 threaduri, ficare dintre ele generand 100 de numere aleatoare. Fiecare numar va fi adunat la elemntul tabloului "suma\_dupa\_rest" corespunzator restului impartirii numarluliu la 10. Folositi mecanismele de sincronizare necesare pentru a asigura aclcularea corecta a sumelor.
+    - **FILE `dana.c`**
 
 
 ###Test - 25 min
