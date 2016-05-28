@@ -1,3 +1,6 @@
+/*
+6. Given a digraph with costs, find a minimum cost Hamiltonian cycle (i.e., solve the TSP)
+*/
 #include <fstream>
 #include <iostream>
 #include <vector>

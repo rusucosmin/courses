@@ -1,4 +1,27 @@
 #Exam
+
+#Labs:
+- Lab2 - Items solved:
+    - 1, 2, 3, 4
+    - 1B, 2B
+- Lab3 - Items solved:
+    - 1
+    - NEW(TODO): 1B. Write a program that, given a graph with costs, having no negative cost cycles, and a pair of vertices, finds the number of distinct walks of minimum cost between the given vertices.
+        `1b.cpp`
+    - 2B
+- Lab4 - Items solved:
+    - 3 and 4
+    - NEW(TODO): 2B. Write a program that, given a graph, does the following:
+    verify if the corresponding graph is a DAG and performs a topological sorting of the activities;
+    if it is a DAG, finds the number of distinct paths between two given vertices, in O(m+n).
+
+    - NEW(TODO): 3B. Write a program that, given a graph with costs, does the following:
+    verify if the corresponding graph is a DAG and performs a topological sorting of the activities;
+    if it is a DAG, finds the number of distinct lowest cost paths between two given vertices, in O(m+n).
+
+- Lab5 - Items solved
+    - 6 - Hamiltonian cycle
+
 - Shortest path:
     - BFS x
     - Dijkstra x
