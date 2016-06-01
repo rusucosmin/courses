@@ -974,3 +974,49 @@ void Tester::randomTest() {
 ##Problem
 Consider n balloons that are moving vertically. Select the biggest number of balloons such that they will not touch between them. (Solution should also present the list of balloons.)
 
+**The solution is as follows:**
+
+The ballons are moving only vertically. Each circle will stay on a fixed interval `[xst, xdr]` on the `OX` axis. So, each circle will be 'translated' as a closed interval, and the problem is reduced to the Activity Selection Problem. http://www.geeksforgeeks.org/greedy-algorithms-set-1-activity-selection-problem/
+
+For simplicity, I will assume we will read the interval `[xst, xdr]` for each circle.
+If the input will be `(r, x, y)` - denoting the center `(x, y)` of the circle and `r` - the radius, it's easy to get the `OX` interval:
+    `[x-r, x+r]`
+Also, I will asume that the circles [1, 2] and [2, 3] do not touch.
+
+**Here is the solution for the activity selection problem:**
+
+The greedy choice is to always pick the next activity whose finish time is least among the remaining activities and the start time is more than or equal to the finish time of previously selected activity. We can sort the activities according to their finishing time so that we always consider the next activity as minimum finishing time activity.
+    1) Sort the activities according to their finishing time
+    2) Select the first activity from the sorted array and print it.
+    3) Do following for remaining activities in the sorted array.
+        a) If the start time of this activity is greater than the finish time of previously selected activity then select this activity and print it.
+
+**How does Greedy Choice work for Activities sorted according to finish time?**
+
+Let the give set of activities be S = {1, 2, 3, ..n} and activities be sorted by finish time. The greedy choice is to always pick activity 1. How come the activity 1 always provides one of the optimal solutions. We can prove it by showing that if there is another solution B with first activity other than 1, then there is also a solution A of same size with activity 1 as first activity. Let the first activity selected by B be k, then there always exist A = {B – {k}} U {1}.(Note that the activities in B are independent and k has smallest finishing time among all. Since k is not 1, finish(k) >= finish(1)).
+
+
+###Tests structure
+The intervals are fully random in some spcific interval, depending on the test.
+Here is how they are generated: T[i] is the number of intervals for the i<sup>th</sup> test, and [0, v[i]] is the i<sup>th</sup> range interval.
+
+```python
+from random import randint
+
+T = [10, 100, 1000, 2500, 5000, 10000, 25000, 50000, 75000, 100000, 200000, 250000, 300000, 400000, 500000, 500000, 500000, 500000, 500000, 500000]
+v = [2 ** (i + 11) for i in range(20)]
+
+print(v)
+for i in range(len(T)):
+    print("> Generating test" + str(i) + ".in <")
+    f = open("test" + str(i) + ".in", "w");
+    n = T[i]
+    f.write(str(n) + "\n")
+    for j in range(n):
+        x = randint(0, v[i])
+        y = randint(0, v[i])
+        if x > y:
+            (x, y) = (y, x)
+        f.write(str(x) + " " + str(y) + "\n")
+    f.close()
+```
