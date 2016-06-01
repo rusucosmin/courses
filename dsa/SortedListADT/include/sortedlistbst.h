@@ -50,8 +50,6 @@ private:
     void _remove(BSTNode *&act);
     /** Free a node **/
     void _free(BSTNode *&act);
-    /** DFS auxiliary function to print the tree **/
-    void _dfs(BSTNode *node);
     /** Function to get the succesor of a BST**/
     BSTNode* _getSuc(BSTNode *node);
     /** Auxiliary function to update the size of a node: the number of nodes in it's subtree**/
@@ -62,7 +60,7 @@ private:
     void _erase_value(BSTNode *&node, const Object& Value);
     /** The root of the Tree **/
     BSTNode *_root;
-    /** Number of elements (not neccesarry since we have root->cnt, but still..**/
+    /** Number of elements (not necessary since we have root->cnt, but still..**/
     int _size;
 };
 
@@ -72,6 +70,7 @@ private:
     @POSTCOND:
         root = NULL
         count = 0
+    @COMPLEXITY: O(1) - it takes constant time to initialize a BST
 */
 template<class T>
 SortedListBST<T>::SortedListBST() {
@@ -79,6 +78,20 @@ SortedListBST<T>::SortedListBST() {
     _size = 0;
 }
 
+/**
+    _getSuc(BSTNode *node): method to return the successor of a node in the BST
+    @PRECOND: node != NULL
+    @POSTCOND:
+        Return: successor(node) - the node which comes right after 'node'
+    @COMPLEXITY:
+        O(N) where N - number of nodes in the BST
+    @IDEA:
+        We have two cases:
+            - 'node' have a right son, which means that all the values in the right subtree are > the data
+                in 'node', and to take the smallest one, we keep going left until we get to a node without a left son.
+            - node doesn't have a right son, which means we have to go up to the father until the node we are now is
+                a left son of it's parent.
+*/
 template<typename T>
 typename SortedListBST<T>::BSTNode* SortedListBST<T>::_getSuc(BSTNode *node) {
     assert(node != NULL);
@@ -95,24 +108,66 @@ typename SortedListBST<T>::BSTNode* SortedListBST<T>::_getSuc(BSTNode *node) {
     return prec->_father;
 }
 
+/**
+    Destructor: release the memory (works exactly like the clear() method)
+    @PRECOND: None
+    @POSTCOND:
+        Tree is destroyed
+            root = NULL
+            count = 0
+    @COMPLEXITY: O(N) where N - number of nodes in the Tree
+*/
 template<class T>
 SortedListBST<T>::~SortedListBST() {
     free(_root);
     _size = 0;
 }
 
+/**
+    getAtIndex(const int& Index): method to retrieve the element on the position
+    'Index' if we consider all the elements in the BST in a sorted order
+    according to the '<' operator.
+    @PRECOND: 0 <= 'Index' and 'Index" < count
+    @POSTCOND:
+        Node
+    @COMPLEXITY: O(N) where N - number of nodes in the BST
+    The idea is to keep a variable 'cnt' for each node representing the number of nodes
+    in its subtree. This way we know on which way we take when we are looking for a specific
+    index, so the complexity is O(Height of tree). It is known that the BST has O(N) height on worst case.
+    (Try to insert the values in increasing or decreasing order in the BST)
+*/
 template<class T>
 T SortedListBST<T>::getAtIndex(const int& Index) {
     assert(0 <= Index && Index < _size);
     return _findIndex(_root, Index);
 }
 
+/**
+    add(const T& Data): method to insert a new element in the BST
+    @PRECOND:
+    @POSTCOND:
+        root != NULL
+        Data is in the BST (if it was already inserted, then duplicates are allowed)
+    @COMPLEXITY: O(N) where N - number of nodes in the BST
+    Again, the time complexity is actually O(height of Tree), so O(N) in the case of BST.
+*/
 template<class T>
 void SortedListBST<T>::add(const T& Data) {
     _add(_root, NULL, Data);
     this->_size ++;
 }
 
+/**
+    _erase(BSTNode *&node, const int& Index): method to erase the node which corresponds to
+    the element on position Index in the list of all the elements of the BST, sorted.
+    @PRECOND:
+        node != NULL
+        0 <= Index and Index < count
+    @POSTCOND:
+        The element at 'Index' is removed.
+    @COMPLEXITY:
+        O(Height(T)) = O(N) where N - number of nodes in the BST
+*/
 template<class T>
 void SortedListBST<T> ::_erase(BSTNode *&node, const int& Index) {
     assert(node != NULL);
@@ -132,6 +187,19 @@ void SortedListBST<T> ::_erase(BSTNode *&node, const int& Index) {
     update_sz(node);
 }
 
+/**
+    _erase_value(BSTNode *&node, const T& Data): method to erase the node containing
+    'Data'.
+    @PRECOND:
+        node != NULL
+        Data must be in the BST
+    @POSTCOND:
+        One occurrence of Data is removed.
+        Warning! Duplicates are allowed, so it is not guaranteed that the BST will not
+        contain any node with Data.
+    @COMPLEXITY:
+        O(Height(T)) = O(N) where N - number of nodes in the BST
+*/
 template<class T>
 void SortedListBST<T> ::_erase_value(BSTNode *&node, const T& value) {
     assert(node != NULL);
@@ -148,6 +216,24 @@ void SortedListBST<T> ::_erase_value(BSTNode *&node, const T& value) {
     update_sz(node);
 }
 
+/**
+    _remove(BSTNode *&node): method to remove a specific node from the BST
+    @PRECOND:
+        node != NULL
+    @POSTCOND:
+        node is removed from BST
+    @COMPLEXITY:
+        O(N) where N - number of nodes in BST
+    @IDEA:
+        We have 3 cases:
+            - the node is a leaf:
+                - simply delete it from the BST
+            - the node has only one child (left or right, doesn't matter):
+                - replace the node with it's unique son
+            - the node has exactly two sons:
+                - in this case, swap the current node with its successor, and then delete that node from the BST.
+                - it is easy to see that the successor will always be in case 1 or 2 of our algorithm.
+*/
 template<class T>
 void SortedListBST<T> :: _remove(BSTNode *&node) {
     if(node->_left == NULL && node->_right == NULL) {
@@ -157,11 +243,13 @@ void SortedListBST<T> :: _remove(BSTNode *&node) {
     else if(node->_right == NULL) { /// only _left
         BSTNode *aux = node;
         node = node->_left;
+        node->_father = aux->_father;
         delete aux;
     }
     else if(node->_left == NULL) {
         BSTNode *aux = node;
         node = node->_right;
+        node->_father = aux->_father;
         delete aux;
     }
     else {
@@ -171,6 +259,18 @@ void SortedListBST<T> :: _remove(BSTNode *&node) {
     }
 }
 
+/**
+    update_sz(BSTNode *&node):
+        - method to update the 'cnt' variable of a BSTNode.
+        - this 'cnt' variable refers to the number of nodes in the subtree rooted at 'node'
+    @POSTCOND:
+        None
+    @PRECOND:
+        'cnt' for 'node' is correctly computed (updated)
+    @COMPLEXITY:
+        O(1) - constant time, we count the number of nodes by using the information already
+        known in sons
+*/
 template<class T>
 void SortedListBST<T> :: update_sz(BSTNode *&node) {
     if(!node)
@@ -182,6 +282,15 @@ void SortedListBST<T> :: update_sz(BSTNode *&node) {
         node->_cnt += node->_right -> _cnt;
 }
 
+/**
+    _add(BSTNode *&node, BSTNode *dad, const T& Data): auxiliary method to insert a new element in the BST
+    @PRECOND:
+        - None
+    @POSTCOND:
+        - root != NULL
+        - Data is in the BST (if it was already inserted, then duplicates are allowed)
+    @COMPLEXITY: O(N) where N - number of nodes in the BST
+*/
 template<class T>
 void SortedListBST<T> ::_add(BSTNode *&node, BSTNode *dad, const T& Data) {
     if(node == NULL) {
@@ -199,20 +308,13 @@ void SortedListBST<T> ::_add(BSTNode *&node, BSTNode *dad, const T& Data) {
         node->_cnt += node->_right->_cnt;
 }
 
-template<class T>
-void SortedListBST<T> ::_dfs(BSTNode *node) {
-    if(node == NULL)
-        return;
-    std::cerr << "Node: " << node->_data << ' ' << node->_cnt << ' ';
-    if(node->_left)
-        std::cerr << "Left: " << node->_left->_data << ' ' << node->_left->_cnt << ' ';
-    if(node->_right)
-        std::cerr << "Right: " << node->_right->_data << ' ' << node->_right->_cnt << ' ';
-    std::cerr << '\n';
-    _dfs(node->_left);
-    _dfs(node->_right);
-}
-
+/**
+    _find(BSTNode *&node, const T& Data): method to find if an element is in the BST
+    @PRECOND: None
+    @POSTCOND:
+        Return: true if an only if Data is in BST, false otherwise
+    @COMPLEXITY: O(N) where N - number of nodes in the BST
+*/
 template<class T>
 bool SortedListBST<T> ::_find(BSTNode *node, const T& Data) {
     if(node == NULL)
@@ -225,6 +327,14 @@ bool SortedListBST<T> ::_find(BSTNode *node, const T& Data) {
         return _find(node->_right, Data);
 }
 
+/**
+    _findIndex(BSTNode *&node, const int& Index): method to find the element at the position 'Index'
+    in the list of all the nodes sorted according
+    @PRECOND: 0 <= 'Index' and 'Index' < count
+    @POSTCOND:
+        Return: the element we were searching for
+    @COMPLEXITY: O(N) where N - number of nodes in the BST
+*/
 template<class T>
 T SortedListBST<T> ::_findIndex(BSTNode *node, const int& Index) {
     int pos = 0;
@@ -238,6 +348,15 @@ T SortedListBST<T> ::_findIndex(BSTNode *node, const int& Index) {
         return _findIndex(node->_right, Index - pos - 1);
 }
 
+/**
+    _free(BSTNode *&node): release the memory
+    @PRECOND: None
+    @POSTCOND:
+        BST is destroyed
+        root = NULL
+        count = 0
+    @COMPLEXITY: O(N) where N - number of nodes in the Tree
+*/
 template<class T>
 void SortedListBST<T> ::_free(BSTNode *&node) {
     if(node == NULL)
@@ -247,6 +366,18 @@ void SortedListBST<T> ::_free(BSTNode *&node) {
     delete node;
     node = NULL;
 }
+
+/**
+    removeAtIndex(const int& Index): method to erase the node which corresponds to
+    the element on position Index in the list of all the elements of the BST, sorted.
+    @PRECOND:
+        node != NULL
+        0 <= Index and Index < count
+    @POSTCOND:
+        The element at 'Index' is removed.
+    @COMPLEXITY:
+        O(Height(T)) = O(N) where N - number of nodes in the BST
+*/
 template<class T>
 void SortedListBST<T>::removeAtIndex(const int& Index) {
     assert(0 <= Index && Index < _size);
@@ -254,11 +385,28 @@ void SortedListBST<T>::removeAtIndex(const int& Index) {
     -- this->_size;
 }
 
+/**
+    contains(const T& Data): method to check if an object is in the BST
+    @PRECOND: None
+    @POSTCOND:
+        Return: true if and only if Data is in BST, false otherwise
+    @COMPLEXITY:
+        O(Height(T)) = O(N) where N - number of nodes in the BST
+*/
 template<class T>
 bool SortedListBST<T>::contains(const T& Data) {
     return _find(_root, Data);
 }
 
+/**
+    clear(): release the memory
+    @PRECOND: None
+    @POSTCOND:
+        BST is destroyed
+        root = NULL
+        count = 0
+    @COMPLEXITY: O(N) where N - number of nodes in the Tree
+*/
 template<class T>
 void SortedListBST<T>::clear() {
     _free(_root);
@@ -266,6 +414,13 @@ void SortedListBST<T>::clear() {
     _size = 0;
 }
 
+/**
+    size(BSTNode *&node): method to get the number of elements in the BST
+    @PRECOND: None
+    @POSTCOND:
+        Return: count - the number of elements inside the Tree
+    @COMPLEXITY: O(1) where N - number of nodes in the Tree
+*/
 template<class T>
 int SortedListBST<T>::size() {
     return this->_size;

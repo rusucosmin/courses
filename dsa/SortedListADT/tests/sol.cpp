@@ -10,7 +10,6 @@ using namespace std;
     The ballons are moving only vertically. Each circle will stay on a fixed interval [xst, xdr] on the x axis.
     So, each circle will be 'translated' as a closed interval, and the problem is reduced to the Activity Selection Problem.
     http://www.geeksforgeeks.org/greedy-algorithms-set-1-activity-selection-problem/
-
     For simplicity, I will assume we will read the interval [xst, xdr] for each circle.
     If the input will be (r, x, y) - denoting the center (x, y) of the circle and r - the radius, it's easy to get the Ox interval:
         [x-r, x+r]
@@ -40,21 +39,18 @@ vector <int> baloonSelectionProblem(vector <pair<double, double>> v) {
 }
 
 int main() {
-    ifstream fin("input.in");
-    ofstream fout("output.out");
-
     int n;
-    fin >> n;
+    cin >> n;
     vector <pair<double, double> > v;
     for(int i = 0 ; i < n ; ++ i) {
-        float st, dr;
-        fin >> st >> dr;
+        double st, dr;
+        cin >> st >> dr;
         v.push_back(make_pair(st, dr));
     }
     sort(v.begin(), v.end(), classComp());
     vector <int> ans = baloonSelectionProblem(v);
-    fout << ans.size() << '\n';
+    cout << ans.size() << '\n';
     for(auto it : ans)
-        fout << v[it].first << ' ' << v[it].second << '\n';
+        cout << v[it].first << ' ' << v[it].second << '\n';
     return 0;
 }

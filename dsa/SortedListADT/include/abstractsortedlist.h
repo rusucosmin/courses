@@ -26,7 +26,7 @@
 template <typename Object>
 class AbstractSortedList {
 public:
-    /*
+    /**
         Get Object from 'Index' in list (counting from 0)
         Index - The list element position
         @PRECOND: Index points between 0 and count, list is valid (nonempty)
@@ -35,7 +35,7 @@ public:
     */
     virtual Object getAtIndex(const int& Index) = 0;
 
-    /*
+    /**
         Add element in the list (SORTED ASCENDING)
         Data - Element to be added in the list
         @PRECOND: Data is an object of 'Object' type (defined at declaration)
@@ -43,7 +43,8 @@ public:
             List now contains T (sorted)
     */
     virtual void add(const Object& Key) = 0;
-    /*
+
+    /**
         Remove element from list at 'Index'
         Index - The list element position
         @PRECOND: Index points between 0 and count, list is valid (nonempty)
@@ -51,7 +52,8 @@ public:
         Object at index 'Index' is now removed
     */
     virtual void removeAtIndex(const int& Index) = 0;
-    /*
+
+    /**
         Check if the list contains 'Data'
         Data - Data to be checked if it exists
         @PRECOND: Data is an object of 'Object' type (defined at declaration)
@@ -60,14 +62,15 @@ public:
         Return: False - otherwise
     */
     virtual bool contains(const Object& Key) = 0;
-    /*
+
+    /**
         Clears the list
         @PRECOND: None
         @POSTCOND: this->count_ = 0;
     */
     virtual void clear() = 0;
 
-    /*
+    /**
         Returns the node count (this->count_)
         @PRECOND: None
         @POSTCOND:

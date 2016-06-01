@@ -35,7 +35,6 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/abstractsortedlist.h" />
-		<Unit filename="include/abstractsortedlistiterator.h" />
 		<Unit filename="include/sortedlistbst.h" />
 		<Unit filename="include/sortedsllist.h" />
 		<Unit filename="include/tester.h" />

@@ -20,7 +20,7 @@ public:
     void unitTestSortedListBSTContains();
     void unitTestSortedListBSTClear();
 
-        /** Unit tests for all the SortedSLList methods */
+    /** Unit tests for all the SortedSLList methods */
     void unitTestSortedSLListAdd();
     void unitTestSortedSLListRemove();
     void unitTestSortedSLListGet();
@@ -31,53 +31,20 @@ public:
 };
 
 Tester::Tester() {
-    /*
-    SortedListBST <int> l;
-    l.add(6567);
-    l.add(7073);
-    l.add(4334);
-    l._dfs(l._root);
-    l.removeAtIndex(1);
-
-    l.add(4);
-    l.add(2);
-    l.add(1);
-    l.add(3);
-    l.add(6);
-    l.add(5);
-    l.add(7);
-    l.removeAtIndex(0);
-    l.removeAtIndex(0);
-    l.removeAtIndex(0);
-    while(l.size())
-        l.removeAtIndex(rand() % l.size());
-    l._dfs(l._root);
-    return ;*/
     srand(time(NULL));
 
     randomTest();
-    std::cerr << "RandomTest - passed\n";
     unitTestSortedSLListAdd();
-    std::cerr << "SortedSLListAdd - passed\n";
     unitTestSortedSLListRemove();
-    std::cerr << "SortedSLListRemove - passed\n";
     unitTestSortedSLListGet();
-    std::cerr << "SortedSLListGet - passed\n";
     unitTestSortedSLListContains();
-    std::cerr << "SortedSLListContains - passed\n";
     unitTestSortedSLListClear();
-    std::cerr << "SortedSLListClear - passed\n";
 
     unitTestSortedListBSTAdd();
-    std::cerr << "SortedBSTAdd - passed\n";
     unitTestSortedListBSTRemove();
-    std::cerr << "SortedBSTRemove - passed\n";
     unitTestSortedListBSTGet();
-    std::cerr << "SortedBSTGet - passed\n";
     unitTestSortedListBSTContains();
-    std::cerr << "SortedBSTContains - passed\n";
     unitTestSortedListBSTClear();
-    std::cerr << "SortedBSTCleas - passed\n";
 }
 
 void Tester::unitTestSortedListBSTAdd() {
@@ -89,7 +56,6 @@ void Tester::unitTestSortedListBSTAdd() {
     sList.add(0);
     sList.add(3);
     sList.add(6);
-    ///sList._dfs(sList._root);
     for(int i = 0 ; i < sList.size() ; ++ i) {
         assert(sList.getAtIndex(i) == i);
     }

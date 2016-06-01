@@ -59,6 +59,8 @@ private:
         begin = NULL
         end = NULL
         count = 0
+    @COMPLEXITY:
+        O(1) - it takes constant time to initialize a singly-liked list
 */
 template <typename Object>
 SortedSLList<Object>::SortedSLList() {
@@ -74,6 +76,8 @@ SortedSLList<Object>::SortedSLList() {
     @POSTCOND:
         begin = end = node containing the given argument
         count = 1
+    @COMPLEXITY:
+        O(1) - it takes constant time to initialize a singly-liked list
 */
 template <typename Object>
 SortedSLList<Object>::SortedSLList(const Object& Data) {
@@ -90,6 +94,8 @@ SortedSLList<Object>::SortedSLList(const Object& Data) {
         front = NULL
         back = NULL
         count = 0
+    @COMPLEXITY:
+        O(N) - where N is the number of nodes in the Singly-Liked List
 */
 template <typename Object>
 SortedSLList<Object>::~SortedSLList() {
@@ -104,11 +110,15 @@ SortedSLList<Object>::~SortedSLList() {
 }
 
 /**
-    Method to get the element from a given Index
+    getAtIndex(const int& Index): Method to get the element from a given Index
     Index - the required element position
     @PRECOND: Index between 0 and count - 1
     @POSTCOND:
         Return: Object contained at Index
+    @COMPLEXITY:
+        We are always making exactly 'Index' steps ahead in the Liked List, so in the
+        worst scenario we will execute exactly N steps.
+        O(N) where N is the number of nodes in the Singly-Liked List
 */
 template <typename Object>
 Object SortedSLList<Object>::getAtIndex(const int& Index) {
@@ -124,10 +134,12 @@ Object SortedSLList<Object>::getAtIndex(const int& Index) {
 }
 
 /**
-    Method to get the first element in the list (aka the smallest one since the ADT is sorted by the Object's < operator)
+    getFront(): Method to get the first element in the list (aka the smallest one since the ADT is sorted by the Object's < operator)
     @PRECOND: List is valid (not empty)
     @POSTCOND:
         Return: Object contained in front
+    @COMPLEXITY:
+        O(1) since we store the front node of the Singly-Liked List
 */
 template <typename Object>
 Object SortedSLList<Object>::getFront() {
@@ -137,7 +149,7 @@ Object SortedSLList<Object>::getFront() {
 }
 
 /**
-    Method to get the last element in the list (aka the biggest one since the ADT is sorted by the Object's < operator)
+    getBack(): Method to get the last element in the list (aka the biggest one since the ADT is sorted by the Object's < operator)
     @PRECOND: List is valid (not empty)
     @POSTCOND:
         Return: Object contained at the end of the list
@@ -150,11 +162,16 @@ Object SortedSLList<Object>::getBack() {
 }
 
 /**
-    Method to add an object to the last, while maintaining the sorted property
+    add(const Object& Data): Method to add an object to the last, while maintaining the sorted property
     Data - Element to be added to the list
     @PRECOND: Data is an object of type 'Object' (defined at the declaration of the SortedSLList)
     @POSTCOND:
         Return: The list now contains Data (and still sorted)
+    @COMPLEXITY:
+        We first, see where we need to insert the new node, then we do the insert.
+        The first part requires O(N) time since in the worst case we look at all the nodes (here N - number
+        of nodes of SLList).
+        The second part required O(1) time since we only change some pointers.
 */
 template <typename Object>
 void SortedSLList<Object>::add(const Object& Data) {
@@ -182,11 +199,15 @@ void SortedSLList<Object>::add(const Object& Data) {
 
 
 /**
-    Method to remove the element from a given Index
+    removeAtIndex(const int& Index): Method to remove the element from a given Index
     Index - the required element position
     @PRECOND: Index between 0 and count - 1
     @POSTCOND:
         Object at index Index is not removed
+    @COMPLEXITY:
+        We are always making exactly 'Index' steps ahead in the Liked List, so in the
+        worst scenario we will execute exactly N steps.
+        O(N) where N is the number of nodes in the Singly-Liked List
 */
 template <typename Object>
 void SortedSLList<Object>::removeAtIndex(const int& Index) {
@@ -211,10 +232,12 @@ void SortedSLList<Object>::removeAtIndex(const int& Index) {
 }
 
 /**
-    Metod to remove front element
+    removeFront(): Method to remove front element
     @PRECOND: List is valid (nonempty)
     @POSTCOND:
         Object at index 0 is now removed
+    @COMPLEXITY:
+        O(1)
 */
 template <typename Object>
 void SortedSLList<Object>::removeFront() {
@@ -227,10 +250,13 @@ void SortedSLList<Object>::removeFront() {
 }
 
 /**
-    Method to remove back element
+    removeBack(): Method to remove back element
     @PRECOND: List is valid (nonempty)
     @POSTCOND:
         Object at index 'count - 1' is now removed
+    @COMPLEXITY:
+        O(N) since we first have to get the node ahead of the last element, then to remove the second one.
+        Here N - number of elements in the SLList.
 */
 template <typename Object>
 void SortedSLList<Object>::removeBack() {
@@ -252,12 +278,13 @@ void SortedSLList<Object>::removeBack() {
     this->_count --;
 }
 /**
-    Method to check if the list contains 'Data'
+    contains(const Object& Data): Method to check if the list contains 'Data'
     Data - Data to be checked if it exists
     @PRECOND: Data is an object of 'Object' type (defined at declaration)
     @POSTCOND
-        Return: True - if it exists
-        Return: False - otherwise
+        Return: True - if it exists, False - otherwise
+    @COMPLEXITY:
+        O(N) where N - the number of nodes in the SLList
 */
 template <typename Object>
 bool SortedSLList<Object>::contains(const Object& Data) {
@@ -271,9 +298,11 @@ bool SortedSLList<Object>::contains(const Object& Data) {
 }
 
 /**
-    Method to clear the list
+    clear*(): Method to clear the list
     @PRECOND: None
-    @POSTCOND: count = 0;
+    @POSTCOND: count = 0
+    @COMPLEXITY:
+        O(N) where N is the number of nodes in the SLList
 */
 template <typename Object>
 void SortedSLList<Object>::clear() {
@@ -288,22 +317,35 @@ void SortedSLList<Object>::clear() {
 }
 
 /**
-    Method to return the node count
+    size(): Method to return the node count
     @PRECOND: None
     @POSTCOND:
         Return: count (number of nodes in the Linked List)
+    @COMPLEXITY:
+        O(1)
 */
 template <typename Object>
 int SortedSLList<Object>::size() {
     return this->_count;
 }
 
+/**
+    '=' operator for the SLNode class
+*/
 template <typename Object>
 typename SortedSLList<Object>::SLNode& SortedSLList<Object>::SLNode::operator=(const SLNode& other) {
     this->_data = other._data;
     this->_next = other._next;
 }
 
+/**
+    getData(): Getter for the data of a SLNode
+    @POSTCOND: None
+    @PRECOND:
+        Return: the data stored in the current node
+    @COMPLEXITY:
+        O(1)
+*/
 template <typename Object>
 Object& SortedSLList<Object>::SLNode::getData() {
     return this->_data;

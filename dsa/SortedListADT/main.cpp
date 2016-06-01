@@ -4,6 +4,7 @@
 #include <sortedsllist.h>
 #include <abstractsortedlist.h>
 #include <sortedlistbst.h>
+#include <ctime>
 
 using namespace std;
 
@@ -29,7 +30,7 @@ vector <int> baloonSelectionProblem(AbstractSortedList <pair<double, double>> *v
     if(v->size() == 0)
         return vector <int>();
     vector <int> ans;
-    int coord = v->getAtIndex(0).first;
+    double coord = v->getAtIndex(0).first;
     ans.push_back(0);
     for(int i = 1 ; i < int(v->size()) ; ++ i) {
         if(v->getAtIndex(i).second >= coord) {
@@ -40,29 +41,125 @@ vector <int> baloonSelectionProblem(AbstractSortedList <pair<double, double>> *v
     return ans;
 }
 
-int main() {
-    ifstream fin("input.in");
-    ofstream fout("output.out");
+vector <int> baloonSelectionProblem(vector <pair<double, double>> v) {
+    if(v.size() == 0)
+        return vector <int>();
+    vector <int> ans;
+    double coord = v[0].second;
+    ans.push_back(0);
+    for(int i = 1 ; i < int(v.size()) ; ++ i) {
+        if(v[i].first >= coord) {
+            ans.push_back(i);
+            coord = v[i].second;
+        }
+    }
+    return ans;
+}
 
+void solveSLList(string input, string output, string okfile) {
+    ifstream fin(input);
+    ofstream fout(output);
+    ifstream fok(okfile);
     int n;
     fin >> n;
-    SortedListBST <pair<double, double> > v;
-    SortedSLList <pair<double, double> > s;
+    SortedSLList <pair<double, double> > v;
     for(int i = 0 ; i < n ; ++ i) {
         double st, dr;
         fin >> st >> dr;
         v.add(make_pair(dr, st));
-        s.add(make_pair(dr, st));
     }
-    for(int i = 0 ; i < v.size() ; ++ i)
-        cout << v.getAtIndex(i).first << ' ' << v.getAtIndex(i).second << '\n';
-    for(int i = 0 ; i < s.size() ; ++ i)
-        cout << s.getAtIndex(i).first << ' ' << s.getAtIndex(i).second << '\n';
     vector <int> ans = baloonSelectionProblem(&v);
-    vector <int> ans2 = baloonSelectionProblem(&s);
-    assert(ans == ans2);
+    int sol;
+    fok >> sol;
+    assert(sol == ans.size());
     fout << ans.size() << '\n';
     for(auto it : ans)
         fout << v.getAtIndex(it).first << ' ' << v.getAtIndex(it).second << '\n';
+}
+
+void solveSLBST(string input, string output, string okfile) {
+    ifstream fin(input);
+    ofstream fout(output);
+    ifstream fok(okfile);
+    int n;
+    fin >> n;
+    SortedListBST <pair<double, double> > v;
+    for(int i = 0 ; i < n ; ++ i) {
+        double st, dr;
+        fin >> st >> dr;
+        v.add(make_pair(dr, st));
+    }
+    vector <int> ans = baloonSelectionProblem(&v);
+    int sol;
+    fok >> sol;
+    assert(sol == ans.size());
+    fout << ans.size() << '\n';
+    for(auto it : ans)
+        fout << v.getAtIndex(it).first << ' ' << v.getAtIndex(it).second << '\n';
+}
+
+void solveVector(string input, string output, string okfile) {
+    ifstream fin(input);
+    ofstream fout(output);
+    ifstream fok(okfile);
+    int n;
+    fin >> n;
+    vector <pair<double, double> > v;
+    for(int i = 0 ; i < n ; ++ i) {
+        double st, dr;
+        fin >> st >> dr;
+        v.push_back(make_pair(st, dr));
+    }
+    sort(v.begin(), v.end(),
+         [] (const pair<double, double> &a, const pair<int, int> &b) -> bool
+         {
+             return a.second < b.second;
+         });
+    vector <int> ans = baloonSelectionProblem(v);
+    int sol;
+    fok >> sol;
+    assert(sol == ans.size());
+    fout << ans.size() << '\n';
+    for(auto it : ans)
+        fout << v[it].first << ' ' << v[it].second << '\n';
+}
+
+void blackBoxTest() {
+    cout << "---------------------------------------\n";
+    cout << "Running tests using vector as container\n";
+    cout << "---------------------------------------\n";
+    for(int i = 0; i < 20; ++ i) {
+        clock_t st = clock();
+        solveVector("tests/test" + to_string(i) + ".in", "tests/test" + to_string(i) + ".out", "tests/test" + to_string(i) + ".ok");
+        clock_t fn = clock();
+        double elapsed_secs = double(fn - st) / CLOCKS_PER_SEC;
+        cout << "Test " << i << " took " << elapsed_secs << " seconds\n";
+    }
+
+    cout << "----------------------------------------------\n";
+    cout << "Running tests using SortedListBST as container\n";
+    cout << "----------------------------------------------\n";
+    for(int i = 0; i < 20; ++ i) {
+        clock_t st = clock();
+        solveSLBST("tests/test" + to_string(i) + ".in", "tests/test" + to_string(i) + ".out", "tests/test" + to_string(i) + ".ok");
+        clock_t fn = clock();
+        double elapsed_secs = double(fn - st) / CLOCKS_PER_SEC;
+        cout << "Test " << i << " took " << elapsed_secs << " seconds\n";
+    }
+
+    cout << "---------------------------------------------\n";
+    cout << "Running tests using SortedSLList as container\n";
+    cout << "---------------------------------------------\n";
+    for(int i = 0; i < 7; ++ i) {
+        clock_t st = clock();
+        solveSLList("tests/test" + to_string(i) + ".in", "tests/test" + to_string(i) + ".out", "tests/test" + to_string(i) + ".ok");
+        clock_t fn = clock();
+        double elapsed_secs = double(fn - st) / CLOCKS_PER_SEC;
+        cout << "Test " << i << " took " << elapsed_secs << " seconds\n";
+    }
+}
+
+int main() {
+    blackBoxTest();
     return 0;
 }
