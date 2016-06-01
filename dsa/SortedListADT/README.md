@@ -7,9 +7,7 @@
     - Representation 1: **Linked List**
     - Representation 2: **Binary Search Tree**
 - Problem:
-    1. Consider n balloons that are moving vertically. Select the biggest number of balloons
-    such that they will not touch between them. (Solution should also present the list of
-    balloons.)
+    1. Consider n balloons that are moving vertically. Select the biggest number of balloons such that they will not touch between them. (Solution should also present the list of balloons.)
 
 
 ##ADT
@@ -882,3 +880,97 @@ int SortedListBST<T>::size() {
     return this->_size;
 }
 ```
+
+###Testing
+I created a seaparate class for testing, called generically `tester.h`. From the methods, I think only the randomTest() method is relevand. The other methods can be seen in the source file.
+
+```c++
+#include <sortedsllist.h>
+#include <sortedlistbst.h>
+#include <iostream>
+#include <time.h>
+#include <set>
+#include <algorithm>
+#include <stdlib.h>
+
+class Tester {
+public:
+    /** Default constructor */
+    Tester();
+    /** Unit tests for all the SortedListBST methods */
+    void unitTestSortedListBSTAdd();
+    void unitTestSortedListBSTRemove();
+    void unitTestSortedListBSTGet();
+    void unitTestSortedListBSTContains();
+    void unitTestSortedListBSTClear();
+
+    /** Unit tests for all the SortedSLList methods */
+    void unitTestSortedSLListAdd();
+    void unitTestSortedSLListRemove();
+    void unitTestSortedSLListGet();
+    void unitTestSortedSLListContains();
+    void unitTestSortedSLListClear();
+
+    void randomTest();
+};
+
+Tester::Tester() {
+    srand(time(NULL));
+
+    randomTest();
+    unitTestSortedSLListAdd();
+    unitTestSortedSLListRemove();
+    unitTestSortedSLListGet();
+    unitTestSortedSLListContains();
+    unitTestSortedSLListClear();
+
+    unitTestSortedListBSTAdd();
+    unitTestSortedListBSTRemove();
+    unitTestSortedListBSTGet();
+    unitTestSortedListBSTContains();
+    unitTestSortedListBSTClear();
+}
+
+void Tester::randomTest() {
+    int m = 1000;
+    int maxval = 1000000000;
+    std::multiset <int> s;
+    SortedListBST<int> bstList;
+    SortedSLList<int> slList;
+    for(int i = 1; i <= m; ++ i) {
+        assert(slList.size() == s.size());
+        assert(bstList.size() == s.size());
+        int op = rand() % 3;
+        if(op == 0) { /// insert
+            int val = rand() % maxval;
+            s.insert(val);
+            slList.add(val);
+            bstList.add(val);
+        }
+        else if(op == 1) {
+            if(!s.size())  /// they are empty
+                continue;
+            int ind = rand() % s.size();
+            auto it = s.begin();
+            std::advance(it, ind);
+            s.erase(it);
+            slList.removeAtIndex(ind);
+            bstList.removeAtIndex(ind);
+        }
+        else {
+            std::vector <int> v;
+            std::vector <int> a, b;
+            for(int i = 0; i < v.size(); ++ i) {
+                a.push_back(slList.getAtIndex(i));
+                b.push_back(bstList.getAtIndex(i));
+            }
+            assert(v == a); /// and implictly, a == b
+            assert(v == b);
+        }
+    }
+}
+```
+
+##Problem
+Consider n balloons that are moving vertically. Select the biggest number of balloons such that they will not touch between them. (Solution should also present the list of balloons.)
+
