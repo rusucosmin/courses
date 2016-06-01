@@ -161,7 +161,7 @@ void SortedSLList<Object>::add(const Object& Data) {
     if(this->_begin == NULL)
         this->_begin = this->_end = new SLNode(Data);
     else {
-        if(this->_begin->_data > Data) {
+        if(this->_begin->_data >= Data) {
             SLNode *newNode = new SLNode(Data);
             newNode->_next = this->_begin;
             this->_begin = newNode;
@@ -191,6 +191,13 @@ void SortedSLList<Object>::add(const Object& Data) {
 template <typename Object>
 void SortedSLList<Object>::removeAtIndex(const int& Index) {
     assert(0 <= Index && Index < this->_count);
+    if(Index == 0) {
+        SLNode *aux = this->_begin;
+        this->_begin = this->_begin->_next;
+        delete aux;
+        this->_count --;
+        return ;
+    }
     SLNode *prevNode = NULL, *node = this->_begin;
     int i = 0;
     while(i < Index) {

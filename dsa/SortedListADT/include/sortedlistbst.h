@@ -36,22 +36,43 @@ private:
         Object _data;
         int _cnt;
     public:
+        /**Constructors**/
         BSTNode(): _father(NULL), _left(NULL), _right(NULL), _data(NULL), _cnt(0) {}
         BSTNode(BSTNode *father, BSTNode *left, BSTNode *right, Object data, int cnt = 0): _father(father), _left(left), _right(right), _data(data), _cnt(cnt) {}
     };
+    /** Adds an object to the BST **/
     void _add(BSTNode *&act, BSTNode *dad, const Object& Data);
+    /** Finds an object in the BST **/
     bool _find(BSTNode *act, const Object& Data);
+    /** Returns the object at index 'Index' if the BST would be linearized (and sorted) **/
     Object _findIndex(BSTNode *act, const int &Index);
+    /** Remove a node **/
     void _remove(BSTNode *&act);
+    /** Free a node **/
     void _free(BSTNode *&act);
+    /** DFS auxiliary function to print the tree **/
     void _dfs(BSTNode *node);
-    BSTNode* _getPrec(BSTNode *node);
+    /** Function to get the succesor of a BST**/
+    BSTNode* _getSuc(BSTNode *node);
+    /** Auxiliary function to update the size of a node: the number of nodes in it's subtree**/
     void update_sz(BSTNode *&node);
+    /** Function to erase the element at index 'Index'**/
     void _erase(BSTNode *&node, const int& Index);
+    /** Function to erase the element with value 'Value'**/
+    void _erase_value(BSTNode *&node, const Object& Value);
+    /** The root of the Tree **/
     BSTNode *_root;
+    /** Number of elements (not neccesarry since we have root->cnt, but still..**/
     int _size;
 };
 
+/**
+    Default constructor
+    @PRECOND: None
+    @POSTCOND:
+        root = NULL
+        count = 0
+*/
 template<class T>
 SortedListBST<T>::SortedListBST() {
     _root = NULL;
@@ -59,7 +80,7 @@ SortedListBST<T>::SortedListBST() {
 }
 
 template<typename T>
-typename SortedListBST<T>::BSTNode* SortedListBST<T>::_getPrec(BSTNode *node) {
+typename SortedListBST<T>::BSTNode* SortedListBST<T>::_getSuc(BSTNode *node) {
     assert(node != NULL);
     BSTNode *prec;
     if(node->_right) {
@@ -69,9 +90,9 @@ typename SortedListBST<T>::BSTNode* SortedListBST<T>::_getPrec(BSTNode *node) {
         return prec;
     }
     prec = node;
-    while(prec->father && prec->father->_right == prec)
-        prec = prec->father;
-    return prec->father;
+    while(prec->_father && prec->_father->_right == prec)
+        prec = prec->_father;
+    return prec->_father;
 }
 
 template<class T>
@@ -99,65 +120,61 @@ void SortedListBST<T> ::_erase(BSTNode *&node, const int& Index) {
     if(node->_left)
         pos += node->_left->_cnt;
     if(pos == Index) {
-        /// done
         _remove(node);
         return ;
     }
-    if(pos > Index)
+    else if(pos > Index)
         _erase(node->_left, Index);
     else
         _erase(node->_right, Index - pos - 1);
-    node->_cnt = 1;
-    if(node->_left)
-        node->_cnt += node->_left->_cnt;
-    if(node->_right)
-        node->_cnt += node->_right->_cnt;
+    update_sz(node->_left);
+    update_sz(node->_right);
+    update_sz(node);
+}
+
+template<class T>
+void SortedListBST<T> ::_erase_value(BSTNode *&node, const T& value) {
+    assert(node != NULL);
+    if(node->_data == value) {
+        _remove(node);
+        return ;
+    }
+    else if(node->_data > value)
+        _erase_value(node->_left, value);
+    else
+        _erase_value(node->_right, value);
+    update_sz(node->_left);
+    update_sz(node->_right);
+    update_sz(node);
 }
 
 template<class T>
 void SortedListBST<T> :: _remove(BSTNode *&node) {
-    if(node == _root) {
-        BSTNode *aux = _root;
-        if(aux->_left)
-            node = aux->_left;
-        else
-            node = aux->_right;
+    if(node->_left == NULL && node->_right == NULL) {
+        delete node;
+        node = NULL;
+    }
+    else if(node->_right == NULL) { /// only _left
+        BSTNode *aux = node;
+        node = node->_left;
         delete aux;
     }
-    else if(node->_left && node->_right) {
-        BSTNode *aux = node->_right, *prev = NULL;
-        while(aux -> _left) {
-            prev = aux;
-            aux = aux->_left;
-        }
-        swap(node->_data, aux->_data);
-        if(prev)
-            prev->_left = NULL;
+    else if(node->_left == NULL) {
+        BSTNode *aux = node;
+        node = node->_right;
         delete aux;
-    }
-    else if(node->_left) {
-        if(node->_father->_left == node)
-            node->_father->_left = node->_left;
-        else
-            node->_father->_right = node->_left;
-    }
-    else if(node->_right) {
-        if(node->_father->_left == node)
-            node->_father->_left = node->_right;
-        else
-            node->_father->_right = node->_right;
     }
     else {
-        if(node->_father->_left == node)
-            node->_father->_left = NULL;
-        else
-            node->_father->_right = NULL;
-        delete node;
+        BSTNode *aux = _getSuc(node);
+        node->_data = aux->_data;
+        _erase_value(node->_right, aux->_data);
     }
 }
 
 template<class T>
 void SortedListBST<T> :: update_sz(BSTNode *&node) {
+    if(!node)
+        return ;
     node->_cnt = 1;
     if(node->_left)
         node->_cnt += node->_left->_cnt;
@@ -186,7 +203,12 @@ template<class T>
 void SortedListBST<T> ::_dfs(BSTNode *node) {
     if(node == NULL)
         return;
-    std::cerr << node->_data << ' ' << node->_cnt << '\n';
+    std::cerr << "Node: " << node->_data << ' ' << node->_cnt << ' ';
+    if(node->_left)
+        std::cerr << "Left: " << node->_left->_data << ' ' << node->_left->_cnt << ' ';
+    if(node->_right)
+        std::cerr << "Right: " << node->_right->_data << ' ' << node->_right->_cnt << ' ';
+    std::cerr << '\n';
     _dfs(node->_left);
     _dfs(node->_right);
 }
@@ -240,6 +262,7 @@ bool SortedListBST<T>::contains(const T& Data) {
 template<class T>
 void SortedListBST<T>::clear() {
     _free(_root);
+    _root = NULL;
     _size = 0;
 }
 

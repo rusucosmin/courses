@@ -6,6 +6,7 @@
 #include <iostream>
 #include <time.h>
 #include <set>
+#include <algorithm>
 #include <stdlib.h>
 
 class Tester {
@@ -25,22 +26,58 @@ public:
     void unitTestSortedSLListGet();
     void unitTestSortedSLListContains();
     void unitTestSortedSLListClear();
+
+    void randomTest();
 };
 
 Tester::Tester() {
+    /*
+    SortedListBST <int> l;
+    l.add(6567);
+    l.add(7073);
+    l.add(4334);
+    l._dfs(l._root);
+    l.removeAtIndex(1);
+
+    l.add(4);
+    l.add(2);
+    l.add(1);
+    l.add(3);
+    l.add(6);
+    l.add(5);
+    l.add(7);
+    l.removeAtIndex(0);
+    l.removeAtIndex(0);
+    l.removeAtIndex(0);
+    while(l.size())
+        l.removeAtIndex(rand() % l.size());
+    l._dfs(l._root);
+    return ;*/
     srand(time(NULL));
 
+    randomTest();
+    std::cerr << "RandomTest - passed\n";
     unitTestSortedSLListAdd();
+    std::cerr << "SortedSLListAdd - passed\n";
     unitTestSortedSLListRemove();
+    std::cerr << "SortedSLListRemove - passed\n";
     unitTestSortedSLListGet();
+    std::cerr << "SortedSLListGet - passed\n";
     unitTestSortedSLListContains();
+    std::cerr << "SortedSLListContains - passed\n";
     unitTestSortedSLListClear();
+    std::cerr << "SortedSLListClear - passed\n";
 
     unitTestSortedListBSTAdd();
+    std::cerr << "SortedBSTAdd - passed\n";
     unitTestSortedListBSTRemove();
+    std::cerr << "SortedBSTRemove - passed\n";
     unitTestSortedListBSTGet();
+    std::cerr << "SortedBSTGet - passed\n";
     unitTestSortedListBSTContains();
+    std::cerr << "SortedBSTContains - passed\n";
     unitTestSortedListBSTClear();
+    std::cerr << "SortedBSTCleas - passed\n";
 }
 
 void Tester::unitTestSortedListBSTAdd() {
@@ -81,16 +118,14 @@ void Tester::unitTestSortedListBSTRemove() {
     assert(sList.getAtIndex(1) == 2);
     assert(sList.getAtIndex(2) == 3);
     assert(sList.getAtIndex(3) == 5);
-    while(sList.size())
-        sList.removeAtIndex(rand() % sList.size());
+    for(int i = 0; i < sList.size(); ++ i)
+        std::cerr << sList.getAtIndex(i) << ' ';
+    while(sList.size()) {
+        int ind = rand() % sList.size();
+        std::cerr << "Remove " << ind << '\n';
+        sList.removeAtIndex(ind);
+    }
     assert(sList.size() == 0);
-    ///todo continu
-    std::set <int> s = {1, 2, 3, 4};
-    std::set <int> :: iterator it = s.begin();
-    std::advance(it, 2);
-    s.erase(it);
-    for(auto it : s)
-        std::cerr << it << '\n';
 }
 
 void Tester::unitTestSortedListBSTGet() {
@@ -270,6 +305,45 @@ void Tester::unitTestSortedSLListClear() {
     assert(false == sList.contains(5));
     assert(false == sList.contains(6));
     assert(0 == sList.size());
+}
+
+void Tester::randomTest() {
+    int m = 1000;
+    int maxval = 1000000000;
+    std::multiset <int> s;
+    SortedListBST<int> bstList;
+    SortedSLList<int> slList;
+    for(int i = 1; i <= m; ++ i) {
+        assert(slList.size() == s.size());
+        assert(bstList.size() == s.size());
+        int op = rand() % 3;
+        if(op == 0) { /// insert
+            int val = rand() % maxval;
+            s.insert(val);
+            slList.add(val);
+            bstList.add(val);
+        }
+        else if(op == 1) {
+            if(!s.size())  /// they are empty
+                continue;
+            int ind = rand() % s.size();
+            auto it = s.begin();
+            std::advance(it, ind);
+            s.erase(it);
+            slList.removeAtIndex(ind);
+            bstList.removeAtIndex(ind);
+        }
+        else {
+            std::vector <int> v;
+            std::vector <int> a, b;
+            for(int i = 0; i < v.size(); ++ i) {
+                a.push_back(slList.getAtIndex(i));
+                b.push_back(bstList.getAtIndex(i));
+            }
+            assert(v == a); /// and implictly, a == b
+            assert(v == b);
+        }
+    }
 }
 
 

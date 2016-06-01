@@ -73,7 +73,7 @@ int main() {
     ifstream fin("input.in");
 
     fin >> n >> m >> st >> fn;
-    for(int i = 1; i <= m; ++ i) {
+    for(int i = 1;d i <= m; ++ i) {
         int x, y, z;
         fin >> x >> y >> z;
         g[x].push_back(make_pair(y, z));
