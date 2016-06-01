@@ -999,9 +999,8 @@ Let the give set of activities be `S = {1, 2, 3, ..n}` and activities be sorted 
 
 
 ###Tests structure
-The intervals are fully random in some spcific interval, depending on the test.
-Here is how they are generated: `T[i]` is the number of intervals for the `i<sup>th</sup>` test, and `[0, v[i]]` is the `i<sup>th</sup>` range interval.
-
+- The intervals are fully random in some spcific interval, depending on the test.
+- Here is how they are generated: `T[i]` is the number of intervals for the `i'th` test, and `[0, v[i]]` is the `i'th` range interval.
 ```python
 from random import randint
 
@@ -1022,3 +1021,74 @@ for i in range(len(T)):
         f.write(str(x) + " " + str(y) + "\n")
     f.close()
 ```
+- There are 20 test cases, for the test number `i`, we have the following two important files:
+    - `test$(i).in` - This is where the intervals are stored. It's structure is as follows: the first line contains the number of intervals, let it be `N`. The following `N` lines contains two integers, `x` and `y`, the end points of the interval. It is guranteed that `x <= y`.
+    - `test$(i).ok` - This is where we have stored a possible correct solution. The first line of this file contains the number of intervals we can choose, then, on each line, the intervals.
+    - `test$(i).out` - Where we put the output for a solution. Then, a verifier must first verify if the number written here is the same with the number written on the `.ok` file, and then check if the intervals are among the given one and their intersection is the void set.
+
+###Times performance of different implementation
+
+```text
+---------------------------------------
+Running tests using vector as container
+---------------------------------------
+Test 0 took 0.00045 seconds
+Test 1 took 0.000312 seconds
+Test 2 took 0.001697 seconds
+Test 3 took 0.003916 seconds
+Test 4 took 0.007427 seconds
+Test 5 took 0.014097 seconds
+Test 6 took 0.033583 seconds
+Test 7 took 0.043473 seconds
+Test 8 took 0.072472 seconds
+Test 9 took 0.091551 seconds
+Test 10 took 0.178872 seconds
+Test 11 took 0.22704 seconds
+Test 12 took 0.281188 seconds
+Test 13 took 0.38642 seconds
+Test 14 took 0.472213 seconds
+Test 15 took 0.45815 seconds
+Test 16 took 0.469866 seconds
+Test 17 took 0.479454 seconds
+Test 18 took 0.483295 seconds
+Test 19 took 0.498255 seconds
+----------------------------------------------
+Running tests using SortedListBST as container
+----------------------------------------------
+Test 0 took 0.000151 seconds
+Test 1 took 0.000191 seconds
+Test 2 took 0.001419 seconds
+Test 3 took 0.002819 seconds
+Test 4 took 0.005634 seconds
+Test 5 took 0.017176 seconds
+Test 6 took 0.039192 seconds
+Test 7 took 0.106835 seconds
+Test 8 took 0.126099 seconds
+Test 9 took 0.175737 seconds
+Test 10 took 0.399987 seconds
+Test 11 took 0.546371 seconds
+Test 12 took 0.608916 seconds
+Test 13 took 0.886572 seconds
+Test 14 took 1.11586 seconds
+Test 15 took 1.15855 seconds
+Test 16 took 1.18489 seconds
+Test 17 took 1.15647 seconds
+Test 18 took 1.15203 seconds
+Test 19 took 1.15621 seconds
+---------------------------------------------
+Running tests using SortedSLList as container
+---------------------------------------------
+Test 0 took 0.00012 seconds
+Test 1 took 0.000168 seconds
+Test 2 took 0.002628 seconds
+Test 3 took 0.024986 seconds
+Test 4 took 0.108942 seconds
+Test 5 took 0.646895 seconds
+Test 6 took 6.74689 seconds
+...............To be continued...............
+```
+
+Conclusions: The vector is the fastest one, since the complexity of the solution that uses a vector and then calls sort is `O(N log N)` where `N` - number of intervals is significantly better thatn the others which has a theoretically time complexity of `O(N^2)`. The BST implementation works pretty well but that is mainly due to the fact that the intervals are randomly choosen and one can prove that if we insert random-generated numbers in a BST, then the height of the tree is `log(N)`. However, the very simple test on which the BST fails is the one that has the intervals sorted (ascending or descending) by the right end.
+
+###Final conclusions
+The `Sorted List` ADT is rather not important, I see it more like how multiset works on `STL` and in my personal opinion, the best implementation of such ADT would be based on a balanced binary search tree (such as AVLs, Treaps, or Red-Black Trees), as their height is always `O(log N)`, so all the methods works much faster.

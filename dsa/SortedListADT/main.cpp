@@ -13,7 +13,7 @@ using namespace std;
     The ballons are moving only vertically. Each circle will stay on a fixed interval [xst, xdr] on the x axis.
     So, each circle will be 'translated' as a closed interval, and the problem is reduced to the Activity Selection Problem.
     http://www.geeksforgeeks.org/greedy-algorithms-set-1-activity-selection-problem/
-    For simplicity, I will assume we will read the interval [xst, xdr] for each circle.
+    For simplicity, I will assume we will read the interval [xst, xdr] forŝ each circle.
     If the input will be (r, x, y) - denoting the center (x, y) of the circle and r - the radius, it's easy to get the Ox interval:
         [x-r, x+r]
     Also, I will assume that the circles [1, 2] and [2, 3] do not touch.
