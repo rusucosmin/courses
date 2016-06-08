@@ -1,0 +1,10 @@
+add,done,3
+find,done,1
+update,done,2
+done,open,-1
+redo,open,-1
+remove,open,-1
+specification,open,-1
+start,open,-1
+tests,open,-1
+undo,open,-1
