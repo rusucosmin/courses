@@ -1,8 +1,10 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
 int main() {
+    vector <int> v;
     freopen("input.in", "r", stdin);
     freopen("output.out", "w", stdout);
     int t;

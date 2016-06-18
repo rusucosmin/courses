@@ -1,0 +1,29 @@
+#include <iostream>
+
+using namespace std;
+
+class B {
+public:
+    B() {
+    }
+    B(string name) {
+    }
+    virtual void sayHello() {
+        cout << "Hello from B\n";
+    }
+};
+
+
+class D: public B {
+public:
+    void sayHello() {
+        cout << "Hello from D\n";
+    }
+};
+
+int main() {
+    B b;
+    b.sayHello();
+    B* d = new D();
+    d->sayHello();
+}
