@@ -1,6 +1,7 @@
 package view;
 
 import controller.Controller;
+import exceptions.VehicleNotFoundException;
 import model.Bicycle;
 import model.Car;
 import model.Motorcyle;
@@ -97,7 +98,11 @@ public class UI {
                     System.out.println("2");
                     v = readVehicle(scanner);
                     System.out.println(v.toString());
-                    this.c.remove(v);
+                    try {
+                        this.c.remove(v);
+                    } catch(VehicleNotFoundException e) {
+                        System.out.println("The following exception occurred: " + e.getMessage());
+                    }
                     break;
                 case 3:
                     System.out.println("3");

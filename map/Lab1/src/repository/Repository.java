@@ -1,5 +1,6 @@
 package repository;
 
+import exceptions.VehicleNotFoundException;
 import model.Vehicle;
 
 /**
@@ -7,6 +8,7 @@ import model.Vehicle;
  */
 public interface Repository {
     void add(Vehicle v);
-    void remove(Vehicle v);
+    void remove(Vehicle v) throws VehicleNotFoundException;
+    boolean find(Vehicle v);
     Vehicle [] getAll();
 }

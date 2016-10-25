@@ -1,5 +1,6 @@
 package controller;
 
+import exceptions.VehicleNotFoundException;
 import model.Vehicle;
 import repository.Repository;
 
@@ -14,7 +15,7 @@ public class Controller {
     public void add(Vehicle v) {
         this.r.add(v);
     }
-    public void remove(Vehicle v) {
+    public void remove(Vehicle v) throws VehicleNotFoundException {
         this.r.remove(v);
     }
     public Vehicle[] solve() {
