@@ -1,0 +1,22 @@
+
+   *-----------------------------------------------------*
+   | Use saboteurs to test your testing.                 |
+   |                                                     |
+   | Introduce bugs on purpose in a separate copy of the |
+   | source to verify that testing will catch them.      |
+   *-----------------------------------------------------*
+          o
+           o   ^__^
+            o  (oo)\_______
+               (__)\       )\/\
+                   ||----w |
+                   ||     ||
+
+   [e]  <empty buffer>
+
+   MRU
+
+   [0]  ~/dotfiles/install.sh
+   [1]  ~/.zshrc
+
+   [q]  <quit>

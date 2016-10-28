@@ -11,6 +11,7 @@ int main() {
     #endif
     int n, m;
     long long sum = 0;
+
     cin >> n >> m;
     int act = 1, change = 0;
     for(int i = 0; i < n; ++ i) {
