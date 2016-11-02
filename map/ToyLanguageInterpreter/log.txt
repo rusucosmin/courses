@@ -24,3 +24,80 @@ Out:
 
 FileTable:
 4 -> test.in, java.io.BufferedReader@355da254
+ExeStack:
+a = 2 - 2
+If a then v = 2 else v = 3; print (v)
+SymTable:
+
+Out:
+
+ExeStack:
+If a then v = 2 else v = 3; print (v)
+SymTable:
+a -> 0
+Out:
+
+ExeStack:
+If a then v = 2 else v = 3
+print (v)
+SymTable:
+a -> 0
+Out:
+
+ExeStack:
+v = 3
+print (v)
+SymTable:
+a -> 0
+Out:
+
+ExeStack:
+print (v)
+SymTable:
+a -> 0
+v -> 3
+Out:
+
+ExeStack:
+
+SymTable:
+a -> 0
+v -> 3
+Out:
+3
+1a = 2 - 2
+If a then v = 2 else v = 3; Print (v)
+
+
+
+1If a then v = 2 else v = 3; print (v)
+a -> 0
+
+ExeStack:
+If a then v = 2 else v = 3
+print (v)
+SymTable:
+a -> 0
+Out:
+
+ExeStack:
+v = 3
+print (v)
+SymTable:
+a -> 0
+Out:
+
+ExeStack:
+print (v)
+SymTable:
+a -> 0
+v -> 3
+Out:
+
+ExeStack:
+
+SymTable:
+a -> 0
+v -> 3
+Out:
+3
