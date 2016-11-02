@@ -1,0 +1,26 @@
+ExeStack:
+openRFile (var_f, test.in)
+readFileStmt (var_f + 2, var_c); print (var_c); If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0); closeRFileStmt (var_f)
+SymTable:
+
+Out:
+
+FileTable:
+
+ExeStack:
+readFileStmt (var_f + 2, var_c); print (var_c); If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0); closeRFileStmt (var_f)
+SymTable:
+var_f -> 4
+Out:
+
+FileTable:
+4 -> test.in, java.io.BufferedReader@355da254
+ExeStack:
+readFileStmt (var_f + 2, var_c)
+print (var_c); If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0); closeRFileStmt (var_f)
+SymTable:
+var_f -> 4
+Out:
+
+FileTable:
+4 -> test.in, java.io.BufferedReader@355da254

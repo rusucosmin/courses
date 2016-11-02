@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -33,6 +35,18 @@ public class MyStack <T> implements MyIStack<T> {
 
     @Override
     public String toString() {
-        return this.stack.toString();
+        String repr = "";
+        MyStack <T> rev = new MyStack<T>(new Stack<T>());
+        boolean ok = false;
+        while(!this.isEmpty()) {
+            if(ok)
+                repr = repr + "\n";
+            repr += this.peek().toString();
+            rev.push(this.pop());
+            ok = true;
+        }
+        while(!rev.isEmpty())
+            this.push(rev.pop());
+        return repr;
     }
 }

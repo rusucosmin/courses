@@ -39,6 +39,14 @@ public class MyList<T> implements MyIList<T> {
 
     @Override
     public String toString() {
-        return this._list.toString();
+        String ret = "";
+        boolean ok = false;
+        for(T el : this._list) {
+            if(ok)
+                ret = ret + "\n";
+            ret += el.toString();
+            ok = true;
+        }
+        return ret;
     }
 }
