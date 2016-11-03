@@ -1,5 +1,8 @@
 package model;
 
+import exception.DivideByZeroException;
+import exception.UnknownVariableException;
+
 /**
  * Created by cosmin on 10/24/16.
  */
@@ -11,12 +14,12 @@ public class PrintStmt implements IStmt {
     }
 
     @Override
-    public String toStr() {
-        return "Print (" + exp + ")";
+    public String toString() {
+        return "print (" + exp + ")";
     }
 
     @Override
-    public PrgState execute(PrgState state) {
+    public PrgState execute(PrgState state) throws UnknownVariableException, DivideByZeroException {
         MyIList <Integer> out = state.getOut();
         out.add(exp.eval(state.getSymTable()));
         return state;

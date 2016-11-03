@@ -1,5 +1,8 @@
 package model;
 
+import exception.DivideByZeroException;
+import exception.UnknownVariableException;
+
 /**
  * Created by cosmin on 10/25/16.
  */
@@ -20,7 +23,7 @@ public class ArithExp extends Exp {
     }
 
     @Override
-    public int eval(MyIDictionary<String, Integer> symTable) {
+    public int eval(MyIDictionary<String, Integer> symTable) throws UnknownVariableException, DivideByZeroException {
         int rez = 0;
         int rez1 = this.e1.eval(symTable);
         int rez2 = this.e2.eval(symTable);
@@ -31,13 +34,15 @@ public class ArithExp extends Exp {
         } else if(op == 2) {
             rez = rez1 * rez2;
         } else if(op == 3) {
+            if(rez2 == 0)
+                throw new DivideByZeroException("DivideByZeroException at: " + this.toString());
             rez = rez / rez2;
         }
         return rez;
     }
 
     @Override
-    public String toStr() {
+    public String toString() {
         String ret = this.e1.toString();
         if(op == 0)
             ret += " + ";

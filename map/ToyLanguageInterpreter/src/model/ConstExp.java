@@ -16,7 +16,7 @@ public class ConstExp extends Exp {
     }
 
     @Override
-    public String toStr() {
+    public String toString() {
         return String.valueOf(value);
     }
 }

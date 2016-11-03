@@ -1,5 +1,6 @@
 package model;
 
+import exception.KeyNotExistException;
 import exception.UnknownVariableException;
 
 /**
@@ -13,17 +14,15 @@ public class VarExp extends Exp {
     }
 
     @Override
-    public int eval(MyIDictionary<String, Integer> symTable) {
-        try {
-            return symTable.get(id);
-        } catch (UnknownVariableException e) {
-            e.printStackTrace();
-        }
-        return -1;
+    public int eval(MyIDictionary<String, Integer> symTable) throws UnknownVariableException {
+        Integer x = symTable.get(id);
+        if(x == null)
+            throw new UnknownVariableException("Unknown Variable Exception at: " + this.toString() + "\nThere is no such " + this.id + " variable");
+        return symTable.get(id);
     }
 
     @Override
-    public String toStr() {
+    public String toString() {
         return id;
     }
 }

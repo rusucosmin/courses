@@ -12,8 +12,8 @@ public class CompStmt implements IStmt {
     }
 
     @Override
-    public String toStr() {
-        return "( " + first.toStr() + ", " + second.toStr() + " )";
+    public String toString() {
+        return first.toString() + "; " + second.toString();
     }
 
     @Override

@@ -3,7 +3,8 @@ import os
 import select
 import sys
 
-HOSTNAME = 'scs.ubbcluj.ro'
+#HOSTNAME = socket.gethostbyname('linux.scs.ubbcluj.ro')
+HOSTNAME = 'localhost'
 PORT = 5001
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -20,4 +21,3 @@ if not data:
     print("ERROR > Disconected from chat Server")
 
 print("RECEIVED:\n" + data);
-

@@ -1,5 +1,8 @@
 package model;
 
+import exception.DivideByZeroException;
+import exception.UnknownVariableException;
+
 /**
  * Created by cosmin on 10/25/16.
  */
@@ -15,12 +18,12 @@ public class IfStmt implements IStmt {
     }
 
     @Override
-    public String toStr() {
-        return "If " + exp.toStr() + " then " + thenS.toStr() + " else " + elseS.toStr();
+    public String toString() {
+        return "If " + exp.toString() + " then " + thenS.toString() + " else " + elseS.toString();
     }
 
     @Override
-    public PrgState execute(PrgState state) {
+    public PrgState execute(PrgState state) throws UnknownVariableException, DivideByZeroException {
         if(exp.eval(state.getSymTable()) == 0)
             state.getExeStack().push(elseS);
         else

@@ -1,5 +1,8 @@
 package model;
 
+import exception.DivideByZeroException;
+import exception.UnknownVariableException;
+
 /**
  * Created by cosmin on 10/24/16.
  */
@@ -13,12 +16,12 @@ public class AssignStmt implements IStmt {
     }
 
     @Override
-    public String toStr() {
-        return this.id + " = " + exp.toStr();
+    public String toString() {
+        return this.id + " = " + exp.toString();
     }
 
     @Override
-    public PrgState execute(PrgState state) {
+    public PrgState execute(PrgState state) throws UnknownVariableException, DivideByZeroException {
         MyIDictionary<String, Integer> symTable = state.getSymTable();
         symTable.put(this.id, this.exp.eval(symTable));
         return state;

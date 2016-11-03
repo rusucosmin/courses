@@ -1,7 +1,8 @@
 package model;
 
-import exception.UnknownVariableException;
+import exception.KeyNotExistException;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -20,12 +21,30 @@ public class MyDictionary <K, V> implements MyIDictionary<K, V> {
     }
 
     @Override
-    public V get(K key) throws UnknownVariableException {
+    public V get(K key) {
         return this._map.get(key);
     }
 
     @Override
+    public Collection<V> values() {
+        return this._map.values();
+    }
+
+    @Override
+    public V remove(K fd) {
+        return this._map.remove(fd);
+    }
+
+    @Override
     public String toString() {
-        return this._map.toString();
+        String ret = "";
+        boolean ok = false;
+        for(HashMap.Entry<K, V> entry : this._map.entrySet()) {
+            if(ok)
+                ret = ret + "\n";
+            ret += entry.getKey().toString() + " -> " + entry.getValue().toString();
+            ok = true;
+        }
+        return ret;
     }
 }
