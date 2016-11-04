@@ -1,6 +1,6 @@
 ExeStack:
-openRFile (var_f, test.in)
-readFileStmt (var_f + 2, var_c); print (var_c); If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0); closeRFileStmt (var_f)
+v = 2
+print (v)
 SymTable:
 
 Out:
@@ -8,19 +8,18 @@ Out:
 FileTable:
 
 ExeStack:
-readFileStmt (var_f + 2, var_c); print (var_c); If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0); closeRFileStmt (var_f)
+print (v)
 SymTable:
-var_f -> 4
+v -> 2
 Out:
 
 FileTable:
-4 -> test.in
+
 ExeStack:
-readFileStmt (var_f + 2, var_c)
-print (var_c); If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0); closeRFileStmt (var_f)
-SymTable:
-var_f -> 4
-Out:
 
+SymTable:
+v -> 2
+Out:
+2
 FileTable:
-4 -> test.in
+

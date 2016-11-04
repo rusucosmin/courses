@@ -1,3 +1,4 @@
+#!/bin/bash
 cmds=("ls -l" "pwd" "time" "man yes" "uptime")
 
 i=0
