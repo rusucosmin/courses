@@ -21,7 +21,7 @@ public class PrintStmt implements IStmt {
     @Override
     public PrgState execute(PrgState state) throws UnknownVariableException, DivideByZeroException {
         MyIList <Integer> out = state.getOut();
-        out.add(exp.eval(state.getSymTable()));
+        out.add(exp.eval(state.getSymTable(), state.getHeap()));
         return state;
     }
 }

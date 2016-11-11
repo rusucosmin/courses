@@ -22,7 +22,7 @@ public class ReadFileStmt implements IStmt {
 
     @Override
     public PrgState execute(PrgState state) throws IOException, FileAlreadyOpenedException, FileNotOpenedException, UnknownVariableException, DivideByZeroException {
-        int fd = this.exp.eval(state.getSymTable());
+        int fd = this.exp.eval(state.getSymTable(), state.getHeap());
         Tuple<String, BufferedReader> br = state.getFileTable().get(fd);
         if (br == null)
             throw new FileNotOpenedException("FileNotOpenedException at: " + this.toString() + "\nNo such file descriptor: " + String.valueOf(fd));

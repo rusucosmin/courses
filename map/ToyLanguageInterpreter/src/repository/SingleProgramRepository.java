@@ -47,6 +47,8 @@ public class SingleProgramRepository implements IRepository {
         this.printWriter.println(this.state.getOut().toString());
         this.printWriter.println("FileTable:");
         this.printWriter.println(this.state.getFileTable().toString());
+        this.printWriter.println("Heap:");
+        this.printWriter.println(this.state.getHeap().toString());
 
         this.printWriter.close();
     }

@@ -17,8 +17,9 @@ public class Main {
         MyIDictionary<String, Integer> symTable = new MyDictionary<>(new HashMap<String, Integer>());
         MyIList<Integer> out = new MyList<>(new ArrayList<Integer>());
         MyIDictionary<Integer, Tuple<String, BufferedReader>> fileTable = new MyDictionary<>(new HashMap<Integer, Tuple<String, BufferedReader>>());
+        MyIHeap<Integer> heap = new MyHeap<Integer>(new HashMap<Integer, Integer>());
 
-        PrgState prgState = new PrgState(exeStack, symTable, out, prg, fileTable);
+        PrgState prgState = new PrgState(exeStack, symTable, out, prg, fileTable, heap);
         IRepository repo = new SingleProgramRepository(prgState, "log.txt");
         Controller ctrl = new Controller(repo);
         return ctrl;
@@ -113,6 +114,27 @@ public class Main {
                         )
                 )
         );
+        /**
+         *v=10;new(v,20);new(a,22);wH(a,30);print(a);print(rH(a));a=0
+         *
+         * */
+        IStmt lab6ex1 =
+        new CompStmt(
+                new AssignStmt("v", new ConstExp(10)),
+                new CompStmt(
+                    new NewStmt("v", new ConstExp(20)),
+                        new CompStmt(
+                            new NewStmt("a", new ConstExp(22)),
+                            new CompStmt(
+                                new WriteHeapStmt("a", new ConstExp(30)),
+                                new CompStmt(
+                                    new PrintStmt(new VarExp("a")),
+                                    new CompStmt(
+                                            new PrintStmt(new ReadHeapExp("a")),
+                                            new AssignStmt("a", new ConstExp(0)))))
+                        )
+                )
+        );
         TextMenu menu = new TextMenu(new MyDictionary<String, Command>(new HashMap<String, Command>()));
         menu.addCommand(new ExitCommand("0", "Exit"));
         menu.addCommand(new RunExample("1", lab2ex1.toString(), getNewController(lab2ex1)));
@@ -120,6 +142,7 @@ public class Main {
         menu.addCommand(new RunExample("3", lab2ex3.toString(), getNewController(lab2ex3)));
         menu.addCommand(new RunExample("4", lab5ex1.toString(), getNewController(lab5ex1)));
         menu.addCommand(new RunExample("5", lab5ex2.toString(), getNewController(lab5ex2)));
+        menu.addCommand(new RunExample("6", lab6ex1.toString(), getNewController(lab6ex1)));
         menu.show();
 
     }

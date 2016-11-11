@@ -23,7 +23,7 @@ public class AssignStmt implements IStmt {
     @Override
     public PrgState execute(PrgState state) throws UnknownVariableException, DivideByZeroException {
         MyIDictionary<String, Integer> symTable = state.getSymTable();
-        symTable.put(this.id, this.exp.eval(symTable));
+        symTable.put(this.id, this.exp.eval(symTable, state.getHeap()));
         return state;
     }
 }

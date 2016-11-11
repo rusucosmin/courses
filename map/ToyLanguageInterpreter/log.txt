@@ -1,25 +1,153 @@
 ExeStack:
-v = 2
-print (v)
+v = 10
+NewStmt (v, 20 ); NewStmt (a, 22 ); WriteHeap (a, 30; print (a); print (ReadHeapExp (a )); a = 0
 SymTable:
 
 Out:
 
 FileTable:
 
+Heap:
+
 ExeStack:
-print (v)
+NewStmt (v, 20 ); NewStmt (a, 22 ); WriteHeap (a, 30; print (a); print (ReadHeapExp (a )); a = 0
 SymTable:
-v -> 2
+v -> 10
 Out:
 
 FileTable:
 
-ExeStack:
+Heap:
 
+ExeStack:
+NewStmt (v, 20 )
+NewStmt (a, 22 ); WriteHeap (a, 30; print (a); print (ReadHeapExp (a )); a = 0
 SymTable:
-v -> 2
+v -> 10
+Out:
+
+FileTable:
+
+Heap:
+
+ExeStack:
+NewStmt (a, 22 ); WriteHeap (a, 30; print (a); print (ReadHeapExp (a )); a = 0
+SymTable:
+v -> 1
+Out:
+
+FileTable:
+
+Heap:
+1 -> 20
+ExeStack:
+NewStmt (a, 22 )
+WriteHeap (a, 30; print (a); print (ReadHeapExp (a )); a = 0
+SymTable:
+v -> 1
+Out:
+
+FileTable:
+
+Heap:
+1 -> 20
+ExeStack:
+WriteHeap (a, 30; print (a); print (ReadHeapExp (a )); a = 0
+SymTable:
+a -> 2
+v -> 1
+Out:
+
+FileTable:
+
+Heap:
+1 -> 20
+2 -> 22
+ExeStack:
+WriteHeap (a, 30
+print (a); print (ReadHeapExp (a )); a = 0
+SymTable:
+a -> 2
+v -> 1
+Out:
+
+FileTable:
+
+Heap:
+1 -> 20
+2 -> 22
+ExeStack:
+print (a); print (ReadHeapExp (a )); a = 0
+SymTable:
+a -> 2
+v -> 1
+Out:
+
+FileTable:
+
+Heap:
+1 -> 20
+2 -> 30
+ExeStack:
+print (a)
+print (ReadHeapExp (a )); a = 0
+SymTable:
+a -> 2
+v -> 1
+Out:
+
+FileTable:
+
+Heap:
+1 -> 20
+2 -> 30
+ExeStack:
+print (ReadHeapExp (a )); a = 0
+SymTable:
+a -> 2
+v -> 1
 Out:
 2
 FileTable:
 
+Heap:
+1 -> 20
+2 -> 30
+ExeStack:
+print (ReadHeapExp (a ))
+a = 0
+SymTable:
+a -> 2
+v -> 1
+Out:
+2
+FileTable:
+
+Heap:
+1 -> 20
+2 -> 30
+ExeStack:
+a = 0
+SymTable:
+a -> 2
+v -> 1
+Out:
+2
+30
+FileTable:
+
+Heap:
+1 -> 20
+2 -> 30
+ExeStack:
+
+SymTable:
+a -> 0
+v -> 1
+Out:
+2
+30
+FileTable:
+
+Heap:
+1 -> 20

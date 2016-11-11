@@ -24,7 +24,7 @@ public class CloseRFileStmt implements IStmt {
 
     @Override
     public PrgState execute(PrgState state) throws IOException, FileAlreadyOpenedException, FileNotOpenedException, UnknownVariableException, DivideByZeroException {
-        int fd = this.exp.eval(state.getSymTable());
+        int fd = this.exp.eval(state.getSymTable(), state.getHeap());
         Tuple<String, BufferedReader> act = state.getFileTable().remove(fd);
         if(act == null)
             throw new FileNotOpenedException("FileNotOpened Exception at: " + this.toString() + "\nThere is no opened file with fd = " + fd);

@@ -23,10 +23,10 @@ public class ArithExp extends Exp {
     }
 
     @Override
-    public int eval(MyIDictionary<String, Integer> symTable) throws UnknownVariableException, DivideByZeroException {
+    public int eval(MyIDictionary<String, Integer> symTable, MyIHeap<Integer> heap) throws UnknownVariableException, DivideByZeroException {
         int rez = 0;
-        int rez1 = this.e1.eval(symTable);
-        int rez2 = this.e2.eval(symTable);
+        int rez1 = this.e1.eval(symTable, heap);
+        int rez2 = this.e2.eval(symTable, heap);
         if(op == 0) {
             rez = rez1 + rez2;
         } else if(op == 1) {

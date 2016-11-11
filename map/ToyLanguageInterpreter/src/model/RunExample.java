@@ -36,6 +36,9 @@ public class RunExample extends Command {
         } catch (IOException e) {
             System.out.println(e.getMessage());
             return ;
+        } catch (NullPointerException n) {
+            System.out.println(n.getMessage());
+            return ;
         }
     }
 }

@@ -24,7 +24,7 @@ public class IfStmt implements IStmt {
 
     @Override
     public PrgState execute(PrgState state) throws UnknownVariableException, DivideByZeroException {
-        if(exp.eval(state.getSymTable()) == 0)
+        if(exp.eval(state.getSymTable(), state.getHeap()) == 0)
             state.getExeStack().push(elseS);
         else
             state.getExeStack().push(thenS);
