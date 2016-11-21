@@ -17,7 +17,10 @@ public class SingleProgramRepository implements IRepository {
         this.logFile = logFile;
         this.printWriter = null;
         this.firstTime = true;
-   }
+    }
+    public void setMain(PrgState state) {
+        this.state = state;
+    }
     @Override
     public PrgState getCrtState() {
         return this.state;
@@ -51,5 +54,50 @@ public class SingleProgramRepository implements IRepository {
         this.printWriter.println(this.state.getHeap().toString());
 
         this.printWriter.close();
+    }
+
+    @Override
+    public void serialize() {
+        ObjectOutputStream out = null;
+        try {
+            out = new ObjectOutputStream(new FileOutputStream("serialize.txt"));
+            out.writeObject(this.state);
+        } catch (IOException e) {
+            System.out.println("IOError\nError: " + e.toString());
+        } finally {
+            if(out != null) {
+                try {
+                    out.close();
+                } catch(IOException e) {
+                    System.out.println("IOError\nError: " + e.toString());
+                }
+            }
+        }
+    }
+
+    @Override
+    public void deserialize() {
+        ObjectInputStream in = null;
+        PrgState state = null;
+        try {
+            in = new ObjectInputStream(new FileInputStream("serialize.txt"));
+            state = (PrgState) in.readObject();
+        } catch(IOException e) {
+            System.out.println("IOError\nError: " + e.toString());
+        } catch(ClassNotFoundException e) {
+            System.out.println("ClassNotFoundException\nError: " + e.toString());
+        }
+        finally {
+            if(in != null) {
+                try {
+                    in.close();
+                } catch(IOException e) {
+                    System.out.println("IOError\nError: " + e.toString());
+                }
+            }
+        }
+        if(state != null) {
+            this.state = state;
+        }
     }
 }

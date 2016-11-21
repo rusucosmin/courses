@@ -1,9 +1,6 @@
 package model;
 
-import exception.DivideByZeroException;
-import exception.FileAlreadyOpenedException;
-import exception.FileNotOpenedException;
-import exception.UnknownVariableException;
+import exception.*;
 
 import java.io.IOException;
 
@@ -18,7 +15,7 @@ public class WriteHeapStmt implements IStmt {
         this.exp = exp;
     }
     @Override
-    public PrgState execute(PrgState state) throws IOException, FileAlreadyOpenedException, FileNotOpenedException, UnknownVariableException, DivideByZeroException {
+    public PrgState execute(PrgState state) throws IOException, FileAlreadyOpenedException, FileNotOpenedException, UnknownVariableException, DivideByZeroException, UnknownComparisonExpression {
         Integer var_val = state.getSymTable().get(id);
         if(var_val == null)
             throw new UnknownVariableException("Unknown variable expression\nError at: " + toString());

@@ -135,6 +135,25 @@ public class Main {
                         )
                 )
         );
+        IStmt lab7test = new CompStmt(
+            new AssignStmt("v", new ConstExp(0)),
+                new WhileStmt(new CompExp("<=", new VarExp("v"), new ConstExp(10)),
+                        new CompStmt(
+                                new PrintStmt(new VarExp("v")),
+                                new AssignStmt("v", new ArithExp('+', new VarExp("v"), new ConstExp(1)))
+                                ))
+        );
+        IStmt lab7ex1 = new CompStmt(
+            new AssignStmt("v", new ConstExp(6)),
+                new CompStmt(
+                    new WhileStmt(new ArithExp('-', new VarExp("v"), new ConstExp(4)),
+                            new CompStmt(
+                                    new PrintStmt(new VarExp("v")),
+                                    new AssignStmt("v", new ArithExp('-', new VarExp("v"), new ConstExp(1)))
+                                    )),
+                        new PrintStmt(new VarExp("v")))
+        );
+//        v=6; (while (v-4) print(v);v=v-1);print(v)
         TextMenu menu = new TextMenu(new MyDictionary<String, Command>(new HashMap<String, Command>()));
         menu.addCommand(new ExitCommand("0", "Exit"));
         menu.addCommand(new RunExample("1", lab2ex1.toString(), getNewController(lab2ex1)));
@@ -143,7 +162,9 @@ public class Main {
         menu.addCommand(new RunExample("4", lab5ex1.toString(), getNewController(lab5ex1)));
         menu.addCommand(new RunExample("5", lab5ex2.toString(), getNewController(lab5ex2)));
         menu.addCommand(new RunExample("6", lab6ex1.toString(), getNewController(lab6ex1)));
+        menu.addCommand(new RunExample("7", lab7test.toString(), getNewController(lab7test)));
+        menu.addCommand(new RunExample("8", lab7ex1.toString(), getNewController(lab7ex1)));
+        menu.addCommand(new InputProgramCommand("9", "Input a program", getNewController(null)));
         menu.show();
-
     }
 }

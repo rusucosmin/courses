@@ -2,13 +2,14 @@ package model;
 
 import exception.KeyNotExistException;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 
 /**
  * Created by cosmin on 10/24/16.
  */
-public class MyDictionary <K, V> implements MyIDictionary<K, V> {
+public class MyDictionary <K, V> implements MyIDictionary<K, V>  {
     private HashMap<K, V> _map;
 
     public MyDictionary(HashMap<K, V> _map) {

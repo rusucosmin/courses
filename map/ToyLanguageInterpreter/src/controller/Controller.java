@@ -1,9 +1,6 @@
 package controller;
 
-import exception.DivideByZeroException;
-import exception.FileAlreadyOpenedException;
-import exception.FileNotOpenedException;
-import exception.UnknownVariableException;
+import exception.*;
 import model.IStmt;
 import model.MyIDictionary;
 import model.MyIHeap;
@@ -33,12 +30,20 @@ public class Controller {
 
     }
 
-    public PrgState oneStep(PrgState state) throws UnknownVariableException, DivideByZeroException, FileAlreadyOpenedException, FileNotOpenedException, IOException {
+    public PrgState oneStep(PrgState state) throws UnknownVariableException, DivideByZeroException, FileAlreadyOpenedException, FileNotOpenedException, IOException, UnknownComparisonExpression {
         IStmt cur = state.getExeStack().pop();
         return cur.execute(state);
     }
 
-    public void allSteps() throws UnknownVariableException, DivideByZeroException, FileAlreadyOpenedException, FileNotOpenedException, IOException {
+    public void setMain(PrgState state) {
+        this.rep.setMain(state);
+    }
+
+    void serialize() {
+        this.rep.serialize();;
+    }
+
+    public void allSteps() throws UnknownVariableException, DivideByZeroException, FileAlreadyOpenedException, FileNotOpenedException, IOException, UnknownComparisonExpression {
         PrgState crt = rep.getCrtState();
         while(!crt.getExeStack().isEmpty()) {
             oneStep(crt);

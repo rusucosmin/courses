@@ -3,11 +3,12 @@ package model;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.BufferedReader;
+import java.io.Serializable;
 
 /**
  * Created by cosmin on 10/24/16.
  */
-public class PrgState {
+public class PrgState implements Serializable {
     private MyIStack <IStmt> exeStack;
     private MyIDictionary <String, Integer> symTable;
     private MyIList<Integer> out;

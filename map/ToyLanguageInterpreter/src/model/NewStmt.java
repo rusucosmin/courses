@@ -1,9 +1,6 @@
 package model;
 
-import exception.DivideByZeroException;
-import exception.FileAlreadyOpenedException;
-import exception.FileNotOpenedException;
-import exception.UnknownVariableException;
+import exception.*;
 
 import java.io.IOException;
 
@@ -18,7 +15,7 @@ public class NewStmt implements IStmt {
         this.exp = exp;
     }
     @Override
-    public PrgState execute(PrgState state) throws IOException, FileAlreadyOpenedException, FileNotOpenedException, UnknownVariableException, DivideByZeroException {
+    public PrgState execute(PrgState state) throws IOException, FileAlreadyOpenedException, FileNotOpenedException, UnknownVariableException, DivideByZeroException, UnknownComparisonExpression {
         int res = this.exp.eval(state.getSymTable(), state.getHeap());
         int loc = state.getHeap().allocate(res);
         state.getSymTable().put(var, loc);

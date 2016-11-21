@@ -1,9 +1,6 @@
 package model;
 
-import exception.DivideByZeroException;
-import exception.FileAlreadyOpenedException;
-import exception.FileNotOpenedException;
-import exception.UnknownVariableException;
+import exception.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,7 +20,7 @@ public class CloseRFileStmt implements IStmt {
     }
 
     @Override
-    public PrgState execute(PrgState state) throws IOException, FileAlreadyOpenedException, FileNotOpenedException, UnknownVariableException, DivideByZeroException {
+    public PrgState execute(PrgState state) throws IOException, FileAlreadyOpenedException, FileNotOpenedException, UnknownVariableException, DivideByZeroException, UnknownComparisonExpression {
         int fd = this.exp.eval(state.getSymTable(), state.getHeap());
         Tuple<String, BufferedReader> act = state.getFileTable().remove(fd);
         if(act == null)

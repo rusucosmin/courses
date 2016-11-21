@@ -1,6 +1,7 @@
 package model;
 
 import exception.DivideByZeroException;
+import exception.UnknownComparisonExpression;
 import exception.UnknownVariableException;
 
 /**
@@ -23,7 +24,7 @@ public class IfStmt implements IStmt {
     }
 
     @Override
-    public PrgState execute(PrgState state) throws UnknownVariableException, DivideByZeroException {
+    public PrgState execute(PrgState state) throws UnknownVariableException, DivideByZeroException, UnknownComparisonExpression {
         if(exp.eval(state.getSymTable(), state.getHeap()) == 0)
             state.getExeStack().push(elseS);
         else

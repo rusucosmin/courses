@@ -10,4 +10,7 @@ import java.io.IOException;
 public interface IRepository {
     PrgState getCrtState();
     void logPrgStateExec() throws IOException;
+    void setMain(PrgState main);
+    void serialize();
+    void deserialize();
 }
