@@ -1,6 +1,6 @@
 ExeStack:
-var = 100
-print (var)
+v = 6
+While (v - 4) print (v); v = v - 1; print (v)
 SymTable:
 
 Out:
@@ -10,9 +10,9 @@ FileTable:
 Heap:
 
 ExeStack:
-print (var)
+While (v - 4) print (v); v = v - 1; print (v)
 SymTable:
-var -> 100
+v -> 6
 Out:
 
 FileTable:
@@ -20,11 +20,133 @@ FileTable:
 Heap:
 
 ExeStack:
+While (v - 4) print (v); v = v - 1
+print (v)
+SymTable:
+v -> 6
+Out:
+
+FileTable:
+
+Heap:
+
+ExeStack:
+print (v); v = v - 1
+While (v - 4) print (v); v = v - 1
+print (v)
+SymTable:
+v -> 6
+Out:
+
+FileTable:
+
+Heap:
+
+ExeStack:
+print (v)
+v = v - 1
+While (v - 4) print (v); v = v - 1
+print (v)
+SymTable:
+v -> 6
+Out:
+
+FileTable:
+
+Heap:
+
+ExeStack:
+v = v - 1
+While (v - 4) print (v); v = v - 1
+print (v)
+SymTable:
+v -> 6
+Out:
+6
+FileTable:
+
+Heap:
+
+ExeStack:
+While (v - 4) print (v); v = v - 1
+print (v)
+SymTable:
+v -> 5
+Out:
+6
+FileTable:
+
+Heap:
+
+ExeStack:
+print (v); v = v - 1
+While (v - 4) print (v); v = v - 1
+print (v)
+SymTable:
+v -> 5
+Out:
+6
+FileTable:
+
+Heap:
+
+ExeStack:
+print (v)
+v = v - 1
+While (v - 4) print (v); v = v - 1
+print (v)
+SymTable:
+v -> 5
+Out:
+6
+FileTable:
+
+Heap:
+
+ExeStack:
+v = v - 1
+While (v - 4) print (v); v = v - 1
+print (v)
+SymTable:
+v -> 5
+Out:
+6
+5
+FileTable:
+
+Heap:
+
+ExeStack:
+While (v - 4) print (v); v = v - 1
+print (v)
+SymTable:
+v -> 4
+Out:
+6
+5
+FileTable:
+
+Heap:
+
+ExeStack:
+print (v)
+SymTable:
+v -> 4
+Out:
+6
+5
+FileTable:
+
+Heap:
+
+ExeStack:
 
 SymTable:
-var -> 100
+v -> 4
 Out:
-100
+6
+5
+4
 FileTable:
 
 Heap:

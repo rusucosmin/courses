@@ -46,8 +46,10 @@ public class Controller {
     public void allSteps() throws UnknownVariableException, DivideByZeroException, FileAlreadyOpenedException, FileNotOpenedException, IOException, UnknownComparisonExpression {
         PrgState crt = rep.getCrtState();
         while(!crt.getExeStack().isEmpty()) {
+            //this.rep.serialize();
             oneStep(crt);
             crt.getHeap().setMap(this.conservativeGarbageCollector(crt.getSymTable().values(), crt.getHeap().getMap()));
+            //this.rep.deserialize();
             try {
                 rep.logPrgStateExec();
             } catch (IOException e) {
