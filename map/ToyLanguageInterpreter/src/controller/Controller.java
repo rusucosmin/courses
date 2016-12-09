@@ -10,7 +10,11 @@ import repository.IRepository;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -18,6 +22,7 @@ import java.util.stream.Collectors;
  */
 public class Controller {
     IRepository rep;
+    private ExecutorService executor;
     public Controller(IRepository rep) {
         this.rep = rep;
     }
@@ -27,12 +32,12 @@ public class Controller {
                 .stream()
                 .filter(e->symTableValues.contains(e.getKey()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
     }
 
-    public PrgState oneStep(PrgState state) throws UnknownVariableException, DivideByZeroException, FileAlreadyOpenedException, FileNotOpenedException, IOException, UnknownComparisonExpression {
-        IStmt cur = state.getExeStack().pop();
-        return cur.execute(state);
+    public List<PrgState> removeCompletedPrg(List<PrgState> prgStateList) {
+        return prgStateList.stream()
+                .filter(p -> p.isNotCompleted())
+                .collect(Collectors.toList());
     }
 
     public void setMain(PrgState state) {
@@ -43,8 +48,40 @@ public class Controller {
         this.rep.serialize();;
     }
 
+    public void allStepsForAllPrg(List<PrgState> prgList) throws InterruptedException {
+        /// Log the states before the execution
+        prgList.forEach(prg -> rep.logPrgStateExec(prg));
+
+        List<Callable<PrgState>> callList = prgList.stream()
+                .map((PrgState p) -> (Callable<PrgState>)(() -> {return p.oneStep();}))
+                .collect(Collectors.toList());
+
+        List<PrgState> newPrgList = executor.invokeAll(callList).stream()
+                .map(future -> {
+                    try {
+                        return future.get();
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                    return null;
+                })
+                .filter(p -> p != null)
+                .collect(Collectors.toList());
+
+        prgList.addAll(newPrgList);
+        prgList.forEach(prg -> {
+            try {
+                rep.logPrgStateExec(prg);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        rep.setPrgList(prgList);
+    }
+
     public void allSteps() throws UnknownVariableException, DivideByZeroException, FileAlreadyOpenedException, FileNotOpenedException, IOException, UnknownComparisonExpression {
-        PrgState crt = rep.getCrtState();
+        List<PrgState> prgList = rep.getPrgList();
         while(!crt.getExeStack().isEmpty()) {
             //this.rep.serialize();
             oneStep(crt);

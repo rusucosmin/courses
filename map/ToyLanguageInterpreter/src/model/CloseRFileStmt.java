@@ -26,6 +26,6 @@ public class CloseRFileStmt implements IStmt {
         if(act == null)
             throw new FileNotOpenedException("FileNotOpened Exception at: " + this.toString() + "\nThere is no opened file with fd = " + fd);
         act.getSecond().close();
-        return state;
+        return null;
     }
 }

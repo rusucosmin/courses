@@ -28,7 +28,7 @@ public class OpenRFileStmt implements IStmt {
         int actFd = ++ OpenRFileStmt.fd; /// static variable
         state.getFileTable().put(actFd, new Tuple<String, BufferedReader> (this.fileName, new BufferedReader(new FileReader(this.fileName))));
         state.getSymTable().put(this.id, actFd);
-        return state;
+        return null;
     }
     @Override
     public String toString() {

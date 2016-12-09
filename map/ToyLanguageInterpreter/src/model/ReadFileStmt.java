@@ -28,7 +28,7 @@ public class ReadFileStmt implements IStmt {
         if(line != null)
             val = Integer.valueOf(line);
         state.getSymTable().put(this.var, val);
-        return state;
+        return null;
     }
 
     @Override

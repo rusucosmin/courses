@@ -23,6 +23,6 @@ public class PrintStmt implements IStmt {
     public PrgState execute(PrgState state) throws UnknownVariableException, DivideByZeroException, UnknownComparisonExpression {
         MyIList <Integer> out = state.getOut();
         out.add(exp.eval(state.getSymTable(), state.getHeap()));
-        return state;
+        return null;
     }
 }

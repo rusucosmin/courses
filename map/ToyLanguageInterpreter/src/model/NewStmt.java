@@ -19,7 +19,7 @@ public class NewStmt implements IStmt {
         int res = this.exp.eval(state.getSymTable(), state.getHeap());
         int loc = state.getHeap().allocate(res);
         state.getSymTable().put(var, loc);
-        return state;
+        return null;
     }
 
     @Override

@@ -21,7 +21,6 @@ public class CompExp extends Exp {
         this.e1 = e1;
         this.e2 = e2;
     }
-
     @Override
     public int eval(MyIDictionary<String, Integer> symTable, MyIHeap<Integer> heap) throws UnknownComparisonExpression, UnknownVariableException, UnknownVariableException, DivideByZeroException {
         int val1 = this.e1.eval(symTable, heap);
@@ -46,6 +45,6 @@ public class CompExp extends Exp {
 
     @Override
     public String toString() {
-        return "CompExp (" + this.type + ", " + this.e1.toString() + ", " + this.e1.toString();
+        return this.e1.toString() + " " +  this.type + " " + this.e2.toString();
     }
 }

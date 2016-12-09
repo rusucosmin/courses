@@ -21,7 +21,7 @@ public class WriteHeapStmt implements IStmt {
             throw new UnknownVariableException("Unknown variable expression\nError at: " + toString());
         int val = this.exp.eval(state.getSymTable(), state.getHeap());
         state.getHeap().writeAddr(var_val, val);
-        return state;
+        return null;
     }
 
     @Override

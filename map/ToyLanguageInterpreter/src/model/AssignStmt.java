@@ -25,6 +25,6 @@ public class AssignStmt implements IStmt {
     public PrgState execute(PrgState state) throws UnknownVariableException, DivideByZeroException, UnknownVariableException, UnknownComparisonExpression {
         MyIDictionary<String, Integer> symTable = state.getSymTable();
         symTable.put(this.id, this.exp.eval(symTable, state.getHeap()));
-        return state;
+        return null;
     }
 }

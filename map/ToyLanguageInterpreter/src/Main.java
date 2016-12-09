@@ -4,7 +4,6 @@ import repository.*;
 import view.TextMenu;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -19,8 +18,8 @@ public class Main {
         MyIDictionary<Integer, Tuple<String, BufferedReader>> fileTable = new MyDictionary<>(new HashMap<Integer, Tuple<String, BufferedReader>>());
         MyIHeap<Integer> heap = new MyHeap<Integer>(new HashMap<Integer, Integer>());
 
-        PrgState prgState = new PrgState(exeStack, symTable, out, prg, fileTable, heap);
-        IRepository repo = new SingleProgramRepository(prgState, "log.txt");
+        PrgState prgState = new PrgState(exeStack, symTable, out, prg, fileTable, heap, 1);
+        IRepository repo = new Repository(prgState, "log.txt");
         Controller ctrl = new Controller(repo);
         return ctrl;
 

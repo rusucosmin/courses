@@ -3,31 +3,36 @@ package repository;
 import model.PrgState;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by cosmin on 10/25/16.
  */
-public class SingleProgramRepository implements IRepository {
+public class Repository implements IRepository {
     private String logFile;
-    private PrgState state;
+    private List<PrgState> prgList;
     private PrintWriter printWriter;
     private boolean firstTime;
-    public SingleProgramRepository(PrgState state, String logFile) {
-        this.state = state;
+    public Repository(PrgState state, String logFile) {
+        this.prgList = new ArrayList<>();
+        this.prgList.add(state);
         this.logFile = logFile;
         this.printWriter = null;
         this.firstTime = true;
     }
-    public void setMain(PrgState state) {
-        this.state = state;
-    }
     @Override
-    public PrgState getCrtState() {
-        return this.state;
+    public List<PrgState> getPrgList() {
+        return this.prgList;
     }
 
     @Override
-    public void logPrgStateExec() throws IOException {
+    public void setPrgList(List<PrgState> prgState) {
+        this.prgList = prgList;
+    }
+
+    @Override
+    public void logPrgStateExec(PrgState state) throws IOException {
         if(firstTime == true) {
             /// first, clear the content
             try {
@@ -43,25 +48,25 @@ public class SingleProgramRepository implements IRepository {
         this.printWriter = new PrintWriter(new FileWriter(logFile, true));
 
         this.printWriter.println("ExeStack:");
-        this.printWriter.println(this.state.getExeStack().toString());
+        this.printWriter.println(state.getExeStack().toString());
         this.printWriter.println("SymTable:");
-        this.printWriter.println(this.state.getSymTable().toString());
+        this.printWriter.println(state.getSymTable().toString());
         this.printWriter.println("Out:");
-        this.printWriter.println(this.state.getOut().toString());
+        this.printWriter.println(state.getOut().toString());
         this.printWriter.println("FileTable:");
-        this.printWriter.println(this.state.getFileTable().toString());
+        this.printWriter.println(state.getFileTable().toString());
         this.printWriter.println("Heap:");
-        this.printWriter.println(this.state.getHeap().toString());
+        this.printWriter.println(state.getHeap().toString());
 
         this.printWriter.close();
     }
-
+    /*
     @Override
-    public void serialize() {
+    public void serialize(PrgState state) {
         ObjectOutputStream out = null;
         try {
             out = new ObjectOutputStream(new FileOutputStream("serialize.txt"));
-            out.writeObject(this.state);
+            out.writeObject(state);
         } catch (IOException e) {
             System.out.println("IOError\nError: " + e.toString());
         } finally {
@@ -100,4 +105,5 @@ public class SingleProgramRepository implements IRepository {
             this.state = state;
         }
     }
+    */
 }
