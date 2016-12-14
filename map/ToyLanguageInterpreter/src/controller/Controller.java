@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -41,16 +42,27 @@ public class Controller {
     }
 
     public void setMain(PrgState state) {
-        this.rep.setMain(state);
+        this.rep.getPrgList().clear();
+        this.rep.getPrgList().add(state);
     }
 
-    void serialize() {
+    public void serialize() {
         this.rep.serialize();;
     }
 
-    public void allStepsForAllPrg(List<PrgState> prgList) throws InterruptedException {
+    public void deserializa() {
+        this.rep.deserialize();
+    }
+
+    public void oneStepForAllPrg(List<PrgState> prgList) throws InterruptedException {
         /// Log the states before the execution
-        prgList.forEach(prg -> rep.logPrgStateExec(prg));
+        prgList.forEach(prg -> {
+            try {
+                rep.logPrgStateExec(prg);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         List<Callable<PrgState>> callList = prgList.stream()
                 .map((PrgState p) -> (Callable<PrgState>)(() -> {return p.oneStep();}))
@@ -80,7 +92,16 @@ public class Controller {
         rep.setPrgList(prgList);
     }
 
-    public void allSteps() throws UnknownVariableException, DivideByZeroException, FileAlreadyOpenedException, FileNotOpenedException, IOException, UnknownComparisonExpression {
+    public void allSteps() throws UnknownVariableException, DivideByZeroException, FileAlreadyOpenedException, FileNotOpenedException, IOException, UnknownComparisonExpression, InterruptedException {
+        executor = Executors.newFixedThreadPool(2);
+        while(true) {
+            List<PrgState> prgList = removeCompletedPrg(rep.getPrgList());
+            if(prgList.size() == 0)
+                break;
+            oneStepForAllPrg(prgList);
+        }
+        executor.shutdownNow();
+        /*
         List<PrgState> prgList = rep.getPrgList();
         while(!crt.getExeStack().isEmpty()) {
             //this.rep.serialize();
@@ -94,5 +115,6 @@ public class Controller {
                 return ;
             }
         }
+        */
     }
 }

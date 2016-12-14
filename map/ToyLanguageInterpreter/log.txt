@@ -1,3 +1,15 @@
+Thread ID: 1
+ExeStack:
+v = 6; While (v - 4) print (v); v = v - 1; print (v)
+SymTable:
+
+Out:
+
+FileTable:
+
+Heap:
+
+Thread ID: 1
 ExeStack:
 v = 6
 While (v - 4) print (v); v = v - 1; print (v)
@@ -9,6 +21,19 @@ FileTable:
 
 Heap:
 
+Thread ID: 1
+ExeStack:
+v = 6
+While (v - 4) print (v); v = v - 1; print (v)
+SymTable:
+
+Out:
+
+FileTable:
+
+Heap:
+
+Thread ID: 1
 ExeStack:
 While (v - 4) print (v); v = v - 1; print (v)
 SymTable:
@@ -19,6 +44,18 @@ FileTable:
 
 Heap:
 
+Thread ID: 1
+ExeStack:
+While (v - 4) print (v); v = v - 1; print (v)
+SymTable:
+v -> 6
+Out:
+
+FileTable:
+
+Heap:
+
+Thread ID: 1
 ExeStack:
 While (v - 4) print (v); v = v - 1
 print (v)
@@ -30,6 +67,19 @@ FileTable:
 
 Heap:
 
+Thread ID: 1
+ExeStack:
+While (v - 4) print (v); v = v - 1
+print (v)
+SymTable:
+v -> 6
+Out:
+
+FileTable:
+
+Heap:
+
+Thread ID: 1
 ExeStack:
 print (v); v = v - 1
 While (v - 4) print (v); v = v - 1
@@ -42,6 +92,20 @@ FileTable:
 
 Heap:
 
+Thread ID: 1
+ExeStack:
+print (v); v = v - 1
+While (v - 4) print (v); v = v - 1
+print (v)
+SymTable:
+v -> 6
+Out:
+
+FileTable:
+
+Heap:
+
+Thread ID: 1
 ExeStack:
 print (v)
 v = v - 1
@@ -55,6 +119,21 @@ FileTable:
 
 Heap:
 
+Thread ID: 1
+ExeStack:
+print (v)
+v = v - 1
+While (v - 4) print (v); v = v - 1
+print (v)
+SymTable:
+v -> 6
+Out:
+
+FileTable:
+
+Heap:
+
+Thread ID: 1
 ExeStack:
 v = v - 1
 While (v - 4) print (v); v = v - 1
@@ -67,6 +146,20 @@ FileTable:
 
 Heap:
 
+Thread ID: 1
+ExeStack:
+v = v - 1
+While (v - 4) print (v); v = v - 1
+print (v)
+SymTable:
+v -> 6
+Out:
+6
+FileTable:
+
+Heap:
+
+Thread ID: 1
 ExeStack:
 While (v - 4) print (v); v = v - 1
 print (v)
@@ -78,6 +171,19 @@ FileTable:
 
 Heap:
 
+Thread ID: 1
+ExeStack:
+While (v - 4) print (v); v = v - 1
+print (v)
+SymTable:
+v -> 5
+Out:
+6
+FileTable:
+
+Heap:
+
+Thread ID: 1
 ExeStack:
 print (v); v = v - 1
 While (v - 4) print (v); v = v - 1
@@ -90,6 +196,20 @@ FileTable:
 
 Heap:
 
+Thread ID: 1
+ExeStack:
+print (v); v = v - 1
+While (v - 4) print (v); v = v - 1
+print (v)
+SymTable:
+v -> 5
+Out:
+6
+FileTable:
+
+Heap:
+
+Thread ID: 1
 ExeStack:
 print (v)
 v = v - 1
@@ -103,6 +223,21 @@ FileTable:
 
 Heap:
 
+Thread ID: 1
+ExeStack:
+print (v)
+v = v - 1
+While (v - 4) print (v); v = v - 1
+print (v)
+SymTable:
+v -> 5
+Out:
+6
+FileTable:
+
+Heap:
+
+Thread ID: 1
 ExeStack:
 v = v - 1
 While (v - 4) print (v); v = v - 1
@@ -116,6 +251,21 @@ FileTable:
 
 Heap:
 
+Thread ID: 1
+ExeStack:
+v = v - 1
+While (v - 4) print (v); v = v - 1
+print (v)
+SymTable:
+v -> 5
+Out:
+6
+5
+FileTable:
+
+Heap:
+
+Thread ID: 1
 ExeStack:
 While (v - 4) print (v); v = v - 1
 print (v)
@@ -128,6 +278,20 @@ FileTable:
 
 Heap:
 
+Thread ID: 1
+ExeStack:
+While (v - 4) print (v); v = v - 1
+print (v)
+SymTable:
+v -> 4
+Out:
+6
+5
+FileTable:
+
+Heap:
+
+Thread ID: 1
 ExeStack:
 print (v)
 SymTable:
@@ -139,6 +303,19 @@ FileTable:
 
 Heap:
 
+Thread ID: 1
+ExeStack:
+print (v)
+SymTable:
+v -> 4
+Out:
+6
+5
+FileTable:
+
+Heap:
+
+Thread ID: 1
 ExeStack:
 
 SymTable:

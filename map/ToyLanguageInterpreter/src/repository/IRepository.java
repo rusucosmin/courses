@@ -11,6 +11,6 @@ public interface IRepository {
     List<PrgState> getPrgList();
     void logPrgStateExec(PrgState state) throws IOException;
     void setPrgList(List<PrgState> prgList);
- //   void serialize();
- //   void deserialize();
+    void serialize();
+    void deserialize();
 }

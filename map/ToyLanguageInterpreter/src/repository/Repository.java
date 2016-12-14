@@ -27,7 +27,7 @@ public class Repository implements IRepository {
     }
 
     @Override
-    public void setPrgList(List<PrgState> prgState) {
+    public void setPrgList(List<PrgState> prgList) {
         this.prgList = prgList;
     }
 
@@ -47,6 +47,7 @@ public class Repository implements IRepository {
 
         this.printWriter = new PrintWriter(new FileWriter(logFile, true));
 
+        this.printWriter.println("Thread ID: " + state.getId());
         this.printWriter.println("ExeStack:");
         this.printWriter.println(state.getExeStack().toString());
         this.printWriter.println("SymTable:");
@@ -60,13 +61,15 @@ public class Repository implements IRepository {
 
         this.printWriter.close();
     }
-    /*
+
     @Override
-    public void serialize(PrgState state) {
+    public void serialize() {
         ObjectOutputStream out = null;
         try {
             out = new ObjectOutputStream(new FileOutputStream("serialize.txt"));
-            out.writeObject(state);
+            out.write(prgList.size());
+            for(PrgState t : prgList)
+                out.writeObject(t);
         } catch (IOException e) {
             System.out.println("IOError\nError: " + e.toString());
         } finally {
@@ -86,7 +89,10 @@ public class Repository implements IRepository {
         PrgState state = null;
         try {
             in = new ObjectInputStream(new FileInputStream("serialize.txt"));
-            state = (PrgState) in.readObject();
+            int size = in.read();
+            prgList.clear();
+            for(int i = 0; i < size; ++ i)
+                prgList.add((PrgState) in.readObject());
         } catch(IOException e) {
             System.out.println("IOError\nError: " + e.toString());
         } catch(ClassNotFoundException e) {
@@ -101,9 +107,5 @@ public class Repository implements IRepository {
                 }
             }
         }
-        if(state != null) {
-            this.state = state;
-        }
     }
-    */
 }

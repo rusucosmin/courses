@@ -48,7 +48,7 @@ public class InputProgramCommand extends Command {
         MyIDictionary<Integer, Tuple<String, BufferedReader>> fileTable = new MyDictionary<>(new HashMap<Integer, Tuple<String, BufferedReader>>());
         MyIHeap<Integer> heap = new MyHeap<Integer>(new HashMap<Integer, Integer>());
 
-        PrgState prgState = new PrgState(exeStack, symTable, out, prg, fileTable, heap);
+        PrgState prgState = new PrgState(exeStack, symTable, out, prg, fileTable, heap, 1);
         this.ctrl.setMain(prgState);
         try {
             this.ctrl.allSteps();
@@ -64,6 +64,8 @@ public class InputProgramCommand extends Command {
             e.printStackTrace();
         } catch (UnknownComparisonExpression unknownComparisonExpression) {
             unknownComparisonExpression.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 

@@ -39,6 +39,9 @@ public class RunExample extends Command {
         } catch (UnknownComparisonExpression e) {
             System.out.println(e.getMessage());
             return ;
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+            return ;
         }
     }
 }
