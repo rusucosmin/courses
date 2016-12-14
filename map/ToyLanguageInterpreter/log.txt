@@ -1,6 +1,6 @@
 Thread ID: 1
 ExeStack:
-v = 6; While (v - 4) print (v); v = v - 1; print (v)
+v = 10; NewStmt (a, 22 ); fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))); print (v); print (ReadHeapExp (a ))
 SymTable:
 
 Out:
@@ -11,8 +11,8 @@ Heap:
 
 Thread ID: 1
 ExeStack:
-v = 6
-While (v - 4) print (v); v = v - 1; print (v)
+v = 10; NewStmt (a, 22 )
+fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))); print (v); print (ReadHeapExp (a ))
 SymTable:
 
 Out:
@@ -23,8 +23,8 @@ Heap:
 
 Thread ID: 1
 ExeStack:
-v = 6
-While (v - 4) print (v); v = v - 1; print (v)
+v = 10; NewStmt (a, 22 )
+fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))); print (v); print (ReadHeapExp (a ))
 SymTable:
 
 Out:
@@ -35,9 +35,11 @@ Heap:
 
 Thread ID: 1
 ExeStack:
-While (v - 4) print (v); v = v - 1; print (v)
+v = 10
+NewStmt (a, 22 )
+fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))); print (v); print (ReadHeapExp (a ))
 SymTable:
-v -> 6
+
 Out:
 
 FileTable:
@@ -46,9 +48,11 @@ Heap:
 
 Thread ID: 1
 ExeStack:
-While (v - 4) print (v); v = v - 1; print (v)
+v = 10
+NewStmt (a, 22 )
+fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))); print (v); print (ReadHeapExp (a ))
 SymTable:
-v -> 6
+
 Out:
 
 FileTable:
@@ -57,10 +61,10 @@ Heap:
 
 Thread ID: 1
 ExeStack:
-While (v - 4) print (v); v = v - 1
-print (v)
+NewStmt (a, 22 )
+fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))); print (v); print (ReadHeapExp (a ))
 SymTable:
-v -> 6
+v -> 10
 Out:
 
 FileTable:
@@ -69,10 +73,10 @@ Heap:
 
 Thread ID: 1
 ExeStack:
-While (v - 4) print (v); v = v - 1
-print (v)
+NewStmt (a, 22 )
+fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))); print (v); print (ReadHeapExp (a ))
 SymTable:
-v -> 6
+v -> 10
 Out:
 
 FileTable:
@@ -81,250 +85,337 @@ Heap:
 
 Thread ID: 1
 ExeStack:
-print (v); v = v - 1
-While (v - 4) print (v); v = v - 1
-print (v)
+fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))); print (v); print (ReadHeapExp (a ))
 SymTable:
-v -> 6
+a -> 1
+v -> 10
 Out:
 
 FileTable:
 
 Heap:
-
+1 -> 22
 Thread ID: 1
 ExeStack:
-print (v); v = v - 1
-While (v - 4) print (v); v = v - 1
-print (v)
+fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))); print (v); print (ReadHeapExp (a ))
 SymTable:
-v -> 6
+a -> 1
+v -> 10
 Out:
 
 FileTable:
 
 Heap:
-
+1 -> 22
 Thread ID: 1
 ExeStack:
-print (v)
-v = v - 1
-While (v - 4) print (v); v = v - 1
-print (v)
+fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a )))
+print (v); print (ReadHeapExp (a ))
 SymTable:
-v -> 6
+a -> 1
+v -> 10
 Out:
 
 FileTable:
 
 Heap:
-
+1 -> 22
 Thread ID: 1
 ExeStack:
-print (v)
-v = v - 1
-While (v - 4) print (v); v = v - 1
-print (v)
+fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a )))
+print (v); print (ReadHeapExp (a ))
 SymTable:
-v -> 6
+a -> 1
+v -> 10
 Out:
 
 FileTable:
 
 Heap:
-
+1 -> 22
 Thread ID: 1
 ExeStack:
-v = v - 1
-While (v - 4) print (v); v = v - 1
-print (v)
+print (v); print (ReadHeapExp (a ))
 SymTable:
-v -> 6
+a -> 1
+v -> 10
 Out:
-6
+
 FileTable:
 
 Heap:
+1 -> 22
+Thread ID: 10
+ExeStack:
+WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))
+SymTable:
+a -> 1
+v -> 10
+Out:
 
+FileTable:
+
+Heap:
+1 -> 22
 Thread ID: 1
 ExeStack:
-v = v - 1
-While (v - 4) print (v); v = v - 1
-print (v)
+print (v); print (ReadHeapExp (a ))
 SymTable:
-v -> 6
+a -> 1
+v -> 10
 Out:
-6
+
 FileTable:
 
 Heap:
-
-Thread ID: 1
+1 -> 22
+Thread ID: 10
 ExeStack:
-While (v - 4) print (v); v = v - 1
-print (v)
+WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))
 SymTable:
-v -> 5
+a -> 1
+v -> 10
 Out:
-6
+
 FileTable:
 
 Heap:
-
-Thread ID: 1
-ExeStack:
-While (v - 4) print (v); v = v - 1
-print (v)
-SymTable:
-v -> 5
-Out:
-6
-FileTable:
-
-Heap:
-
-Thread ID: 1
-ExeStack:
-print (v); v = v - 1
-While (v - 4) print (v); v = v - 1
-print (v)
-SymTable:
-v -> 5
-Out:
-6
-FileTable:
-
-Heap:
-
-Thread ID: 1
-ExeStack:
-print (v); v = v - 1
-While (v - 4) print (v); v = v - 1
-print (v)
-SymTable:
-v -> 5
-Out:
-6
-FileTable:
-
-Heap:
-
+1 -> 22
 Thread ID: 1
 ExeStack:
 print (v)
-v = v - 1
-While (v - 4) print (v); v = v - 1
-print (v)
+print (ReadHeapExp (a ))
 SymTable:
-v -> 5
+a -> 1
+v -> 10
 Out:
-6
+
 FileTable:
 
 Heap:
+1 -> 22
+Thread ID: 10
+ExeStack:
+WriteHeap (a, 30
+v = 32; print (v); print (ReadHeapExp (a ))
+SymTable:
+a -> 1
+v -> 10
+Out:
 
+FileTable:
+
+Heap:
+1 -> 22
 Thread ID: 1
 ExeStack:
 print (v)
-v = v - 1
-While (v - 4) print (v); v = v - 1
-print (v)
+print (ReadHeapExp (a ))
 SymTable:
-v -> 5
+a -> 1
+v -> 10
 Out:
-6
+
 FileTable:
 
 Heap:
+1 -> 22
+Thread ID: 10
+ExeStack:
+WriteHeap (a, 30
+v = 32; print (v); print (ReadHeapExp (a ))
+SymTable:
+a -> 1
+v -> 10
+Out:
 
+FileTable:
+
+Heap:
+1 -> 22
 Thread ID: 1
 ExeStack:
-v = v - 1
-While (v - 4) print (v); v = v - 1
-print (v)
+print (ReadHeapExp (a ))
 SymTable:
-v -> 5
+a -> 1
+v -> 10
 Out:
-6
-5
+10
 FileTable:
 
 Heap:
+1 -> 30
+Thread ID: 10
+ExeStack:
+v = 32; print (v); print (ReadHeapExp (a ))
+SymTable:
+a -> 1
+v -> 10
+Out:
+10
+FileTable:
 
+Heap:
+1 -> 30
 Thread ID: 1
 ExeStack:
-v = v - 1
-While (v - 4) print (v); v = v - 1
-print (v)
+print (ReadHeapExp (a ))
 SymTable:
-v -> 5
+a -> 1
+v -> 10
 Out:
-6
-5
+10
 FileTable:
 
 Heap:
-
-Thread ID: 1
+1 -> 30
+Thread ID: 10
 ExeStack:
-While (v - 4) print (v); v = v - 1
-print (v)
+v = 32; print (v); print (ReadHeapExp (a ))
 SymTable:
-v -> 4
+a -> 1
+v -> 10
 Out:
-6
-5
+10
 FileTable:
 
 Heap:
-
-Thread ID: 1
-ExeStack:
-While (v - 4) print (v); v = v - 1
-print (v)
-SymTable:
-v -> 4
-Out:
-6
-5
-FileTable:
-
-Heap:
-
-Thread ID: 1
-ExeStack:
-print (v)
-SymTable:
-v -> 4
-Out:
-6
-5
-FileTable:
-
-Heap:
-
-Thread ID: 1
-ExeStack:
-print (v)
-SymTable:
-v -> 4
-Out:
-6
-5
-FileTable:
-
-Heap:
-
+1 -> 30
 Thread ID: 1
 ExeStack:
 
 SymTable:
-v -> 4
+a -> 1
+v -> 10
 Out:
-6
-5
-4
+10
+30
 FileTable:
 
 Heap:
+1 -> 30
+Thread ID: 10
+ExeStack:
+v = 32
+print (v); print (ReadHeapExp (a ))
+SymTable:
+a -> 1
+v -> 10
+Out:
+10
+30
+FileTable:
 
+Heap:
+1 -> 30
+Thread ID: 10
+ExeStack:
+v = 32
+print (v); print (ReadHeapExp (a ))
+SymTable:
+a -> 1
+v -> 10
+Out:
+10
+30
+FileTable:
+
+Heap:
+1 -> 30
+Thread ID: 10
+ExeStack:
+print (v); print (ReadHeapExp (a ))
+SymTable:
+a -> 1
+v -> 32
+Out:
+10
+30
+FileTable:
+
+Heap:
+1 -> 30
+Thread ID: 10
+ExeStack:
+print (v); print (ReadHeapExp (a ))
+SymTable:
+a -> 1
+v -> 32
+Out:
+10
+30
+FileTable:
+
+Heap:
+1 -> 30
+Thread ID: 10
+ExeStack:
+print (v)
+print (ReadHeapExp (a ))
+SymTable:
+a -> 1
+v -> 32
+Out:
+10
+30
+FileTable:
+
+Heap:
+1 -> 30
+Thread ID: 10
+ExeStack:
+print (v)
+print (ReadHeapExp (a ))
+SymTable:
+a -> 1
+v -> 32
+Out:
+10
+30
+FileTable:
+
+Heap:
+1 -> 30
+Thread ID: 10
+ExeStack:
+print (ReadHeapExp (a ))
+SymTable:
+a -> 1
+v -> 32
+Out:
+10
+30
+32
+FileTable:
+
+Heap:
+1 -> 30
+Thread ID: 10
+ExeStack:
+print (ReadHeapExp (a ))
+SymTable:
+a -> 1
+v -> 32
+Out:
+10
+30
+32
+FileTable:
+
+Heap:
+1 -> 30
+Thread ID: 10
+ExeStack:
+
+SymTable:
+a -> 1
+v -> 32
+Out:
+10
+30
+32
+30
+FileTable:
+
+Heap:
+1 -> 30

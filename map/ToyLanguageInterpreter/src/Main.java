@@ -153,6 +153,35 @@ public class Main {
                         new PrintStmt(new VarExp("v")))
         );
 //        v=6; (while (v-4) print(v);v=v-1);print(v)
+        /*
+            v=10;new(a,22);
+            fork(wH(a,30);v=32;print(v);print(rH(a)));
+            print(v);print(rH(a))
+        */
+        IStmt lab8ex1 = new CompStmt(
+                new CompStmt(
+                    new AssignStmt("v", new ConstExp(10)),
+                    new NewStmt("a", new ConstExp(22))
+                ),
+                new CompStmt(
+                        new ForkStmt(
+                                new CompStmt(
+                                    new WriteHeapStmt("a", new ConstExp(30)),
+                                        new CompStmt(
+                                                new AssignStmt("v", new ConstExp(32)),
+                                                new CompStmt(
+                                                        new PrintStmt(new VarExp("v")),
+                                                        new PrintStmt(new ReadHeapExp("a"))
+                                                )
+                                        )
+                                )
+                        ),
+                        new CompStmt(
+                                new PrintStmt(new VarExp("v")),
+                                new PrintStmt(new ReadHeapExp("a"))
+                        )
+                )
+        );
         TextMenu menu = new TextMenu(new MyDictionary<String, Command>(new HashMap<String, Command>()));
         menu.addCommand(new ExitCommand("0", "Exit"));
         menu.addCommand(new RunExample("1", lab2ex1.toString(), getNewController(lab2ex1)));
@@ -163,7 +192,8 @@ public class Main {
         menu.addCommand(new RunExample("6", lab6ex1.toString(), getNewController(lab6ex1)));
         menu.addCommand(new RunExample("7", lab7test.toString(), getNewController(lab7test)));
         menu.addCommand(new RunExample("8", lab7ex1.toString(), getNewController(lab7ex1)));
-        menu.addCommand(new InputProgramCommand("9", "Input a program", getNewController(null)));
+        menu.addCommand(new RunExample("9", lab8ex1.toString(), getNewController(lab8ex1)));
+        menu.addCommand(new InputProgramCommand("10", "Input a program", getNewController(null)));
         menu.show();
     }
 }

@@ -14,9 +14,14 @@ public class ForkStmt implements IStmt {
     public ForkStmt(IStmt stmt) {
         this.stmt = stmt;
     }
-    @Override
+   @Override
     public PrgState execute(PrgState state) throws IOException, FileAlreadyOpenedException, FileNotOpenedException, UnknownVariableException, DivideByZeroException, UnknownComparisonExpression, IOException, UnknownComparisonExpression {
         PrgState forkProgram = new PrgState(new MyStack<>(new Stack<>()), state.getSymTable().clone(), state.getOut(), this.stmt, state.getFileTable(), state.getHeap(), state.getId() * 10);
         return forkProgram;
+    }
+
+    @Override
+    public String toString() {
+        return "fork (" + this.stmt.toString() + ")";
     }
 }
