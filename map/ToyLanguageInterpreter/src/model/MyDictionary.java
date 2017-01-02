@@ -32,6 +32,11 @@ public class MyDictionary <K, V> implements MyIDictionary<K, V>  {
     }
 
     @Override
+    public Collection<K> keys() {
+        return this._map.keySet();
+    }
+
+    @Override
     public V remove(K fd) {
         return this._map.remove(fd);
     }

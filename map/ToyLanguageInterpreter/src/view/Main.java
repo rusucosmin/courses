@@ -1,16 +1,38 @@
+package view;
+
+import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 import model.*;
 import controller.*;
 import repository.*;
+import services.PrgStateService;
+import sun.security.pkcs11.Secmod;
 import view.TextMenu;
 
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.net.URL;
 import java.util.*;
 
 /**
  * Created by cosmin on 10/25/16.
  */
-public class Main {
-    public static Controller getNewController(IStmt prg) {
+public class Main extends Application {
+    public static IRepository getNewRepository(IStmt prg) {
         /// Create the data structures for the program execution
         MyIStack<IStmt> exeStack = new MyStack<>(new Stack<IStmt>());
         MyIDictionary<String, Integer> symTable = new MyDictionary<>(new HashMap<String, Integer>());
@@ -20,11 +42,14 @@ public class Main {
 
         PrgState prgState = new PrgState(exeStack, symTable, out, prg, fileTable, heap, 1);
         IRepository repo = new Repository(prgState, "log.txt");
-        Controller ctrl = new Controller(repo);
-        return ctrl;
-
+        return repo;
     }
     public static void main(String [] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
         /*
         *   Lab2Ex1:
         *   v = 2;
@@ -182,18 +207,79 @@ public class Main {
                         )
                 )
         );
-        TextMenu menu = new TextMenu(new MyDictionary<String, Command>(new HashMap<String, Command>()));
-        menu.addCommand(new ExitCommand("0", "Exit"));
-        menu.addCommand(new RunExample("1", lab2ex1.toString(), getNewController(lab2ex1)));
-        menu.addCommand(new RunExample("2", lab2ex2.toString(), getNewController(lab2ex2)));
-        menu.addCommand(new RunExample("3", lab2ex3.toString(), getNewController(lab2ex3)));
-        menu.addCommand(new RunExample("4", lab5ex1.toString(), getNewController(lab5ex1)));
-        menu.addCommand(new RunExample("5", lab5ex2.toString(), getNewController(lab5ex2)));
-        menu.addCommand(new RunExample("6", lab6ex1.toString(), getNewController(lab6ex1)));
-        menu.addCommand(new RunExample("7", lab7test.toString(), getNewController(lab7test)));
-        menu.addCommand(new RunExample("8", lab7ex1.toString(), getNewController(lab7ex1)));
-        menu.addCommand(new RunExample("9", lab8ex1.toString(), getNewController(lab8ex1)));
-        menu.addCommand(new InputProgramCommand("10", "Input a program", getNewController(null)));
-        menu.show();
+        ///create the list of istmts
+        List<IStmt> menu = new ArrayList<IStmt>();
+        menu.add(lab2ex1);
+        menu.add(lab2ex2);
+        menu.add(lab2ex3);
+        menu.add(lab5ex1);
+        menu.add(lab5ex2);
+        menu.add(lab6ex1);
+        menu.add(lab7test);
+        menu.add(lab7ex1);
+        menu.add(lab8ex1);
+
+        VBox root = new VBox(5);
+        root.getChildren().add(new Label("Plase choose a program: "));
+
+        /// create the listview
+        ObservableList<IStmt> observableStmtList = FXCollections.observableArrayList(menu);
+        ListView<IStmt> programList = new ListView<IStmt>(observableStmtList);
+        programList.setCellFactory(new Callback<ListView<IStmt>, ListCell<IStmt>>() {
+            @Override
+            public ListCell<IStmt> call(ListView<IStmt> param) {
+                ListCell<IStmt> listCell = new ListCell<IStmt>() {
+                    @Override
+                    protected void updateItem(IStmt e, boolean empty) {
+                        super.updateItem(e, empty);
+                        if(e == null || empty)
+                            setText("");
+                        else
+                            setText(e.toString());
+                    }
+                };
+                return listCell;
+            }
+        });
+        root.getChildren().add(programList);
+
+        Scene scene = new Scene(root, 100, 100);
+
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Examples");
+        primaryStage.show();
+
+        observableStmtList.add(new PrintStmt(new ConstExp(1)));
+
+        programList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<IStmt>() {
+            @Override
+            public void changed(ObservableValue<? extends IStmt> observable, IStmt oldValue, IStmt newValue) {
+                try {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(Main.class.getResource("RunProgram.fxml"));
+                    VBox root = (VBox) loader.load();
+
+                    PrgStateService prgStateService = new PrgStateService(getNewRepository(newValue));
+                    Controller ctrl = loader.getController();
+                    ctrl.setService(prgStateService);
+                    prgStateService.addObserver(ctrl);
+
+                    Stage dialogStage = new Stage();
+                    dialogStage.setTitle("Run example dialog");
+                    dialogStage.initModality(Modality.APPLICATION_MODAL);
+                    dialogStage.setScene(new Scene(root));
+                    dialogStage.show();
+                } catch(IOException e) {
+                    e.printStackTrace();
+                }
+                /*
+                Stage dialogStage = new Stage();
+                dialogStage.setTitle("Run example dialog");
+                dialogStage.initModality(Modality.APPLICATION_MODAL);
+                dialogStage.setScene(new Scene(new Label(newValue.getDescription())));
+                dialogStage.show();
+                */
+            }
+        });
     }
 }

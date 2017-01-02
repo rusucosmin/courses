@@ -1,6 +1,6 @@
 Thread ID: 1
 ExeStack:
-v = 10; NewStmt (a, 22 ); fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))); print (v); print (ReadHeapExp (a ))
+openRFile (var_f, test.in); readFileStmt (var_f, var_c); print (var_c); If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0) end; closeRFileStmt (var_f)
 SymTable:
 
 Out:
@@ -11,8 +11,8 @@ Heap:
 
 Thread ID: 1
 ExeStack:
-v = 10; NewStmt (a, 22 )
-fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))); print (v); print (ReadHeapExp (a ))
+openRFile (var_f, test.in)
+readFileStmt (var_f, var_c); print (var_c); If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0) end; closeRFileStmt (var_f)
 SymTable:
 
 Out:
@@ -23,8 +23,8 @@ Heap:
 
 Thread ID: 1
 ExeStack:
-v = 10; NewStmt (a, 22 )
-fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))); print (v); print (ReadHeapExp (a ))
+openRFile (var_f, test.in)
+readFileStmt (var_f, var_c); print (var_c); If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0) end; closeRFileStmt (var_f)
 SymTable:
 
 Out:
@@ -35,387 +35,266 @@ Heap:
 
 Thread ID: 1
 ExeStack:
-v = 10
-NewStmt (a, 22 )
-fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))); print (v); print (ReadHeapExp (a ))
+readFileStmt (var_f, var_c); print (var_c); If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0) end; closeRFileStmt (var_f)
 SymTable:
-
+var_f -> 3
 Out:
 
 FileTable:
-
+3 -> test.in
 Heap:
 
 Thread ID: 1
 ExeStack:
-v = 10
-NewStmt (a, 22 )
-fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))); print (v); print (ReadHeapExp (a ))
+readFileStmt (var_f, var_c); print (var_c); If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0) end; closeRFileStmt (var_f)
 SymTable:
-
+var_f -> 3
 Out:
 
 FileTable:
-
+3 -> test.in
 Heap:
 
 Thread ID: 1
 ExeStack:
-NewStmt (a, 22 )
-fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))); print (v); print (ReadHeapExp (a ))
+readFileStmt (var_f, var_c)
+print (var_c); If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0) end; closeRFileStmt (var_f)
 SymTable:
-v -> 10
+var_f -> 3
 Out:
 
 FileTable:
-
+3 -> test.in
 Heap:
 
 Thread ID: 1
 ExeStack:
-NewStmt (a, 22 )
-fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))); print (v); print (ReadHeapExp (a ))
+readFileStmt (var_f, var_c)
+print (var_c); If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0) end; closeRFileStmt (var_f)
 SymTable:
-v -> 10
+var_f -> 3
 Out:
 
 FileTable:
-
+3 -> test.in
 Heap:
 
 Thread ID: 1
 ExeStack:
-fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))); print (v); print (ReadHeapExp (a ))
+print (var_c); If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0) end; closeRFileStmt (var_f)
 SymTable:
-a -> 1
-v -> 10
+var_f -> 3
+var_c -> 10
 Out:
 
 FileTable:
-
+3 -> test.in
 Heap:
-1 -> 22
+
 Thread ID: 1
 ExeStack:
-fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))); print (v); print (ReadHeapExp (a ))
+print (var_c); If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0) end; closeRFileStmt (var_f)
 SymTable:
-a -> 1
-v -> 10
+var_f -> 3
+var_c -> 10
 Out:
 
 FileTable:
-
+3 -> test.in
 Heap:
-1 -> 22
+
 Thread ID: 1
 ExeStack:
-fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a )))
-print (v); print (ReadHeapExp (a ))
+print (var_c)
+If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0) end; closeRFileStmt (var_f)
 SymTable:
-a -> 1
-v -> 10
+var_f -> 3
+var_c -> 10
 Out:
 
 FileTable:
-
+3 -> test.in
 Heap:
-1 -> 22
+
 Thread ID: 1
 ExeStack:
-fork (WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a )))
-print (v); print (ReadHeapExp (a ))
+print (var_c)
+If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0) end; closeRFileStmt (var_f)
 SymTable:
-a -> 1
-v -> 10
+var_f -> 3
+var_c -> 10
 Out:
 
 FileTable:
-
+3 -> test.in
 Heap:
-1 -> 22
+
 Thread ID: 1
 ExeStack:
-print (v); print (ReadHeapExp (a ))
+If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0) end; closeRFileStmt (var_f)
 SymTable:
-a -> 1
-v -> 10
-Out:
-
-FileTable:
-
-Heap:
-1 -> 22
-Thread ID: 10
-ExeStack:
-WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))
-SymTable:
-a -> 1
-v -> 10
-Out:
-
-FileTable:
-
-Heap:
-1 -> 22
-Thread ID: 1
-ExeStack:
-print (v); print (ReadHeapExp (a ))
-SymTable:
-a -> 1
-v -> 10
-Out:
-
-FileTable:
-
-Heap:
-1 -> 22
-Thread ID: 10
-ExeStack:
-WriteHeap (a, 30; v = 32; print (v); print (ReadHeapExp (a ))
-SymTable:
-a -> 1
-v -> 10
-Out:
-
-FileTable:
-
-Heap:
-1 -> 22
-Thread ID: 1
-ExeStack:
-print (v)
-print (ReadHeapExp (a ))
-SymTable:
-a -> 1
-v -> 10
-Out:
-
-FileTable:
-
-Heap:
-1 -> 22
-Thread ID: 10
-ExeStack:
-WriteHeap (a, 30
-v = 32; print (v); print (ReadHeapExp (a ))
-SymTable:
-a -> 1
-v -> 10
-Out:
-
-FileTable:
-
-Heap:
-1 -> 22
-Thread ID: 1
-ExeStack:
-print (v)
-print (ReadHeapExp (a ))
-SymTable:
-a -> 1
-v -> 10
-Out:
-
-FileTable:
-
-Heap:
-1 -> 22
-Thread ID: 10
-ExeStack:
-WriteHeap (a, 30
-v = 32; print (v); print (ReadHeapExp (a ))
-SymTable:
-a -> 1
-v -> 10
-Out:
-
-FileTable:
-
-Heap:
-1 -> 22
-Thread ID: 1
-ExeStack:
-print (ReadHeapExp (a ))
-SymTable:
-a -> 1
-v -> 10
+var_f -> 3
+var_c -> 10
 Out:
 10
 FileTable:
-
+3 -> test.in
 Heap:
-1 -> 30
-Thread ID: 10
-ExeStack:
-v = 32; print (v); print (ReadHeapExp (a ))
-SymTable:
-a -> 1
-v -> 10
-Out:
-10
-FileTable:
 
-Heap:
-1 -> 30
 Thread ID: 1
 ExeStack:
-print (ReadHeapExp (a ))
+If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0) end; closeRFileStmt (var_f)
 SymTable:
-a -> 1
-v -> 10
+var_f -> 3
+var_c -> 10
 Out:
 10
 FileTable:
-
+3 -> test.in
 Heap:
-1 -> 30
-Thread ID: 10
+
+Thread ID: 1
 ExeStack:
-v = 32; print (v); print (ReadHeapExp (a ))
+If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0) end
+closeRFileStmt (var_f)
 SymTable:
-a -> 1
-v -> 10
+var_f -> 3
+var_c -> 10
 Out:
 10
 FileTable:
-
+3 -> test.in
 Heap:
-1 -> 30
+
+Thread ID: 1
+ExeStack:
+If var_c then readFileStmt (var_f, var_c); print (var_c) else print (0) end
+closeRFileStmt (var_f)
+SymTable:
+var_f -> 3
+var_c -> 10
+Out:
+10
+FileTable:
+3 -> test.in
+Heap:
+
+Thread ID: 1
+ExeStack:
+readFileStmt (var_f, var_c); print (var_c)
+closeRFileStmt (var_f)
+SymTable:
+var_f -> 3
+var_c -> 10
+Out:
+10
+FileTable:
+3 -> test.in
+Heap:
+
+Thread ID: 1
+ExeStack:
+readFileStmt (var_f, var_c); print (var_c)
+closeRFileStmt (var_f)
+SymTable:
+var_f -> 3
+var_c -> 10
+Out:
+10
+FileTable:
+3 -> test.in
+Heap:
+
+Thread ID: 1
+ExeStack:
+readFileStmt (var_f, var_c)
+print (var_c)
+closeRFileStmt (var_f)
+SymTable:
+var_f -> 3
+var_c -> 10
+Out:
+10
+FileTable:
+3 -> test.in
+Heap:
+
+Thread ID: 1
+ExeStack:
+readFileStmt (var_f, var_c)
+print (var_c)
+closeRFileStmt (var_f)
+SymTable:
+var_f -> 3
+var_c -> 10
+Out:
+10
+FileTable:
+3 -> test.in
+Heap:
+
+Thread ID: 1
+ExeStack:
+print (var_c)
+closeRFileStmt (var_f)
+SymTable:
+var_f -> 3
+var_c -> 20
+Out:
+10
+FileTable:
+3 -> test.in
+Heap:
+
+Thread ID: 1
+ExeStack:
+print (var_c)
+closeRFileStmt (var_f)
+SymTable:
+var_f -> 3
+var_c -> 20
+Out:
+10
+FileTable:
+3 -> test.in
+Heap:
+
+Thread ID: 1
+ExeStack:
+closeRFileStmt (var_f)
+SymTable:
+var_f -> 3
+var_c -> 20
+Out:
+10
+20
+FileTable:
+3 -> test.in
+Heap:
+
+Thread ID: 1
+ExeStack:
+closeRFileStmt (var_f)
+SymTable:
+var_f -> 3
+var_c -> 20
+Out:
+10
+20
+FileTable:
+3 -> test.in
+Heap:
+
 Thread ID: 1
 ExeStack:
 
 SymTable:
-a -> 1
-v -> 10
+var_f -> 3
+var_c -> 20
 Out:
 10
-30
+20
 FileTable:
 
 Heap:
-1 -> 30
-Thread ID: 10
-ExeStack:
-v = 32
-print (v); print (ReadHeapExp (a ))
-SymTable:
-a -> 1
-v -> 10
-Out:
-10
-30
-FileTable:
 
-Heap:
-1 -> 30
-Thread ID: 10
-ExeStack:
-v = 32
-print (v); print (ReadHeapExp (a ))
-SymTable:
-a -> 1
-v -> 10
-Out:
-10
-30
-FileTable:
-
-Heap:
-1 -> 30
-Thread ID: 10
-ExeStack:
-print (v); print (ReadHeapExp (a ))
-SymTable:
-a -> 1
-v -> 32
-Out:
-10
-30
-FileTable:
-
-Heap:
-1 -> 30
-Thread ID: 10
-ExeStack:
-print (v); print (ReadHeapExp (a ))
-SymTable:
-a -> 1
-v -> 32
-Out:
-10
-30
-FileTable:
-
-Heap:
-1 -> 30
-Thread ID: 10
-ExeStack:
-print (v)
-print (ReadHeapExp (a ))
-SymTable:
-a -> 1
-v -> 32
-Out:
-10
-30
-FileTable:
-
-Heap:
-1 -> 30
-Thread ID: 10
-ExeStack:
-print (v)
-print (ReadHeapExp (a ))
-SymTable:
-a -> 1
-v -> 32
-Out:
-10
-30
-FileTable:
-
-Heap:
-1 -> 30
-Thread ID: 10
-ExeStack:
-print (ReadHeapExp (a ))
-SymTable:
-a -> 1
-v -> 32
-Out:
-10
-30
-32
-FileTable:
-
-Heap:
-1 -> 30
-Thread ID: 10
-ExeStack:
-print (ReadHeapExp (a ))
-SymTable:
-a -> 1
-v -> 32
-Out:
-10
-30
-32
-FileTable:
-
-Heap:
-1 -> 30
-Thread ID: 10
-ExeStack:
-
-SymTable:
-a -> 1
-v -> 32
-Out:
-10
-30
-32
-30
-FileTable:
-
-Heap:
-1 -> 30

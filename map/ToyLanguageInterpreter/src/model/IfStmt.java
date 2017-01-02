@@ -20,7 +20,7 @@ public class IfStmt implements IStmt {
 
     @Override
     public String toString() {
-        return "If " + exp.toString() + " then " + thenS.toString() + " else " + elseS.toString();
+        return "If " + exp.toString() + " then " + thenS.toString() + " else " + elseS.toString() + " end";
     }
 
     @Override

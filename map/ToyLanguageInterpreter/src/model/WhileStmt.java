@@ -27,6 +27,6 @@ public class WhileStmt implements IStmt {
 
     @Override
     public String toString() {
-        return "While (" + this.exp.toString() + ") " + this.stmt.toString();
+        return "While (" + this.exp.toString() + ") do " + this.stmt.toString() + " end";
     }
 }

@@ -12,6 +12,7 @@ public interface MyIDictionary <K, V> extends Serializable {
     V put(K key, V value);
     V get(K key) ;
     Collection<V> values();
+    Collection<K> keys();
     V remove(K fd);
     MyIDictionary<K, V> clone();
 }
