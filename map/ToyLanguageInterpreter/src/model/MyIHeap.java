@@ -12,6 +12,6 @@ public interface MyIHeap <T> extends Serializable {
     void writeAddr(int addr, T value);
     T deallocate(int addr);
 
-    Map<Integer, T> getMap();
     void setMap(Map<Integer, T> map);
+    Map<Integer, T> toMap();
 }

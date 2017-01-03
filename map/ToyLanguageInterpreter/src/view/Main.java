@@ -251,6 +251,7 @@ public class Main extends Application {
 
         observableStmtList.add(new PrintStmt(new ConstExp(1)));
 
+
         programList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<IStmt>() {
             @Override
             public void changed(ObservableValue<? extends IStmt> observable, IStmt oldValue, IStmt newValue) {
@@ -269,16 +270,10 @@ public class Main extends Application {
                     dialogStage.initModality(Modality.APPLICATION_MODAL);
                     dialogStage.setScene(new Scene(root));
                     dialogStage.show();
+
                 } catch(IOException e) {
                     e.printStackTrace();
                 }
-                /*
-                Stage dialogStage = new Stage();
-                dialogStage.setTitle("Run example dialog");
-                dialogStage.initModality(Modality.APPLICATION_MODAL);
-                dialogStage.setScene(new Scene(new Label(newValue.getDescription())));
-                dialogStage.show();
-                */
             }
         });
     }

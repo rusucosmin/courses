@@ -29,6 +29,6 @@ public class ReadHeapExp extends Exp  {
 
     @Override
     public String toString() {
-        return "ReadHeapExp (" + id +" )";
+        return "readHeapExp(" + id + ")";
     }
 }

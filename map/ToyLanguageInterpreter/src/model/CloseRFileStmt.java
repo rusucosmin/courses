@@ -16,7 +16,7 @@ public class CloseRFileStmt implements IStmt {
 
     @Override
     public String toString() {
-        return "closeRFileStmt (" + this.exp.toString() + ")";
+        return "closeRFileStmt(" + this.exp.toString() + ")";
     }
 
     @Override

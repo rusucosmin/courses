@@ -32,6 +32,6 @@ public class OpenRFileStmt implements IStmt {
     }
     @Override
     public String toString() {
-        return "openRFile (" + this.id + ", " + this.fileName + ")";
+        return "openRFile(" + this.id + ", " + this.fileName + ")";
     }
 }

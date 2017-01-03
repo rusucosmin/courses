@@ -54,7 +54,7 @@ public class MyHeap<T> implements MyIHeap <T> {
     }
 
     @Override
-    public Map<Integer, T> getMap() {
+    public Map<Integer, T> toMap() {
         return this.vals;
     }
 }

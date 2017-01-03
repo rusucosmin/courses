@@ -4,6 +4,7 @@ import exception.KeyNotExistException;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * Created by cosmin on 10/24/16.
@@ -15,4 +16,5 @@ public interface MyIDictionary <K, V> extends Serializable {
     Collection<K> keys();
     V remove(K fd);
     MyIDictionary<K, V> clone();
+    Map<K, V> toMap();
 }

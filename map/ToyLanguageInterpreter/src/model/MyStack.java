@@ -35,6 +35,11 @@ public class MyStack <T> implements MyIStack<T> {
     }
 
     @Override
+    public Stack<T> toStack() {
+        return this.stack;
+    }
+
+    @Override
     public String toString() {
         String repr = "";
         MyStack <T> rev = new MyStack<T>(new Stack<T>());

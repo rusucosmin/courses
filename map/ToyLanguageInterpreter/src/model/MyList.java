@@ -39,6 +39,11 @@ public class MyList<T> implements MyIList<T> {
     }
 
     @Override
+    public List<T> toList() {
+        return this._list;
+    }
+
+    @Override
     public String toString() {
         String ret = "";
         boolean ok = false;

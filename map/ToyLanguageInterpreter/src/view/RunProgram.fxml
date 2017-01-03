@@ -38,7 +38,7 @@
          </graphic>
       </Label>
       <Label text="Symbol table: " />
-      <TableView prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="symTableView" prefHeight="200.0" prefWidth="200.0">
         <columns>
           <TableColumn prefWidth="75.0" text="Symbol" />
           <TableColumn prefWidth="75.0" text="Value" />

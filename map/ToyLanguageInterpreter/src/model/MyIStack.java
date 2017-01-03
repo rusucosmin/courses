@@ -11,4 +11,5 @@ public interface MyIStack <T> extends Serializable {
     T pop();
     T peek();
     boolean isEmpty();
+    Stack<T> toStack();
 }

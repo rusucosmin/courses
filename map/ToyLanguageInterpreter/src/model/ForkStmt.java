@@ -22,6 +22,6 @@ public class ForkStmt implements IStmt {
 
     @Override
     public String toString() {
-        return "fork (" + this.stmt.toString() + ")";
+        return "fork(" + this.stmt.toString() + ")";
     }
 }

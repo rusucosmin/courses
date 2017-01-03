@@ -5,6 +5,7 @@ import exception.KeyNotExistException;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by cosmin on 10/24/16.
@@ -47,6 +48,11 @@ public class MyDictionary <K, V> implements MyIDictionary<K, V>  {
         for(K key : _map.keySet())
             dict.put(key, _map.get(key));
         return dict;
+    }
+
+    @Override
+    public Map<K, V> toMap() {
+        return this._map;
     }
 
     @Override

@@ -33,6 +33,6 @@ public class ReadFileStmt implements IStmt {
 
     @Override
     public String toString() {
-        return "readFileStmt (" + this.exp.toString() + ", " + this.var + ")";
+        return "readFileStmt(" + this.exp.toString() + ", " + this.var + ")";
     }
 }

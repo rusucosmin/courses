@@ -16,7 +16,7 @@ public class PrintStmt implements IStmt {
 
     @Override
     public String toString() {
-        return "print (" + exp + ")";
+        return "print(" + exp + ")";
     }
 
     @Override

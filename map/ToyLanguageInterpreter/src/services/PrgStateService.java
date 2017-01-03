@@ -46,8 +46,8 @@ public class PrgStateService implements utils.Observable<PrgState> {
     }
 
     public List<Map.Entry<Integer, Integer>> getHeapList() {
-        System.out.println(repo.getPrgList().get(0).getHeap().getMap().entrySet());
-        return new ArrayList<Map.Entry<Integer, Integer>>(repo.getPrgList().get(0).getHeap().getMap().entrySet());
+        System.out.println(repo.getPrgList().get(0).getHeap().toMap().entrySet());
+        return new ArrayList<Map.Entry<Integer, Integer>>(repo.getPrgList().get(0).getHeap().toMap().entrySet());
     }
 
     @Override

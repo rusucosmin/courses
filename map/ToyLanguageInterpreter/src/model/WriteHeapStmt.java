@@ -26,6 +26,6 @@ public class WriteHeapStmt implements IStmt {
 
     @Override
     public String toString() {
-        return "WriteHeap (" + this.id + ", " + this.exp.toString();
+        return "writeHeap(" + this.id + ", " + this.exp.toString() + ")";
     }
 }
