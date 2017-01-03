@@ -12,3 +12,6 @@
 
 *.in
 *.out
+
+#java Classes
+*.class
