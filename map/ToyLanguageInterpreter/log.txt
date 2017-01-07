@@ -1,6 +1,6 @@
 Thread ID: 1
 ExeStack:
-v = 10; newStmt(a, 22); fork(writeHeap(a, 30); v = 32; print(v); print(readHeapExp(a ))); print(v); print(readHeapExp(a ))
+v = 2; print(v)
 SymTable:
 
 Out:
@@ -11,8 +11,8 @@ Heap:
 
 Thread ID: 1
 ExeStack:
-v = 10; newStmt(a, 22)
-fork(writeHeap(a, 30); v = 32; print(v); print(readHeapExp(a ))); print(v); print(readHeapExp(a ))
+v = 2
+print(v)
 SymTable:
 
 Out:
@@ -23,8 +23,8 @@ Heap:
 
 Thread ID: 1
 ExeStack:
-v = 10; newStmt(a, 22)
-fork(writeHeap(a, 30); v = 32; print(v); print(readHeapExp(a ))); print(v); print(readHeapExp(a ))
+v = 2
+print(v)
 SymTable:
 
 Out:
@@ -35,11 +35,9 @@ Heap:
 
 Thread ID: 1
 ExeStack:
-v = 10
-newStmt(a, 22)
-fork(writeHeap(a, 30); v = 32; print(v); print(readHeapExp(a ))); print(v); print(readHeapExp(a ))
+print(v)
 SymTable:
-
+v -> 2
 Out:
 
 FileTable:
@@ -48,11 +46,9 @@ Heap:
 
 Thread ID: 1
 ExeStack:
-v = 10
-newStmt(a, 22)
-fork(writeHeap(a, 30); v = 32; print(v); print(readHeapExp(a ))); print(v); print(readHeapExp(a ))
+print(v)
 SymTable:
-
+v -> 2
 Out:
 
 FileTable:
@@ -61,99 +57,12 @@ Heap:
 
 Thread ID: 1
 ExeStack:
-newStmt(a, 22)
-fork(writeHeap(a, 30); v = 32; print(v); print(readHeapExp(a ))); print(v); print(readHeapExp(a ))
-SymTable:
-v -> 10
-Out:
 
+SymTable:
+v -> 2
+Out:
+2
 FileTable:
 
 Heap:
 
-Thread ID: 1
-ExeStack:
-newStmt(a, 22)
-fork(writeHeap(a, 30); v = 32; print(v); print(readHeapExp(a ))); print(v); print(readHeapExp(a ))
-SymTable:
-v -> 10
-Out:
-
-FileTable:
-
-Heap:
-
-Thread ID: 1
-ExeStack:
-fork(writeHeap(a, 30); v = 32; print(v); print(readHeapExp(a ))); print(v); print(readHeapExp(a ))
-SymTable:
-a -> 1
-v -> 10
-Out:
-
-FileTable:
-
-Heap:
-1 -> 22
-Thread ID: 1
-ExeStack:
-fork(writeHeap(a, 30); v = 32; print(v); print(readHeapExp(a ))); print(v); print(readHeapExp(a ))
-SymTable:
-a -> 1
-v -> 10
-Out:
-
-FileTable:
-
-Heap:
-1 -> 22
-Thread ID: 1
-ExeStack:
-fork(writeHeap(a, 30); v = 32; print(v); print(readHeapExp(a )))
-print(v); print(readHeapExp(a ))
-SymTable:
-a -> 1
-v -> 10
-Out:
-
-FileTable:
-
-Heap:
-1 -> 22
-Thread ID: 1
-ExeStack:
-fork(writeHeap(a, 30); v = 32; print(v); print(readHeapExp(a )))
-print(v); print(readHeapExp(a ))
-SymTable:
-a -> 1
-v -> 10
-Out:
-
-FileTable:
-
-Heap:
-1 -> 22
-Thread ID: 1
-ExeStack:
-print(v); print(readHeapExp(a ))
-SymTable:
-a -> 1
-v -> 10
-Out:
-
-FileTable:
-
-Heap:
-1 -> 22
-Thread ID: 10
-ExeStack:
-writeHeap(a, 30); v = 32; print(v); print(readHeapExp(a ))
-SymTable:
-a -> 1
-v -> 10
-Out:
-
-FileTable:
-
-Heap:
-1 -> 22
