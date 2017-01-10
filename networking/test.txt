@@ -1,0 +1,16 @@
++---------------------------------------------------+
+|               TEST PACKET TRACER                  |
++------------+--------------------------------------+
+|IP          | IP static/dinamici                   |
+|Netmask     | Retele/subretele                     |
+|IP          | Gateway                              |
+|DHCP        | DHCP Server                          |
+|DHCP        | Rutar                                |
+|Rutare      | Statica                              |
+|DNS         | Config DNS Server + DNS Client       |
+|HTTP        | Config HTTP Server/browser           |
+|Comenzi Dos | ipconfig, ping, arp                  |
+|Rutare      | Diamaica RIP 2                       |
+|Wireless    | AP/Router/Client                     |
+|NAT         | Configurare NAT pe router            |
++------------+--------------------------------------+

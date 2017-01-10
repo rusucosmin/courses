@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -31,6 +32,11 @@ public class MyStack <T> implements MyIStack<T> {
     @Override
     public boolean isEmpty() {
         return this.stack.isEmpty();
+    }
+
+    @Override
+    public Stack<T> toStack() {
+        return this.stack;
     }
 
     @Override

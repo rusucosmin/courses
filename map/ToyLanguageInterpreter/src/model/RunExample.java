@@ -1,10 +1,7 @@
 package model;
 
 import controller.Controller;
-import exception.DivideByZeroException;
-import exception.FileAlreadyOpenedException;
-import exception.FileNotOpenedException;
-import exception.UnknownVariableException;
+import exception.*;
 
 import java.io.IOException;
 
@@ -34,6 +31,15 @@ public class RunExample extends Command {
             System.out.println(e.getMessage());
             return ;
         } catch (IOException e) {
+            System.out.println(e.getMessage());
+            return ;
+        } catch (NullPointerException n) {
+            System.out.println(n.getMessage());
+            return ;
+        } catch (UnknownComparisonExpression e) {
+            System.out.println(e.getMessage());
+            return ;
+        } catch (InterruptedException e) {
             System.out.println(e.getMessage());
             return ;
         }

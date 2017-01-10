@@ -1,6 +1,7 @@
 package model;
 
 import exception.DivideByZeroException;
+import exception.UnknownComparisonExpression;
 import exception.UnknownVariableException;
 
 /**
@@ -19,15 +20,15 @@ public class IfStmt implements IStmt {
 
     @Override
     public String toString() {
-        return "If " + exp.toString() + " then " + thenS.toString() + " else " + elseS.toString();
+        return "if(" + exp.toString() + ") then " + thenS.toString() + " else " + elseS.toString() + " end";
     }
 
     @Override
-    public PrgState execute(PrgState state) throws UnknownVariableException, DivideByZeroException {
-        if(exp.eval(state.getSymTable()) == 0)
+    public PrgState execute(PrgState state) throws UnknownVariableException, DivideByZeroException, UnknownComparisonExpression {
+        if(exp.eval(state.getSymTable(), state.getHeap()) == 0)
             state.getExeStack().push(elseS);
         else
             state.getExeStack().push(thenS);
-        return state;
+        return null;
     }
 }

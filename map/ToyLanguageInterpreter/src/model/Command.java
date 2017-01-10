@@ -1,5 +1,7 @@
 package model;
 
+import controller.Controller;
+
 /**
  * Created by cosmin on 02/11/16.
  */

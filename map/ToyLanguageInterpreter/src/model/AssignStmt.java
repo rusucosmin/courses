@@ -1,6 +1,7 @@
 package model;
 
 import exception.DivideByZeroException;
+import exception.UnknownComparisonExpression;
 import exception.UnknownVariableException;
 
 /**
@@ -21,9 +22,9 @@ public class AssignStmt implements IStmt {
     }
 
     @Override
-    public PrgState execute(PrgState state) throws UnknownVariableException, DivideByZeroException {
+    public PrgState execute(PrgState state) throws UnknownVariableException, DivideByZeroException, UnknownVariableException, UnknownComparisonExpression {
         MyIDictionary<String, Integer> symTable = state.getSymTable();
-        symTable.put(this.id, this.exp.eval(symTable));
-        return state;
+        symTable.put(this.id, this.exp.eval(symTable, state.getHeap()));
+        return null;
     }
 }

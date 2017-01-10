@@ -14,7 +14,7 @@ public class VarExp extends Exp {
     }
 
     @Override
-    public int eval(MyIDictionary<String, Integer> symTable) throws UnknownVariableException {
+    public int eval(MyIDictionary<String, Integer> symTable, MyIHeap<Integer> heap) throws UnknownVariableException {
         Integer x = symTable.get(id);
         if(x == null)
             throw new UnknownVariableException("Unknown Variable Exception at: " + this.toString() + "\nThere is no such " + this.id + " variable");

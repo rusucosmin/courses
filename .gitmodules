@@ -1,0 +1,6 @@
+[submodule "map/ToyLanguageInterpreterCS"]
+	path = map/ToyLanguageInterpreterCS
+	url = https://github.com/rusucosmin/ToyLanguageInterpreterCS
+[submodule "oop/OOP_Exam"]
+	path = oop/OOP_Exam
+	url = https://github.com/rusucosmin/OOP_Exam

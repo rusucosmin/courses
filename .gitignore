@@ -12,3 +12,10 @@
 
 *.in
 *.out
+
+#CodeBlocks
+bin/
+debug/
+Debug/
+*.layout
+*.depend

@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -35,6 +36,11 @@ public class MyList<T> implements MyIList<T> {
     @Override
     public int size() {
         return this._list.size();
+    }
+
+    @Override
+    public List<T> toList() {
+        return this._list;
     }
 
     @Override
