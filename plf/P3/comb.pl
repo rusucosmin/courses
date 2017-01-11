@@ -8,3 +8,6 @@ comb(N, [X | T], [X | Tr]) :-
 comb(N, [_ | T], Tr) :-
     N > 0,
     comb(N, T, Tr).
+
+main(N, X, Y) :-
+    findall(AUX, comb(N, X, AUX), Y).
