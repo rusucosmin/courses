@@ -3,5 +3,12 @@
 )
 
 (SETQ F 10)
-(SETQ G 'F)
-(write (funcall G '(8 11 2 3 7 9)))
+(SETF G 'F)
+(write (G '(8 11 2 3 7 9)))
+
+(format t "~%")
+(write f)
+(format t "~%")
+(write (function f))
+(format t "~%")
+(write  G)
