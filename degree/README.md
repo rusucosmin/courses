@@ -9,6 +9,11 @@
 - Ideas from the pdf social-media-analytics
 
 ##Google Research Blog:
+<<<<<<< HEAD
+- App discovery with Google Play [Link](https://research.googleblog.com/2016/11/app-discovery-with-google-play-part-1.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed:+blogspot/gJZg+(Official+Google+Research+Blog)
+
+##Reinforcement Learning
+- openAi/gym
 - App discovery with Google Play [Link](https://research.googleblog.com/2016/11/app-discovery-with-google-play-part-1.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed:+blogspot/gJZg+(Official+Google+Research+Blog))
 
 ##Other ideas
