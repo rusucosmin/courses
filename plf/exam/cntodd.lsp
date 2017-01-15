@@ -1,0 +1,35 @@
+(defun maxodd(x d)
+    (cond
+        ((null x) -1)
+        ((numberp x) (if (= (mod d 2) 1) x -1))
+        ((atom x) -1)
+        (t (apply 'max (mapcar (lambda (el) (maxodd el (+ d 1))) x)))
+    )
+)
+
+(defun check(x)
+    (setq maxi (maxodd x 0))
+    (write x)
+    (format t "~%")
+    (write maxi)
+    (format t "~%")
+    (cond
+        ((= maxi -1) 0)
+        ((= (mod maxi 2) 0) 1)
+        (t 0)
+    )
+)
+
+(defun cnt(x)
+;    (write x)
+;    (format t "~%")
+;    (write (check x))
+;    (format t "CHECK~%")
+    (cond
+        ((null x) 0)
+        ((atom x) 0)
+        (t (+ (check x) (apply '+ (mapcar 'cnt x))))
+    )
+)
+
+(write (cnt '(A (B 2) (1 C 4) (1 (6 F)) (((G) 4) 6))))

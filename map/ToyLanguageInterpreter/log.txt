@@ -1,6 +1,6 @@
 Thread ID: 1
 ExeStack:
-v = 2; print(v)
+v = 0; while(v <= 10) do print(v); v = v + 1 end
 SymTable:
 
 Out:
@@ -11,8 +11,8 @@ Heap:
 
 Thread ID: 1
 ExeStack:
-v = 2
-print(v)
+v = 0
+while(v <= 10) do print(v); v = v + 1 end
 SymTable:
 
 Out:
@@ -23,8 +23,8 @@ Heap:
 
 Thread ID: 1
 ExeStack:
-v = 2
-print(v)
+v = 0
+while(v <= 10) do print(v); v = v + 1 end
 SymTable:
 
 Out:
@@ -35,11 +35,244 @@ Heap:
 
 Thread ID: 1
 ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 0
+Out:
+
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 0
+Out:
+
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 0
+Out:
+
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 0
+Out:
+
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
 print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 0
+Out:
+
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 0
+Out:
+
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 0
+Out:
+0
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 0
+Out:
+0
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 1
+Out:
+0
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 1
+Out:
+0
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 1
+Out:
+0
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 1
+Out:
+0
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 1
+Out:
+0
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 1
+Out:
+0
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 1
+Out:
+0
+1
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 1
+Out:
+0
+1
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
 SymTable:
 v -> 2
 Out:
+0
+1
+FileTable:
 
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 2
+Out:
+0
+1
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 2
+Out:
+0
+1
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 2
+Out:
+0
+1
 FileTable:
 
 Heap:
@@ -47,21 +280,1254 @@ Heap:
 Thread ID: 1
 ExeStack:
 print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
 SymTable:
 v -> 2
 Out:
-
+0
+1
 FileTable:
 
 Heap:
 
 Thread ID: 1
 ExeStack:
-
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
 SymTable:
 v -> 2
 Out:
+0
+1
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 2
+Out:
+0
+1
 2
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 2
+Out:
+0
+1
+2
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 3
+Out:
+0
+1
+2
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 3
+Out:
+0
+1
+2
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 3
+Out:
+0
+1
+2
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 3
+Out:
+0
+1
+2
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 3
+Out:
+0
+1
+2
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 3
+Out:
+0
+1
+2
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 3
+Out:
+0
+1
+2
+3
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 3
+Out:
+0
+1
+2
+3
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 4
+Out:
+0
+1
+2
+3
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 4
+Out:
+0
+1
+2
+3
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 4
+Out:
+0
+1
+2
+3
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 4
+Out:
+0
+1
+2
+3
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 4
+Out:
+0
+1
+2
+3
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 4
+Out:
+0
+1
+2
+3
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 4
+Out:
+0
+1
+2
+3
+4
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 4
+Out:
+0
+1
+2
+3
+4
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 5
+Out:
+0
+1
+2
+3
+4
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 5
+Out:
+0
+1
+2
+3
+4
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 5
+Out:
+0
+1
+2
+3
+4
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 5
+Out:
+0
+1
+2
+3
+4
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 5
+Out:
+0
+1
+2
+3
+4
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 5
+Out:
+0
+1
+2
+3
+4
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 5
+Out:
+0
+1
+2
+3
+4
+5
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 5
+Out:
+0
+1
+2
+3
+4
+5
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 6
+Out:
+0
+1
+2
+3
+4
+5
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 6
+Out:
+0
+1
+2
+3
+4
+5
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 6
+Out:
+0
+1
+2
+3
+4
+5
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 6
+Out:
+0
+1
+2
+3
+4
+5
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 6
+Out:
+0
+1
+2
+3
+4
+5
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 6
+Out:
+0
+1
+2
+3
+4
+5
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 6
+Out:
+0
+1
+2
+3
+4
+5
+6
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 6
+Out:
+0
+1
+2
+3
+4
+5
+6
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 7
+Out:
+0
+1
+2
+3
+4
+5
+6
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 7
+Out:
+0
+1
+2
+3
+4
+5
+6
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 7
+Out:
+0
+1
+2
+3
+4
+5
+6
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 7
+Out:
+0
+1
+2
+3
+4
+5
+6
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 7
+Out:
+0
+1
+2
+3
+4
+5
+6
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 7
+Out:
+0
+1
+2
+3
+4
+5
+6
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 7
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 7
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 8
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 8
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 8
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 8
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 8
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 8
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 8
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 8
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 9
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 9
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 9
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 9
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 9
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 9
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 9
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 9
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 10
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 10
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 10
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v); v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 10
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 10
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+print(v)
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 10
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 10
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+v = v + 1
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 10
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 11
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+while(v <= 10) do print(v); v = v + 1 end
+SymTable:
+v -> 11
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+FileTable:
+
+Heap:
+
+Thread ID: 1
+ExeStack:
+
+SymTable:
+v -> 11
+Out:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
 FileTable:
 
 Heap:
