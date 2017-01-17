@@ -21,10 +21,10 @@
 )
 
 (defun cnt(x)
-;    (write x)
-;    (format t "~%")
-;    (write (check x))
-;    (format t "CHECK~%")
+    (write x)
+    (format t "~%")
+    (write (check x))
+    (format t "CHECK~%")
     (cond
         ((null x) 0)
         ((atom x) 0)
