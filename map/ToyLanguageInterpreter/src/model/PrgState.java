@@ -18,7 +18,8 @@ public class PrgState implements Serializable {
     private IStmt originalProgram;
     private MyIDictionary<Integer, Tuple<String, BufferedReader>> fileTable;
     private MyIHeap<Integer> heap;
-    public PrgState(MyIStack<IStmt> exeStack, MyIDictionary<String, Integer> symTable, MyIList<Integer> out, IStmt prg, MyIDictionary<Integer, Tuple<String, BufferedReader>> fileTable, MyIHeap<Integer> heap, int id) {
+    private MyILatchTable latchTable;
+    public PrgState(MyIStack<IStmt> exeStack, MyIDictionary<String, Integer> symTable, MyIList<Integer> out, IStmt prg, MyIDictionary<Integer, Tuple<String, BufferedReader>> fileTable, MyIHeap<Integer> heap, int id, MyILatchTable latchTable) {
         this.exeStack = exeStack;
         this.symTable = symTable;
         this.out = out;
@@ -27,6 +28,7 @@ public class PrgState implements Serializable {
         this.fileTable = fileTable;
         this.heap = heap;
         this.id = id;
+        this.latchTable = latchTable;
     }
     public int getId() {
         return id;
@@ -65,5 +67,9 @@ public class PrgState implements Serializable {
                 .append(fileTable.toString())
                 .append(heap.toString());
         return builder.build();
+    }
+
+    public MyILatchTable getLatchTable() {
+        return latchTable;
     }
 }

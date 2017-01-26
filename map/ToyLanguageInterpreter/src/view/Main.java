@@ -39,8 +39,9 @@ public class Main extends Application {
         MyIList<Integer> out = new MyList<>(new ArrayList<Integer>());
         MyIDictionary<Integer, Tuple<String, BufferedReader>> fileTable = new MyDictionary<>(new HashMap<Integer, Tuple<String, BufferedReader>>());
         MyIHeap<Integer> heap = new MyHeap<Integer>(new HashMap<Integer, Integer>());
+        MyILatchTable latchTable = new MyLatchTable(new HashMap<Integer, Integer>());
 
-        PrgState prgState = new PrgState(exeStack, symTable, out, prg, fileTable, heap, 1);
+        PrgState prgState = new PrgState(exeStack, symTable, out, prg, fileTable, heap, 1, latchTable);
         IRepository repo = new Repository(prgState, "log.txt");
         return repo;
     }
@@ -55,7 +56,6 @@ public class Main extends Application {
         *   v = 2;
         *   print (v)
         *
-        * */
         IStmt lab2ex1= new CompStmt(new AssignStmt("v",new ConstExp(2)), new PrintStmt(new
                 VarExp("v")));
         /*
@@ -64,7 +64,6 @@ public class Main extends Application {
         *   b = a + 1;
         *   print (b)
         *
-        * */
         IStmt lab2ex2 = new CompStmt(new AssignStmt("a", new ArithExp('+',new ConstExp(2),new
                 ArithExp('*',new ConstExp(3), new ConstExp(5)))),
                 new CompStmt(new AssignStmt("b",new ArithExp('+',new VarExp("a"), new
@@ -75,7 +74,6 @@ public class Main extends Application {
         *   If a then v = 2 else v = 3;
         *   print (v)
         *
-        * */
         IStmt lab2ex3 = new CompStmt(new AssignStmt("a", new ArithExp('-',new ConstExp(2), new
                 ConstExp(2))),
                 new CompStmt(new IfStmt(new VarExp("a"),new AssignStmt("v",new ConstExp(2)), new
@@ -89,7 +87,6 @@ public class Main extends Application {
         *   If var_c then readFile (var_f, var_c); print (var_c) else print (0);
         *   closeRFile (var_f)
         *
-        * */
         IStmt lab5ex1 = new CompStmt(
                 new OpenRFileStmt("var_f", "test.in"),
                 new CompStmt(
@@ -117,7 +114,6 @@ public class Main extends Application {
         *   readFile (var_f + 2, var_c); print (var_c);
         *   If var_c then readFile (var_f, var_c); print (var_c) else print (0);
         *   closeRFile (var_f)
-        * */
         IStmt lab5ex2 = new CompStmt(
                 new OpenRFileStmt("var_f", "test.in"),
                 new CompStmt(
@@ -141,7 +137,6 @@ public class Main extends Application {
         /**
          *v=10;new(v,20);new(a,22);wH(a,30);print(a);print(rH(a));a=0
          *
-         * */
         IStmt lab6ex1 =
         new CompStmt(
                 new AssignStmt("v", new ConstExp(10)),
@@ -182,7 +177,6 @@ public class Main extends Application {
             v=10;new(a,22);
             fork(wH(a,30);v=32;print(v);print(rH(a)));
             print(v);print(rH(a))
-        */
         IStmt lab8ex1 = new CompStmt(
                 new CompStmt(
                     new AssignStmt("v", new ConstExp(10)),
@@ -207,9 +201,124 @@ public class Main extends Application {
                         )
                 )
         );
+        */
+        /*
+        v=0;
+        (repeat (fork(print(v);v=v-1);v=v+1) until v==3);
+        x=1;y=2;z=3;w=4;
+        print(v*10)
+         */
+        IStmt examEx1 = new CompStmt(
+                new AssignStmt("v", new ConstExp(0)),
+                new CompStmt(
+                    new RepeatStmt(
+                            new CompStmt(
+                            new ForkStmt(
+                                    new CompStmt(
+                                            new PrintStmt(new VarExp("v")),
+                                            new AssignStmt("v", new ArithExp('-', new VarExp("v"), new ConstExp(1)))
+                                    )),
+                            new AssignStmt("v", new ArithExp('+', new VarExp("v"), new ConstExp(1)))
+                            ),
+                            new CompExp("==", new VarExp("v"), new ConstExp(3))
+                    ),
+                        new CompStmt(
+                            new AssignStmt("x", new ConstExp(1)),
+                                new CompStmt(
+                                    new AssignStmt("y", new ConstExp(2)),
+                                        new CompStmt(
+                                                new AssignStmt("z", new ConstExp(3)),
+                                                new CompStmt(
+                                                        new AssignStmt("w", new ConstExp(4)),
+                                                        new PrintStmt(new ArithExp('*', new VarExp("v"), new ConstExp(10)))
+                                                )
+                                        )
+
+                                )
+                        )
+                )
+        );
+        IStmt error1 = new AwaitStmt("cnt");
+        IStmt error2 = new CompStmt(
+                new AssignStmt("v", new ConstExp(100)),
+                new CompStmt(
+                        new NewLatchStmt("cnt", new ConstExp(2)),
+                        new AwaitStmt("v")
+                )
+        );
+        IStmt error3 = new CountDownStmt("cnt");
+
+        /*
+        new(v1,2);new(v2,3);new(v3,4);newLatch(cnt,rH(v2));
+        fork(wh(v1,rh(v1)*10));print(rh(v1));countDown(cnt));
+        fork(wh(v2,rh(v2)*10));print(rh(v2));countDown(cnt));
+        fork(wh(v3,rh(v3)*10));print(rh(v3));countDown(cnt));
+        await(cnt);
+        print(cnt);
+        countDown(cnt);
+        print(cnt)
+        The final Out should be {20,id-first-child,30,id-second-child,40, id-thirdchild,0,0}
+        where id-first-child, id-second-child and id-third-child are the
+        unique identifiers of those three new threads created by fork
+         */
+        IStmt examEx2 = new CompStmt(
+                new NewStmt("v1", new ConstExp(2)),
+                new CompStmt(
+                        new NewStmt("v2", new ConstExp(3)),
+                        new CompStmt(
+                                new NewStmt("v3", new ConstExp(4)),
+                                new CompStmt(
+                                        new NewLatchStmt("cnt", new ReadHeapExp("v2")),
+                                        new CompStmt(
+                                            new ForkStmt(
+                                                    new CompStmt(
+                                                            new WriteHeapStmt("v1", new ArithExp('*', new ReadHeapExp("v1"), new ConstExp(10))),
+                                                            new CompStmt(
+                                                                    new PrintStmt(new ReadHeapExp("v1")),
+                                                                    new CountDownStmt("cnt")
+                                                            )
+                                                    )
+                                            ),
+                                                new CompStmt(
+                                                    new ForkStmt(
+                                                            new CompStmt(
+                                                                    new WriteHeapStmt("v2", new ArithExp('*', new ReadHeapExp("v2"), new ConstExp(10))),
+                                                                    new CompStmt(
+                                                                            new PrintStmt(new ReadHeapExp("v2")),
+                                                                            new CountDownStmt("cnt")
+                                                                    )
+                                                            )
+                                                    ),
+                                                        new CompStmt(
+                                                            new ForkStmt(
+                                                                    new CompStmt(
+                                                                            new WriteHeapStmt("v3", new ArithExp('*', new ReadHeapExp("v3"), new ConstExp(10))),
+                                                                            new CompStmt(
+                                                                                new PrintStmt(new ReadHeapExp("v3")),
+                                                                                new CountDownStmt("cnt")
+                                                                            )
+                                                                    )
+                                                            ),
+                                                                new CompStmt(
+                                                                        new AwaitStmt("cnt"),
+                                                                        new CompStmt(
+                                                                                new PrintStmt(new VarExp("cnt")),
+                                                                                new CompStmt(
+                                                                                        new CountDownStmt("cnt"),
+                                                                                        new PrintStmt(new VarExp("cnt"))
+                                                                                )
+                                                                        )
+                                                                )
+                                                        )
+                                                )
+                                        )
+                                )
+                        )
+                )
+        );
         ///create the list of istmts
         List<IStmt> menu = new ArrayList<IStmt>();
-        menu.add(lab2ex1);
+        /*menu.add(lab2ex1);
         menu.add(lab2ex2);
         menu.add(lab2ex3);
         menu.add(lab5ex1);
@@ -218,9 +327,16 @@ public class Main extends Application {
         menu.add(lab7test);
         menu.add(lab7ex1);
         menu.add(lab8ex1);
+        */
+
+        menu.add(examEx1);
+        menu.add(examEx2);
+        menu.add(error1);
+        menu.add(error2);
+        menu.add(error3);
 
         VBox root = new VBox(5);
-        root.getChildren().add(new Label("Plase choose a program: "));
+        root.getChildren().add(new Label("Please choose a program: "));
 
         /// create the listview
         ObservableList<IStmt> observableStmtList = FXCollections.observableArrayList(menu);
@@ -277,4 +393,16 @@ public class Main extends Application {
             }
         });
     }
+}
+
+class A  {
+
+}
+
+class B extends A {
+
+}
+
+class C extends A {
+
 }

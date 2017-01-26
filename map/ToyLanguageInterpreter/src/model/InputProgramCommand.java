@@ -47,8 +47,9 @@ public class InputProgramCommand extends Command {
         MyIList<Integer> out = new MyList<>(new ArrayList<Integer>());
         MyIDictionary<Integer, Tuple<String, BufferedReader>> fileTable = new MyDictionary<>(new HashMap<Integer, Tuple<String, BufferedReader>>());
         MyIHeap<Integer> heap = new MyHeap<Integer>(new HashMap<Integer, Integer>());
+        MyILatchTable latchTable = new MyLatchTable(new HashMap<Integer, Integer>());
 
-        PrgState prgState = new PrgState(exeStack, symTable, out, prg, fileTable, heap, 1);
+        PrgState prgState = new PrgState(exeStack, symTable, out, prg, fileTable, heap, 1, latchTable);
         this.ctrl.setMain(prgState);
         try {
             this.ctrl.allSteps();

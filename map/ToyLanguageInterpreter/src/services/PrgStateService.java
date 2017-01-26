@@ -5,10 +5,7 @@ import model.Tuple;
 import repository.IRepository;
 import utils.Observer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by cosmin on 1/2/17.
@@ -16,6 +13,7 @@ import java.util.Map;
 public class PrgStateService implements utils.Observable<PrgState> {
     protected List<Observer<PrgState>> observers = new ArrayList<Observer<PrgState>>();
     private IRepository repo;
+    private Collection<? extends Tuple<Integer, Integer>> latchList;
 
     public PrgStateService(IRepository repo) {
         this.repo = repo;
@@ -64,5 +62,12 @@ public class PrgStateService implements utils.Observable<PrgState> {
     public void notifyObservers() {
         for(Observer o : observers)
             o.update(this);
+    }
+
+    public List<Tuple<Integer, Integer>> getLatchList() {
+        List<Tuple<Integer, Integer>> mList = new ArrayList<>();
+        for(Integer key : repo.getPrgList().get(0).getLatchTable().keys())
+            mList.add(new Tuple(key, repo.getPrgList().get(0).getLatchTable().get(key)));
+        return mList;
     }
 }

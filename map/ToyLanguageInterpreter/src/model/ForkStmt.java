@@ -16,7 +16,7 @@ public class ForkStmt implements IStmt {
     }
    @Override
     public PrgState execute(PrgState state) throws IOException, FileAlreadyOpenedException, FileNotOpenedException, UnknownVariableException, DivideByZeroException, UnknownComparisonExpression, IOException, UnknownComparisonExpression {
-        PrgState forkProgram = new PrgState(new MyStack<>(new Stack<>()), state.getSymTable().clone(), state.getOut(), this.stmt, state.getFileTable(), state.getHeap(), state.getId() * 10);
+        PrgState forkProgram = new PrgState(new MyStack<>(new Stack<>()), state.getSymTable().clone(), state.getOut(), this.stmt, state.getFileTable(), state.getHeap(), state.getId() * 10, state.getLatchTable());
         return forkProgram;
     }
 
