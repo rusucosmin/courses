@@ -1,5 +1,8 @@
 #Bachelor's Degree Ideas
 
+##Turing AI
+- algorithm to solve Turing Test
+
 ##Deep learning
 - From doodle to paintings
 - Predict dangerous things in a photo
