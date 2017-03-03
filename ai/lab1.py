@@ -36,6 +36,7 @@ Solution:
 
 import numpy
 import random
+import matplotlib.pyplot as pyplot
 
 def generate_camels(n):
     x = range(n)
@@ -53,8 +54,11 @@ def generate_samples(n, m):
     samples = [generate_camels(n) for _ in range(m)]
     fitness = [fitness_function(x) for x in samples]
     print("\n".join([str(samples[i]) + " fitness = " + str(fitness[i]) for i in range(len(samples))]))
+    pyplot.hist(fitness)
+    pyplot.draw()
     print("mean: %.6f" % numpy.mean(fitness))
     print("std dev: %.6f" % numpy.std(fitness))
+    pyplot.show()
 
 def main():
     n = int(input("number of camles: = "))
