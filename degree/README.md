@@ -1,25 +1,21 @@
 #Bachelor's Degree Ideas
 
-##Turing AI
-- algorithm to solve Turing Test
-
 ##Deep learning
-- From doodle to paintings
+- Adding colors to black/white images/gifs/videos
 - Predict dangerous things in a photo
-- Adding colors to black/white images/videos
+- From doodle to paintings
 - High resolution images
-- Edge detection and doodle classifier
-- Adding sound to videos / gifs (understanding languages based on facial expressions)
+- Deep Reinforcement Learning to learn to play a game
+- Detecting ads in a photo
 
 ##Social Media Analysis
 - Ideas from the pdf social-media-analytics
 
 ##Google Research Blog:
-- App discovery with Google Play [Link](https://research.googleblog.com/2016/11/app-discovery-with-google-play-part-1.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed:+blogspot/gJZg+(Official+Google+Research+Blog)
+- App discovery with Google Play [Link](https://research.googleblog.com/2016/11/app-discovery-with-google-play-part-1.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed:+blogspot/gJZg+(Official+Google+Research+Blog))
 
 ##Reinforcement Learning
 - openAi/gym
-- App discovery with Google Play [Link](https://research.googleblog.com/2016/11/app-discovery-with-google-play-part-1.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed:+blogspot/gJZg+(Official+Google+Research+Blog))
 
 ##Other ideas
 
