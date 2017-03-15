@@ -1,5 +1,0 @@
-- meniu nagivagibl
-- imagine
-- tabel
-- videoclip
-- footer cu copyright
