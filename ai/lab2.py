@@ -31,10 +31,6 @@ class State:
                 now._conf = now._conf ^ (1 << x)
             return now
 
-    def flip(self, pos):
-        now = State(self.getState())
-        now._conf = now._conf ^ (1 << pos)
-        return now
     #BCCA
     def __eq__(self, other):
         return self.getState() == other.getState()
@@ -102,7 +98,7 @@ class Problem:
 
     def heuristic(self, s1, s2):
         x1 = str(s1).count("1")
-        x2 = str(s2).count("2")
+        x2 = str(s2).count("1")
         if x1 == x2:
             return 0
         elif x1 < x2:
@@ -134,8 +130,8 @@ class Controller:
         dad = {}
         q.append(self._problem._initState)
         vis.append(self._problem._initState)
-        while len(q) > 0:
-            now = q.pop(0)
+        while len(q) > 0:                           #while there are states in the queue
+            now = q.pop(0)                          #get the first one
             if now == self._problem._finalState:
                 return self.findSol(now, dad)
             for nxt in self._problem.expand(now):
@@ -216,9 +212,4 @@ p = Problem()
 ctrl = Controller(p)
 ui = UI(ctrl)
 ui.run()
-
-#print(ctrl.orderStates(ctrl.bfs(ctrl.getProblem())))
-#print(ctrl.orderStates(ctrl.gbfs(ctrl.getProblem())))
-
-
 
