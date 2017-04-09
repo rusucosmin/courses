@@ -1,0 +1,27 @@
+div#texts h1 {
+    text-shadow: 0 0 3px #FF0000;
+}
+
+div#texts h2 {
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+#menu ul { list-style: none; margin: 0; padding: 0; width: 11em; }
+
+#menu h2 { color: #f0f0f0; background: #aabbff; }
+
+#menu a { color: #000; background: #efefef; }
+
+div#menu ul ul{ display: none; margin:0; padding: 0; }
+
+div#menu > ul > li{ position: relative; }
+
+div#menu ul li:hover ul {
+  display: block;
+  position: absolute;
+  top:0px;
+  left: 11em;
+  margin:0;
+  padding: 0;
+}

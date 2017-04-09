@@ -1,0 +1,396 @@
+aside,
+        figcaption,
+        figure,
+        footer,
+        header,
+        main,
+        menu,
+        nav,
+        section {
+            display: block;
+        }
+
+        button,
+        input {
+            color: inherit;
+            font: inherit;
+            margin: 0;
+        }
+
+        img {
+            vertical-align: middle;
+        }
+
+        html {
+            font-family: sans-serif;
+            color: #222;
+            font-size: 1em;
+            line-height: 1.4;
+        }
+
+        body {
+            margin: 0;
+            color: #5F5F5F;
+            background-color: #FAFAFC;
+            height: 100%;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        img {
+            border: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        input {
+            line-height: normal;
+        }
+
+        a:active, a:hover, textarea:focus, input:focus {
+            outline: 0;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .top-menu {
+            position: fixed;
+	    z-index: 1;
+            top: 0;
+            width: 100%;
+            margin-bottom: 2em;
+        }
+
+        .top-menu ul {
+            background-color: #2D1152;
+            list-style-type: none;
+            margin-top: 0;
+            padding-left: 1em;
+        }
+
+        .top-menu ul li {
+            color: white;
+            display: inline;
+            padding-left: 2em;
+        }
+
+        .top-menu ul li a {
+            font-family: arial, sans-serif;
+            color: white;
+        }
+
+        main {
+            position: relative;
+            margin-left: 5em;
+            width: 90%;
+            min-height: 800px;
+        }
+
+        main aside {
+            position: absolute;
+            right: 0;
+            top: 5em;
+            width: 30%;
+        }
+
+        .search .logo-wrapper, .search .input-wrapper, .search-button,
+        .search-right {
+            display: inline;
+        }
+	
+	.search {
+	    background-color: #FAFAFC;
+	    width: 100%;
+	    position: fixed;
+	    top: 22px;
+	    padding-top: 10px;
+	    padding-bottom: 10px;
+	    z-index: 1;
+	}
+
+        .search .logo-wrapper img {
+            width: 200px;
+            height: 60px;
+        }
+
+        .search .input-wrapper input {
+            margin: 0 .2em 0 1em;
+            width: 25em;
+            height: 2em;
+            padding: 4px 7px 4px 8px;
+        }
+
+        .search-button {
+            border-radius: 3px;
+            font-family: arial, sans-serif;
+            color: #ffffff;
+            background: #3498db;
+            padding: 10px 20px 10px 20px;
+            text-decoration: none;
+        }
+
+        .search-button:hover {
+            text-decoration: none;
+        }
+
+        .search-right {
+            right: 0;
+            top: 1em;
+        }
+
+        .search-right img {
+            width: 27px;
+            height: 27px;
+        }
+
+        .main-navigation {
+	    position: relative;
+	    top: 80px;
+            width: 15%;
+            display: inline-block;
+        }
+
+        .main-navigation ul {
+            position: relative;
+            list-style: none;
+            width: 100%;
+        }
+
+        .main-navigation a {
+            display: block;
+            width: 100%;
+        }
+
+        .main-navigation ul {
+            padding-left: 1em;
+        }
+
+        .main-navigation ul li {
+            padding-top: 1em;
+        }
+
+        .icon-generic {
+            display: inline;
+            width: 20px;
+            height: 20px;
+            vertical-align: bottom;
+            margin-right: 1em;
+        }
+
+        .section {
+	    position: relative;
+	    top: 20px;
+            background-color: white;
+            padding: 10px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .section-content {
+            display: block;
+        }
+
+        .section-content li {
+            width: 50%;
+            white-space: nowrap;
+        }
+
+        .right, .left {
+            display: inline-block;
+            width: 45%;
+        }
+
+        .main-content {
+	    position: relative;
+	    top: 100px;
+            vertical-align: top;
+            display: inline-block;
+            width: 54%;
+        }
+
+        .main-content .image-header {
+            position: relative;
+            display: inline-block;
+            margin-top: 1em;
+        }
+
+        .main-content .image-header img {
+            width: 41em;
+            height: 16em;
+        }
+
+        .image-header .image-bottom {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .image-bottom .image-bottom-content {
+            padding: 10px;
+        }
+
+        .image-bottom-content h3, .image-bottom-content p {
+            margin: 0;
+            padding-bottom: 10px;
+        }
+
+        .content-tabs {
+            margin-top: 15px;
+            background-color: #500095;
+            color: white;
+            border-radius: 3px;
+            padding: 5px 10px 10px 5px;
+        }
+
+        .content-tabs a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .content-tabs ul {
+            position: relative;
+            list-style: none;
+            margin: 0;
+            width: 90%;
+            padding-left: 1em;
+        }
+
+        .content-tabs ul li {
+            display: inline;
+            padding-right: 2em;
+            padding-left: 1em;
+            padding-bottom: 0.3em;
+        }
+
+        .content .title {
+            display: block;
+            position: relative;
+        }
+
+        .content-tabs .content {
+	    color: black;
+            display: none;
+            position: absolute;
+            padding-top: 20px;
+            left: 0;
+            width: 110%;
+            margin-bottom: 3em;
+        }
+
+	.content-tabs li:hover .content {
+            display: block;
+        }
+
+        .content-section {
+            border: 1px grey solid;
+            padding-bottom: 10px;
+        }
+
+        .image, .content-section {
+            clear: both;
+        }
+
+        .content-section {
+            text-align: left;
+            height: 78px;
+            overflow: hidden;
+        }
+
+        .content-section img {
+            width: 100px;
+            vertical-align: middle;
+            float: left;
+            margin-right: 10px;
+        }
+
+        .content-section a {
+            color: #324fe1;
+            vertical-align: top;
+            font-size: 17px;
+        }
+
+        .content-section .body {
+            overflow: hidden;
+        }
+
+        .content-section .title {
+            margin-left: 18%;
+        }
+
+        .image-filmstrip {
+            font-size: 0;
+            margin-left: 10px;
+        }
+
+        .image-filmstrip .film {
+            font-size: 0;
+            background-color: white;
+            display: inline-block;
+            vertical-align: top;
+            border: 1px white solid;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .image-filmstrip .film a {
+            font-size: 12px;
+	    float: left;
+	    clear: both;
+	    width: 115px;
+        }
+
+	.image-filmstrip .film img {
+	    float: left;
+	}
+        .image-filmstrip .film:hover {
+            border-bottom: 5px #500095 solid;
+        }
+
+        .mic  {
+            width: 115px;
+        }
+
+        .image-filmstrip .film  {
+            height: 100px;
+        }
+
+	.image-filmstrip .film .replacement {
+	    display: none;
+		position: absolute;
+		top:0;
+		left:0;
+	}
+
+	.film:hover .replacement {
+	    display: block;
+	    position: absolute;
+	    top: 16px;
+	}
+
+	.replacement img {
+		width: 631px;
+        height: 250px;
+	}
+
+	.film:hover .replacement a {
+		position: absolute;
+        bottom: 0;
+        left: 0px;
+        width: 100%;
+        height: 20%;
+        padding-bottom: 10px;
+        background: rgba(255, 255, 255, 0.5);
+        padding: 10px;
+	}
+
