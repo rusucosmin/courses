@@ -1,8 +1,7 @@
-#for print
 import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
-import pylab
+import sys
 
 from random import sample, shuffle, random, randint
 from math import floor, ceil
@@ -33,7 +32,7 @@ class Individual:
                         pass
 
     def mutate(self, probability):
-        if random() < 0.1:
+        if random() < probability:
             k = randint(0, self.size - 1)
             if self.x[k] == "1":
                 self.x[k] = "0"
@@ -59,14 +58,12 @@ class Individual:
         pos = nx.spring_layout(G)
         nx.draw_networkx_labels(G, pos, labels=node_labels)
         nx.draw(G, pos, edge_color = edge_color, node_size = 2000, node_color = 'w')
-        pylab.show()
 
 class Population:
     def __init__(self, nrInd, problem):
         self.nrInd = nrInd
         self.problem = problem
         self.arr = [Individual(problem) for _ in range(nrInd)]
-        pass
 
     def evaluate(self):
         for individ in self.arr:
@@ -87,101 +84,127 @@ class Population:
         return arrSorted[:maxInd]
 
 class Problem:
-    def __init__(self):
+    def __init__(self, fileName):
         self.n = 0
         self.m = 0
         self.vertices = []
         self.edges = []
+        self.loadData(fileName)
 
     def loadData(self, fileName):
         print("Loading file...")
-        f = open(fileName, "r")
-        (self.n, self.m) = map(int, f.readline().split())
-        self.vertices = map(int, f.readline().split())
-        for line in f:
-            (x, y) = map(int, line.split())
-            if x > y:
-                (x, y) = (y, x)
-            self.edges.append((x, y))
-        print("Loaded file data: ")
-        print("Number of Vertices: " + str(self.n))
-        print("Number of Edges: " + str(self.m))
-        print("Edges:")
-        print("\n".join([str(edg) for edg in self.edges]))
+        try:
+            f = open(fileName, "r")
+            (self.n, self.m) = map(int, f.readline().split())
+            self.vertices = map(int, f.readline().split())
+            for line in f:
+                (x, y) = map(int, line.split())
+                if x > y:
+                    (x, y) = (y, x)
+                if x < 1 or x > self.n:
+                    raise Exception("Corrupt file: vertex index (x)")
+                if y < 1 or y > self.n:
+                    raise Exception("Corrupt file: vertex index (y)")
+                self.edges.append((x, y))
+            print("Loaded file data: ")
+            print("Number of Vertices: " + str(self.n))
+            print("Number of Edges: " + str(self.m))
+            if len(self.edges) != self.m:
+                raise Exception("Corrupt file: number of edges")
+        except Exception as e:
+            print(str(e))
+            sys.exit(1)
 
 class Algorithm:
-    def __init__(self, fileName, nrInd = 100, nrGen = 10):
-        self.problem = Problem()
+    def __init__(self, fileName, paramFileName = "param.in", nrInd = 50, nrGen = 100):
+        self.problem = Problem(fileName)
+        self.probability_mutate = 0.5
+        self.probability_crossover = 0.5
+        self.readParameters(paramFileName)
         self.nrInd = nrInd
         self.nrGen = nrGen
-        self.readParameters(fileName)
         self.population = Population(self.nrInd, self.problem)
         self.population.evaluate()
 
         self.std = []
         self.average = []
+        self.bestf = []
 
-    def readParameters(self, fileName):
-        self.problem.loadData(fileName)
+    def readParameters(self, paramFileName):
+        try:
+            f = open(paramFileName, "r")
+            for line in f:
+                (key, value) = line.split("=")
+                if key == "probability_mutate":
+                    self.probability_mutate = float(value)
+                elif key == "probability_crossover":
+                    self.probability_crossover = float(value)
+                else:
+                    raise Exception("Corrupt parameters file (key)")
+        except Exception as e:
+            print(str(e))
+            sys.exit(1)
 
     def iteration(self):
         parents = range(self.nrInd)
         nrChilds = len(parents) // 2
         offspring = Population(nrChilds, self.problem)
         for i in range(nrChilds):
-            offspring.arr[i] = Individual.crossover(self.population.arr[i << 1], self.population.arr[(i << 1) | 1], 0.5)
-            offspring.arr[i].mutate(0.5)
+            offspring.arr[i] = Individual.crossover(self.population.arr[i << 1], self.population.arr[(i << 1) | 1], self.probability_crossover)
+            offspring.arr[i].mutate(self.probability_mutate)
         offspring.evaluate()
         self.population.reunion(offspring)
         self.population.selection(self.nrInd)
 
     def run(self):
+        plt.figure(num = None, figsize=(15, 7), dpi=80, facecolor='w', edgecolor='k')
         for nowIter in range(self.nrGen):
             print("Running iteration: " + str(nowIter))
             self.iteration()
-            self.record_statistics()
-
-        self.population.best(1)[0].printGraph(self.problem)
+            self.statistics(nowIter)
         self.show_statistics()
-
-
         return self.population.best(10)
 
-    def record_statistics(self):
+    def statistics(self, nowIter):
+        self.record_statistics(nowIter)
+        plt.subplot(121)
+        bst = self.population.best(1)[0]
+        plt.title("Best individual\nFitness: " + str(bst.f))
+        bst.printGraph(self.problem)
+        self.show_statistics(nowIter, bst)
+
+    def record_statistics(self, iteration):
         self.std.append(np.std(map(lambda Individual: Individual.f, self.population.arr)))
         self.average.append(np.average(map(lambda Individual: Individual.f, self.population.arr)))
+        self.bestf.append(min(map(lambda Individual: Individual.f, self.population.arr)))
 
-    def show_statistics(self):
-        plt.plot(self.std, label = "stddev")
-        plt.plot(self.average, label = "average")
-        plt.ylabel("fitness")
-        plt.xlabel("iteration")
-        plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
-           ncol=2, mode="expand", borderaxespad=0.)
-        plt.axis([0, self.nrGen, -1, 1])
-        plt.show()
+    def show_statistics(self, iteration = None, bst = None):
+        plt.subplot(122)
+        plt.plot(range(1, len(self.std) + 1), self.std, label = "stddev")
+        plt.plot(range(1, len(self.average) + 1), self.average, label = "average")
+        plt.plot(range(1, len(self.bestf) + 1), self.bestf, label = "best fitness")
+        ymin = ceil(min(self.std + self.average + self.bestf)) * 2 - 1
+        ymax = ceil(max(self.std + self.average + self.bestf)) * 2 + 1
+        plt.ylabel("Fitness")
+        plt.xlabel("Generation")
+        plt.legend()
+        plt.title("Statistics for generations")
+        plt.axis([1, self.nrGen, ymin, ymax])
+        if iteration is None:
+            plt.show()
+        else:
+            plt.draw()
+            plt.pause(0.05)
+            plt.clf()
 
 class Application:
     def __init__(self, fileName):
         self.fileName = fileName
-        pass
 
     def main(self):
         self.algorithm = Algorithm(self.fileName)
         best = self.algorithm.run()
-        pass
 
-app = Application("input.in")
+app = Application("input3.in")
 app.main()
-
-
-
-
-
-
-
-
-
-
-
 
