@@ -156,14 +156,18 @@ class Algorithm:
         self.population.reunion(offspring)
         self.population.selection(self.nrInd)
 
-    def run(self):
-        plt.figure(num = None, figsize=(15, 7), dpi=80, facecolor='w', edgecolor='k')
+    def run(self, shouldShow = True):
+        if shouldShow:
+            plt.figure(num = None, figsize=(15, 7), dpi=80, facecolor='w', edgecolor='k')
         for nowIter in range(self.nrGen):
-            print("Running iteration: " + str(nowIter))
+            if nowIter % 30 == 0:
+                print("Running iteration: " + str(nowIter))
             self.iteration()
-            self.statistics(nowIter)
-        self.show_statistics()
-        return self.population.best(10)
+            if shouldShow:
+                self.statistics(nowIter)
+        if shouldShow:
+            self.show_statistics()
+        return self.population.best(10)[0]
 
     def statistics(self, nowIter):
         self.record_statistics(nowIter)
@@ -205,6 +209,22 @@ class Application:
         self.algorithm = Algorithm(self.fileName)
         best = self.algorithm.run()
 
+    def runStat(self):
+        bsts = []
+        for i in range(30):
+            print("Running test #" + str(i))
+            self.algorithm = Algorithm(self.fileName)
+            bsts.append(self.algorithm.run(False))
+        stddev = np.std(map(lambda Individual: Individual.f, bsts))
+        average = np.average(map(lambda Individual: Individual.f, bsts))
+        best = min(map(lambda Individual: Individual.f, bsts))
+        print("Runned statistics for data in: " + self.fileName + "\n")
+        print("Stddev: " + str(stddev))
+        print("Average: " + str(average))
+        print("Best: " + str(best))
+
+
 app = Application("input3.in")
-app.main()
+#app.main()
+app.runStat()
 
