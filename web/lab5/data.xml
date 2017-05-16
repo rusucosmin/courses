@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="file.xsl"?>
+<entries>
+  <entry>
+    <type>text</type>
+    <name>Genetic algorithm-based clustering technique</name>
+    <author>Maulik</author>
+    <year>2000</year>
+  </entry>
+  <entry>
+    <type>web link</type>
+    <name>https://www.google.com</name>
+    <author>Larry</author>
+    <year>2020</year>
+  </entry>
+  <entry>
+    <type>web link</type>
+    <name>http://www.change.org</name>
+    <author>Everyone</author>
+    <year>2007</year>
+  </entry>
+  <entry>
+    <type>image</type>
+    <name>http://i.imgur.com/ZXHQ5qi.jpg</name>
+    <author>Cosmin Rusu</author>
+    <year>2005</year>
+  </entry>
+  <entry>
+    <type>web link</type>
+    <name>https://github.com/rusucosmin</name>
+    <author>Cosmin Rusu</author>
+    <year>2001</year>
+  </entry>
+</entries>

@@ -1,0 +1,31 @@
+.main-section {
+	width: 100%;
+	border-collapse: collapse;
+    color: green;
+    box-shadow: 20px 10px 5px #888888;
+    text-align: center;
+}
+
+.header-row {
+	height: 4em;
+	background-color: black;
+}
+
+.data-row {
+	border: 1px solid black;
+}
+
+.year-data {
+	font-style: italic;
+}
+
+.name-data {
+	font-size: 1.25em;
+	font-style: oblique;
+	padding-top: 10px;
+	text-align: right;
+}
+
+.type-data:hover, .author-data:hover {
+	text-decoration: underline;
+}

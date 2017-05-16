@@ -19,3 +19,5 @@ debug/
 Debug/
 *.layout
 *.depend
+
+.DS_Store
