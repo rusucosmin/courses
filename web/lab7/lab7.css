@@ -1,0 +1,16 @@
+#game, #status, #message {
+  margin: auto;
+}
+
+#game {
+  width: 500px;
+  height: 500px;
+  border: 2px solid black;
+}
+
+#status {
+}
+
+#pic {
+  position: relative;
+}
