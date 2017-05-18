@@ -79,7 +79,32 @@ class Ruler:
                 "high": "intense"
             }
         }
-    def getRule(self, t, c):
-        return self.rules[t][c]
+    def evaluate(self, t, c):
+        tdic = t.toDiscrete()
+        cdic = c.toDiscrete()
+        resdic = {}
+        print(tdic)
+        print(cdic)
+        for tkey, tvalue in tdic.items():
+            for ckey, cvalue in cdic.items():
+                res = self.rules[tkey][ckey]
+                val = min(tvalue, cvalue)
+                if res in resdic:
+                    resdic[res] = max(resdic[res], val)
+                else:
+                    resdic[res] = val
+        return resdic
 
-r = Ruler()
+class Controller:
+    def __init__(self, texture, capacity):
+        self.rules = Ruler()
+        self.t = Texture(texture)
+        self.c = Capactiy(capacity)
+
+    def solve(self):
+        agg = self.rules.evaluate(self.t, self.c)
+        print(agg)
+        print(sorted(list(agg.items()), key = lambda x: x[1])[-1][0])
+
+c = Controller(0.4, 0.5)
+c.solve()

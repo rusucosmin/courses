@@ -18,3 +18,8 @@ resistant) and the amount of clothes loaded in the car (small, medium, high)
 ###Output
 - Z = (the washing cycle)
     - L = {delicate, easy, normal, intense}
+
+###Algorithm
+- Mamdami model
+- Defuzzification: LOM - Largest of maximum
+
