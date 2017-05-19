@@ -6,7 +6,7 @@
     <?php include 'layouts/header.php'; ?>
     <div id="content">
       <h2>Welcome! You can leave us a message.</h2>
-      <form action="new-message.php" method="post">
+      <form action="forms/new.php" method="post">
         <label>
           e-mail:
         </label>
