@@ -1,5 +1,5 @@
 <?php
-	function get_car_by_id($id) {
+  function get_car_by_id($id) {
       require_once 'config/database.php';
 
         try {
@@ -22,9 +22,9 @@
     }
 
     function get_all_cars($model) {
-    	require_once '../config/database.php';
+      require_once '../config/database.php';
 
-    	try {
+      try {
               $connect = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
               $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -39,13 +39,13 @@
               $i = 0;
               $tab = null;
               while ($val = $stmt->fetch()) {
-              	$tab[$i]['id'] = $val['id'];
-              	$tab[$i]['model'] = $val['model'];
-              	$tab[$i]['fuel'] = $val['fuel'];
-              	$tab[$i]['capacity'] = $val['capacity'];
-              	$tab[$i]['fabrication_year'] = $val['fabrication_year'];
+                $tab[$i]['id'] = $val['id'];
+                $tab[$i]['model'] = $val['model'];
+                $tab[$i]['fuel'] = $val['fuel'];
+                $tab[$i]['capacity'] = $val['capacity'];
+                $tab[$i]['fabrication_year'] = $val['fabrication_year'];
 
-              	$i++;
+                $i++;
               }
               $stmt->closeCursor();
 
