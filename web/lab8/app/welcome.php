@@ -8,7 +8,7 @@
       <h2>Welcome! You can leave us a message.</h2>
       <form action="forms/new.php" method="post">
         <label>
-          e-mail:
+          e-Mail:
         </label>
         <input type="email" name="email"/>
         <br>

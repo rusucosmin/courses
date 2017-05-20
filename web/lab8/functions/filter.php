@@ -4,8 +4,7 @@
   $con = connect();
 
   try {
-    $stmt = $con ->prepare("SELECT * FROM records WHERE INSTR(email, :email) > 0 AND INSTR(title, :title) > 0");
-    $res = [];
+    $stmt = $con->prepare("SELECT * FROM records WHERE INSTR(email, :email) > 0 AND INSTR(title, :title) > 0");
     $stmt->execute(array(":email" => $_GET["email"], ":title" => $_GET["title"]));
     $res = $stmt->fetchAll();
     exit(json_encode($res));
