@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
 <html>
-  <?php include 'layouts/scripts.php'; ?>
+  <?php include '../layouts/scripts.php'; ?>
   <body>
-    <?php include 'layouts/header.php'; ?>
+    <?php include '../layouts/header.php'; ?>
     <div id="content">
       <h2>Welcome! You can leave us a message.</h2>
-      <form action="forms/new.php" method="post">
+      <form action="../forms/new.php" method="post">
         <label>
           e-Mail:
         </label>
@@ -25,6 +25,6 @@
         <input type="submit" />
       </form>
     </div>
-    <?php include 'layouts/footer.php'; ?>
+    <?php include '../layouts/footer.php'; ?>
   </body>
 </html>

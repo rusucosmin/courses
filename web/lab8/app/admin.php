@@ -3,94 +3,102 @@
   <?php include '../layouts/scripts.php' ?>
   <script>
     $(document).ready(function() {
-      filter("", ""); // get all
-      var filterXmlHttp;
-      var deleteXmlHttp;
-      $("#filterBtn").click(function() {
+      filter("", "", 1); // get all
+      $("#filterBtn").click(function() { 
+        console.log("clicked on filter");
         var _title = $("#titleInput").val();
         var _email = $("#emailInput").val();
-        filter(_title, _email);
+        filter(_title, _email, 1);
       });
 
-      $(".editBtn").click(function() {
-        console.log("clicked");
+      $("#titleInput").on("input propertychange paste", function() {
+        console.log("changed title");
+        var _title = $("#titleInput").val();
+        var _email = $("#emailInput").val();
+        filter(_title, _email, 1);
       });
 
-      $(".deleteBtn").bind("click", function() {
-        console.log("deleteBtn clicked");
+      $("#emailInput").on("input propertychange paste", function() {
+        console.log("changed email");
+        var _title = $("#titleInput").val();
+        var _email = $("#emailInput").val();
+        filter(_title, _email, 1);
       });
 
-      function filter(_title, _email) {
+      function filter(_title, _email, _page) {
+        console.log("filter: " + _title + " " + _email);
         var url="../functions/filter.php";
         url = url + "?title=" + _title;
         url = url + "&email=" + _email;
-        filterXmlHttp = getXmlHttpObject();
-        filterXmlHttp.onreadystatechange=filterStateChanged;
-        filterXmlHttp.open("GET", url, true);
-        filterXmlHttp.send(null);
+        url = url + "&page=" + _page;
+        $.get(url, function(data, status) {
+          console.log(data);
+          filterStateChanged(data);
+        });
       }
 
       function callDelete(id) {
         var url="../api/delete.php?id=" + id;
-        deleteXmlHttp = getXmlHttpObject();
-        deleteXmlHttp.onreadystatechange=deleteStateChanged;
-        deleteXmlHttp.open("GET", url, true);
-        deleteXmlHttp.send(null);
+        $.get(url, function(data, status) {
+          deleteStateChanged(data);
+        });
       }
 
-      function deleteStateChanged() {
-        if(deleteXmlHttp.readyState == 4) {
-          var res = JSON.parse(deleteXmlHttp.responseText);
-          if(res["response"] == "ok") {
-            console.log("ok");
-          }
-          else {
-            console.log("error deleting: ");
-          }
+      function deleteStateChanged(response) {
+        var res = JSON.parse(response);
+        if(res["response"] == "ok") {
+          console.log("ok");
+        }
+        else {
+          console.log("error deleting: ");
         }
       }
 
-      function filterStateChanged() {
-        if(filterXmlHttp.readyState == 4) {
-          var arr = JSON.parse(filterXmlHttp.responseText);
-          $("#result tbody").empty();
-          for(var i = 0; i < arr.length; ++ i) {
-            var row = $("<tr></tr>");
-            var rowid = $("<td></td>").text(arr[i]["id"]);
-            var rowemail = $("<td></td>").text(arr[i]["email"]);
-            var rowtitle = $("<td></td>").text(arr[i]["title"]);
-            var rowcomment = $("<td></td>").text(arr[i]["comment"]);
-            var rowcreated = $("<td></td>").text(arr[i]["created_at"]);
-            var rowedit = $("<button>Edit</button>");
-            var rowdelete = $("<button>Delete</button>");
-            rowdelete.attr("id", arr[i]["id"]);
-            rowdelete.click(function(){
-              console.log("clicked: " + $(this).attr("id"));
-              callDelete($(this).attr("id"));
-              $(this).parent().remove();
-            });
-            rowedit.attr("id", arr[i]["id"]);
-            rowedit.click(function() {
-              console.log("clicked edit" + $(this).attr("id"));
-            });
-            row.append(rowid);
-            row.append(rowemail);
-            row.append(rowtitle);
-            row.append(rowcomment);
-            row.append(rowcreated);
-            row.append(rowedit);
-            row.append(rowdelete);
-            $("#result tbody").append(row);
-          }
+      function filterStateChanged(res) {
+        var res = JSON.parse(res);
+        var arr = res["records"];
+        $("#result tbody").empty();
+        for(var i = 0; i < arr.length; ++ i) {
+          var row = $("<tr></tr>");
+          var rowid = $("<td></td>").text(arr[i]["id"]);
+          var rowemail = $("<td></td>").text(arr[i]["email"]);
+          var rowtitle = $("<td></td>").text(arr[i]["title"]);
+          var rowcomment = $("<td></td>").text(arr[i]["comment"]);
+          var rowcreated = $("<td></td>").text(arr[i]["created_at"]);
+          var rowedit = $("<button>Edit</button>");
+          var rowdelete = $("<button>Delete</button>");
+          rowdelete.attr("id", arr[i]["id"]);
+          rowdelete.click(function(){
+            console.log("clicked: " + $(this).attr("id"));
+            callDelete($(this).attr("id"));
+            $(this).parent().remove();
+          });
+          rowedit.attr("id", arr[i]["id"]);
+          rowedit.click(function() {
+            console.log("clicked edit" + $(this).attr("id"));
+            location.href = '/lab8/app/edit.php?id=' + $(this).attr('id');
+          });
+          row.append(rowid);
+          row.append(rowemail);
+          row.append(rowtitle);
+          row.append(rowcomment);
+          row.append(rowcreated);
+          row.append(rowedit);
+          row.append(rowdelete);
+          $("#result tbody").append(row);
         }
-      }
-
-      function getXmlHttpObject() {
-        if(window.XMLHttpRequest)
-          return new XMLHttpRequest();
-        if(window.ActiveXObject)
-          return new ActiveXObject("Microsoft.XMLHTTP");
-        return null;
+        $("#paginate").empty();
+        for(var i = 0; i < res["total_pages"]; ++ i) {
+          var pageBtn = $("<button></button>");
+          pageBtn.text((i + 1));
+          pageBtn.attr("id", (i + 1));
+          pageBtn.click(function () {
+            var _title = $("#titleInput").val();
+            var _email = $("#emailInput").val();
+            filter(_title, _email, $(this).attr("id"));
+          });
+          $("#paginate").append(pageBtn);
+        }
       }
     });
   </script>
@@ -118,6 +126,8 @@
         <tbody>
         </tbody>
       </table>
+      <div id="paginate" align="center">
+      </div>
     </div>
     <?php include '../layouts/footer.php' ?>
   </body>
