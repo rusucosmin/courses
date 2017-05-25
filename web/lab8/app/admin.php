@@ -126,7 +126,8 @@
         <tbody>
         </tbody>
       </table>
-      <div id="paginate" align="center">
+      <label for="paginate">Page: </label>
+      <div id="paginate" align="left">
       </div>
     </div>
     <?php include '../layouts/footer.php' ?>

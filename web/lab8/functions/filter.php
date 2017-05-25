@@ -11,7 +11,7 @@
     else {
       $page_number = 1;
     }
-    $item_per_page = 2;
+    $item_per_page = 4;
 
     $count_all = $con->prepare("SELECT COUNT(*) FROM records WHERE INSTR(email, :email) > 0 AND INSTR(title, :title) > 0");
     $count_all->execute(array(":email" => $_GET["email"],
