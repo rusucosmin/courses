@@ -1,0 +1,21 @@
+h1 {
+    color: red;
+}
+
+#puzzle {
+    width: 300px;
+    height: 300px;
+}
+
+#puzzle img {
+    width: 100px;
+    height: 100px;
+    margin: 0;
+    padding: 0;
+}
+
+.puzzlepiece {
+    float: left;
+    outline: 1px solid white;
+    outline-offset: -1px;
+}
