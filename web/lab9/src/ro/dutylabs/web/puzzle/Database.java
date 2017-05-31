@@ -38,6 +38,28 @@ public class Database {
         }
     }
 
+    public void swap(int id1, int id2) {
+        try {
+            System.out.println("swap ( " + id1 + ", " + id2);
+            PreparedStatement pStmtSelect = this.con.prepareStatement("SELECT SUM(position) FROM Puzzle WHERE id IN (?, ?)");
+            pStmtSelect.setInt(1, id1);
+            pStmtSelect.setInt(2, id2);
+            ResultSet rs = pStmtSelect.executeQuery();
+            rs.next();
+            int sum = Integer.parseInt(rs.getString(1));
+            System.out.println("gotSum: " + sum);
+            PreparedStatement pStmt = this.con.prepareStatement("UPDATE Puzzle SET position = ? - position WHERE id IN (?, ?)");
+            pStmt.setInt(1, sum);
+            pStmt.setInt(2, id1);
+            pStmt.setInt(3, id2);
+            pStmt.executeUpdate();
+            System.out.println("updated: " + sum);
+        } catch(SQLException e) {
+            System.out.println("Error while swapping");
+            e.printStackTrace();
+        }
+    }
+
     public int getScore() {
         try {
             PreparedStatement pStmt = this.con.prepareStatement("SELECT position FROM Puzzle WHERE id = ?");
@@ -97,7 +119,7 @@ public class Database {
                 where[rs.getInt("position")] = rs.getInt("id");
             }
             for(int i = 0; i < n * n; ++ i) {
-                res += "<img class='puzzlepiece' src='img/" + where[i] + ".jpeg'/>";
+                res += "<img id = '" + where[i] + "' class='puzzlepiece' src='img/" + where[i] + ".jpeg'/>";
             }
         } catch(Exception ex) {
             System.out.println("Error on get Puzzle: " + ex.getMessage());

@@ -21,3 +21,5 @@ Debug/
 *.depend
 
 .DS_Store
+
+*.class
