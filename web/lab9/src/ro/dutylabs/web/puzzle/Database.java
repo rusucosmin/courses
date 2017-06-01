@@ -118,9 +118,14 @@ public class Database {
             while(rs.next()) {
                 where[rs.getInt("position")] = rs.getInt("id");
             }
+            boolean solved = true;
             for(int i = 0; i < n * n; ++ i) {
+                if(where[i] != i)
+                    solved = false;
                 res += "<img id = '" + where[i] + "' class='puzzlepiece' src='img/" + where[i] + ".jpeg'/>";
             }
+            if(solved)
+                res += "<p>Congratulations, you finished the puzzle in: " + this.getScore() + "!</p>";
         } catch(Exception ex) {
             System.out.println("Error on get Puzzle: " + ex.getMessage());
         }

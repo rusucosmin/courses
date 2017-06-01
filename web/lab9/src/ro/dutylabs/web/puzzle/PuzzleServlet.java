@@ -37,6 +37,10 @@ public class PuzzleServlet extends HttpServlet {
         printWriter.println("<img style='width:100px;height:100px' id='selected'/>");
         printWriter.println("</div>");
         printWriter.println("<hr>");
+        printWriter.println("<input action='action' onclick='window.location.href=\"/\"' type='button' value='Back' />");
+        printWriter.println("<form action='/puzzle' method='post'> ");
+        printWriter.println("<input type='submit' value='Reset puzzle' id='reset'/>");
+        printWriter.println("</form>");
         printWriter.println("</body>");
         printWriter.println("</html>");
     }
