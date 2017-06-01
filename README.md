@@ -1,6 +1,9 @@
 #Courses
- **Courses from the Faculty of Mathematics and Computer Science, Babes-Bolyai University**
+
+**Courses from the Faculty of Mathematics and Computer Science, Babes-Bolyai University**
+
 ##1st semester
+
 * Linear Algebra - algebra
 * Fundamentals of programming - fop
 * Computer Systems Architecture - asc
@@ -8,6 +11,7 @@
 * Analysis - analysis
 
 ##2nd Semester
+
 * Object-Oriented Programming - oop
 * Operating Systems - os
 * Dynamical Systems - dynsys
@@ -16,6 +20,7 @@
 * Geometry - geometry
 
 ##3rd Semester
+
 * Advanced Methods of Programming - map
 * Networking - networking
 * Logic and functional Programming - plf
@@ -23,6 +28,7 @@
 * Databases
 
 ##4rd Semester
+
 * Artificial intelligence - ai
 * mpp - Two persons
 * Software Engineering
