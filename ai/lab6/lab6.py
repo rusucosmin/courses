@@ -12,15 +12,14 @@ from numpy.random import choice
 from math import floor, ceil, sin, cos
 from copy import deepcopy
 
-#with this confirutation, cost ~2.0
 # parameters
 TrainSIZE = 0.75  #percentage of training size
 TestSIZE = 0.25   #percentage of testing size
 DEPTH_MAX = 11
 ITER = 100
 HEADER = []
-F = ['+', '-', '*']#, 'sin', 'cos']
-P = [0.33, 0.33, 0.34]#, 0.02, 0.02]
+F = ['+', '-', '*', 'sin', 'cos']
+P = [0.332, 0.332, 0.332, 0.002, 0.002]
 #P = [0.32, 0.32, 0.32, 0.02, 0.02]
 T = ["value" + str(x) for x in range(384)] + \
         ["c" + str(x) for x in range(10)]
@@ -160,6 +159,7 @@ class Chromosome:
                 exec("{} = {}".format(HEADER[i], x[i]))
             res = eval(exp)
             self.fitness += abs(res - y)
+        self.fitness = self.fitness / len(X)
         return self.fitness
 
     @staticmethod
@@ -244,7 +244,7 @@ class GPAlgorithm:
         print("Loading training data... this may take a while");
         with open(self.filename, "r") as f:
             HEADER = f.readline().split(',')[1:-1]
-            for line in f.readlines()[:100]:
+            for line in f.readlines()[:10]:
                 values = map(float, line.split(','))
                 self.x.append(values[1:-1])
                 self.y.append(values[-1])
