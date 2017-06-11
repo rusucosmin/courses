@@ -5,5 +5,5 @@
   path = oop/OOP_Exam
   url = https://github.com/rusucosmin/OOP_Exam
 [submodule "mpp"]
-  path = mpp/mpp-project
+  path = mpp
   url = https://github.com/rusucosmin/mpp
