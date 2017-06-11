@@ -1,9 +1,9 @@
 [submodule "map/ToyLanguageInterpreterCS"]
-	path = map/ToyLanguageInterpreterCS
-	url = https://github.com/rusucosmin/ToyLanguageInterpreterCS
+  path = map/ToyLanguageInterpreterCS
+  url = https://github.com/rusucosmin/ToyLanguageInterpreterCS
 [submodule "oop/OOP_Exam"]
-	path = oop/OOP_Exam
-	url = https://github.com/rusucosmin/OOP_Exam
+  path = oop/OOP_Exam
+  url = https://github.com/rusucosmin/OOP_Exam
 [submodule "mpp"]
-	path = mpp
-	url = https://github.com/rusucosmin/mpp
+  path = mpp/mpp-project
+  url = https://github.com/rusucosmin/mpp
