@@ -1,0 +1,4 @@
+rootProject.name = 'exam'
+include 'exam-core'
+include 'exam-web'
+
