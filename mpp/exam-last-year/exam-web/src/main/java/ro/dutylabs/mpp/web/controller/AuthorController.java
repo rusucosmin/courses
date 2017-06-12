@@ -35,7 +35,9 @@ public class AuthorController {
     public AuthorsDto getAll() {
         log.trace("AuthorController::getAll()");
         System.out.println("AuthorController::getAll()");
-        return new AuthorsDto(authorConverter.convertModelsToDtos(authorService.findAll()));
+        AuthorsDto authorsDto = new AuthorsDto(authorConverter.convertModelsToDtos(authorService.findAll()));
+        log.trace("DONE: AuthorController::getAll()");
+        return authorsDto;
     }
 
     @RequestMapping(value = "/authors", method = RequestMethod.POST)
