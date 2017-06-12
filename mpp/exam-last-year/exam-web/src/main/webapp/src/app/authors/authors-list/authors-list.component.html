@@ -1,0 +1,7 @@
+<script src="authors-list.component.ts"></script>
+
+<a *ngFor="let author of authors"
+   (click)="onSelect(author)" [class.active]="selectedAuthor === author"
+    href="/ab/authors/{{author.id}}">
+  Author {{author.name}} with {{author.books.length}} written books <br>
+</a>

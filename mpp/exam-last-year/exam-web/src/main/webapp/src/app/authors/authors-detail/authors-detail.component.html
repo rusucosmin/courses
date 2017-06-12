@@ -1,0 +1,14 @@
+<div *ngIf="author">
+  <p>
+    Name: {{author.name}}
+  </p>
+  Books:
+  <ul>
+    <li *ngFor="let book of author.books">
+      id {{book.id}}<br>
+      Title: {{book.title}}<br>
+      Year {{book.year}}<br>
+      ISBN {{book.isbn}}<br>
+    </li>
+  </ul>
+</div>
