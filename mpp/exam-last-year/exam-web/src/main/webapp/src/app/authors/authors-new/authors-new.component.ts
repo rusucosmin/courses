@@ -13,4 +13,8 @@ export class AuthorsNewComponent implements OnInit {
     console.log("authors - new")
   }
 
+  onSearch(ssid: string) {
+    console.log(ssid);
+  }
+
 }
