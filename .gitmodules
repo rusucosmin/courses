@@ -7,3 +7,6 @@
 [submodule "mpp-project"]
 	path = mpp/mpp-project
 	url = https://github.com/rusucosmin/mpp
+[submodule "mpp/exampp"]
+	path = mpp/exampp
+	url = https://github.com/rusucosmin/exampp
