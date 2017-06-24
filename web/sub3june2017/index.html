@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+#div0 {
+    background-color: black;
+}
+
+#div1 {
+    background-color: green;
+}
+
+#div2 {
+    background-color: lightblue;
+}
+
+#div3 {
+    background-color: yellow;
+}
+
+#div4 {
+    background-color: red;
+}
+
+#div5 {
+    background-color: white;
+}
+
+#div6 {
+    background-color: pink;
+}
+
+#div7 {
+    background-color: blue;
+}
+
+#div8 {
+    background-color: darkblue;
+}
+
+#div9 {
+    background-color: grey;
+}
+
+
+  </style>
+  <script src="scripts/jquery-3.2.1.js"></script>
+  <script>
+    divs = [];
+    $(document).ready(function() {
+      for(var i = 0; i < 10; ++ i) {
+        divs.push('<div id=div' + i + '>Div ' + i + '</div>');
+      }
+      console.log(divs);
+      $('#content').html(divs.reduce((o = "", op) => o += op));
+      console.log(divs);
+      $('#content').click(function() {
+        console.log(divs);
+        divs = [divs[9]].concat(divs.splice(0, 9));
+        console.log(divs);
+        $('#content').html(divs.reduce((o = "", op) => o += op));
+      });
+    });
+  </script>
+</head>
+<body>
+  <div id="content">
+    caca
+  </div>
+</body>
+</html>
