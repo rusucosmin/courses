@@ -3,46 +3,62 @@
 <head>
   <style>
 #div0 {
-    background-color: black;
+  background-color: black;
 }
 
 #div1 {
-    background-color: green;
+  background-color: green;
 }
 
 #div2 {
-    background-color: lightblue;
+  background-color: lightblue;
 }
 
 #div3 {
-    background-color: yellow;
+  background-color: yellow;
 }
 
 #div4 {
-    background-color: red;
+  background-color: red;
 }
 
 #div5 {
-    background-color: white;
+  background-color: white;
 }
 
 #div6 {
-    background-color: pink;
+  background-color: pink;
 }
 
 #div7 {
-    background-color: blue;
+  background-color: blue;
 }
 
 #div8 {
-    background-color: darkblue;
+  background-color: darkblue;
 }
 
 #div9 {
-    background-color: grey;
+  background-color: grey;
 }
 
 
+#circle {
+  background: green;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  border-radius: 50%;
+}
+
+#maskCircle {
+  margin: auto;
+  transition: margin 2s;
+}
+
+#circle:hover {
+  margin: 0;
+}
   </style>
   <script src="scripts/jquery-3.2.1.js"></script>
   <script>
@@ -62,6 +78,11 @@
 <body>
   <div id="content">
     caca
+  </div>
+  <div id="maskCircle">
+    <div id="circle">
+
+    </div>
   </div>
 </body>
 </html>
