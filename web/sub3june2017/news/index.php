@@ -2,8 +2,11 @@
   session_start();
   if(array_key_exists('user', $_SESSION)) {
     // check type of user then
-    header("Location: add.php");
-    header("Location: view.php");
+    if($_SESSION['user_id'] == 1) {
+      header("Location: view.php");
+    } else if($_SESSION['user_id'] == 2) {
+      header("Location: add.php");
+    }
   }
 ?>
 <!DOCTYPE html>
