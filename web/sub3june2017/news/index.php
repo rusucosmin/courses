@@ -23,10 +23,7 @@
       <p>
         Logged in as <?php echo $_SESSION['user']?>
       </p>
-      <form action="./forms/logout.php" method="post">
-        <input type="submit" value="Logout" />
-      </form>
-    <?php } else { ?>
+  <?php } else { ?>
       <form action="./forms/login.php" method="post">
         <label>user</label>
         <input name="user" type="text" />
