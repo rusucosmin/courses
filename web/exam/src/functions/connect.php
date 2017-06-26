@@ -7,7 +7,8 @@
       echo "Error connecting to database " . $pikachu->getMessage();
     }
 
-    $con->query(" USE news");
+    /// database exam
+    $con->query("USE exam");
 
     return $con;
   }
