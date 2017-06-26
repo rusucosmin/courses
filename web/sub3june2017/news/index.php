@@ -3,9 +3,9 @@
   if(array_key_exists('user', $_SESSION)) {
     // check type of user then
     if($_SESSION['user_id'] == 1) {
-      header("Location: view.php");
-    } else if($_SESSION['user_id'] == 2) {
       header("Location: add.php");
+    } else if($_SESSION['user_id'] == 2) {
+      header("Location: view.php");
     }
   }
 ?>

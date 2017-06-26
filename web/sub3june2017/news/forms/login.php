@@ -20,6 +20,7 @@
         echo "Logged in as ";
         $_SESSION['user'] = $uObj->User;
         $_SESSION['user_id'] = $uObj->ID;
+        echo $_SESSION['user_id'];
         $_SESSION['user_role'] = $uObj->Role;
         $_SESSION['user_password'] = $uObj->Password;
       } else {
