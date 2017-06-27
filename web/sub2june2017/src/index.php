@@ -8,9 +8,10 @@
   <?php include './layouts/scripts.php'; ?>
 </head>
 <body>
+  <h1>Home</h1>
   <?php include './layouts/header.php'; ?>
   <div id="content">
-    Hello from exam!
+    Content
   </div>
   <?php include './layouts/footer.php'; ?>
 </body>

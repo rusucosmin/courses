@@ -4,10 +4,6 @@
   $user = $_POST['user'];
   $answer = $_POST['answer'];
   $question = $_POST['question'];
-  if(is_null($user) || empty($user)) {
-    header("Location: ../index.php");
-    return ;
-  }
 
 
   include './connect.php';
