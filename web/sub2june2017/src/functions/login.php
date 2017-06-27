@@ -2,22 +2,20 @@
   session_start();
 
   $user = $_POST['user'];
-  $password = $_POST['password'];
-
-  echo $user;
-  echo $password;
 
   include './connect.php';
   $con = connect();
-  $stmt = $con->prepare("SELECT * FROM test_users WHERE user='$user' AND password='$password'");
+  $stmt = $con->prepare("SELECT * FROM Users WHERE user='$user'");
   $stmt->execute();
   if($stmt->rowCount() > 0) {
     $uObj = $stmt->fetch(PDO::FETCH_OBJ);
-    $_SESSION["user"] = $uObj->user;
-    $_SESSION["user_id"] = $uObj->ID;
+    $_SESSION["attempt_user"] = $uObj->user;
+    $_SESSION["question"] = $uObj->secretQuestion;
+    unset($_SESSION["error"]);
+    header("Location: ../secret.php");
   }
   else {
     $_SESSION["error"] = "User and/or password are incorrect";
+    header("Location: ../index.php");
   }
-  header("Location: ../index.php");
 ?>

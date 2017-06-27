@@ -8,7 +8,7 @@
     }
 
     /// database exam
-    $con->query("USE exam");
+    $con->query("USE chat");
 
     return $con;
   }

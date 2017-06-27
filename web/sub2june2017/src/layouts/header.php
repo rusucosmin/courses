@@ -12,8 +12,8 @@
     </p>
   <?php } else { ?>
       <a href="./login.php">Login</a>
+      <a href="./register.php">Register</a>
   <?php } ?>
-  <a href="#">Admin</a>
-  <a href="#">View</a>
+  <a href="#">Chat</a>
   <a href="./logout.php">Logout</a>
 </div>
