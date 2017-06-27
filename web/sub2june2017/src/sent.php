@@ -14,8 +14,8 @@
   <script>
     var user = "<?php echo $_SESSION["user"] ?>";
     $(document).ready(function() {
-      setInterval(function() {
-        $.get("./functions/chat.php", {"user": user}, function(data) {
+      setInterval(function () {
+        $.get("./functions/sent.php", {"user": user}, function(data) {
           $("#chat").empty();
           var arr = JSON.parse(data);
           for(var i = 0; i < arr.length; ++ i) {
@@ -28,7 +28,10 @@
         li.append(createItem("Sender", "sender", obj));
         li.append(createItem("Message", "text", obj));
         li.append(createItem("Receivers", "receivers", obj));
-        li.append($("<button>Hide</button>").addClass("deleteBtn"));
+        li.append(createItem("Views", "views", obj));
+        li.append($("<button>Delete</button>")
+                    .addClass("deleteBtn")
+                    .attr("id", obj.id));
         return li;
       }
       function createItem(dt, dd, obj) {
@@ -40,7 +43,11 @@
     });
     $(document).on('click', '.deleteBtn', function() {
       console.log("deletbnt");
+      console.log($(this).attr("id"));
       $(this).parent().fadeOut();
+      $.get("./functions/delete.php", {id: $(this).attr("id")}, function(data) {
+          loadData();
+      });
     });
   </script>
 </head>

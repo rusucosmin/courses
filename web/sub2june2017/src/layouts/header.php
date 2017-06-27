@@ -11,6 +11,7 @@
     </p>
   <a href="./index.php">Home</a>
   <a href="./send.php">Send</a>
+  <a href="./sent.php">Sent and Received</a>
   <a href="./chat.php">Chat</a>
   <?php } else { ?>
       <a href="./login.php">Login</a>

@@ -5,7 +5,14 @@
 
   $con = connect();
   $stmt = $con->prepare("SELECT * FROM Messages WHERE sender = '$user'
-            OR (',' + RTRIM(receivers) + ',') LIKE '%,$user,%'");
+            OR CONCAT(CONCAT(',', RTRIM(receivers)), ',') LIKE '%,$user,%'");
   $stmt->execute();
-  die(json_encode($stmt->fetchAll()));
+  $arr = $stmt->fetchAll();
+
+  $stmt = $con->prepare("UPDATE Messages
+                         SET views = '$user'
+                         WHERE receivers='$user'
+                         AND type='unicast'");
+  $stmt->execute();
+  die(json_encode($arr));
 ?>
