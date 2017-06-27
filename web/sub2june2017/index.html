@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="./scripts/jquery-3.2.1.js"></script>
+  <style>
+    #circle {
+      height: 100px;
+      width: 100px;
+      border-radius: 50%;
+      background-color: #c00;
+      -webkit-transition: all 1s ease;
+      -moz-transition: all 1s ease;
+      -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+      transition: all 1s ease;
+      position: absolute;
+      left: 0; /*or bottom, top, right*/
+    }
+    #circle:hover {
+      left: 100%;   /*or bottom, top, right*/
+      margin-left: -100px; /*or bottom, top, right */
+    }
+
+    .drop_menu {
+    	background:#005555;
+    	padding:0;
+    	margin:0;
+    	list-style-type:none;
+    	height:30px;
+    }
+    .drop_menu li { float:left; }
+    .drop_menu li a {
+    	padding:9px 20px;
+    	display:block;
+    	color:#fff;
+    	text-decoration:none;
+    	font:12px arial, verdana, sans-serif;
+    }
+
+    /* Submenu */
+    .drop_menu ul {
+    	position:absolute;
+    	left:-9999px;
+    	top:-9999px;
+    	list-style-type:none;
+    }
+    .drop_menu li:hover { position:relative; background:#5FD367; }
+    .drop_menu li:hover ul {
+    	left:0px;
+    	top:30px;
+    	background:#5FD367;
+    	padding:0px;
+    }
+
+    .drop_menu li:hover ul li a {
+    	padding:5px;
+    	display:block;
+    	width:168px;
+    	text-indent:15px;
+    	background-color:#5FD367;
+    }
+    .drop_menu li:hover ul li a:hover { background:#005555; }
+  </style>
+</head>
+<body>
+  <div id="circle"></div>
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <div class="drop">
+    <ul class="drop_menu">
+    <li><a href='#'>Item 1</a>
+    	<ul>
+    	<li><a href='#'>Sub Item 1</a></li>
+    	<li><a href='#'>Sub Item 2</a></li>
+    	<li><a href='#'>Sub Item 3</a></li>
+    	</ul>
+    </li>
+    <li><a href='#'>Item 2</a>
+    	<ul>
+    	<li><a href='#'>Sub Item 1</a></li>
+    	<li><a href='#'>Sub Item 2</a></li>
+    	<li><a href='#'>Sub Item 3</a></li>
+    	</ul>
+    </li>
+    <li><a href='#'>Item 3</a>
+    	<ul>
+    	<li><a href='#'>Sub Item 1</a></li>
+    	<li><a href='#'>Sub Item 2</a></li>
+    	<li><a href='#'>Sub Item 3</a></li>
+    	</ul>
+    </li>
+    <li><a href='#'>Item 4</a>
+    	<ul>
+    	<li><a href='#'>Sub Item 1</a></li>
+    	<li><a href='#'>Sub Item 2</a></li>
+    	<li><a href='#'>Sub Item 3</a></li>
+    	</ul>
+    </li>
+    <li><a href='#'>Item 5</a>
+    	<ul>
+    	<li><a href='#'>Sub Item 1</a></li>
+    	<li><a href='#'>Sub Item 2</a></li>
+    	<li><a href='#'>Sub Item 3</a></li>
+    	</ul>
+    </li>
+    </ul>
+  </div>
+</body>
+</html>
