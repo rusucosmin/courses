@@ -9,6 +9,7 @@
 </head>
 <body>
   <?php include './layouts/header.php'; ?>
+  <h1>Home</h1>
   <div id="content">
     Hello from exam!
   </div>
