@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #circle {
+      height: 100px;
+      width: 200px;
+      background-color: #c00;
+      -webkit-transition: all 1s ease;
+      -moz-transition: all 1s ease;
+      -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+      transition: all 1s ease;
+      position: absolute;
+      left: 0; /*or bottom, top, right*/
+    }
+    #circle:hover {
+      width: 100px;
+      border-radius: 50%;
+    }
+  </style>
+  <script src="scripts/jquery-3.2.1.js"></script>
+  <script>
+    $(document).ready(function() {
+      $("body").click(function() {
+        console.log("click");
+        $('div.hate, p.hate').each(function() {
+          var str = $(this).text();
+          str = str.replace(new RegExp("I hate Forest!", 'g'), "");
+          $(this).text(str);
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="hate">
+    I hate Forest!
+  </div>
+  <p class="hate">
+    I hate Forest! and UBB!
+  </p>
+  <div class="hate">
+    I hate Forest! salut cf? sunt la ecsamen.
+  </div>
+  <div class="hate">
+    I cu             I hate Forest!         I hate Forest! I hate Forest!
+  </div>
+  <ul>
+    <li>
+        Test I hate Forest!
+    </li>
+    <li>
+      <div class="hate">
+        Test I hate Forest!
+      </div>
+    </li>
+  </ul>
+  <div id="circle">
+    Un Text
+  </div>
+</body>
+</html>

@@ -1,20 +1,15 @@
 <div id="header">
-  <?php if(array_key_exists("error", $_SESSION)) { ?>
-    <p>
-      Error: <?php echo $_SESSION['error'] ?>
-      <?php unset($_SESSION['error'])?>
-    </p>
-  <?php } if(array_key_exists("user", $_SESSION)) { ?>
-    <p>
-      Logged in as <?php echo $_SESSION["user"]?> <br />
-      ID = <?php echo $_SESSION["user_id"]?>
-    </p>
-    <a href="./logout.php">Logout</a>
-  <?php } else { ?>
-    <a href="./login.php">Login</a>
-  <?php } ?>
+  <p>
+    <?php
+      if(array_key_exists("error", $_SESSION)) {
+          echo $_SESSION["error"];
+          unset($_SESSION["error"]);
+      }
+    ?>
+  </p>
   <a href="./index.php">Home</a>
-  <a href="#">Admin</a>
-  <a href="#">View</a>
+  <a href="./add.php">Add course</a>
+  <a href="./schedule.php">Schedule course</a>
+  <a href="./show.php">Show Schedule</a>
   <hr />
 </div>
