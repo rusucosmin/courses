@@ -27,7 +27,7 @@
 * Statistics - statistics
 * Databases
 
-## 4rd Semester
+## 4th Semester
 
 * Artificial intelligence - ai
 * mpp - Two persons
