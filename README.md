@@ -34,3 +34,12 @@
 * Software Engineering
 * Database management systems
 * Web programming - web
+
+##5th Semester
+* Formal Languages and Compiler Design
+* Collective project
+* [Parallel and Distributed Programming](http://www.cs.ubbcluj.ro/~rlupsa/edu/pdp/)
+* [Mobile Application Programming](http://www.cs.ubbcluj.ro/~dan/ma/index.html)
+* Software security
+* Public-Key Cryptography
+
