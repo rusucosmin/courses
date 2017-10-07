@@ -10,3 +10,9 @@
 [submodule "mpp/exampp"]
 	path = mpp/exampp
 	url = https://github.com/rusucosmin/exampp
+[submodule "crypto/cryptography"]
+	path = crypto/cryptography
+	url = https://github.com/rusucosmin/cryptography
+[submodule "cryptography"]
+	path = cryptography
+	url = https://github.com/rusucosmin/cryptography
