@@ -31,8 +31,8 @@ protected:
   #endif
 public:
   virtual int getIndex() = 0;
-  virtual int getValue() = 0;
-  virtual void addToValue(int) = 0;
+  virtual int getValue() = 0;         // thread safe
+  virtual void addToValue(int) = 0;   // thread safe
   virtual int computeValue() = 0;
 };
 
@@ -52,7 +52,14 @@ public:
     return index;
   }
   virtual int getValue() {
-    return value;
+    #ifdef NODE_MUTEX
+    node_mtx.lock();
+    #endif
+    int auxval = value;
+    #ifdef NODE_MUTEX
+    node_mtx.unlock();
+    #endif
+    return auxval;
   }
   virtual void addToValue(int x) {
     #ifdef NODE_MUTEX
