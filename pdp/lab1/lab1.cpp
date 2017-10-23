@@ -22,6 +22,7 @@
 
 using namespace std;
 
+#define debug
 #define NODE_MUTEX
 //#define ENABLE_GLOBAL_MUTEX
 
@@ -56,19 +57,31 @@ public:
   virtual int getValue() {
     #ifdef NODE_MUTEX
     node_mtx.lock();
+    #ifdef debug
+    cerr << "Locking " << index << '\n';
+    #endif
     #endif
     int auxval = value;
     #ifdef NODE_MUTEX
     node_mtx.unlock();
+    #ifdef debug
+    cerr << "unlocking " << index << '\n';
+    #endif
     #endif
     return auxval;
   }
   virtual void addToValue(int x) {
     #ifdef NODE_MUTEX
     node_mtx.lock();
+    #ifdef debug
+    cerr << "Locking " << index << '\n';
+    #endif
     #endif
     value += x;
     #ifdef NODE_MUTEX
+    #ifdef debug
+    cerr << "Unlocking " << index << '\n';
+    #endif
     node_mtx.unlock();
     #endif
   }
@@ -124,10 +137,16 @@ public:
   void updateBaseNode(BaseNode* baseNode, int newValue) {
     #ifdef ENABLE_GLOBAL_MUTEX
     global_mutex.lock();
+    #ifdef debug
+    cerr << "Locking graph";
+    #endif
     #endif
     dfs(baseNode, newValue - baseNode->getValue());
     #ifdef ENABLE_GLOBAL_MUTEX
     global_mutex.unlock();
+    #ifdef debug
+    cerr << "Unlocking graph";
+    #endif
     #endif
   }
   void loadGraph(string filename) {
@@ -159,11 +178,15 @@ public:
     }
   }
   void checkConsistency() {
+    #ifdef debug
     cerr << "Checking consistency\n";
+    #endif
     for(auto it : nodes) {
       assert(it.second->isConsistent());
     }
+    #ifdef debug
     cerr << "Consistent\n";
+    #endif
   }
   void printValues() {
     for (auto it : nodes) {
@@ -194,13 +217,15 @@ int main() {
       for(int i = 0; i < threads.size(); ++ i) {
         threads[i].join();
       }
-      g.checkConsistency();
       threads.clear();
+      g.checkConsistency();
     }
     BaseNode* currentNode = g.getRandomBaseNode();
     int newVal = getRandomInteger(-10, 10);
+    #ifdef debug
     cerr << "thread " << t + 1 << " updates node " << currentNode->getIndex()
         << " with " << newVal << '\n';
+    #endif
    threads.push_back(thread(&ComputationalGraph::updateBaseNode, &g, currentNode, newVal));
   }
   for(int t = 0; t < (int)threads.size(); ++ t) {
@@ -208,7 +233,9 @@ int main() {
   }
   threads.clear();
   g.checkConsistency();
+  #ifdef debug
   g.printValues();
+  #endif
   auto finish = std::chrono::high_resolution_clock::now();
   std::chrono::duration<double> elapsed = finish - start;
   cerr << "Elapsed time: " << elapsed.count() << '\n';
