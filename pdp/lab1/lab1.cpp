@@ -18,6 +18,7 @@
 #include <time.h>
 #include <thread>
 #include <mutex>
+#include <cassert>
 
 using namespace std;
 
@@ -34,6 +35,7 @@ public:
   virtual int getValue() = 0;         // thread safe
   virtual void addToValue(int) = 0;   // thread safe
   virtual int computeValue() = 0;
+  virtual bool isConsistent() = 0;
 };
 
 class BaseNode : public Node {
@@ -73,6 +75,9 @@ public:
   virtual int computeValue() {
     return value;
   }
+  virtual bool isConsistent() {
+    return true;
+  }
 };
 
 class InternalNode : public BaseNode {
@@ -90,6 +95,13 @@ public:
       value += it->computeValue();
     }
     return value;
+  }
+  virtual bool isConsistent() {
+    int sum = 0;
+    for(auto it : dependency) {
+      sum += it->getValue();
+    }
+    return sum == value;
   }
 };
 
@@ -146,6 +158,13 @@ public:
       it.second->computeValue();
     }
   }
+  void checkConsistency() {
+    cerr << "Checking consistency\n";
+    for(auto it : nodes) {
+      assert(it.second->isConsistent());
+    }
+    cerr << "Consistent\n";
+  }
   void printValues() {
     for (auto it : nodes) {
       cout << "value of " << it.first << " is: " << it.second->getValue() << '\n';
@@ -170,15 +189,25 @@ int main() {
   g.loadGraph("graph.in");
   g.computeInitialValue();
   for(int t = 0; t < T; ++ t) {
+    if (t % 5 == 0) {
+      // check for consistency
+      for(int i = 0; i < threads.size(); ++ i) {
+        threads[i].join();
+      }
+      g.checkConsistency();
+      threads.clear();
+    }
     BaseNode* currentNode = g.getRandomBaseNode();
     int newVal = getRandomInteger(-10, 10);
     cerr << "thread " << t + 1 << " updates node " << currentNode->getIndex()
         << " with " << newVal << '\n';
-    threads.push_back(thread(&ComputationalGraph::updateBaseNode, &g, currentNode, newVal));
+   threads.push_back(thread(&ComputationalGraph::updateBaseNode, &g, currentNode, newVal));
   }
-  for(int t = 0; t < T; ++ t) {
+  for(int t = 0; t < (int)threads.size(); ++ t) {
     threads[t].join();
   }
+  threads.clear();
+  g.checkConsistency();
   g.printValues();
   auto finish = std::chrono::high_resolution_clock::now();
   std::chrono::duration<double> elapsed = finish - start;
