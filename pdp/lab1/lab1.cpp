@@ -22,7 +22,7 @@
 
 using namespace std;
 
-#define debug
+//#define debug
 #define NODE_MUTEX
 //#define ENABLE_GLOBAL_MUTEX
 

@@ -41,7 +41,7 @@ void addLines(int line, int T) {
 inline void addMat(int T, bool check = false) {
   auto start = std::chrono::high_resolution_clock::now();
   vector <thread> threads;
-  loadData<int>(a, b, "add3.in");
+  loadData<int>(a, b, "add2.in");
   cerr << "Matrix of dimension " << n << '\n';
 
   for(int i = 0; i < min(T, n); ++ i) {
