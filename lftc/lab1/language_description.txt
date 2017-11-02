@@ -20,8 +20,8 @@
 <real_number> ::= ["-" | "+"] <float>
 <float> ::= <number> "." <number>
 <iostmt> ::= <input> | <output>
-<input> ::= "cin" ">>" <id> ";"
-<output> ::= "cout" "<<" <id> ";"
+<input> ::= "cin" <id> ";"
+<output> ::= "cout" <id> ";"
 <loop> ::= "while" "(" <condition> ")" <compound_stmt>
 <condition> ::= <expr> <relation_op> <expr>
 <relation_op> ::= "==" | "!=" | "<" | "<=" | ">" | ">="
