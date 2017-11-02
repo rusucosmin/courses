@@ -89,7 +89,7 @@ class Scanner:
     # if the symbol is in the symbol table
     if _symbol in self.symbolsTable:
       # print it
-      self.appendToOutput(str(self.symbolsTable[_symbol]) + "\n")
+      self.appendToOutput(str(self.symbolsTable[_symbol]) + " 0\n")
       return True
     else:
       # return false because _symbol is not a valid symbol, and then throw an error
@@ -98,7 +98,8 @@ class Scanner:
   # method prints identifier and it's id to the output file
   def addIdentifier(self, _id):
     # assign a new, unused integer id for the current identifier
-    self.identifiersTable[_id] = self.randomNotIn(self.identifiersTable.values())
+    if _id not in self.identifiersTable:
+      self.identifiersTable[_id] = self.randomNotIn(self.identifiersTable.values())
     # print to program internal form output file
     self.appendToOutput(
         self.symbolsTable["identifier"] + " " + str(self.identifiersTable[_id]) + "\n")
@@ -107,7 +108,8 @@ class Scanner:
   # method adds a constant to the table and prints it to the output file
   def addConstant(self, _val):
     # assign a new, unsued integer id for the current identifier
-    self.constantsTable[_val] = self.randomNotIn(self.constantsTable.values())
+    if _val not in self.constantsTable:
+      self.constantsTable[_val] = self.randomNotIn(self.constantsTable.values())
     # print to the program internl form output file
     self.appendToOutput(
         self.symbolsTable["constant"] + " " + str(self.constantsTable[_val]) + "\n")
@@ -170,7 +172,6 @@ class Scanner:
             (i, j, ch) = next(charIterator)
           # add the constant to the program internal form and to the internal hashmaps
           self.addConstant(_val)
-          _val = ""
         # ignore whitespace characters
         elif ch.isspace():
           # get the next character
@@ -193,7 +194,6 @@ class Scanner:
             pass
           # if we couldn't add the symobl, we throw an error because it is an unexpected
           # symbol identifier
-          _id = ""
           if not self.addSymbol(_id):
             print("ERROR: Syntax Error detected at (line, col) = (%d, %d)" % (i, j))
             print("ERROR: Unexpected token '%s'" % _id)
