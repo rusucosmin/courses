@@ -17,7 +17,7 @@
 <CONST> ::= <number> | <real_number>
 <number> ::= <digit> | <digit> <number>
 <digit> ::= "0" | .. | "9"
-<real_number> ::= ["-" | "+"] <float>
+<real_number> ::= <float>
 <float> ::= <number> "." <number>
 <iostmt> ::= <input> | <output>
 <input> ::= "cin" <id> ";"
