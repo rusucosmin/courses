@@ -1,4 +1,3 @@
-# TODO: pretty print FA elements
 # TODO: Create a file containing the description of a deterministic FA describing the integer
 # constants (literals) from C / C++ . Use it as test data for your program.
 
@@ -96,7 +95,7 @@ class UI:
     print("> 1. print set of states")
     print("> 2. print the alphabet")
     print("> 3. print all the trasitions")
-    print("> 4. jrint accepted states")
+    print("> 4. print accepted states")
     print("> 5. check if accepted")
     print("> 6. get the longest accepted prefix ")
     print("")
@@ -108,13 +107,21 @@ class UI:
       self.print_menu()
       op = raw_input("> ")
       if op == "1":
-        print(self.fa.get_states())
+        print("> states: ["),
+        print(", ".join([str(x) for x in self.fa.get_states()])),
+        print("]")
       elif op == "2":
+        print("> alphabet: "),
         print(self.fa.get_alphabet())
       elif op == "3":
-        print(self.fa.get_transitions())
+        print("> transitions: [")
+        print(",\n".join([">   %s ---%s---> %s" % (x["from"], x["letter"], x["to"]) \
+            for x in self.fa.get_transitions()]))
+        print("> ]")
       elif op == "4":
-        print(self.fa.get_accepted_states())
+        print("> accepted states: ["),
+        print(", ".join([str(x) for x in self.fa.get_accepted_states()])),
+        print("]")
       elif op == "5":
         if not self.fa.deterministic:
           print("> Only for deterministic finite automata")
