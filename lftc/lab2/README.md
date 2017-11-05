@@ -23,3 +23,22 @@ File content description
       - the initial state of the finite automata
   5. field **`"accepted_states"`**
       - an array of all the accepted states
+* Example
+```javascript
+{
+  "states": ["q0", "q1", "q2"],
+  "alphabet": "abcfeghijklmnopqrstuvwxyz",
+  "transitions": [{
+      "from": "q0",
+      "to": "q1",
+      "letter": "a"
+    }, {
+      "from": "q1",
+      "to": "q2",
+      "letter": "a"
+    }
+  ],
+  "initial_state": "q0",
+  "accepted_states": ["q2"]
+}
+```
