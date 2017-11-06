@@ -84,7 +84,6 @@ inline void consumer(int tid, int T) {
     while(!q[tid].empty()) {
       tuple<int, int, int> el = q[tid].front();
       q[tid].pop();
-      //lk.unlock();
       int i = get<0>(el);
       int j = get<1>(el);
       int x = get<2>(el);

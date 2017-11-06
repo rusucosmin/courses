@@ -17,7 +17,7 @@ File content description
   3. field **`"transitions"`**
       - an array of "transition" object containing:
           - **`"from"`** field: a valid state from which we came from
-          - **`"letter"`** field: a valid a letter from the alphabet
+          - **`"letter"`** field: a valid a letter from the alphabet, or an array containing valid letters
           - **`"to"`** field: the state we will move if we follow the arrow corresponding to letter
   4. field **`"initial_state"`**
       - the initial state of the finite automata
@@ -35,10 +35,20 @@ File content description
     }, {
       "from": "q1",
       "to": "q2",
-      "letter": "a"
+      "letter": ["a"]
     }
   ],
   "initial_state": "q0",
   "accepted_states": ["q2"]
 }
 ```
+
+[C++ Integer Literal](http://en.cppreference.com/w/cpp/language/integer_literal)
+---------------------
+
+An integer literal is a primary expression of the form
+* decimal-literal integer-suffix(optional)  (1)
+* octal-literal integer-suffix(optional)  (2)
+* hex-literal integer-suffix(optional)  (3)
+* binary-literal integer-suffix(optional) (4) (since C++14)
+

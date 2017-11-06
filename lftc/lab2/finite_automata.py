@@ -1,6 +1,4 @@
-# TODO: Create a file containing the description of a deterministic FA describing the integer
-# constants (literals) from C / C++ . Use it as test data for your program.
-
+# TODO: integer u, l, U, L
 
 import json
 
@@ -16,10 +14,17 @@ class FiniteAutomata:
     for t in self.get_transitions():
       if t["from"] not in self.graph:
         self.graph[t["from"]] = {}
-      if t["letter"] in self.graph[t["from"]]:
-        print ("> Warning, autmoata is not a deterministic one!")
-        self.deterministic = False
-      self.graph[t["from"]][t["letter"]] = t["to"]
+      if type(t["letter"]) is list:
+        for k in t["letter"]:
+          if k in self.graph[t["from"]]:
+            print ("> Warning, autmoata is not a deterministic one!")
+            self.deterministic = False
+          self.graph[t["from"]][k] = t["to"]
+      else:
+        if t["letter"] in self.graph[t["from"]]:
+          print ("> Warning, autmoata is not a deterministic one!")
+          self.deterministic = False
+        self.graph[t["from"]][t["letter"]] = t["to"]
 
   def validate(self):
     if "states" not in self.json:
@@ -42,7 +47,11 @@ class FiniteAutomata:
         raise ValueError("Transition contains unknown state.")
       if t["to"] not in self.get_states():
         raise ValueError("Transition contains unknown state.")
-      if t["letter"] not in self.get_alphabet():
+      if type(t["letter"]) is list:
+        for k in t["letter"]:
+          if k not in self.get_alphabet():
+            raise ValueError("Transition letter not in the alphabet.")
+      elif t["letter"] not in self.get_alphabet():
         raise ValueError("Transition letter not in the alphabet.")
 
   def get_states(self):
@@ -149,7 +158,8 @@ class UI:
 
 
 def main():
-  with open("fa.json") as f:
+#  with open("fa.json") as f:
+  with open("cpp_integer_literals.json") as f:
     fa = FiniteAutomata(json.load(f))
     ui = UI(fa)
     ui.run()
