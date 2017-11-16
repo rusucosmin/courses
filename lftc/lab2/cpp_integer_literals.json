@@ -1,8 +1,8 @@
 {
-  "states": ["q0", "q1", "q2", "q3", "q4"],
+  "states": ["q0", "q1", "q2", "q3", "q4", "q5", "q6", "q7"],
   "alphabet": "0123456789.-+lLuUxXABCDEFabcdefb",
   "initial_state": "q0",
-  "accepted_states": ["q1", "q2", "q3", "q4"],
+  "accepted_states": ["q1", "q2", "q3", "q4", "q5", "q6", "q7"],
   "transitions": [{
       "from": "q0",
       "letter": ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
@@ -36,6 +36,46 @@
       "from": "q4",
       "letter": ["0", "1"],
       "to": "q4"
+    }, {
+      "from": "q1",
+      "letter": ["u", "U"],
+      "to": "q5"
+    }, {
+      "from": "q2",
+      "letter": ["u", "U"],
+      "to": "q5"
+    }, {
+      "from": "q3",
+      "letter": ["u", "U"],
+      "to": "q5"
+    }, {
+      "from": "q4",
+      "letter": ["u", "U"],
+      "to": "q5"
+    }, {
+      "from": "q1",
+      "letter": ["l", "L"],
+      "to": "q6"
+    }, {
+      "from": "q2",
+      "letter": ["l", "L"],
+      "to": "q6"
+    }, {
+      "from": "q3",
+      "letter": ["l", "L"],
+      "to": "q6"
+    }, {
+      "from": "q4",
+      "letter": ["l", "L"],
+      "to": "q6"
+    }, {
+      "from": "q5",
+      "letter": ["l", "L"],
+      "to": "q6"
+    }, {
+      "from": "q6",
+      "letter": ["l", "L"],
+      "to": "q7"
     }
   ]
 }

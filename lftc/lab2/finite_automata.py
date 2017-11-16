@@ -1,5 +1,3 @@
-# TODO: integer u, l, U, L
-
 import json
 
 class FiniteAutomata:
@@ -164,5 +162,41 @@ def main():
     ui = UI(fa)
     ui.run()
 
+def run_tests():
+  with open("cpp_integer_literals.json") as f:
+    fa = FiniteAutomata(json.load(f))
+    assert fa.accept("42")
+    assert fa.accept("052")
+    assert fa.accept("0x2a")
+    assert fa.accept("0X2A")
+    assert fa.accept("0b101010")
+    assert fa.accept("42u")
+    assert fa.accept("052U")
+    assert fa.accept("0x2au")
+    assert fa.accept("0X2AU")
+    assert fa.accept("0b101010u")
+    assert fa.accept("42l")
+    assert fa.accept("052L")
+    assert fa.accept("0x2al")
+    assert fa.accept("0X2AL")
+    assert fa.accept("0b101010L")
+    assert fa.accept("42ll")
+    assert fa.accept("052LL")
+    assert fa.accept("0x2alL")
+    assert fa.accept("0X2ALl")
+    assert fa.accept("0b101010Ll")
+    assert fa.accept("42ll")
+    assert fa.accept("052LL")
+    assert fa.accept("0x2alL")
+    assert fa.accept("0X2ALl")
+    assert fa.accept("0b101010Ll")
+    assert fa.accept("42ull")
+    assert fa.accept("052uLL")
+    assert fa.accept("0x2aulL")
+    assert fa.accept("0X2AuLl")
+    assert fa.accept("0b101010uLl")
+    print ("All tests pass")
+
 if __name__ == "__main__":
+  run_tests()
   main()
