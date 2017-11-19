@@ -34,5 +34,6 @@ inline void solve(string filename) {
 }
 
 int main(int argc, char* argv[]) {
+//  solve("input.in");
   solve(argv[1]);
 }

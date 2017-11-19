@@ -2,10 +2,11 @@
 #include <fstream>
 #include <vector>
 #include <ctime>
+#include <thread>
 
 using namespace std;
 
-inline void mult(const vector <int> &a, const vector <int> &b, vector <int> &sol) {
+void mult(const vector <int> &a, const vector <int> &b, vector <int> &sol) {
   if(a.size() == 1 && b.size() == 1) {
     sol[0] = a[0] * b[0];
     return;
@@ -18,19 +19,31 @@ inline void mult(const vector <int> &a, const vector <int> &b, vector <int> &sol
   vector <int> b_hi(b.begin() + half, b.end());
   vector <int> lo(a_lo.size() + b_lo.size() - 1);
   vector <int> hi(a_hi.size() + b_hi.size() - 1);
-  mult(a_lo, b_lo, lo);
-  mult(a_hi, b_hi, hi);
+  vector <thread> th;
+  th.push_back(thread([&a_lo, &b_lo, &lo](){mult(a_lo, b_lo, lo);}));
+  th.push_back(thread([&a_hi, &b_hi, &hi](){mult(a_hi, b_hi, hi);}));
+  for(int i = 0; i < th.size(); ++ i) {
+    th[i].join();
+  }
+  th.clear();
+  // middle
+  vector <int> a_lo2(a_lo);
+  vector <int> b_lo2(b_lo);
+  for(int i = 0; i < a_hi.size(); ++ i) {
+    a_lo2[i] += a_hi[i];
+    b_lo2[i] += b_hi[i];
+  }
+  vector <int> mid(a_lo2.size() + b_lo2.size() - 1);
+  th.push_back(thread([&a_lo2, &b_lo2, &mid](){mult(a_lo2, b_lo2, mid);}));
+  // th.push_back(thread(mult, a_lo2, b_lo2, mid));
+  // wait for threads to finish
+  for(int i = 0; i < th.size(); ++ i) {
+    th[i].join();
+  }
   // copy first part
   for(int i = 0; i < lo.size(); ++ i) {
     sol[i] += lo[i];
   }
-  // middle
-  for(int i = 0; i < a_hi.size(); ++ i) {
-    a_lo[i] += a_hi[i];
-    b_lo[i] += b_hi[i];
-  }
-  vector <int> mid(a_lo.size() + b_lo.size() - 1);
-  mult(a_lo, b_lo, mid);
   for(int i = 0; i < mid.size(); ++ i) {
     sol[i + half] += mid[i] - lo[i] - hi[i];
   }
@@ -68,7 +81,7 @@ inline void solve(string filename) {
   vector <int> sol(2 * n - 1);
   mult(a, b, sol);
   t = clock() - t;
-  cout << "Karatsuba algorithm took me " << t << " cycles ("
+  cout << "Karatsuba algorithm (threaded) took me " << t << " cycles ("
       << static_cast<float> (t) / CLOCKS_PER_SEC << " seconds)\n";
 }
 
