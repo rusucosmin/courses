@@ -1,4 +1,4 @@
-#Requirements
+# Requirements
 
 Solve both problems below:
 
@@ -17,7 +17,7 @@ pass the result to the next thread. Arrange the threads in a *binary tree*. Each
 thread should pass the sum to the next thread through a queue, digit by digit.
 
 
-#Documentation
+# Documentation
 
 I solved the two problems using `C++`.
 The performance is measured on my personal computer with the following config:
@@ -28,9 +28,9 @@ Memory: 16 GB 2133 MHZ LPDDR3
 Graphics: Intel Iris Plus GRaphics 640 1536 MB
 ```
 
-##Algorithms
+## Algorithms
 
-###Partial Sums
+### Partial Sums
 
 I used dynamic programming to solve this problem. Each thread can compute the
 sum of every subsequence of the array (not neccessarry starting on the first
@@ -52,7 +52,7 @@ Thread number `i where 0 <= i < T` will compute every partial sum `k` such that
 
 Source code: `sums.cpp`
 
-###Addition of n numbers
+### Addition of n numbers
 
 The requirements were very clear. So we arranged the threads in a binary tree,
 such that the 'root' thread computes the final sum and the leaf nodes
@@ -62,15 +62,15 @@ The threads used a syncronized queue to send the digits.
 
 Source code: `add.cpp`
 
-##Synchronization
+## Synchronization
 
-###Partial Sums
+### Partial Sums
 
 No synchornization is needed because everything is independent in terms of
 what variables they modify (the threads write to indepdent variables and
 and read read-only variables).
 
-###Addition of n numbers
+### Addition of n numbers
 
 The only synchronization mechanism we need is a Threadsafe-Queue.
 In this context we mean that the queue should support at least:
@@ -80,17 +80,17 @@ In this context we mean that the queue should support at least:
 This two methods are implemented in `safequeue.h` using a `mutex`, a normal
 `queue` and a `condition_variable`.
 
-##Performance measurements
+## Performance measurements
 
 Both program will tell you the number of clock cycles it took and the number of
 seconds.
 
-###Partial Sums
+### Partial Sums
 
 The program will tell you the number of clock cycles it took and the number of
 seconds.
 
-###Addition of n numbers
+### Addition of n numbers
 
 Run `eval.sh` to test the program for correctness and to see the times for each
 test case. My computer is limited on the number of threads I can spawn per

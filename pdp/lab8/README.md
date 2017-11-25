@@ -1,9 +1,9 @@
-#Requirements
+# Requirements
 
 Given a directed graph, find a Hamiltonean cycle, if one exists. Use multiple threads to
 parallelize the search.
 
-#Documentation
+# Documentation
 
 I solved the problems in `C++`.
 The performance is measured on my personal computer with the following config:
@@ -14,7 +14,7 @@ Memory: 16 GB 2133 MHZ LPDDR3
 Graphics: Intel Iris Plus GRaphics 640 1536 MB
 ```
 
-##Algorithm
+## Algorithm
 
 `In general, the problem of finding a Hamiltonian cycle is NP-complete (Karp 1972; Garey and
 Johnson 1983, p. 199), so the only known way to determine whether a given general graph has a
@@ -37,7 +37,7 @@ from the list of nodes of current node.
 We also need to keep track of the nodes which we selected so far.
 
 
-##Synchronization
+## Synchronization
 
 Each thread makes two children threads, so it must wait for them in order to solve it's current
 problem.
