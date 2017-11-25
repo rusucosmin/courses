@@ -50,6 +50,6 @@ inline void solve(string filename) {
 }
 
 int main(int argc, char* argv[]) {
-  solve(argv[1]);
 //  solve("input.in");
+  solve(argv[1]);
 }
