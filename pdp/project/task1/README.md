@@ -18,7 +18,7 @@ Now run the following commands to build the project:
 cmake .
 make
 ```
-A `GrayscaleFilter` file should be created by now.
+A `GrayscaleFilter.o` executable file should be created by now.
 In order to apply the grayscale filter to your image, run:
 ```
 ./GrayscaleFilter.o path_to_your_image number_of_threads
