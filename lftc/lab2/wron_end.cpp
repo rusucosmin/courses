@@ -1,0 +1,3 @@
+cin x
+cin y
+

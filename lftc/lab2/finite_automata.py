@@ -157,7 +157,9 @@ class UI:
 
 def main():
 #  with open("fa.json") as f:
-  with open("cpp_integer_literals.json") as f:
+  with open("symbols.json") as f:
+#  with open("identifier.json") as f:
+#  with open("constant.json") as f:
     fa = FiniteAutomata(json.load(f))
     ui = UI(fa)
     ui.run()
