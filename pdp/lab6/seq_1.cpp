@@ -23,11 +23,15 @@ inline void solve(string filename) {
     b.push_back(x);
   }
   vector <int> sol(2 * n - 1, 0);
-  for(int i = 0; i <= n; ++ i) {
-    for(int j = 0; j <= n; ++ j) {
+  for(int i = 0; i < n; ++ i) {
+    for(int j = 0; j < n; ++ j) {
       sol[i + j] += a[i] * b[j];
     }
   }
+//  for(int i = 0; i < 2 * n - 1; ++ i) {
+//    cerr << sol[i] << ' ';
+//  }
+//  cerr << '\n';
   t = clock() - t;
   cout << "Naive algorithm took me " << t << " cycles ("
       << static_cast<float> (t) / CLOCKS_PER_SEC << " seconds)\n";
