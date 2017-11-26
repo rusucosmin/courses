@@ -12,6 +12,9 @@
 
 *.in
 *.out
+*.ok
+*.jpg
+*.jped
 
 #CodeBlocks
 bin/
