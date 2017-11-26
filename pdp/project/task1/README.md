@@ -21,9 +21,9 @@ make
 A `GrayscaleFilter` file should be created by now.
 In order to apply the grayscale filter to your image, run:
 ```
-./GrayscaleFilter path_to_your_image number_of_threads
+./GrayscaleFilter.o path_to_your_image number_of_threads
 ```
-For example, run `./GrayscaleFilter ~/image.jpg 2` to apply a filter to image.jpg on home dir
+For example, run `./GrayscaleFilter.o ~/image.jpg 2` to apply a filter to image.jpg on home dir
 with 2 threads.
 
 ## Algorithm

@@ -6,9 +6,9 @@ project(GrayscaleFilter)
 # Open CV
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
-add_executable(GrayscaleFilter grayscalefilter.cpp)
-target_link_libraries(GrayscaleFilter ${OpenCV_LIBS})
+add_executable(GrayscaleFilter.o grayscalefilter.cpp)
+target_link_libraries(GrayscaleFilter.o ${OpenCV_LIBS})
 # Pthread
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
-target_link_libraries(GrayscaleFilter Threads::Threads)
+target_link_libraries(GrayscaleFilter.o Threads::Threads)
