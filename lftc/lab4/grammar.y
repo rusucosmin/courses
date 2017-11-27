@@ -4,7 +4,7 @@
 #include <math.h>
 
 void yyerror(const char *str) {
-  fprintf(stderr,"error: %s\n",str);
+  fprintf(stderr,"> Error: %s.\n",str);
   exit(0);
 }
 
@@ -20,7 +20,7 @@ char **argv;
 {
   main_lex(argc, argv);
   yyparse();
-  fprintf(stdout, "No syntax errors\n");
+  fprintf(stdout, "> Finished: No syntax errors\n");
 }
 
 %}
@@ -54,24 +54,22 @@ compound_stmt:
         | OBRACE stmt_list EBRACE
         ;
 
-stmt_list: SEMICOLON
-        | stmt_list stmt SEMICOLON
-        ;
-
-stmt: CIN
-    | COUT
-    | RETURN
-    ;
-
-stmt: decl
-    | assign
-    | return
-    | iostmt
+stmt_list:
+        | stmt_list stmt ; stmt: decl SEMICOLON
+    | assign SEMICOLON
+    | return SEMICOLON
+    | iostmt SEMICOLON
     | loop
     | if_stmt
     ;
 
-decl: type ID
+decl:
+    type ID {
+      if(strlen(yylval.text) > 250) {
+        fprintf(stderr, "Error: identifier %s is too long (more than 250 character limit)\n", yylval.text);
+        exit(0);
+      }
+    }
     ;
 
 assign: ID ASSIGN expr

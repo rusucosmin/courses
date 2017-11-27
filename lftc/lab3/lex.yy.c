@@ -552,6 +552,10 @@ void addConst(float atom){
 }
 
 void addIdentifier(char *atom){
+  if (strlen(atom)) {
+    fprintf(stderr, "Identifier %s is too long!\n", atom);
+    return ;
+  }
   int found = 0;
   int i = 0;
   while(i < identifierLength){
@@ -602,7 +606,7 @@ void show(){
   showId();
   showPIF();
 }
-#line 606 "lex.yy.c"
+#line 610 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -784,9 +788,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 106 "lab3.lx"
+#line 110 "lab3.lx"
 
-#line 790 "lex.yy.c"
+#line 794 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -871,173 +875,173 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 107 "lab3.lx"
+#line 111 "lab3.lx"
 addConst(atoi(yytext));
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 108 "lab3.lx"
+#line 112 "lab3.lx"
 addConst(atof(yytext));
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 110 "lab3.lx"
-printf("got identifier: %s", yytext); addPIF(0,0);
+#line 114 "lab3.lx"
+addPIF(0,0);
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 111 "lab3.lx"
-printf("got constant: %s", yytext); addPIF(1,0);
+#line 115 "lab3.lx"
+addPIF(1,0);
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 112 "lab3.lx"
+#line 116 "lab3.lx"
 addPIF(2,0);
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 113 "lab3.lx"
+#line 117 "lab3.lx"
 addPIF(3,0);
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 114 "lab3.lx"
+#line 118 "lab3.lx"
 addPIF(4,0);
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 115 "lab3.lx"
+#line 119 "lab3.lx"
 addPIF(5,0);
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 116 "lab3.lx"
+#line 120 "lab3.lx"
 addPIF(6,0);
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 117 "lab3.lx"
+#line 121 "lab3.lx"
 addPIF(7,0);
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 118 "lab3.lx"
+#line 122 "lab3.lx"
 addPIF(8,0);
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 119 "lab3.lx"
+#line 123 "lab3.lx"
 addPIF(9,0);
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 120 "lab3.lx"
+#line 124 "lab3.lx"
 addPIF(10,0);
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 121 "lab3.lx"
+#line 125 "lab3.lx"
 addPIF(11,0);
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 122 "lab3.lx"
+#line 126 "lab3.lx"
 addPIF(12,0);
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 123 "lab3.lx"
+#line 127 "lab3.lx"
 addPIF(13,0);
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 124 "lab3.lx"
+#line 128 "lab3.lx"
 addPIF(14,0);
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 125 "lab3.lx"
+#line 129 "lab3.lx"
 addPIF(15,0);
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 126 "lab3.lx"
+#line 130 "lab3.lx"
 addPIF(16,0);
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 127 "lab3.lx"
+#line 131 "lab3.lx"
 addPIF(17,0);
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 128 "lab3.lx"
+#line 132 "lab3.lx"
 addPIF(18,0);
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 129 "lab3.lx"
+#line 133 "lab3.lx"
 addPIF(19,0);
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 130 "lab3.lx"
+#line 134 "lab3.lx"
 addPIF(20,0);
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 131 "lab3.lx"
+#line 135 "lab3.lx"
 addPIF(21,0);
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 132 "lab3.lx"
+#line 136 "lab3.lx"
 addPIF(22,0);
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 133 "lab3.lx"
+#line 137 "lab3.lx"
 addPIF(23,0);
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 134 "lab3.lx"
+#line 138 "lab3.lx"
 addPIF(24,0);
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 135 "lab3.lx"
+#line 139 "lab3.lx"
 addPIF(25,0);
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 136 "lab3.lx"
+#line 140 "lab3.lx"
 addPIF(26,0);
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 137 "lab3.lx"
+#line 141 "lab3.lx"
 addPIF(27,0);
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 138 "lab3.lx"
+#line 142 "lab3.lx"
 addPIF(28,0);
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 139 "lab3.lx"
+#line 143 "lab3.lx"
 addIdentifier(yytext);
 	YY_BREAK
 case 33:
 /* rule 33 can match eol */
 YY_RULE_SETUP
-#line 141 "lab3.lx"
+#line 145 "lab3.lx"
 ;/* eat up whitespace */
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 142 "lab3.lx"
+#line 146 "lab3.lx"
 {
   if(yytext[0] != 13){
   printf("Illegal token %s and %d !\n",yytext,yytext[0]);
@@ -1046,10 +1050,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 147 "lab3.lx"
+#line 151 "lab3.lx"
 ECHO;
 	YY_BREAK
-#line 1053 "lex.yy.c"
+#line 1057 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2046,7 +2050,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 147 "lab3.lx"
+#line 151 "lab3.lx"
 
 
 int main (argc,argv)
