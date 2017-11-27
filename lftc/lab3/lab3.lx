@@ -145,7 +145,7 @@ return                addPIF(28,0);
   }
 }
 %%
-int main (argc,argv)
+int main_lex (argc,argv)
 int argc;
 char **argv;
 {
