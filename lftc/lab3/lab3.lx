@@ -1,0 +1,159 @@
+%{
+#include<stdlib.h>
+#include<string.h>
+#include<math.h>
+
+typedef struct{
+  int id1;
+  int id2;
+}PIF;
+
+typedef struct{
+  char name[250];
+}TSiden;
+
+int pifLength = 0;
+int constLength = 0;
+int identifierLength = 0;
+int identifierCode = 0;
+int constCode = 0;
+PIF program[300];
+
+TSiden TSidentifier[30];
+
+float TSconstants[30];
+
+void addPIF(int id1,int id2){
+  program[pifLength].id1 = id1;
+  program[pifLength].id2 = id2;
+  ++pifLength;
+}
+
+void addConst(float atom){
+  int found = 0;
+  int i ;
+  for(int i=0;i<constLength;++i){
+    if(TSconstants[i] == atom){
+      found = 1;
+      addPIF(constCode,i);
+    }
+  }
+  if(found == 0){
+    TSconstants[constLength] = atom;
+    addPIF(constCode,constLength);
+    ++constLength;
+  }
+}
+
+void addIdentifier(char *atom){
+  int found = 0;
+  int i = 0;
+  while(i < identifierLength){
+    int res = strcmp(TSidentifier[i].name,atom);
+    if(res == 0){
+      found = 1;
+      addPIF(identifierCode,i);
+    }
+    ++i;
+  }
+  if(found == 0){
+    strcpy(TSidentifier[identifierLength].name,atom);
+    addPIF(identifierCode,identifierLength);
+    identifierLength++;
+  }
+}
+
+void showPIF(){
+  printf("PIF:\n");
+  int t;
+  for(t = 0; t < pifLength;++t){
+    if(program[t].id1 != identifierCode && program[t].id1 != constCode){
+      printf(" %d|- ",program[t].id1);
+    }
+    else{
+      printf(" %d|%d ",program[t].id1,program[t].id2);
+    }
+  }
+}
+
+void showConst(){
+  printf("Constants: \n");
+  for(int i=0;i<constLength;++i){
+    printf(" %f", TSconstants[i]);
+  }
+  printf("\n");
+}
+
+void showId(){
+    printf("Identifier\n");
+    for(int i = 0 ;i<identifierLength;++i)
+        printf(" %s|%d", TSidentifier[i].name, i);
+    printf("\n");
+}
+
+void show(){
+  showConst();
+  showId();
+  showPIF();
+}
+%}
+
+%option noyywrap
+DIGIT     [0-9]
+ID_FIRST  [a-zA-Z]
+ID_END    [a-zA-Z0-9_]
+
+%%
+{DIGIT}+              addConst(atoi(yytext));
+{DIGIT}+"."{DIGIT}*   addConst(atof(yytext));
+
+\identifier           addPIF(0,0);
+\constant             addPIF(1,0);
+int                   addPIF(2,0);
+char                  addPIF(3,0);
+float                 addPIF(4,0);
+cin                   addPIF(5,0);
+cout                  addPIF(6,0);
+if                    addPIF(7,0);
+else                  addPIF(8,0);
+while                 addPIF(9,0);
+main                  addPIF(10,0);
+\{                    addPIF(11,0);
+\}                    addPIF(12,0);
+\;                    addPIF(13,0);
+\)                    addPIF(14,0);
+\(                    addPIF(15,0);
+\+                    addPIF(16,0);
+\-                    addPIF(17,0);
+\*                    addPIF(18,0);
+\/                    addPIF(19,0);
+\%                    addPIF(20,0);
+\>                    addPIF(21,0);
+\<                    addPIF(22,0);
+\>=                   addPIF(23,0);
+\<=                   addPIF(24,0);
+\==                   addPIF(25,0);
+\!=                   addPIF(26,0);
+\=                    addPIF(27,0);
+return                addPIF(28,0);
+{ID_FIRST}{ID_END}*   addIdentifier(yytext);
+
+[ \t\n]+          ;/* eat up whitespace */
+. {
+  if(yytext[0] != 13){
+  printf("Illegal token %s and %d !\n",yytext,yytext[0]);
+  }
+}
+%%
+int main (argc,argv)
+int argc;
+char **argv;
+{
+  ++argv;--argc;
+  if( argc > 0)
+    yyin = fopen(argv[0],"r");
+  else
+    yyin = stdin;
+  yylex();
+  show();
+}
