@@ -7,6 +7,8 @@ using namespace std;
 
 const int maxn = 35;
 
+const int NR_THREADS = 4000;
+
 int n, m;
 vector <int> g[maxn];
 
@@ -41,7 +43,7 @@ inline bool doIt(int node, vector <int> &sol, int x) {
   vector <int> a(sol), b(sol); // create two copies
   bool sol1 = 0;
   mtx.lock();
-  if(T < 4000) {
+  if(T < NR_THREADS) {
     T += 2;
     mtx.unlock();
     thread t1([&](){
