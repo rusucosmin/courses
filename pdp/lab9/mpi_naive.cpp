@@ -22,14 +22,16 @@ void generate(vector <int> &a, vector <int> &b, unsigned n) {
 
 inline void send_work(vector <int> &a, vector <int> &b, int nrProcs) {
   cerr << "> master sends work\n";
+  int n = a.size();
   int l = a.size() + b.size() - 1;
   for(int i = 1; i < nrProcs; ++ i) {
     int st = i * l / nrProcs;
-    int dr = ((i + 1) * l) / nrProcs;
+    int dr = min(l, (i + 1) * l / nrProcs);
+    MPI_Bsend(&n, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
     MPI_Bsend(&st, 1, MPI_INT, i, 1, MPI_COMM_WORLD);
     MPI_Bsend(&dr, 1, MPI_INT, i, 2, MPI_COMM_WORLD);
-    MPI_Bsend(a.data(), dr, MPI_INT, i, 3, MPI_COMM_WORLD);
-    MPI_Bsend(b.data(), dr, MPI_INT, i, 4, MPI_COMM_WORLD);
+    MPI_Bsend(a.data(), min(dr, n), MPI_INT, i, 3, MPI_COMM_WORLD);
+    MPI_Bsend(b.data(), min(dr, n), MPI_INT, i, 4, MPI_COMM_WORLD);
   }
   cerr << "> master sent work\n";
 }
@@ -37,8 +39,11 @@ inline void send_work(vector <int> &a, vector <int> &b, int nrProcs) {
 inline void do_it(int st, int dr, const vector <int> &a, const vector <int> &b, vector <int> &res) {
   cerr << "> do it " << st << ' ' << dr << "\n";
   for(int i = st; i < dr; ++ i) {
-    for(int x = 0; x <= i; ++ x) {
+    for(int x = 0; x <= min(int(a.size()) - 1, i); ++ x) {
       int y = i - x;
+      if(y >= b.size()) {
+        continue;
+      }
       res[i - st] += a[x] * b[y];
     }
   }
@@ -50,24 +55,23 @@ inline void collect(int nrProcs, vector <int> &res) {
   int l = res.size();
   for(int i = 1; i < nrProcs; ++ i) {
     MPI_Status _;
-    MPI_Recv(res.data() + (i * l) / nrProcs, l / nrProcs, MPI_INT, i, 5, MPI_COMM_WORLD, &_);
+    int st = i * l / nrProcs;
+    int dr = min(l, (i + 1) * l / nrProcs);
+    MPI_Recv(res.data() + st, dr - st, MPI_INT, i, 5, MPI_COMM_WORLD, &_);
   }
   cerr << "> master collected\n";
 }
 
 inline void check(vector <int> &a, vector <int> &b, vector <int> &res) {
   cerr << "> master check\n";
-  vector <int> check(a.size() + b.size() - 1);
+  vector <int> check(a.size() + b.size() - 1, 0);
   for(int i = 0; i < a.size(); ++ i) {
     for(int j = 0; j < b.size(); ++ j) {
       check[i + j] += a[i] * b[j];
     }
   }
-  cerr << check.size() << ' ' << res.size() << '\n';
-  cerr << "res.size() : " << res.size() << '\n';
   assert(check.size() == res.size());
   for(int i = 0; i < check.size(); ++ i) {
-    cerr << i << ' ' << check[i] << ' ' << res[i] << '\n';
     assert(check[i] == res[i]);
   }
   cerr << "> master checked\n";
@@ -75,16 +79,18 @@ inline void check(vector <int> &a, vector <int> &b, vector <int> &res) {
 
 inline void slave(int me) {
   cerr << "> slave("  << me << ") started\n";
+  int n;
   int st;
   int dr;
   MPI_Status _;
+  MPI_Recv(&n, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, &_);
   MPI_Recv(&st, 1, MPI_INT, 0, 1, MPI_COMM_WORLD, &_);
   MPI_Recv(&dr, 1, MPI_INT, 0, 2, MPI_COMM_WORLD, &_);
   vector <int> a(dr);
   vector <int> b(dr);
-  MPI_Recv(a.data(), dr, MPI_INT, 0, 3, MPI_COMM_WORLD, &_);
-  MPI_Recv(b.data(), dr, MPI_INT, 0, 4, MPI_COMM_WORLD, &_);
-  vector <int> res(dr - st);
+  MPI_Recv(a.data(), min(dr, n), MPI_INT, 0, 3, MPI_COMM_WORLD, &_);
+  MPI_Recv(b.data(), min(dr, n), MPI_INT, 0, 4, MPI_COMM_WORLD, &_);
+  vector <int> res(dr - st, 0);
   do_it(st, dr, a, b, res);
   MPI_Bsend(res.data(), dr - st, MPI_INT, 0, 5, MPI_COMM_WORLD);
   cerr << "> slave("  << me << ") finished\n";
