@@ -55,7 +55,9 @@ compound_stmt:
         ;
 
 stmt_list:
-        | stmt_list stmt ; stmt: decl SEMICOLON
+        | stmt_list stmt ;
+
+stmt: decl SEMICOLON
     | assign SEMICOLON
     | return SEMICOLON
     | iostmt SEMICOLON

@@ -929,7 +929,7 @@ YY_RULE_SETUP
 #line 47 "lab4.lx"
 {
   if(yytext[0] != 13){
-  printf("Illegal token %s and %d !\n",yytext,yytext[0]);
+  printf("Illegal token %s!\n",yytext);
   }
 }
 	YY_BREAK

@@ -48,7 +48,7 @@ class Scanner:
         self.symbolsTable[symbol] = sid
     except IOError:
       # In case there is no such file, fail fast!
-      print("ERROR: Symbols file not found!")
+      print("> Error: Symbols file not found!")
       sys.exit()
 
   # method returns a random integer that is not in the values array
@@ -134,25 +134,25 @@ class Scanner:
           if _sym == _id:
             _id = None
           if _id is not None and _id != "":
-            print("_id " + _id)
             if len(_id) > 250:
-              print("ERROR: Identifier has too many characters, line %d." % (i + 1))
-              sys.exit()
+              print("> Error: Identifier has too many characters, line %d." % (i + 1))
+              sys.exit(1)
             # add the token to the interal hashmaps
             self.addIdentifier(_id)
             program = program[len(_id):]
           elif _sym is not None and _sym != "":
-            print("_sym " + _sym)
             self.addSymbol(_sym)
             program = program[len(_sym):]
           elif _const is not None and _const != "":
-            print("_const " + _const)
             self.addConstant(_const)
             program = program[len(_const):]
+          else:
+            print("> Error: Syntax error. Unexpected token at line %d:%s" % (i + 1, program))
+            sys.exit(1)
       self.writeTables()
     except IOError:
-      print("ERROR: Source file not found!")
-      sys.exit()
+      print("> Error: Source file not found!")
+      sys.exit(1)
 
 # method scans and tokenize the filename source code
 def scan(filename):
@@ -166,9 +166,10 @@ if __name__ == '__main__':
   # get the first argument of the args
   # log it
   if len(sys.argv) > 1:
-    print("> scanning " + str(sys.argv[1]) + "...")
+    print("> Scanning " + str(sys.argv[1]) + "...")
     # scan that filename
     scan(sys.argv[1])
   else:
     scan("main.cpp")
+  print("> Done")
 

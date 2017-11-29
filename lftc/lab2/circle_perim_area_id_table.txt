@@ -1,0 +1,4 @@
+perimeter 17248
+PI 54477
+radius 27238
+area 24240

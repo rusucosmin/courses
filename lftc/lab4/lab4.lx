@@ -46,7 +46,7 @@ return                return RETURN;
 [ \t\n]+              /* ignore end of line and whitespace */
 . {
   if(yytext[0] != 13){
-  printf("Illegal token %s and %d !\n",yytext,yytext[0]);
+  printf("Illegal token %s!\n",yytext);
   }
 }
 %%

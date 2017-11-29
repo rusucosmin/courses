@@ -46,7 +46,7 @@ void addConst(float atom){
 }
 
 void addIdentifier(char *atom){
-  if (strlen(atom)) {
+  if (strlen(atom) > 250) {
     fprintf(stderr, "ERROR: Identifier %s is too long!\n", atom);
     return ;
   }
@@ -145,7 +145,7 @@ return                addPIF(28,0);
 [ \t\n]+          ;/* eat up whitespace */
 . {
   if(yytext[0] != 13){
-  printf("ERROR: Illegal token %s and %d !\n",yytext,yytext[0]);
+  printf("ERROR: Illegal token %s!\n",yytext);
   }
 }
 %%

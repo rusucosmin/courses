@@ -552,8 +552,8 @@ void addConst(float atom){
 }
 
 void addIdentifier(char *atom){
-  if (strlen(atom)) {
-    fprintf(stderr, "Identifier %s is too long!\n", atom);
+  if (strlen(atom) > 250) {
+    fprintf(stderr, "ERROR: Identifier %s is too long!\n", atom);
     return ;
   }
   int found = 0;
@@ -1044,7 +1044,7 @@ YY_RULE_SETUP
 #line 146 "lab3.lx"
 {
   if(yytext[0] != 13){
-  printf("Illegal token %s and %d !\n",yytext,yytext[0]);
+  printf("ERROR: Illegal token %s!\n",yytext);
   }
 }
 	YY_BREAK

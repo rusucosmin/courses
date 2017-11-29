@@ -166,7 +166,7 @@ char **argv;
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
-# define YYDEBUG 1
+# define YYDEBUG 0
 #endif
 
 /* Enabling verbose error messages.  */
@@ -506,10 +506,10 @@ static const yytype_int8 yyrhs[] =
 static const yytype_uint8 yyrline[] =
 {
        0,    44,    44,    45,    48,    49,    50,    53,    54,    57,
-      58,    58,    59,    60,    61,    62,    63,    67,    75,    78,
-      79,    80,    81,    82,    85,    86,    89,    90,    91,    92,
-      93,    96,    99,   100,   103,   106,   109,   112,   115,   120,
-     123,   126,   127,   128,   129,   130,   131,   134,   135
+      58,    60,    61,    62,    63,    64,    65,    69,    77,    80,
+      81,    82,    83,    84,    87,    88,    91,    92,    93,    94,
+      95,    98,   101,   102,   105,   108,   111,   114,   117,   122,
+     125,   128,   129,   130,   131,   132,   133,   136,   137
 };
 #endif
 
@@ -1457,7 +1457,7 @@ yyreduce:
   switch (yyn)
     {
         case 17:
-#line 67 "grammar.y"
+#line 69 "grammar.y"
     {
       if(strlen(yylval.text) > 250) {
         fprintf(stderr, "Error: identifier %s is too long (more than 250 character limit)\n", yylval.text);
@@ -1467,28 +1467,28 @@ yyreduce:
     break;
 
   case 35:
-#line 106 "grammar.y"
+#line 108 "grammar.y"
     {
       printf("cout id\n");
     }
     break;
 
   case 36:
-#line 109 "grammar.y"
+#line 111 "grammar.y"
     {
       printf("cout int\n");
     }
     break;
 
   case 37:
-#line 112 "grammar.y"
+#line 114 "grammar.y"
     {
       printf("cout float\n");
     }
     break;
 
   case 38:
-#line 115 "grammar.y"
+#line 117 "grammar.y"
     {
       printf("cout char\n");
     }
@@ -1710,6 +1710,6 @@ yyreturn:
 }
 
 
-#line 137 "grammar.y"
+#line 139 "grammar.y"
 
 
