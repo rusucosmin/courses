@@ -6,6 +6,7 @@
 
 using namespace cv;
 using namespace std;
+
 inline int convertToInt(char *s) {
   string _s(s);
   stringstream str(_s);
@@ -23,15 +24,24 @@ inline void displayImage(Mat &image) {
   waitKey(0);
 }
 
+inline int magic_transform(int R, int G, int B) {
+  return 0.21 * R + 0.72 * G + 0.07 * B;
+}
+
+inline int basic_transform(int R, int G, int B) {
+  return (R + G + B) / 3;
+}
+
 inline void apply_bw_filter(Mat &img, int st, int fn, int me) {
   cerr << "> proc " << me << " applying black & white filter\n";
   for (int i = st; i < fn; ++ i) {
     for (int j = 0; j < img.cols; ++ j) {
       Vec3b px = img.at<Vec3b>(i, j);
-      int gray = (px[0] + px[1] + px[2]) / 3;
-      px[0] = gray;
-      px[1] = gray;
-      px[2] = gray;
+      int magic = magic_transform(px[0], px[1], px[2]);
+      //int magic = basic_transform(px[0], px[1], px[2]);
+      px[0] = magic;
+      px[1] = magic;
+      px[2] = magic;
       img.at<Vec3b>(i, j) = px;
     }
   }
@@ -96,7 +106,7 @@ int main(int argc, char** argv ) {
   t = clock();
 
   if (argc != 2) {
-    printf("Usage: DisplayImage.out <Image_Path>\n");
+    printf("Usage: GrayscaleFilter.o <Image_Path>\n");
     return -1;
   }
   string filename = argv[1];

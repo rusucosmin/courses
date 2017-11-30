@@ -26,7 +26,7 @@ int main(int argc, char** argv ) {
   clock_t t;
   t = clock();
   if (argc != 3) {
-    printf("Usage: DisplayImage.out <Image_Path> <Number_of_threads>\n");
+    printf("Usage: GrayscaleFilter.o <Image_Path> <Number_of_threads>\n");
     return -1;
   }
   std::string filename = argv[1];
@@ -43,7 +43,7 @@ int main(int argc, char** argv ) {
   }
   std::vector <std::thread> th;
   for(int t = 0; t < min(image.rows, T); ++ t) {
-    th.push_back(std::thread([&T, &t, &image](){
+    th.push_back(std::thread([&image, t, T](){
       for(int i = t; i < image.rows; i += T) {
         for(int j = 0; j < image.cols; ++ j) {
           Vec3b px = image.at<Vec3b>(i, j);
