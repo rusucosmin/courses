@@ -20,6 +20,8 @@ Graphics: Intel Iris Plus GRaphics 640 1536 MB
 
 
 ## Algorithm
+
+### Naive approach
 The algorithm I decided to use is the following:
 Each worked gets a chunk of the end result to comute. Let `a` and `b` - the polynoms to multiply.
 Now, let `m = a * b`.
@@ -27,6 +29,9 @@ Each worked node will have to compute `m[st:fn]` - the result on the positions b
 It's easy to see that because each worked will need to compute `m[st:fn]` it only needs the values
 `a[0:fn]` and `b[0:fn]`.
 Based on this observation the algorithm is as follows:
+
+### Karatsuba
+TODO
 
 ```
 master: assign chunks to all of the slave nodes
@@ -48,4 +53,4 @@ the master to wait for the results, the master will do slave work after assignin
 the other nodes.
 
 ## Performance measurements
-TBD
+TODO
