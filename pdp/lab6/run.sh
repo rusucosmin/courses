@@ -15,10 +15,10 @@ for i in `ls tests/*.in`
 do
   echo "Running test $i"
   head -n1 $i
-  ./seq_1.o $i
-  ./seq_2.o $i
-  ./kar_1.o $i
-  ./kar_2.o $i
+#  ./seq_1.o $i
+#  ./seq_2.o $i
+#  ./kar_1.o $i
+#  ./kar_2.o $i
   ./kar_smen.o $i
   echo ""
 done

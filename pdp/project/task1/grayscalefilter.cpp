@@ -25,22 +25,31 @@ inline void displayImage(Mat &image) {
 int main(int argc, char** argv ) {
   clock_t t;
   t = clock();
-  if (argc != 3) {
-    printf("Usage: GrayscaleFilter.o <Image_Path> <Number_of_threads>\n");
+  if (argc != 3 && argc != 4) {
+    printf("Usage: GrayscaleFilter.o <Image_Path> <Number_of_threads> <generate_photo_size_n>\n");
     return -1;
   }
   std::string filename = argv[1];
+  int N;
   int T = convertToInt(argv[2]);
   if(T == -1) {
     printf("Please give me a valid integer for the number of threads\n");
     return -1;
   }
   Mat image;
-  image = imread(argv[1], CV_LOAD_IMAGE_COLOR);
-  if (!image.data) {
-    printf("No image data\n");
-    return -1;
+  if (argc == 3) {
+    printf("Applying grayscale filter to %s\n", filename.c_str());
+    image = imread(argv[1], CV_LOAD_IMAGE_COLOR);
+    if (!image.data) {
+      printf("No image data\n");
+      return -1;
+    }
+  } else if(argc == 4) {
+    N = convertToInt(argv[3]);
+    printf("Generating %d by %d matrix\n", N, N);
+    image = Mat(N, N, CV_8UC3);
   }
+  printf("Started working...\n");
   std::vector <std::thread> th;
   for(int t = 0; t < min(image.rows, T); ++ t) {
     th.push_back(std::thread([&image, t, T](){

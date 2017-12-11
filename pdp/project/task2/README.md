@@ -25,7 +25,7 @@ make
 A `GrayscaleFilter.o` executable file should be created by now.
 In order to apply the grayscale filter to your image, run:
 ```
-./GrayscaleFilter.o path_to_your_image number_of_threads
+mpirun --host list_of_hosts ./GrayscaleFilter.o path_to_your_image
 ```
 For example, run `mpirun --host localhost,localhost ./GrayscaleFilter.o ~/image.jpg' to apply
 a filter to image.jpg on home dir with two nodes one on the localhost machine.

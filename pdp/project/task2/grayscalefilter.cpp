@@ -105,19 +105,26 @@ int main(int argc, char** argv ) {
   clock_t t;
   t = clock();
 
-  if (argc != 2) {
+  if (argc != 2 && argc != 3) {
     printf("Usage: GrayscaleFilter.o <Image_Path>\n");
-    return -1;
-  }
-  string filename = argv[1];
-  Mat image;
-  image = imread(argv[1], CV_LOAD_IMAGE_COLOR);
-  if (!image.data) {
-    printf("No image data\n");
     return -1;
   }
 
   if(me == 0) {
+    string filename = argv[1];
+    Mat image;
+    if (argc == 2) {
+      image = imread(argv[1], CV_LOAD_IMAGE_COLOR);
+      if (!image.data) {
+        printf("No image data\n");
+        return -1;
+      }
+    } else {
+      int N = convertToInt(argv[2]);
+      printf("Generating %d by %d matrix\n", N, N);
+      image = Mat(N, N, CV_8UC3);
+      printf("Generated %d by %d matrix\n", N, N);
+    }
     master(image, nrProcs);
     imwrite("grayscale.jpg", image);
 

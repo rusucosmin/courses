@@ -31,14 +31,16 @@ It's easy to see that because each worked will need to compute `m[st:fn]` it onl
 Based on this observation the algorithm is as follows:
 
 ### Karatsuba
-TODO
+`P1 * P2 = (P11 + P12 + ... + P1k) * P2`
+I just split the first polynom and distribute the work equally.
+The master does it's part, then sums up all the result.
 
 ```
 master: assign chunks to all of the slave nodes
-master: sends the needed prefixes to the slaves
+master: sends the chunks to the slaves
 master: keeps a chunk for him & solve
 master: wait for the results
-master: concatenate the results together
+master: adds up the results together
 
 slave: get the chunk assigned from master
 slave: solve the subproblem
@@ -53,4 +55,4 @@ the master to wait for the results, the master will do slave work after assignin
 the other nodes.
 
 ## Performance measurements
-TODO
+Pretty good

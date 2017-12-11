@@ -1,11 +1,15 @@
 #include <iostream>
 #include <fstream>
+#include <assert.h>
 
 using namespace std;
 
 void brute(int *a, int *b, int *ret, int n) {
+  for(int i = 0; i < 2 * n; ++ i) {
+    ret[i] = 0;
+  }
   for(int i = 0; i < n; ++ i) {
-    for(int j = 0; j < n ;++ j) {
+    for(int j = 0; j < n; ++ j) {
       ret[i + j] += a[i] * b[j];
     }
   }
@@ -46,8 +50,18 @@ void karatsuba(int *a, int *b, int *ret, int n)
 }
 
 const int MAXN = 250005;
+int a[MAXN], b[MAXN], ret[10 * MAXN], check[3 * MAXN];
 
-int a[MAXN], b[MAXN], ret[MAXN * 10];
+inline void verify(int *a, int *b, int *res, int n) {
+  for(int i = 0; i < n; ++ i) {
+    for(int j = 0; j < n; ++ j) {
+      check[i + j] += a[i] * b[j];
+    }
+  }
+  for(int i = 0; i < 2 * n - 1; ++ i) {
+    assert(res[i] == check[i]);
+  }
+}
 
 int main(int argc, char* argv[]) {
   clock_t t;
@@ -65,9 +79,7 @@ int main(int argc, char* argv[]) {
     ++ n;
   }
   karatsuba(a, b, ret, n);
-  //for(int i = 0; i < 2 * n - 1; ++ i) {
-  //  cerr << ret[i] << ' ';
-  //}
+  verify(a, b, ret, n);
   t = clock() - t;
   cout << "Karatsuba algorithm on STEROIDS took me " << t << " cycles ("
       << static_cast<float> (t) / CLOCKS_PER_SEC << " seconds)\n";
