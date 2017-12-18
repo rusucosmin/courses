@@ -1,27 +1,60 @@
-Parsing
-Working time: 3 weeks
-Delivery: lab.12
--------------------------------
-One assignment is for a team of 2 students.
-One of the following parsing methods will be chosen:
-a. recursive descendent
-b. ll(1)
-*c. slr*
-d. lr(1)
-The assignment is divided in the following phases:
-STEP 1: perform the parsing of an input sequence
-Input: - a context free grammar (the example from course)
-- an input sequence
-Output: the parsing tree corresponding to the input sequence
-or a message in case the sequence is not accepted.
-The result will be any possible representation of the parsing tree
-(including derivations string)
-Remark: Verify if the parsing method can be applied.
-STEP 2: parsing
-performs the parsing for a program written in your language
-(MLP lab. 1)
-Input: PIF + minilanguage grammar
-Output: parsing tree corresponding to the program
-or a message for errors (error diagnose where it is the case)
-If the grammar does not satisfy the conditions of the parsing algorithm,
-consult your teacher!
+# SLR Parser
+
+## Usage:
++ Store grammar in a file called `grammar` (all rule must be in format `X->a`, ie LHS and RHS
+seperated by -> and no | operator, use only single alphabet for each terminal and non-terminal
+eg: i for id)
++ Run `python slr_short.py`
++ Enter grammar file name
++ All GOTO and REDUCTION table is generated
++ Enter string to check
++ Parse table with result is shown
+
+## Context Free Grammar
+[altimage]('/grammar.png')
+
+## Bibliography
+[Metode de Proiectare a Compilatoarelor, Simona Motogna](https://www.scribd.com/document/332697666/Metode-de-Proiectare-a-Compilatoarelor-Simona-Motogna)
+
+```
+S->2afeA    #commands
+B->2        #type
+B->3        #type
+B->4        #type
+A->bCc      #compound_stmt
+C->CD       #stmt_list
+D->Ed       #stmt
+D->Fd
+D->Gd
+D->Hd
+D->I
+D->J
+E->B0       #decl
+F->0rM      #assign
+L->g        #op
+L->h
+L->i
+L->j
+L->k
+M->0        #expr
+M->1
+M->ML0
+M->ML1
+M->eMf
+G->sM       #return
+H->N        #iostmt
+H->O
+N->50       #cin
+O->60       #cout
+O->61
+I->9fPeA    #loop
+P->MQM      #condition
+Q->l        #rel operator
+Q->m
+Q->n
+Q->o
+Q->p
+Q->q
+J->7fPeA      #if
+J->7fPeA8A    #else
+```
