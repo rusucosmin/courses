@@ -1,17 +1,32 @@
 # SLR Parser
+Step wise implementation of SLR parsing
 
-## Usage:
-+ Store grammar in a file called `grammar` (all rule must be in format `X->a`, ie LHS and RHS
-seperated by -> and no | operator, use only single alphabet for each terminal and non-terminal
-eg: i for id)
-+ Run `python slr_short.py`
-+ Enter grammar file name
-+ All GOTO and REDUCTION table is generated
-+ Enter string to check
-+ Parse table with result is shown
+* Generates Goto
+* Calculates First and Follow
+* Shifting and Reduction
+* Generates parsing table
+* String evaluation using parsing table.
 
+## Running
+```bash
+python slr.py "grammar file location" "string to check"
+```
+Example:
+```bash
+python slr.py ./test_grammar/grammar1.txt "id + ( id * id )"
+```
 ## Context Free Grammar
+Example from the book `Metode de proiectare a Compilatoarelor, Simona Motogna`
 ![context free grammar](grammar.png)
+###Grammar file:
+```
+X' := S
+S := T S'
+S' := + T S' | E
+T := F T'
+T' := * F T' | E
+F := ( S ) | id | const
+```
 
 ## Bibliography
 [Metode de Proiectare a Compilatoarelor, Simona Motogna](https://www.scribd.com/document/332697666/Metode-de-Proiectare-a-Compilatoarelor-Simona-Motogna)

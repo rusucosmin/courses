@@ -1,0 +1,9 @@
+X' := commands
+commands := INT MAIN OPAR EPAR compound_stmt
+type := INT | FLOAT | CHAR
+compound_stmt := OBRACE stmt_list EBRACE
+stmt_list := stmt stmt_list | E
+stmt := decl SEMICOLON | return SEMICOLON | assign SEMICOLON
+decl := type ID
+assign := ID assigneaza
+assigneaza := ASSIGN CONST
