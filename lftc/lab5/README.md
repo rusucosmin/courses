@@ -11,7 +11,7 @@ eg: i for id)
 + Parse table with result is shown
 
 ## Context Free Grammar
-[altimage]('/grammar.png')
+![context free grammar]('/grammar.png')
 
 ## Bibliography
 [Metode de Proiectare a Compilatoarelor, Simona Motogna](https://www.scribd.com/document/332697666/Metode-de-Proiectare-a-Compilatoarelor-Simona-Motogna)
