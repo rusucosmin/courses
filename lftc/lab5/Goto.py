@@ -7,7 +7,7 @@ import copy
 epsila = "E"
 MAX_LOOP = 30
 
-DEBUG = False
+DEBUG = True
 
 class Goto(object):
   '''Holds the list of productions produced by the goto function.'''

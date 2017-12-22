@@ -56,7 +56,7 @@ class Table(object):
   def generate_shift(self):
     productions = self.grammar.get_dot_terminal_productions()
     for production in productions:
-      # print production, "===", production.next_symbol()
+      print production, "===", production.next_symbol()
       goto_list = self.gotos.find_production(production)
       for goto in goto_list:
         print goto

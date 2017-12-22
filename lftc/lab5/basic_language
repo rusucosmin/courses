@@ -1,2 +1,7 @@
-S->2afeA
-A->bc
+X' := commands
+commands := INT MAIN OPAR EPAR compound_stmt
+type := INT | FLOAT | CHAR
+compound_stmt := OBRACE stmt_list EBRACE
+stmt_list := stmt | E
+stmt := assign SEMICOLON
+assign := ID ASSIGN CONST
