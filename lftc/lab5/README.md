@@ -21,16 +21,35 @@ Example:
 ```bash
 python SLRParser.py "id + ( id * id )"
 ```
-```
 ## Context Free Grammar
 Example from the book `Metode de proiectare a Compilatoarelor, Simona Motogna`
-![context free grammar](grammar.png)
-###Grammar file:
+
+###Step 1 Grammar file:
+```
 E -> E + T
 E -> T
 T -> T * F | F
 F -> ( E )
 F -> id | const
+```
+###Step 1 Grammar file:
+```
+E -> int main opar epar COMP_STMT
+TYPE -> int | float | char
+COMP_STMT -> obrace STMT_LIST ebrace
+STMT_LIST -> STMT_LIST STMT | STMT
+STMT -> ASSIGN | DECL | RETURN | IOSTMT | LOOP | IF_STMT | semicolon
+ASSIGN -> id assign EXPR semicolon
+DECL -> TYPE id semicolon
+RETURN -> return EXPR semicolon
+IOSTMT -> cin id semicolon | cout EXPR semicolon
+PASS -> pass semicolon
+OP -> plus | minus | mult | div | mod
+EXPR -> id | const | EXPR OP const | EXPR OP id | opar EXPR epar
+LOOP -> while opar COND epar COMP_STMT
+COND -> EXPR RELATION_OP EXPR
+RELATION_OP -> eq | noteq | lt| le | gt | ge
+IF_STMT -> if opar COND epar COMP_STMT else COMP_STMT
 ```
 
 ## Bibliography
