@@ -1,0 +1,828 @@
+Terminals which are not used
+
+   TEXT
+
+
+Grammar
+
+    0 $accept: commands $end
+
+    1 commands: /* empty */
+    2         | INT MAIN OPAR EPAR compound_stmt
+
+    3 type: INT
+    4     | FLOAT
+    5     | CHAR
+
+    6 compound_stmt: /* empty */
+    7              | OBRACE stmt_list EBRACE
+
+    8 stmt_list: /* empty */
+    9          | stmt_list stmt
+
+   10 stmt: decl SEMICOLON
+   11     | assign SEMICOLON
+   12     | return SEMICOLON
+   13     | iostmt SEMICOLON
+   14     | loop
+   15     | if_stmt
+
+   16 decl: type ID
+
+   17 assign: ID ASSIGN expr
+
+   18 op: PLUS
+   19   | MINUS
+   20   | MULT
+   21   | DIV
+   22   | MOD
+
+   23 constant: INTEGER
+   24         | REAL
+
+   25 expr: ID
+   26     | constant
+   27     | expr op ID
+   28     | expr op constant
+   29     | OPAR expr EPAR
+
+   30 return: RETURN INTEGER
+
+   31 iostmt: input
+   32       | output
+
+   33 input: CIN ID
+
+   34 output: COUT ID
+   35       | COUT INTEGER
+   36       | COUT FLOAT
+   37       | COUT CHAR
+
+   38 loop: WHILE OPAR condition EPAR compound_stmt
+
+   39 condition: expr relation_op expr
+
+   40 relation_op: EQ
+   41            | NOTEQ
+   42            | LT
+   43            | LE
+   44            | GT
+   45            | GE
+
+   46 if_stmt: IF OPAR condition EPAR compound_stmt
+   47        | IF OPAR condition EPAR compound_stmt ELSE compound_stmt
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+ID (258) 16 17 25 27 33 34
+INT (259) 2 3
+CHAR (260) 5 37
+FLOAT (261) 4 36
+CIN (262) 33
+COUT (263) 34 35 36 37
+IF (264) 46 47
+ELSE (265) 47
+WHILE (266) 38
+MAIN (267) 2
+OBRACE (268) 7
+EBRACE (269) 7
+SEMICOLON (270) 10 11 12 13
+OPAR (271) 2 29 38 46 47
+EPAR (272) 2 29 38 46 47
+PLUS (273) 18
+MINUS (274) 19
+MULT (275) 20
+DIV (276) 21
+MOD (277) 22
+GT (278) 44
+LT (279) 42
+GE (280) 45
+LE (281) 43
+EQ (282) 40
+NOTEQ (283) 41
+ASSIGN (284) 17
+RETURN (285) 30
+INTEGER (286) 23 30 35
+REAL (287) 24
+TEXT (288)
+
+
+Nonterminals, with rules where they appear
+
+$accept (34)
+    on left: 0
+commands (35)
+    on left: 1 2, on right: 0
+type (36)
+    on left: 3 4 5, on right: 16
+compound_stmt (37)
+    on left: 6 7, on right: 2 38 46 47
+stmt_list (38)
+    on left: 8 9, on right: 7 9
+stmt (39)
+    on left: 10 11 12 13 14 15, on right: 9
+decl (40)
+    on left: 16, on right: 10
+assign (41)
+    on left: 17, on right: 11
+op (42)
+    on left: 18 19 20 21 22, on right: 27 28
+constant (43)
+    on left: 23 24, on right: 26 28
+expr (44)
+    on left: 25 26 27 28 29, on right: 17 27 28 29 39
+return (45)
+    on left: 30, on right: 12
+iostmt (46)
+    on left: 31 32, on right: 13
+input (47)
+    on left: 33, on right: 31
+output (48)
+    on left: 34 35 36 37, on right: 32
+loop (49)
+    on left: 38, on right: 14
+condition (50)
+    on left: 39, on right: 38 46 47
+relation_op (51)
+    on left: 40 41 42 43 44 45, on right: 39
+if_stmt (52)
+    on left: 46 47, on right: 15
+
+
+state 0
+
+    0 $accept: . commands $end
+
+    INT  shift, and go to state 1
+
+    $default  reduce using rule 1 (commands)
+
+    commands  go to state 2
+
+
+state 1
+
+    2 commands: INT . MAIN OPAR EPAR compound_stmt
+
+    MAIN  shift, and go to state 3
+
+
+state 2
+
+    0 $accept: commands . $end
+
+    $end  shift, and go to state 4
+
+
+state 3
+
+    2 commands: INT MAIN . OPAR EPAR compound_stmt
+
+    OPAR  shift, and go to state 5
+
+
+state 4
+
+    0 $accept: commands $end .
+
+    $default  accept
+
+
+state 5
+
+    2 commands: INT MAIN OPAR . EPAR compound_stmt
+
+    EPAR  shift, and go to state 6
+
+
+state 6
+
+    2 commands: INT MAIN OPAR EPAR . compound_stmt
+
+    OBRACE  shift, and go to state 7
+
+    $default  reduce using rule 6 (compound_stmt)
+
+    compound_stmt  go to state 8
+
+
+state 7
+
+    7 compound_stmt: OBRACE . stmt_list EBRACE
+
+    $default  reduce using rule 8 (stmt_list)
+
+    stmt_list  go to state 9
+
+
+state 8
+
+    2 commands: INT MAIN OPAR EPAR compound_stmt .
+
+    $default  reduce using rule 2 (commands)
+
+
+state 9
+
+    7 compound_stmt: OBRACE stmt_list . EBRACE
+    9 stmt_list: stmt_list . stmt
+
+    ID      shift, and go to state 10
+    INT     shift, and go to state 11
+    CHAR    shift, and go to state 12
+    FLOAT   shift, and go to state 13
+    CIN     shift, and go to state 14
+    COUT    shift, and go to state 15
+    IF      shift, and go to state 16
+    WHILE   shift, and go to state 17
+    EBRACE  shift, and go to state 18
+    RETURN  shift, and go to state 19
+
+    type     go to state 20
+    stmt     go to state 21
+    decl     go to state 22
+    assign   go to state 23
+    return   go to state 24
+    iostmt   go to state 25
+    input    go to state 26
+    output   go to state 27
+    loop     go to state 28
+    if_stmt  go to state 29
+
+
+state 10
+
+   17 assign: ID . ASSIGN expr
+
+    ASSIGN  shift, and go to state 30
+
+
+state 11
+
+    3 type: INT .
+
+    $default  reduce using rule 3 (type)
+
+
+state 12
+
+    5 type: CHAR .
+
+    $default  reduce using rule 5 (type)
+
+
+state 13
+
+    4 type: FLOAT .
+
+    $default  reduce using rule 4 (type)
+
+
+state 14
+
+   33 input: CIN . ID
+
+    ID  shift, and go to state 31
+
+
+state 15
+
+   34 output: COUT . ID
+   35       | COUT . INTEGER
+   36       | COUT . FLOAT
+   37       | COUT . CHAR
+
+    ID       shift, and go to state 32
+    CHAR     shift, and go to state 33
+    FLOAT    shift, and go to state 34
+    INTEGER  shift, and go to state 35
+
+
+state 16
+
+   46 if_stmt: IF . OPAR condition EPAR compound_stmt
+   47        | IF . OPAR condition EPAR compound_stmt ELSE compound_stmt
+
+    OPAR  shift, and go to state 36
+
+
+state 17
+
+   38 loop: WHILE . OPAR condition EPAR compound_stmt
+
+    OPAR  shift, and go to state 37
+
+
+state 18
+
+    7 compound_stmt: OBRACE stmt_list EBRACE .
+
+    $default  reduce using rule 7 (compound_stmt)
+
+
+state 19
+
+   30 return: RETURN . INTEGER
+
+    INTEGER  shift, and go to state 38
+
+
+state 20
+
+   16 decl: type . ID
+
+    ID  shift, and go to state 39
+
+
+state 21
+
+    9 stmt_list: stmt_list stmt .
+
+    $default  reduce using rule 9 (stmt_list)
+
+
+state 22
+
+   10 stmt: decl . SEMICOLON
+
+    SEMICOLON  shift, and go to state 40
+
+
+state 23
+
+   11 stmt: assign . SEMICOLON
+
+    SEMICOLON  shift, and go to state 41
+
+
+state 24
+
+   12 stmt: return . SEMICOLON
+
+    SEMICOLON  shift, and go to state 42
+
+
+state 25
+
+   13 stmt: iostmt . SEMICOLON
+
+    SEMICOLON  shift, and go to state 43
+
+
+state 26
+
+   31 iostmt: input .
+
+    $default  reduce using rule 31 (iostmt)
+
+
+state 27
+
+   32 iostmt: output .
+
+    $default  reduce using rule 32 (iostmt)
+
+
+state 28
+
+   14 stmt: loop .
+
+    $default  reduce using rule 14 (stmt)
+
+
+state 29
+
+   15 stmt: if_stmt .
+
+    $default  reduce using rule 15 (stmt)
+
+
+state 30
+
+   17 assign: ID ASSIGN . expr
+
+    ID       shift, and go to state 44
+    OPAR     shift, and go to state 45
+    INTEGER  shift, and go to state 46
+    REAL     shift, and go to state 47
+
+    constant  go to state 48
+    expr      go to state 49
+
+
+state 31
+
+   33 input: CIN ID .
+
+    $default  reduce using rule 33 (input)
+
+
+state 32
+
+   34 output: COUT ID .
+
+    $default  reduce using rule 34 (output)
+
+
+state 33
+
+   37 output: COUT CHAR .
+
+    $default  reduce using rule 37 (output)
+
+
+state 34
+
+   36 output: COUT FLOAT .
+
+    $default  reduce using rule 36 (output)
+
+
+state 35
+
+   35 output: COUT INTEGER .
+
+    $default  reduce using rule 35 (output)
+
+
+state 36
+
+   46 if_stmt: IF OPAR . condition EPAR compound_stmt
+   47        | IF OPAR . condition EPAR compound_stmt ELSE compound_stmt
+
+    ID       shift, and go to state 44
+    OPAR     shift, and go to state 45
+    INTEGER  shift, and go to state 46
+    REAL     shift, and go to state 47
+
+    constant   go to state 48
+    expr       go to state 50
+    condition  go to state 51
+
+
+state 37
+
+   38 loop: WHILE OPAR . condition EPAR compound_stmt
+
+    ID       shift, and go to state 44
+    OPAR     shift, and go to state 45
+    INTEGER  shift, and go to state 46
+    REAL     shift, and go to state 47
+
+    constant   go to state 48
+    expr       go to state 50
+    condition  go to state 52
+
+
+state 38
+
+   30 return: RETURN INTEGER .
+
+    $default  reduce using rule 30 (return)
+
+
+state 39
+
+   16 decl: type ID .
+
+    $default  reduce using rule 16 (decl)
+
+
+state 40
+
+   10 stmt: decl SEMICOLON .
+
+    $default  reduce using rule 10 (stmt)
+
+
+state 41
+
+   11 stmt: assign SEMICOLON .
+
+    $default  reduce using rule 11 (stmt)
+
+
+state 42
+
+   12 stmt: return SEMICOLON .
+
+    $default  reduce using rule 12 (stmt)
+
+
+state 43
+
+   13 stmt: iostmt SEMICOLON .
+
+    $default  reduce using rule 13 (stmt)
+
+
+state 44
+
+   25 expr: ID .
+
+    $default  reduce using rule 25 (expr)
+
+
+state 45
+
+   29 expr: OPAR . expr EPAR
+
+    ID       shift, and go to state 44
+    OPAR     shift, and go to state 45
+    INTEGER  shift, and go to state 46
+    REAL     shift, and go to state 47
+
+    constant  go to state 48
+    expr      go to state 53
+
+
+state 46
+
+   23 constant: INTEGER .
+
+    $default  reduce using rule 23 (constant)
+
+
+state 47
+
+   24 constant: REAL .
+
+    $default  reduce using rule 24 (constant)
+
+
+state 48
+
+   26 expr: constant .
+
+    $default  reduce using rule 26 (expr)
+
+
+state 49
+
+   17 assign: ID ASSIGN expr .
+   27 expr: expr . op ID
+   28     | expr . op constant
+
+    PLUS   shift, and go to state 54
+    MINUS  shift, and go to state 55
+    MULT   shift, and go to state 56
+    DIV    shift, and go to state 57
+    MOD    shift, and go to state 58
+
+    $default  reduce using rule 17 (assign)
+
+    op  go to state 59
+
+
+state 50
+
+   27 expr: expr . op ID
+   28     | expr . op constant
+   39 condition: expr . relation_op expr
+
+    PLUS   shift, and go to state 54
+    MINUS  shift, and go to state 55
+    MULT   shift, and go to state 56
+    DIV    shift, and go to state 57
+    MOD    shift, and go to state 58
+    GT     shift, and go to state 60
+    LT     shift, and go to state 61
+    GE     shift, and go to state 62
+    LE     shift, and go to state 63
+    EQ     shift, and go to state 64
+    NOTEQ  shift, and go to state 65
+
+    op           go to state 59
+    relation_op  go to state 66
+
+
+state 51
+
+   46 if_stmt: IF OPAR condition . EPAR compound_stmt
+   47        | IF OPAR condition . EPAR compound_stmt ELSE compound_stmt
+
+    EPAR  shift, and go to state 67
+
+
+state 52
+
+   38 loop: WHILE OPAR condition . EPAR compound_stmt
+
+    EPAR  shift, and go to state 68
+
+
+state 53
+
+   27 expr: expr . op ID
+   28     | expr . op constant
+   29     | OPAR expr . EPAR
+
+    EPAR   shift, and go to state 69
+    PLUS   shift, and go to state 54
+    MINUS  shift, and go to state 55
+    MULT   shift, and go to state 56
+    DIV    shift, and go to state 57
+    MOD    shift, and go to state 58
+
+    op  go to state 59
+
+
+state 54
+
+   18 op: PLUS .
+
+    $default  reduce using rule 18 (op)
+
+
+state 55
+
+   19 op: MINUS .
+
+    $default  reduce using rule 19 (op)
+
+
+state 56
+
+   20 op: MULT .
+
+    $default  reduce using rule 20 (op)
+
+
+state 57
+
+   21 op: DIV .
+
+    $default  reduce using rule 21 (op)
+
+
+state 58
+
+   22 op: MOD .
+
+    $default  reduce using rule 22 (op)
+
+
+state 59
+
+   27 expr: expr op . ID
+   28     | expr op . constant
+
+    ID       shift, and go to state 70
+    INTEGER  shift, and go to state 46
+    REAL     shift, and go to state 47
+
+    constant  go to state 71
+
+
+state 60
+
+   44 relation_op: GT .
+
+    $default  reduce using rule 44 (relation_op)
+
+
+state 61
+
+   42 relation_op: LT .
+
+    $default  reduce using rule 42 (relation_op)
+
+
+state 62
+
+   45 relation_op: GE .
+
+    $default  reduce using rule 45 (relation_op)
+
+
+state 63
+
+   43 relation_op: LE .
+
+    $default  reduce using rule 43 (relation_op)
+
+
+state 64
+
+   40 relation_op: EQ .
+
+    $default  reduce using rule 40 (relation_op)
+
+
+state 65
+
+   41 relation_op: NOTEQ .
+
+    $default  reduce using rule 41 (relation_op)
+
+
+state 66
+
+   39 condition: expr relation_op . expr
+
+    ID       shift, and go to state 44
+    OPAR     shift, and go to state 45
+    INTEGER  shift, and go to state 46
+    REAL     shift, and go to state 47
+
+    constant  go to state 48
+    expr      go to state 72
+
+
+state 67
+
+   46 if_stmt: IF OPAR condition EPAR . compound_stmt
+   47        | IF OPAR condition EPAR . compound_stmt ELSE compound_stmt
+
+    OBRACE  shift, and go to state 7
+
+    $default  reduce using rule 6 (compound_stmt)
+
+    compound_stmt  go to state 73
+
+
+state 68
+
+   38 loop: WHILE OPAR condition EPAR . compound_stmt
+
+    OBRACE  shift, and go to state 7
+
+    $default  reduce using rule 6 (compound_stmt)
+
+    compound_stmt  go to state 74
+
+
+state 69
+
+   29 expr: OPAR expr EPAR .
+
+    $default  reduce using rule 29 (expr)
+
+
+state 70
+
+   27 expr: expr op ID .
+
+    $default  reduce using rule 27 (expr)
+
+
+state 71
+
+   28 expr: expr op constant .
+
+    $default  reduce using rule 28 (expr)
+
+
+state 72
+
+   27 expr: expr . op ID
+   28     | expr . op constant
+   39 condition: expr relation_op expr .
+
+    PLUS   shift, and go to state 54
+    MINUS  shift, and go to state 55
+    MULT   shift, and go to state 56
+    DIV    shift, and go to state 57
+    MOD    shift, and go to state 58
+
+    $default  reduce using rule 39 (condition)
+
+    op  go to state 59
+
+
+state 73
+
+   46 if_stmt: IF OPAR condition EPAR compound_stmt .
+   47        | IF OPAR condition EPAR compound_stmt . ELSE compound_stmt
+
+    ELSE  shift, and go to state 75
+
+    $default  reduce using rule 46 (if_stmt)
+
+
+state 74
+
+   38 loop: WHILE OPAR condition EPAR compound_stmt .
+
+    $default  reduce using rule 38 (loop)
+
+
+state 75
+
+   47 if_stmt: IF OPAR condition EPAR compound_stmt ELSE . compound_stmt
+
+    OBRACE  shift, and go to state 7
+
+    $default  reduce using rule 6 (compound_stmt)
+
+    compound_stmt  go to state 76
+
+
+state 76
+
+   47 if_stmt: IF OPAR condition EPAR compound_stmt ELSE compound_stmt .
+
+    $default  reduce using rule 47 (if_stmt)

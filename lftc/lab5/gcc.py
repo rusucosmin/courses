@@ -67,7 +67,7 @@ class Scanner:
     # open file
     with open(self.outputFileName, "a") as f:
       # write the string buff as a new line
-      f.write(buff)
+      f.write(buff + " ")
 
   # method write the identifier and constant tables
   def writeTables(self):
@@ -89,7 +89,7 @@ class Scanner:
     # if the symbol is in the symbol table
     if _symbol in self.symbolsTable:
       # print it
-      self.appendToOutput(str(self.symbolsTable[_symbol]) + " 0\n")
+      self.appendToOutput(str(self.symbolsTable[_symbol]))
       return True
     else:
       # return false because _symbol is not a valid symbol, and then throw an error
@@ -102,7 +102,7 @@ class Scanner:
       self.identifiersTable[_id] = self.randomNotIn(self.identifiersTable.values())
     # print to program internal form output file
     self.appendToOutput(
-        self.symbolsTable["identifier"] + " " + str(self.identifiersTable[_id]) + "\n")
+        self.symbolsTable["identifier"])
     return True
 
   # method adds a constant to the table and prints it to the output file
@@ -112,7 +112,7 @@ class Scanner:
       self.constantsTable[_val] = self.randomNotIn(self.constantsTable.values())
     # print to the program internl form output file
     self.appendToOutput(
-        self.symbolsTable["constant"] + " " + str(self.constantsTable[_val]) + "\n")
+        self.symbolsTable["constant"])
     return True
 
   # method tokenize the source file

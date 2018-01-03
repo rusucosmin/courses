@@ -1,0 +1,1 @@
+int main opar epar obrace return const semicolon 

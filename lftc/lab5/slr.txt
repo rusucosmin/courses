@@ -1,5 +1,0 @@
-S' := S
-S := c j o n A
-A := k C l
-C := D m C | E
-D := y b | a x b

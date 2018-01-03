@@ -1,0 +1,28 @@
+//bbc
+
+<program> ::= <type> "main()" <compound_stmt>
+<type> ::= "int" | "float" | "char"
+<compound_stmt> ::= "{" <stmt_list> "}"
+<stmt_list> ::= <stmt> | <stmt> <stmt_list>
+<stmt> ::= <decl> | <assign> | <return> | <iostmt> | <loop> | <if_stmt>
+<decl> ::= <type> <id> ";"
+<id> ::= <letter> <char_list>
+<letter> ::= "a" | .. | "z" | "A" | .. | "Z"
+<char_list> ::= <char> | <char> <char_list>
+<char> ::= <letter> | "0" | .. | "9" | "_"
+<assign> ::= <id> "=" <expr> ";"
+<expr> ::= <id> | <CONST> | <expr> <op> <expr>
+<op> ::= "+" | "-" | "*" | "/" | "%"
+<return> ::= "return" <expr> ";"
+<CONST> ::= <number> | <real_number>
+<number> ::= <digit> | <digit> <number>
+<digit> ::= "0" | .. | "9"
+<real_number> ::= <float>
+<float> ::= <number> "." <number>
+<iostmt> ::= <input> | <output>
+<input> ::= "cin" <id> ";"
+<output> ::= "cout" <id> ";"
+<loop> ::= "while" "(" <condition> ")" <compound_stmt>
+<condition> ::= <expr> <relation_op> <expr>
+<relation_op> ::= "==" | "!=" | "<" | "<=" | ">" | ">="
+<if_stmt> ::= "if" "(" <condition> ")" <compound_stmt> | "if" "(" <condition> ")" <compound_stmt> "else" <compound_stmt>

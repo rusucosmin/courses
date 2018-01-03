@@ -1,75 +1,37 @@
 # SLR Parser
-Step wise implementation of SLR parsing
+ SLR parsing method
 
-* Generates Goto
-* Calculates First and Follow
-* Shifting and Reduction
-* Generates parsing table
-* String evaluation using parsing table.
+The assignment is divided in the following phases:
+* STEP 1: perform the parsing of an input sequence
+  - Input
+    - a context free grammar (the example from course)
+    - an input sequence
+  - Output: the parsing tree corresponding to the input sequence
+  or a message in case the sequence is not accepted.
+* STEP 2: parsing
+  - Input: PIF + minilanguage grammar
+  - Output: parsing tree corresponding to the program
+  or a message for errors (error diagnose where it is the case)
 
 ## Running
 ```bash
-python slr.py "grammar file location" "string to check"
+python SLRParser.py "string to check"
 ```
 Example:
 ```bash
-python slr.py ./test_grammar/grammar1.txt "id + ( id * id )"
+python SLRParser.py "id + ( id * id )"
+```
 ```
 ## Context Free Grammar
 Example from the book `Metode de proiectare a Compilatoarelor, Simona Motogna`
 ![context free grammar](grammar.png)
 ###Grammar file:
-```
-X' := S
-S := T S'
-S' := + T S' | E
-T := F T'
-T' := * F T' | E
-F := ( S ) | id | const
+E -> E + T
+E -> T
+T -> T * F | F
+F -> ( E )
+F -> id | const
 ```
 
 ## Bibliography
 [Metode de Proiectare a Compilatoarelor, Simona Motogna](https://www.scribd.com/document/332697666/Metode-de-Proiectare-a-Compilatoarelor-Simona-Motogna)
-
-```
-S->2afeA    #commands
-B->2        #type
-B->3        #type
-B->4        #type
-A->bCc      #compound_stmt
-C->CD       #stmt_list
-D->Ed       #stmt
-D->Fd
-D->Gd
-D->Hd
-D->I
-D->J
-E->B0       #decl
-F->0rM      #assign
-L->g        #op
-L->h
-L->i
-L->j
-L->k
-M->0        #expr
-M->1
-M->ML0
-M->ML1
-M->eMf
-G->sM       #return
-H->N        #iostmt
-H->O
-N->50       #cin
-O->60       #cout
-O->61
-I->9fPeA    #loop
-P->MQM      #condition
-Q->l        #rel operator
-Q->m
-Q->n
-Q->o
-Q->p
-Q->q
-J->7fPeA      #if
-J->7fPeA8A    #else
-```

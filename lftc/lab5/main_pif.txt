@@ -1,16 +1,1 @@
-INT 0
-MAIN 0
-OPAR 0
-EPAR 0
-OBRACE 0
-INT 0
-ID 72325
-SEMICOLON 0
-ID 72325
-ASSIGN 0
-CONST 61492
-SEMICOLON 0
-RETURN 0
-CONST 61492
-SEMICOLON 0
-EBRACE 0
+int main opar epar obrace int id semicolon cin id semicolon id assign const semicolon cout id mult const semicolon return opar id plus const epar mult const semicolon ebrace 
