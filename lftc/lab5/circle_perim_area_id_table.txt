@@ -1,4 +1,4 @@
-perimeter 67904
-PI 12247
-radius 49899
-area 62013
+perimeter 58621
+PI 59218
+radius 70844
+area 72913

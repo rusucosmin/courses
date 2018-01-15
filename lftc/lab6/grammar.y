@@ -1,232 +1,404 @@
 %{
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
-
-char vars[250][250];
-int cntvar;
-int vals[250];
-
-void add_var(char *var) {
-  for(int i = 0; i < cntvar; ++ i) {
-    if(strcmp(vars[i], var) == 0) {
-      fprintf(stderr, "Error: identifier %s redeclared\n", var);
-      exit(0);
-    }
+  #include <string.h>
+  #include <stdio.h>
+  #include <stdlib.h>
+  #include "decl.h"
+  extern int yylex();
+  extern int yyparse();
+  extern FILE *yyin;
+  extern int line;
+  extern void printAll();
+  void yyerror(const char *s);
+  int t = 1;
+  int lbl = 1;
+  char * NewTempName() {
+    char temp[10];
+    sprintf(temp,"%d",t++);
+    char tc[10];
+    tc[0] = 't';
+    return strdup(strcat(tc,temp));
   }
-  fprintf(stderr, "Adding variable %s\n", var);
-  strcpy(vars[cntvar], var);
-  vals[cntvar] = 0;
-  ++ cntvar;
-}
-
-void assign(char *var, int val) {
-  for(int i = 0; i < cntvar; ++ i) {
-    if(strcmp(vars[i], var) == 0) {
-      vals[i] = val;
-      return ;
-    }
+  char * NewLabelName() {
+    char temp[10];
+    char l[10];
+    sprintf(l,"label");
+    sprintf(temp,"%d",lbl++);
+    return strdup(strcat(l,temp));
   }
-  fprintf(stderr, "Error: identifier %s not declared\n", var);
-}
+  char* result;
+  char* display_function = "\ndisp proc\nMOV BX, 10\nMOV DX, 0000H\nMOV CX, 0000H\n.Dloop1:\nMOV DX, 0000H\ndiv BX\nPUSH DX\nINC CX\nCMP AX, 0\nJNE .Dloop1\n.Dloop2:\nPOP DX\nADD DX, 30H\nMOV AH, 02H\nINT 21H\nLOOP .Dloop2\nmov dx,offset newl\nmov ah,09h\nint 21h\nRET\n disp ENDP"
+                            "\nreadInput proc"
+                            "\nmov  ah, 0Ah"
+                            "\nmov  dx, offset string"
+                            "\nint  21H"
+                            "\ncall string2number"
+                            "\nret"
+                            "\nreadInput endp"
 
-int var_val(char *var) {
-  for(int i = 0; i < cntvar; ++ i) {
-    if(strcmp(vars[i], var) == 0) {
-      return vals[i];
-    }
-  }
-  fprintf(stderr, "Error: Use of undeclared indentifier %s\n", var);
-}
-
-void yyerror(const char *str) {
-  fprintf(stderr,"> Error: %s.\n",str);
-  exit(0);
-}
-
-int yywrap() {
-  return 1;
-}
-
-int yydebug = 1;
-
-int main(argc, argv)
-int argc;
-char **argv;
-{
-  main_lex(argc, argv);
-  yyparse();
-  fprintf(stdout, "> Finished: No syntax errors\n");
-}
-
+                            "\nstring2number proc"
+                            "\n;MAKE SI TO POINT TO THE LEAST SIGNIFICANT DIGIT."
+                              "\nmov  si, offset string + 1 ;NUMBER OF CHARACTERS ENTERED."
+                              "\nmov  cl, [ si ] ;NUMBER OF CHARACTERS ENTERED.\nmov  ch, 0 ;CLEAR CH, NOW CX==CL."
+                              "\nadd  si, cx ;NOW SI POINTS TO LEAST SIGNIFICANT DIGIT."
+                            "\n;CONVERT STRING."
+                              "\nmov  bx, 0"
+                              "\nmov  bp, 1 ;MULTIPLE OF 10 TO MULTIPLY EVERY DIGIT."
+                            "\nrepeat:"
+                            "\n;CONVERT CHARACTER."
+                              "\nmov  al, [ si ] ;CHARACTER TO PROCESS."
+                              "\nsub  al, 48 ;CONVERT ASCII CHARACTER TO DIGIT."
+                              "\nmov  ah, 0 ;CLEAR AH, NOW AX==AL."
+                              "\nmul  bp ;AX*BP = DX:AX."
+                              "\nadd  bx,ax ;ADD RESULT TO BX"
+                            "\n;INCREASE MULTIPLE OF 10 (1, 10, 100...)."
+                              "\nmov  ax, bp"
+                              "\nmov  bp, 10"
+                              "\nmul  bp ;AX*10 = DX:AX."
+                              "\nmov  bp, ax ;NEW MULTIPLE OF 10."
+                            "\n;CHECK IF WE HAVE FINISHED"
+                              "\ndec  si ;NEXT DIGIT TO PROCESS."
+                              "\nloop repeat ;COUNTER CX-1, IF NOT ZERO, REPEAT."
+                              "\nret"
+                            "\nstring2number endp";
+    char* vars= "\t\nnewl db "  ",13,10,\"$\""
+                "\n\t\tstring db 5"
+                    "\n\t\tdb ?"
+                    "\n\t\tdb 5 dup (?)";
 %}
 
+%union {
+  struct{
+    char* code;
+    char* varn;
+  } attributes;
+  struct {
+    char* code;
+    char* lbl_Else;
+    char* lbl_After;
+  } ifAttr;
+  struct {
+    char* code;
+    char* varn;
+    char* op;
+  } exprAttr;
+  int intval;
+}
+%token <intval> CONST
+%token <attributes> ID
+%token IF
+%token THEN
+%token ELSE
+%token LT
+%token CIN
+%token COUT
+%token GG
+%token LL
+%token INCLUDE
+%token USING
+%token RETURN
+%token NAMESPACE
+%token GT
+%token INT
+%token EE
+%token NE
+%type <attributes> stmt
+%type <attributes> assign_stmt
+%type <attributes> iostmt
+%type <attributes> program
+%type <attributes> antet
+%type <attributes> expression
+%type <exprAttr> expression1
+%type <attributes> term
+%type <exprAttr> term1
+%type <attributes> factor
+%type <attributes> stmt_list
+%type <attributes> stmt_list1
+%type <attributes> declstmt
+%type <attributes> ifstmt
+%type <attributes> boolOp
+%type <attributes> cond
+%%
+program: antet '{' stmt_list RETURN CONST ';' '}'
+            {
+                char temp[10000];
+                char ids[500];
+                for(int i = 1;i<t;i++)
+                {
+                    strcat(ids,"\tt");
+                    char no[10];
+                    sprintf(no,"%d",i);
+                    strcat(ids,no);
+                    strcat(ids," dw ?\n");
+                }
 
-%token ID INT CHAR FLOAT CIN COUT IF ELSE WHILE MAIN OBRACE EBRACE
-%token SEMICOLON OPAR EPAR PLUS MINUS MULT DIV MOD GT LT GE LE EQ NOTEQ
-%token ASSIGN RETURN
+                strcat(ids,vars);
+                sprintf(temp,"assume cs:code,ds:data\ndata segment\n%s\ndata ends\ncode segment\nstart:\nmov ax,data\nmov ds,ax\n%s\nmov ah,4ch\nint 21h\n%s\ncode ends\nend start\n",ids,$3.code,display_function);
+                $$.code = strdup(temp);
+                printf("Assembly code:\n\n%s\n",$$.code);
+                result = strdup($$.code);
+            }
 
-%union
-{
-  int integer;
-  float real;
-  char *text;
+antet: INCLUDE LT ID GT USING NAMESPACE ID ';' INT ID '('')'
+            {
+                $$.code="";
+                $$.varn="";
+            }
+
+stmt_list:stmt stmt_list1
+            {
+                char temp[10000];
+                sprintf(temp,"%s\n%s\n",$1.code,$2.code);
+                $$.code=strdup(temp);
+                $$.varn="";
+            }
+stmt_list1:stmt_list
+            {
+                $$.code=strdup($1.code);
+                $$.varn="";
+            }
+stmt_list1:
+            {
+                $$.code="";
+                $$.varn="";
+            }
+stmt:ifstmt
+            {
+                $$.code=strdup($1.code);
+                $$.varn="";
+            }
+    |
+    assign_stmt
+            {
+                $$.code=strdup($1.code);
+            }
+    |
+    iostmt
+            {
+                $$.code=strdup($1.code);
+            }
+    |
+    declstmt
+            {
+                $$.code ="";
+                $$.varn="";
+            }
+
+expression:term expression1
+            {
+                char temp[5000];
+                if(strcmp($2.op,"-")==0)
+                {
+                    $$.varn = $1.varn;
+                    sprintf(temp,"%s\n",$1.code);
+                    //sprintf(temp,"%s\n%s\nmov ax,%s\nmov %s,ax\n",$1.code,$2.code,$1.varn,$$.varn);
+                }
+                else
+                {
+                    $$.varn = NewTempName();
+                    sprintf(temp,"%s\n%s\nmov ax,%s\nmov bx,%s\n%s ax,bx\nmov %s,ax",$1.code,$2.code,$1.varn,$2.varn,$2.op,$$.varn);
+                }
+                $$.code=strdup(temp);
+            }
+expression1:'+' expression
+            {
+                $$.op="add";
+                $$.varn=NewTempName();
+                char temp[5000];
+                sprintf(temp,"%s\nmov ax,%s\nmov %s,ax\n",$2.code,$2.varn,$$.varn);
+                $$.code=strdup(temp);
+            }
+expression1:'-' expression
+            {
+                $$.op="sub";
+                $$.varn=NewTempName();
+                char temp[1000];
+                sprintf(temp,"%s\nmov ax,%s\nmov %s,ax\n",$2.code,$2.varn,$$.varn);
+                $$.code=strdup(temp);
+            }
+expression1:
+            {
+                $$.varn="",$$.code="";$$.op="-";
+            }
+
+term:factor term1
+            {
+                char temp[5000];
+                if(strcmp($2.op,"-")==0)
+                {
+                    sprintf(temp,"%s\n",$1.code);
+                    $$.varn = $1.varn;
+                }
+                else
+                {
+                    $$.varn=NewTempName();
+                    sprintf(temp,"%s\n%s\nmov ax,%s\nmov bx,%s\n%s bx\nmov %s,ax\n",$1.code,$2.code,$1.varn,$2.varn,$2.op,$$.varn);
+                }
+                $$.code=strdup(temp);
+            }
+term1:'*' term
+            {
+                $$.op="mul";
+                $$.varn=NewTempName();
+                char temp[5000];
+                sprintf(temp,"%s\nmov ax,%s\nmov %s,ax\n",$2.code,$2.varn,$$.varn);
+                $$.code=strdup(temp);
+            }
+term1:'/' term
+            {
+                $$.op="div";
+                $$.varn=NewTempName();
+                char temp[5000];
+                sprintf(temp,"%s\nmov ax,%s\nmov %s,ax\n",$2.code,$2.varn,$$.varn);
+                $$.code=strdup(temp);   
+            }
+term1:
+            {
+                $$.varn="";$$.code="";$$.op="-";
+            }
+factor:ID
+            {
+                $$.varn = strdup($1.varn);
+                $$.code="";
+            }
+factor:CONST
+            {
+                char temp[10];
+                sprintf(temp,"%d",$1);
+                $$.varn = strdup(temp);
+                $$.code="";
+            }
+factor:'(' expression ')'
+            {
+                char temp[1000];
+                $$.varn=NewTempName();
+                sprintf(temp,"%s\nmov ax,%s\nmov %s,ax",$2.code,$2.varn,$$.varn);
+                $$.code=strdup(temp);
+
+            }
+
+ifstmt:IF '(' cond  ')' '{' stmt_list '}'
+        {
+            /*
+                mov ax,expression1.varn
+                mov bx,expression2.varn
+                cmp ax,bx
+                j.. labeli
+                stmt_list.code
+                labeli:
+            */
+                char* temp = malloc(1000*sizeof(char));
+                char* lbl = NewLabelName();
+                sprintf(temp,"%s%s\n%s\n%s:\n",$3.code,lbl,$6.code,lbl);
+                $$.code=strdup(temp);
+        };
+
+
+assign_stmt:ID '=' expression ';'
+        {
+            char temp[500];
+            sprintf(temp,"%s\nmov ax,%s\nmov %s,ax\n",$3.code,$3.varn,$1.varn);
+            $$.code=strdup(temp);
+        }
+
+iostmt:COUT LL ID ';'
+        {
+            $$.varn="";
+            char temp[100];
+            sprintf(temp,"mov ax,%s\ncall disp",$3.varn);
+            $$.code=strdup(temp);
+        }
+    |
+        CIN GG ID ';'
+        {
+            $$.varn="";
+            char temp[100];
+            sprintf(temp,"call readInput\nmov %s,bx\n",$3.varn);
+            $$.code=strdup(temp);
+        }
+declstmt: INT ID ';'
+        {
+            char* temp = malloc(1000*sizeof(char));
+
+            sprintf(temp,"\t%s dw ?\n",$2.varn);
+
+            strcat(temp,vars);
+
+            vars = strdup(temp);
+            $$.code="";
+            $$.varn="";
+            free(temp);
+        }
+
+cond:expression boolOp expression 
+        {
+            /*
+                mov ax,expression1.varn
+                mov bx,expression2.varn
+                cmp ax,bx
+                boolOp.code
+            */
+            char* temp =malloc(1000*sizeof(char));
+            sprintf(temp,"%s\n%s\nmov ax,%s\nmov bx,%s\ncmp ax,bx\n%s ",$1.code,$3.code,$1.varn,$3.varn,$2.code);
+            $$.code=strdup(temp);
+            free(temp);
+            $$.varn="";
+        }
+
+boolOp: GT
+         {
+            $$.code = "jle";
+            $$.varn="";
+         }
+        | LT
+        {
+            $$.code = "jge";
+            $$.varn="";
+        }
+        |
+        EE
+        {
+            $$.code = "jne";
+            $$.varn="";
+        }
+        |
+        NE
+        {
+            $$.code = "je";
+            $$.varn="";
+        }
+%%
+int main(int argc, char *argv[]) {
+    ++argv, --argc;
+
+    if (argc > 0){
+        yyin = fopen(argv[0], "r"); 
+        int c;
+        FILE *file;
+        printf("Source code: \n");
+        file = fopen(argv[0], "r");
+        if (file) {
+            while ((c = getc(file)) != EOF)
+                putchar(c);
+            fclose(file);
+        }
+    }
+    else
+        yyin = stdin;
+    while (!feof(yyin)) {
+        yyparse();
+    }
+    printf("The file is syntactically correct!\n");
+    FILE *file = fopen("out.asm", "w");
+
+    int results = fputs(result, file);
+    if (results == EOF) {
+        //error
+    }
+    fclose(file);
+    return 0;
 }
 
-%token <integer> INTEGER
-%token <float> REAL
-%token <text> TEXT
-
-%type <text> ID
-%type <integer> constant
-%type <integer> expr
-%type <integer> condition
-%type <integer> return
-
-%start program
-
-%%
-program:
-        | INT MAIN OPAR EPAR compound_stmt
-        ;
-
-type: INT
-    | FLOAT
-    ;
-
-compound_stmt:
-        | OBRACE stmt_list EBRACE
-        ;
-
-stmt_list:
-        | stmt_list stmt ;
-
-stmt: decl SEMICOLON {
-    }
-    | assign SEMICOLON {
-    }
-    | return SEMICOLON {
-    }
-    | iostmt SEMICOLON {
-    }
-    | loop {
-    }
-    | if_stmt {
-    }
-    ;
-
-decl:
-    type ID {
-      if(strlen(yylval.text) > 250) {
-        fprintf(stderr, "Error: identifier %s is too long (more than 250 character limit)\n", yylval.text);
-        exit(0);
-      }
-      add_var($2);
-    }
-    ;
-
-assign: ID ASSIGN expr {
-      assign($1, $3);
-    }
-    ;
-
-constant: INTEGER {
-      $$ = $1;
-    }
-    ;
-
-expr: ID {
-      $$ = var_val($1);
-    }
-    | constant {
-      $$ = $1;
-    }
-    | expr PLUS ID {
-      $$ = $1 + var_val($3);
-    }
-    | expr MINUS ID {
-      $$ = $1 - var_val($3);
-    }
-    | expr MULT ID {
-      $$ = $1 * var_val($3);
-    }
-    | expr DIV ID {
-      $$ = $1 / var_val($3);
-    }
-    | expr MOD ID {
-      $$ = $1 % var_val($3);
-    }
-    | expr PLUS constant {
-      $$ = $1 + $3;
-    }
-    | expr MINUS constant {
-      $$ = $1 - $3;
-    }
-    | expr MULT constant {
-      $$ = $1 * $3;
-    }
-    | expr DIV constant {
-      $$ = $1 / $3;
-    }
-    | expr MOD constant {
-      $$ = $1 % $3;
-    }
-    | OPAR expr EPAR {
-      $$ = $2;
-    }
-    ;
-
-return: RETURN expr {
-      $$ = $2;
-    }
-    ;
-
-iostmt: input
-    | output
-    ;
-
-input: CIN ID {
-      int x;
-      scanf("%d", &x);
-      assign($2, x);
-    }
-    ;
-output:
-    COUT expr {
-      printf("%d", $2);
-    }
-    ;
-
-loop: WHILE OPAR condition EPAR compound_stmt
-    ;
-
-condition: expr EQ expr {
-      $$ = ($1 == $3);
-    }
-    | expr NOTEQ expr {
-      $$ = ($1 != $3);
-    }
-    | expr LT expr {
-      $$ = ($1 < $3);
-    }
-    | expr LE expr {
-      $$ = ($1 <= $3);
-    }
-    | expr GT expr {
-      $$ = ($1 > $3);
-    }
-    | expr GE expr {
-      $$ = ($1 >= $3);
-    }
-    ;
-
-if_stmt: IF OPAR condition EPAR compound_stmt {
-      if($3) {
-      }
-    }
-    | IF OPAR condition EPAR compound_stmt ELSE compound_stmt {
-      if($3) {
-      }
-    }
-    ;
-%%
+void yyerror(const char *s) {
+    printf("Error: %s at line -> %d ! \n", s, line);
+    exit(1);
+}

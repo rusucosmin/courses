@@ -1,64 +1,25 @@
 localhost 100
-.195636000
+.671842000
 localhost 200
-.204002000
+.139457000
 localhost 500
-.209452000
+.141893000
 localhost 1000
-.256453000
+.207784000
 localhost 2000
-.414975000
+.329467000
 localhost 5000
-1.435532000
+1.408656000
 localhost 10000
-5.088372000
+5.230481000
 localhost 20000
-20.117196000
+16.397838000
 localhost,localhost 100
-.282399000
+.697675000
 localhost,localhost 200
-.265288000
+.149956000
 localhost,localhost 500
-.272002000
+.320815000
 localhost,localhost 1000
-.261664000
+.035418000
 localhost,localhost 2000
-.368882000
-localhost,localhost 5000
-1.037787000
-localhost,localhost 10000
-3.575161000
-localhost,localhost 20000
-13.318239000
-localhost,localhost,localhost 100
-.276379000
-localhost,localhost,localhost 200
-.242997000
-localhost,localhost,localhost 500
-.258066000
-localhost,localhost,localhost 1000
-.391187000
-localhost,localhost,localhost 2000
-.523998000
-localhost,localhost,localhost 5000
-1.839736000
-localhost,localhost,localhost 10000
-3.925488000
-localhost,localhost,localhost 20000
-15.048359000
-localhost,localhost,localhost,localhost 100
-.351412000
-localhost,localhost,localhost,localhost 200
-.329022000
-localhost,localhost,localhost,localhost 500
-.321782000
-localhost,localhost,localhost,localhost 1000
-.387181000
-localhost,localhost,localhost,localhost 2000
-.489541000
-localhost,localhost,localhost,localhost 5000
-1.183257000
-localhost,localhost,localhost,localhost 10000
-4.349211000
-localhost,localhost,localhost,localhost 20000
-17.716089000
