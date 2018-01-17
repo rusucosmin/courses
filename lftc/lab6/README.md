@@ -2,7 +2,7 @@
 
 ## Build it
 First, you need to build the compiler
-````
+```
 chmod +x make_comp.sh
 ./make_comp.sh
 ```
