@@ -1,4 +1,4 @@
-# Solution for the `subject-1-2017`
+# Solution for the `subject-2-2017`
 
 ## 1. (3.5p) Write a parallel (distributed or local, at your choice) program for finding a Hamiltonian path starting at a given vertex.
 

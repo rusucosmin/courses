@@ -1,4 +1,4 @@
-# Exam to Parallel and Distributed Programming `jan-feb 2017, subject no. 1`
+# Exam to Parallel and Distributed Programming `jan-feb 2017, subject no. 2`
 
 1. (3.5p) Write a parallel (distributed or local, at your choice) program for finding a
 Hamiltonian path starting at a given vertex. That is, you are given a graph with n vertices
