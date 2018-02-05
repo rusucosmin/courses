@@ -134,4 +134,45 @@ same for all servers. Write a distributed algorithm that accomplishes that. Cons
 for starting.
 
 
+### Solution
+Let's consider the case when `n = 2`. Let's name the processes `A` and `B`.
+
+
+Every process will keep a `Lamport clock` and pass that on each message.
+
+Suppose an event occurs in the process `A`. Then, process `A` will increate it's timestamp `t` by one,
+and send that event alongside `t` at the process `B` - this is called `PREPARE` event. Process `B` computes the maximum between
+its internal clock and the timestamp of the message and adds one. It send back an `OK` with that
+computed timestamp. Process `A` receives the `OK` and sends back a `COMMIT` message. They both
+agreed on this value.
+
+The generalization to `n > 2` follows easily.
+
+Each process having an occuring event will:
+* broadcast `PREPARE` with the timestamp
+* waits for `OKs` from all the other processes
+* computes the maximum amongs the `OKs` timestamps
+* broadcast `COMMIT` to each process
+
+
+There is only one little problem. A process may have previously gave an `OK` but did not get any `COMMIT`
+yet for that event. So, in case another `COMMIT` appears, it can't write that to a file because the `COMMIT`
+from the previously sent `OK` may be either before, or after the current `COMMIT`. That's why,
+each process will maintain a list of given `OKs` as well as a list of `COMMITs` to be flushed to disk.
+
+Note. Every tie can be solved by chosing an initial *arbitrary* ordering of the processes. Such as the `PID`
+or `IP` if they live on different hosts.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
