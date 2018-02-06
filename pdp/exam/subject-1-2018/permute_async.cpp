@@ -1,6 +1,7 @@
 #include <iostream>
 #include <thread>
 #include <vector>
+#include <atomic>
 
 using namespace std;
 
@@ -20,13 +21,12 @@ bool contains(vector <int> v, int n) {
   return false;
 }
 
+atomic <int> cnt;
+
 void back(vector <int> sol, int T, int n) {
   if(sol.size() == n) {
     if(check(sol)) {
-      for(auto it : sol) {
-        cerr << it << ' ';
-      }
-      cerr << "da\n";
+      cnt ++;
     }
     return;
   }
@@ -59,4 +59,5 @@ void back(vector <int> sol, int T, int n) {
 
 int main() {
   back(vector <int>(), 2, 3);
+  cout << cnt.load() << '\n';
 }
