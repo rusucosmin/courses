@@ -1,0 +1,10 @@
+income;100;1
+income;50;1
+income;10;2
+income;40;1
+income;20;2
+cost;90;1
+cost;10;2
+cost;10;100
+cost;10;3
+
