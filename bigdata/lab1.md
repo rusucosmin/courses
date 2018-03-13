@@ -1,8 +1,7 @@
 # Intro to Big Data - Lab 1
 
-[x] Installed the Cloudera VM with Hadoop
-
-[ ] [Lab pdf](https://drive.google.com/file/d/1g3vCwrrBJF1jUgramF3bG1-nEbPqTzes/view)
+- [x] Installed the Cloudera VM with Hadoop
+- [x] [Lab pdf](https://drive.google.com/file/d/1g3vCwrrBJF1jUgramF3bG1-nEbPqTzes/view)
 
 ## Assignment
 
