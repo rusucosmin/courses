@@ -55,5 +55,5 @@ $ hadoop fs -find src
 
 Solution
 ```bash
-$ hadoop fs -find src -name '*.txt' > textFile.txt
+$ hadoop fs -find src -name 'file*.txt' > textFile.txt
 ```
