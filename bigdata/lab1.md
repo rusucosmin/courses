@@ -1,7 +1,7 @@
 # Intro to Big Data - Lab 1
 
 - [x] Installed the Cloudera VM with Hadoop
-- [x] [Lab pdf](https://drive.google.com/file/d/1g3vCwrrBJF1jUgramF3bG1-nEbPqTzes/view)
+- [x] [Lab 1 pdf](https://drive.google.com/file/d/1g3vCwrrBJF1jUgramF3bG1-nEbPqTzes/view)
 
 ## Assignment
 
@@ -10,7 +10,7 @@ put).
 
 Solution
 ```bash
-cat | hadoop fs -put - file1.txt
+$ cat | hadoop fs -put - file1.txt
 ```
 
 2. Create a new directory “src” and populate it with two text files “file1.txt” and

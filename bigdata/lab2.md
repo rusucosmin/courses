@@ -1,5 +1,7 @@
 # Lab2 - MapReduce
 
+- [x] [Lab 2 pdf](https://drive.google.com/file/d/1s_NyhN_ZnVE8SWvQWX8d2R5lYVBiv1G2/view)
+
 ## PySpark
 
 Assignment:
