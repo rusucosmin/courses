@@ -1,5 +1,6 @@
-x = [1 2 3 4 5];
-y = [22 23 25 30 28];
+x = [0:6/12:6];
+f = @(x) exp(sin(x));
+y = f(x);
 
 function ret = div_diff_table(a, f)
   [_, n] = size(a);
@@ -24,8 +25,7 @@ function N = newton(x, f, X)
   N = A * C';
 end
 
-fprintf("Newton interpolation at 2.5 = %d\n", newton(x, y, 2.5))
-X = 1:0.1:5;
+X = 0:0.1:6;
 Y = newton(x, y, X);
 
 plot(x, y, "o")
