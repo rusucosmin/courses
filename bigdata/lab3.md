@@ -1,7 +1,7 @@
 # Lab 3
 
 ## Assignments
-* ```Import only the column order_status from the table orders, as text files (default)..```
+- [x] Import only the column order_status from the table orders, as text files (default).
 
 ```
 $ sqoop import \
@@ -12,16 +12,16 @@ $ sqoop import \
 --columns order_status
 --target-dir /orders
 ```
-* ```Using pyspark with (one of) the resulted data files, print how many times each order_status appears in that file.```
+- [x] Using pyspark with (one of) the resulted data files, print how many times each order_status appears in that file.
 
 ```python
 $ pyspark
 
-lines = sc.textFile("lab2/ex1.txt")
+lines = sc.textFile("/lab3/orders")
 
-sum = lines.map(lambda x: (x, 1)).reduceByKey(lambda x, y: x + y)
+sum = lines.map(lambda x: (x.split(',')[-1], 1)).reduceByKey(lambda x, y: x + y)c
 
-sum.take(9)
+sum.take(10)
 ```
 
 `movie (digital_visa, title, year, type, nb_spec, budget)`
