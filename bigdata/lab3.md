@@ -95,7 +95,7 @@ $ sqoop import --connect "jdbc:mysql://localhost/userdb" --username root --passw
 ```
 lines = sc.textFile("/lab3/has_played_in")
 
-sum = lines.map(lambda x: (" ".join(x.split(',')[0:-1]), 1)).reduceByKey(lambda x, y: x + y)
+sum = lines.filter(lambda x: "Johnny Depp" in " ".join(x.split(',')[0:-1])).map(lambda x: (" ".join(x.split(',')[0:-1]), 1)).reduceByKey(lambda x, y: x + y)
 
 sum.take(9)
 ```
