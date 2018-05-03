@@ -108,7 +108,7 @@ db.students.find({}, {"firstname":1, "lastname":1, "_id":0, "admission":1, "doma
 }
 ```
 
-- [x] Set the ‘city’ field value to “London” for all documents that have the domain equal to “Biology”.
+- [x] 5. Set the ‘city’ field value to “London” for all documents that have the domain equal to “Biology”.
 
 ```
 db.students.update({"domain": "Biology"}, {"$set": {"city": "London"}}, {"multi": true})
@@ -150,7 +150,7 @@ db.students.find({"domain": "Biology"}).pretty()
 }
 ```
 
-- [x] Delete all documents that have the admission year equal to 2015.
+- [x] 6. Delete all documents that have the admission year equal to 2015.
 
 ```
 db.students.remove({"admission.year": 2015})
