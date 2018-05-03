@@ -15,8 +15,6 @@ $ sqoop import \
 - [x] Using pyspark with (one of) the resulted data files, print how many times each order_status appears in that file.
 
 ```python
-$ pyspark
-
 lines = sc.textFile("/lab3/orders")
 
 sum = lines.map(lambda x: (x.split(',')[-1], 1)).reduceByKey(lambda x, y: x + y)c
