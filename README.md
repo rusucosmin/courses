@@ -1,6 +1,8 @@
 # Courses
 
-**Courses from the Faculty of Mathematics and Computer Science, Babes-Bolyai University**
+~~**Courses from the Data Science master's at EPFL, Lausanne, Switzerland**~~
+
+~~**Courses from the Faculty of Mathematics and Computer Science, Babes-Bolyai University**~~
 
 ## 1st semester
 

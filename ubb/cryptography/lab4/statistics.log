@@ -1,0 +1,38 @@
+58 132 cycles (0.132 milliseconds)
+Pollard-p algorithm for factorizing 58 took me 121 cycles (0.000121 seconds)
+running test on classic 10.in
+Classic algorithm for factorizing 56744818041 took me 388 cycles (0.000388 seconds)
+running test on pollard 10.in
+Pollard-p algorithm for factorizing 56744818041 took me 138 cycles (0.000138 seconds)
+running test on classic 2.in
+Classic algorithm for factorizing 916 took me 126 cycles (0.000126 seconds)
+running test on pollard 2.in
+Pollard-p algorithm for factorizing 916 took me 121 cycles (0.000121 seconds)
+running test on classic 3.in
+Classic algorithm for factorizing 4768 took me 124 cycles (0.000124 seconds)
+running test on pollard 3.in
+Pollard-p algorithm for factorizing 4768 took me 120 cycles (0.00012 seconds)
+running test on classic 4.in
+Classic algorithm for factorizing 67647 took me 128 cycles (0.000128 seconds)
+running test on pollard 4.in
+Pollard-p algorithm for factorizing 67647 took me 128 cycles (0.000128 seconds)
+running test on classic 5.in
+Classic algorithm for factorizing 645938 took me 129 cycles (0.000129 seconds)
+running test on pollard 5.in
+Pollard-p algorithm for factorizing 645938 took me 121 cycles (0.000121 seconds)
+running test on classic 6.in
+Classic algorithm for factorizing 5518781 took me 137 cycles (0.000137 seconds)
+running test on pollard 6.in
+Pollard-p algorithm for factorizing 5518781 took me 123 cycles (0.000123 seconds)
+running test on classic 7.in
+Classic algorithm for factorizing 49165902 took me 128 cycles (0.000128 seconds)
+running test on pollard 7.in
+Pollard-p algorithm for factorizing 49165902 took me 118 cycles (0.000118 seconds)
+running test on classic 8.in
+Classic algorithm for factorizing 671982980 took me 170 cycles (0.00017 seconds)
+running test on pollard 8.in
+Pollard-p algorithm for factorizing 671982980 took me 121 cycles (0.000121 seconds)
+running test on classic 9.in
+Classic algorithm for factorizing 4574208396 took me 157 cycles (0.000157 seconds)
+running test on pollard 9.in
+Pollard-p algorithm for factorizing 4574208396 took me 119 cycles (0.000119 seconds)

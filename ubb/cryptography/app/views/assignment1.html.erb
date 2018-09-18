@@ -1,0 +1,69 @@
+<% content_for(:title, "Cryptography | Assignment 1") %>
+<div class="container">
+  <h1>PUBLIC KEY CRYPTOGRAPHY</h1>
+  <h2> Assignment 1 </h2>
+
+  <center><h3 id="title">Affine cipher - Encrypt</h3></center>
+
+  <form id="form">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Alphabet</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="alphabet" type="text" value=" abcdefghijklmnopqrstuvwxyz">
+        <div id="invalid-alphabet" class="invalid-feedback">
+          Must be non empty.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Alpha</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="alpha" type="number" min="0" step="1" value=1>
+        <div class="invalid-feedback">
+          Must be a positive integer.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Beta</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="beta" type="number" value=1>
+        <div class="invalid-feedback">
+          Must be a positive integer.
+        </div>
+      </div>
+    </div>
+  <div id="locker" class="wrapper">
+      <div class="base">
+          <div class="base-bottom">
+          </div>
+          <div class="lock-inside-top">
+          </div>
+          <div class="lock-inside-bottom">
+          </div>
+      </div>
+      <div class="lock-circle">
+          <div class="lock-circle-inside">
+          </div>
+      </div>
+      <div class="lock-box">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label id="text-label" class="col-sm-2 col-form-label">Text to encrypt</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="text" type="text" value="text to encrypt">
+        <div class="invalid-feedback">
+          Text contains characters not in alphabet.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label id="result-label" class="col-sm-2 col-form-label">Encrypted</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="result" type="text" readonly>
+      </div>
+    </div>
+  </form>
+</div> <!-- content -->

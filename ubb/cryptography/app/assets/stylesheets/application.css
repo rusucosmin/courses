@@ -1,0 +1,106 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ body {
+     margin: 0px;
+     background-color: #ffffff;
+ }
+
+ .wrapper {
+     height: 300px;
+     width: 300px;
+     margin: 10px auto;
+ }
+
+ .base {
+     background-color: #ecf0f1;
+     width: 200px;
+     height: 170px;
+     border-radius: 30px;
+     margin: 0 auto;
+     position: relative;
+     top: 100px;
+     z-index: 100;
+ }
+
+ .base-bottom {
+     background-color: #bdc3c7;
+     width: 200px;
+     height: 85px;
+     border-radius: 0 0 30px 30px;
+     top: 85px;
+     position: relative;
+     opacity: 0.4;
+ }
+
+ .lock-circle {
+     height: 180px;
+     width: 110px;
+     border-radius: 45px;
+     z-index: 10;
+     background-color: #bdc3c7;
+     position: relative;
+     margin: 0 auto;
+     bottom: 150px;
+ }
+
+ .lock-circle-active {
+   transform: translateY(-25px);
+ }
+
+ .lock-circle-inside {
+     height: 180px;
+     width: 50px;
+     border-radius: 30px;
+     z-index: 20;
+     background-color: #ffffff;
+     position: relative;
+     margin: 0 auto;
+     top: 25px;
+ }
+
+ .lock-box {
+     position: relative;
+     height: 50px;
+     background-color: #ffffff;
+     bottom: 230px;
+     left: 170px;
+     z-index: 80;
+ }
+
+ .lock-box-active {
+   transform: translateY(-50px);
+ }
+
+ .lock-inside-top {
+     width: 50px;
+     height: 50px;
+     border-radius: 50px;
+     background-color: black;
+     z-index: 300;
+     position: relative;
+     bottom: 45px;
+     left: 75px;
+ }
+
+ .lock-inside-bottom {
+     width: 30px;
+     height: 80px;
+     background-color: black;
+     z-index: 300;
+     position: relative;
+     bottom: 85px;
+     left: 85px;
+ }

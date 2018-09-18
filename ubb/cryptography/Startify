@@ -1,0 +1,43 @@
+
+   *-------------------------------------------------------*
+   | Critically analyze what you read and hear.            |
+   |                                                       |
+   | Don't be swayed by vendors, media hype, or dogma.     |
+   | Analyze information in terms of you and your project. |
+   *-------------------------------------------------------*
+          o
+           o   ^__^
+            o  (oo)\_______
+               (__)\       )\/\
+                   ||----w |
+                   ||     ||
+
+   [e]  <empty buffer>
+
+   MRU
+
+   [0]  ~/courses/crypto/lab1/app/assets/stylesheets/application.css.sass
+   [1]  ~/courses/crypto/lab1/app/assets/javascripts/application.js
+   [2]  ~/courses/crypto/lab1/app/assets/javascripts/cable.js
+   [3]  ~/courses/crypto/lab1/app/views/lab1.html.erb
+   [4]  ~/courses/crypto/lab1/app/views/layouts/application.html.erb
+   [5]  ~/courses/crypto/lab1/config/routes.rb
+   [6]  ~/courses/crypto/lab1/app/controllers/application_controller.rb
+   [7]  ~/courses/crypto/lab1/app/models/application_record.rb
+   [8]  ~/courses/crypto/lab1/app/views/layouts/mailer.html.erb
+   [9]  ~/courses/crypto/lab1/app/views/layouts/mailer.text.erb
+
+   MRU /Users/rusucosmin/courses/crypto/lab1
+
+   [10] app/assets/stylesheets/application.css.sass
+   [11] app/assets/javascripts/application.js
+   [12] app/assets/javascripts/cable.js
+   [13] app/views/lab1.html.erb
+   [14] app/views/layouts/application.html.erb
+   [15] config/routes.rb
+   [16] app/controllers/application_controller.rb
+   [17] app/models/application_record.rb
+   [18] app/views/layouts/mailer.html.erb
+   [19] app/views/layouts/mailer.text.erb
+
+   [q]  <quit>
