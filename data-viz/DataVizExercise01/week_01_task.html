@@ -1,0 +1,51 @@
+<h1 id="getting-started">Getting started</h1>
+<h2 id="create-a-slack-account">Create a Slack account</h2>
+<p>Your pseudo should be in the format: firstname_lastname_SCIPER. Example : kirell_benzi_20417X</p>
+<p><a href="https://join.slack.com/t/epfl-com480/shared_invite/enQtNDM0NTQ2NDM2MTUxLWEwNzQxNTYwZTFjZjk0YjZjZjc0ZTdlMWE0MGE2MzlhYTE0NDM2MTVhNDgzOWExNTNiNzA0MjhlOGI4MjFmODM">Now join the team!</a></p>
+<p><strong>All communications will happen via Slack, it is mandatory that you create an account.</strong></p>
+<h2 id="tools">Tools</h2>
+<p>For this exercise we will be using a web browser and a text editor with syntax highlighting, for example <a href="https://www.google.com/chrome/">Chrome</a> and <a href="https://atom.io/">Atom</a>. Here you can find some <a href="InstallationHelp.html">help with the installation</a>.</p>
+<p>You might also find the SVG editor <a href="https://inkscape.org/en/">Inkscape</a> useful for inspecting and experimenting with SVG.</p>
+<h1 id="website">Website</h1>
+<p>The goal of this course is to create an interactive visulization. But in order to show it, we need to put it on a website - today we will practice building and styling the website.</p>
+<p>We will use <a href="./exercise/index.html"><code>exercise/index.html</code></a> as our starting point. Open it in your browser to see the site.</p>
+<p>The site source consists of the HTML <code>index.html</code> which is our content and of the stylesheet <code>style.css</code> which controls the appearance of the site. Please look at the comments in <code>style.css</code> for more details.</p>
+<p>Now practice CSS by customizing the website according to your preferred style.</p>
+<ul>
+<li><p>First let’s inspect the site content and style with the browser’s developer tools. Read <a href="https://developer.chrome.com/devtools">Dev Tools overview</a> and <a href="https://developers.google.com/web/tools/chrome-devtools/inspect-styles">Inspect styles</a> for more info about dev-tools. Try changing the background of the first paragraph using the dev-tools:</p>
+<p><img src="task_images/paragraph_green.png" width="640" /></p></li>
+<li><p>Edit the stylesheet <code>style.css</code> to adapt the site to your preferred visual style:</p>
+<ul>
+<li>Change the background color of the title area, or use an image as background</li>
+<li>Change the text colors</li>
+<li>Add a shadow to the title</li>
+<li>Add a box around the “How to use” section</li>
+<li>Change the width of the content</li>
+<li>Optional: use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*">css variables</a> to avoid repetition.</li>
+</ul></li>
+</ul>
+<p>Alternatively, you may decide to use a framework like <a href="https://getbootstrap.com">Bootstrap</a> to build your site.</p>
+<p>Below you can see the result of my edits. Your result can look similar or completely different based on your tastes.</p>
+<p><img src="task_images/site_customized.png" width="960" /></p>
+<h1 id="svg-plot">SVG plot</h1>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/SVG">SVG</a> is a vector-graphics format, which means that instead of storing pixel values, it consists of objects to draw, such as circles, lines, other shapes and text.</p>
+<p>In this course we will use SVG to draw our visualization. To start, let’s consider the plot placed on the example site, which is also an SVG image.</p>
+<ul>
+<li>Read the source of <a href="./exercise/viz_plot.svg"><code>exercise/viz_plot.svg</code></a> to see how it is constructed.</li>
+<li><p>Inspect the plot on the website using dev-tools. Like with HTML, you can edit them in the browser. Try to move the red dot up and change the color of the plot, to achieve the result shown below. (To change colors, read about <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Fills_and_Strokes">stroke and fill</a> - these properties control the contour of a shape and its interior.</p>
+<p><img src="task_images/plot_devtooled.png" width="640" /></p>
+<p><a href="https://inkscape.org/en/">Inkscape</a> can also be useful for inspecting SVGs.</p></li>
+<li><p>The main plot is a <em>path</em> - a versative element that can describe a variety of shapes. Please read the <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths">tutorial on paths</a> and edit the path’s points to match the plot’s shape (approximately) in the image below.</p></li>
+<li>Edit the colors of the elements (or in the stylesheet)</li>
+<li><p>Add the text label with a line pointing at the graph</p></li>
+</ul>
+<p>This is the reference end result of the edits, but like with the website, you can choose the style that fits your preference.</p>
+<p><img src="task_images/plot_customized.png" width="960" /></p>
+<h1 id="extending-the-site">Extending the site</h1>
+<p>Create the sub-pages <code>description.html</code>, <code>data.html</code> (about your dataset) and <code>team.html</code> (about your team) by copying <code>index.html</code>. Later we will have more to put there but right now you can fill it with <a href="http://www.blindtextgenerator.com/snippets">placeholder text</a>.</p>
+<h1 id="practice-css-and-html-in-an-interactive-game">Practice CSS and HTML in an interactive game</h1>
+<p>CSS selectors determine which elements the style is applied to. They help separating content from style and prevent repetition.</p>
+<ul>
+<li><p>Practice CSS selectors in a game - <a href="https://flukeout.github.io/">CSS Diner</a></p></li>
+<li><p>Practice the <a href="http://www.landofcode.com/html-quiz/">quiz about HTML elements</a></p></li>
+</ul>

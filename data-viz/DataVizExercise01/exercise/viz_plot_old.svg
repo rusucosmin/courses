@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The viewBox is set such that the canvas coordinates span from (-10, -10) to (210, 110).
+The area from (0, 0) to (200, 100) is used for the plot, the remaining area is for margins and axes.
+Warning: in SVG the coordinates start from the top-left corner,
+but you can use transform="scale(1, -1)" to invert that.
+
+	https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/viewBox
+-->
+<svg version="1.1" viewBox="-10 -10 220 120" width="220" height="120" xmlns="http://www.w3.org/2000/svg" >
+	<!--
+		We can use stylesheets inside SVG too.
+		Likewise, SVG elements are affected by the main site's CSS.
+		https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/SVG_and_CSS
+	-->
+	<style>
+		.axis {
+			stroke-width: 1;
+			stroke: rgb(200, 200, 200);
+		}
+		text {
+			fill: rgb(200, 200, 200);
+			font-size: 8px;
+			text-anchor: middle;
+		}
+	</style>
+
+	<!--
+	To draw the main plot, we use a path. Paths are very flexible, read about them here:
+		https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths
+	This path consists of line segments (L).
+	-->
+	<path
+		d="M 0 100 L 25 75 L 50 50 L 75 40 L 100 70 L 125 80 L 150 70 L 175 40 L 200 15 V 100 Z"
+		fill="rgb(0, 44, 122)"
+		stroke="rgb(0, 156, 250)"
+		stroke-width="0.75"
+	/>
+
+	<!-- Axis lines, the color and thickness is set by the stylesheet
+		https://developer.mozilla.org/en-US/docs/Web/SVG/Element/line
+	-->
+	<line class="axis" x1="-5" y1="100" x2="205" y2="100"  />
+	<line class="axis" x1="0" y1="105" x2="0" y2="-5"/>
+
+	<!--
+	A different plot, consisting of red circles.
+	We set the color for all of them using a group
+	https://developer.mozilla.org/en-US/docs/Web/SVG/Element/g
+	-->
+	<g id="red-dots-plot" fill="rgb(255, 0, 0)">
+		<!-- https://developer.mozilla.org/en-US/docs/Web/SVG/Element/circle -->
+		<circle cx="0" cy="75" r="1" />
+		<circle cx="25" cy="65" r="1" />
+		<circle cx="50" cy="60" r="1" />
+		<circle cx="75" cy="55" r="1" />
+		<circle cx="100" cy="47" r="1" />
+		<circle cx="125" cy="40" r="1" />
+		<circle cx="150" cy="30" r="1" />
+		<circle cx="175" cy="10" r="1" />
+		<circle cx="200" cy="20" r="1" />
+	</g>
+
+
+
+	<text x="50%" y="110">time</text>
+
+	<!-- The group positions the text by the translate transform, the text element inside is rotated around the point -->
+	<g transform="translate(-4, 50)">
+		<text transform="rotate(-90)">population</text>
+	</g>
+</svg>
