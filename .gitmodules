@@ -16,3 +16,9 @@
 [submodule "cryptography"]
 	path = cryptography
 	url = https://github.com/rusucosmin/cryptography
+[submodule "fp/2-recursion-rusucosmin"]
+	path = fp/2-recursion-rusucosmin
+	url = https://github.com/lampepfl-courses/2-recursion-rusucosmin
+[submodule "fp/1-example-rusucosmin"]
+	path = fp/1-example-rusucosmin
+	url = https://github.com/lampepfl-courses/1-example-rusucosmin
