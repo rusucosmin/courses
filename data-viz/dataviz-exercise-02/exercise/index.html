@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Welcome to Data Visualization</title>
+	<meta name="description" content="Welcome to Data Visualization">
+	<meta name="author" content="K Lis">
+
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+	<ul class="width-limited">
+		<li><a href="index.html">Home</a></li>
+		<li><a href="description.html">Description</a></li>
+		<li><a href="data.html">Data</a></li>
+		<li><a href="team.html">Team</a></li>
+	</ul>
+</nav>
+
+<header class="title-row">
+	<h1> My Visualization Project </h1>
+</header>
+
+<main class="width-limited">
+	<h4>Introduction</h4>
+	<p>
+	This visualization unveils the deepest mysteries of our world,
+	showing the facts through the lens of statistical data anlysis
+	and colorful animations.
+	The truth shines brightly and guides the lost minds.
+	</p>
+	<p>
+	We investigate the changes in population of alligators in Lac Léman
+	over the last century and extrapolate the trend to predict
+	a world of reptile domination.
+	Read more <a href="description.html">about our model</a>
+	or the <a href="data.html">sources of our data</a>.
+	</p>
+
+	<h4>How to use</h4>
+	<p>
+	Here we would tell you how to interact with the plot below.
+	Sadly, it is not interactive at this stage of the project.
+	Please imagine that the plot is interactive and that clicking on it
+	activates captivating animations.
+	</p>
+</main>
+
+<div class="width-limited">
+	<h3>Color cycle</h3>
+	<p>This plot will demonstrate your <code>colorCycle</code> function.</p>
+	<code>
+const my_cc = colorCycle(['purple', 'rgb(20, 230, 220)', 'rgb(10, 230, 20)']);
+showColorCycle(my_cc);
+</code>
+	<p></p>
+</div>
+<figure class="viz-row">
+	<svg viewBox="-10 -10 220 50" width="220" height="50" class="width-limited">
+		<g id="plot-color-cycle" fill="rgb(120, 120, 120)">
+			<rect x="0" y="0" width="10" height="10" />
+			<rect x="20" y="0" width="10" height="10" />
+			<rect x="40" y="0" width="10" height="10" />
+			<rect x="60" y="0" width="10" height="10" />
+			<rect x="80" y="0" width="10" height="10" />
+			<rect x="100" y="0" width="10" height="10" />
+			<rect x="120" y="0" width="10" height="10" />
+			<rect x="140" y="0" width="10" height="10" />
+			<rect x="160" y="0" width="10" height="10" />
+			<rect x="180" y="0" width="10" height="10" />
+
+			<rect x="0" y="20" width="10" height="10" />
+			<rect x="20" y="20" width="10" height="10" />
+			<rect x="40" y="20" width="10" height="10" />
+			<rect x="60" y="20" width="10" height="10" />
+			<rect x="80" y="20" width="10" height="10" />
+			<rect x="100" y="20" width="10" height="10" />
+			<rect x="120" y="20" width="10" height="10" />
+			<rect x="140" y="20" width="10" height="10" />
+			<rect x="160" y="20" width="10" height="10" />
+			<rect x="180" y="20" width="10" height="10" />
+		</g>
+	</svg>
+</figure>
+
+<div class="width-limited">
+	<h3>Counting characters in text</h3>
+	<p>Implement <code>countOccurrencesNormalized</code> and execute:</p>
+	<code>
+setCharacterCountingFunction(countOccurrencesNormalized, my_color_cycle);
+	</code>
+	<p>to count the characters in the text below.</p>
+	<!--
+	JRR Tolkien "The Fellowship of the Ring"
+	http://ae-lib.org.ua/texts-c/tolkien__the_lord_of_the_rings_1__en.htm#1-01
+	-->
+	<textarea id='input-count-text'>
+When Mr. Bilbo Baggins of Bag End announced that he would shortly be celebrating his eleventy-first birthday with a party of special magnificence, there was much talk and excitement in Hobbiton.
+
+Bilbo was very rich and very peculiar, and had been the wonder of the Shire for sixty years, ever since his remarkable disappearance and unexpected return. The riches he had brought back from his travels had now become a local legend, and it was popularly believed, whatever the old folk might say, that the Hill at Bag End was full of tunnels stuffed with treasure. And if that was not enough for fame, there was also his prolonged vigour to marvel at. Time wore on, but it seemed to have little effect on Mr. Baggins. At ninety he was much the same as at fifty. At ninety-nine they began to call him well-preserved, but unchanged would have been nearer the mark. There were some that shook their heads and thought this was too much of a good thing; it seemed unfair that anyone should possess (apparently) perpetual youth as well as (reputedly) inexhaustible wealth.
+
+‘It will have to be paid for,’ they said. ‘It isn’t natural, and trouble will come of it!’
+
+But so far trouble had not come; and as Mr. Baggins was generous with his money, most people were willing to forgive him his oddities and his good fortune. He remained on visiting terms with his relatives (except, of course, the Sackville-Bagginses), and he had many devoted admirers among the hobbits of poor and unimportant families. But he had no close friends, until some of his younger cousins began to grow up.
+
+The eldest of these, and Bilbo’s favourite, was young Frodo Baggins. When Bilbo was ninety-nine, he adopted Frodo as his heir, and brought him to live at Bag End; and the hopes of the Sackville-Bagginses were finally dashed. Bilbo and Frodo happened to have the same birthday, September 22nd. ‘You had better come and live here, Frodo my lad,’ said Bilbo one day; ‘and then we can celebrate our birthday-parties comfortably together.’ At that time Frodo was still in his tweens, as the hobbits called the irresponsible twenties between childhood and coming of age at thirty-three.
+
+Twelve more years passed. Each year the Bagginses had given very lively combined birthday-parties at Bag End; but now it was understood that something quite exceptional was being planned for that autumn. Bilbo was going to be eleventy-one, 111, a rather curious number and a very respectable age for a hobbit (the Old Took himself had only reached 130); and Frodo was going to be thirty-three, 33) an important number: the date of his ‘coming of age’.
+
+Tongues began to wag in Hobbiton and Bywater; and rumour of the coming event travelled all over the Shire. The history and character of Mr. Bilbo Baggins became once again the chief topic of conversation; and the older folk suddenly found their reminiscences in welcome demand.
+	</textarea>
+	<button id="btn-count-text"> Count characters </button>
+</div>
+<figure class="viz-row">
+	<div id="plot-occurrences" class="width-limited">
+		<div>
+			setCharacterCountingFunction has not been called yet
+		</div>
+	</div>
+</figure>
+
+<div class="width-limited">
+	<h3>Ball simulation</h3>
+
+	<p> Use <code>plotBall(points)</code> to draw trajectories here. </p>
+</div>
+
+<figure class="viz-row">
+	<svg viewBox="-10 -10 220 120" width="220" height="120" class="width-limited">
+		<style>
+			#plot-ball path {
+				stroke-width: 1px;
+				fill: none;
+			}
+			line {
+				stroke: rgb(200, 200, 200);
+				stroke-width: 1px;
+			}
+		</style>
+		<g id="plot-ball" transform="scale(1, -1) translate(0, -100)">
+			<line class="axis" x1="0" y1="0" x2="200" y2="0"  />
+			<line class="axis" x1="0" y1="0" x2="0" y2="100"/>
+		</g>
+	</svg>
+</figure>
+
+<footer></footer>
+
+<script src="provided.js"></script>
+<script src="exercise.js"></script>
+</body>
+</html>

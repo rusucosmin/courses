@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Exercise 2: JavaScript basics</title>
+	<meta name="description" content="Exercise 2: JavaScript basics">
+	<meta name="author" content="K Lis">
+
+<style>
+* {
+	box-sizing: border-box;
+}
+
+body {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+
+	max-width: 60rem;
+	margin-left: auto;
+	margin-right: auto;
+
+	font-family: sans-serif;
+	font-size: 1.1rem;
+	line-height: 120%;
+
+	text-align: justify;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+	color: rgb(0, 44, 122);
+}
+h3, h4, h5, h6 {
+	font-weight: normal;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.4rem; }
+h4 { font-size: 1.25rem; }
+
+figure {
+	width: 100%;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+}
+
+code {
+	color: rgb(0, 44, 122);
+}
+</style>
+</head>
+
+<body><h1 id="javascript-basics">JavaScript basics</h1>
+<p>In this exercise we will practice programming with (JavaScript)[https://developer.mozilla.org/en-US/docs/Web/JavaScript], which we will need to create interactive visualizations in the browser. Today we will focus on processing data in JS, the functions used to plot the data are provided.</p>
+<p>We would like to practice the functional style of programming, because it fits well with the d3.js library which we are going to use for the visualizations. This means that instead of <code>for</code> or <code>while</code> loops to iterate over arrays, we would use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach"><code>forEach</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"><code>map</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce"><code>reduce</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"><code>filter</code></a> - if you haven’t seen them before, please take a look at the linked documentation which contains intuitive examples.</p>
+<p>Please write your solutions in <code>exercise/exercise.js</code> and open the site <a href="exercise/index.html"><code>exercise/index.html</code></a> to execute them. Reload the page to re-run your script after applying changes. Remember that you can use the developer tools to interactively call your functions or see the values of variables.</p>
+<h2 id="functions-and-iteration">Functions and iteration</h2>
+<h3 id="iseven">isEven</h3>
+<p>Let’s try a basic function <code>isEven</code> that will check if an integer is divisible by 2.</p>
+<p>Then apply it over an array of integers to see the results:</p>
+<ul>
+	<li>
+		<p>Apply <code>isEven</code> to each element of <code>[1, 2, 3, 4, 5]</code> using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"><code>map</code></a>.</p>
+	</li>
+	<li>
+		<p>Choose even numbers from <code>1...5</code> by using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"><code>filter</code></a>.</p>
+	</li>
+</ul>
+<h3 id="multiply">multiply</h3>
+<p>Now, imagine, you do not know how many numbers in your array. In JS, there is a way to create functions with arbitrary number of parameters. This is also called <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Spread syntax</a>. Let’s implement a function <code>multiply</code> that computes a product of all numbers specified as parameters. For example, <code>multiply(1,2,3,4,5)</code> should return <code>120</code>.</p>
+<h2 id="closures">Closures</h2>
+<p>In JS, functions are treated as objects. When a function is created, it has access to all currently visible variables - the newly created function and these variables form a closure. The details are in the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures">documentation about closures</a>.</p>
+<h3 id="divisibleby">divisibleBy</h3>
+<p>Let’s generalize the above example, and create the function <code>divisibleBy</code> which:</p>
+<ul>
+	<li>takes an argument <code>divisor</code></li>
+	<li>returns a function <code>f</code> such that <code>f(x)</code> returns <code>true</code> when <code>x</code> is divisible by <code>divisor</code></li>
+</ul>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">arrow function</a> syntax is a convenient way to construct functions.</p>
+<p>Now we have an alternative solution to the previous task <code>const isEvenNew = divisibleBy(2)</code>. Try filtering <code>[0, 1, 2, 3, 4, 5, 6]</code> by <code>divisibleBy(3)</code>.</p>
+<h3 id="increment">increment</h3>
+<p>Sometimes, in JS, you will have to deal with nested functions. Implement a function <code>increment</code> such that it can be called as <code>increment(100)(2)</code> with the first parameter as an initial value (<code>0</code> as a default parameter) and second params as a step size (<code>1</code> as a default parameter).</p>
+<h3 id="colorcycle">colorCycle</h3>
+<p>In plots, we often want to apply different colors, for example to distinguish between lines illustrating different quantities. When making a general mechanism, we can’t predict how many colored objects there are going to be, so we will make the colors repeat in a cycle.</p>
+<p>Create a function <code>colorCycle</code> such that</p>
+<ul>
+	<li>it takes one argument: an array of colors,</li>
+	<li>the default value of the the color array is <code>COLOR_CYCLE_DEFAULT</code></li>
+	<li>
+		<p>it returns a function which repeats the colors in the cycle, for example</p>
+		<p><code>cc = colorCycle(['red', 'green']);   console.log([cc(), cc(), cc(), cc()]); // ['red', 'green', 'red', 'green']</code></p>
+	</li>
+</ul>
+<p>Now create a cycle <code>my_cc</code> with your chosen colors and run <code>showColorCycle(my_cc)</code> to apply the colors to a demo plot on the website <a href="exercise/index.html"><code>index.html</code></a>.</p>
+<figure><img src="task_images/color_cycle.png" width="640" /></figure>
+<h2 id="range">Range</h2>
+<p>In the above task, we were writing the sequences <code>[1, 2, ..., N]</code> explicitly, now let’s automate it.</p>
+<ul>
+	<li>
+		<p>Create a function <code>range(N)</code> which constructs a range of integers [0, 1, …, N-1].</p>
+		<p>For an additional challenge, you can try using a functional approach, that is without a <code>for</code> or <code>while</code> loop.</p>
+		<p>We could try creating an empty array of size <code>N</code>: <code>Array(N)</code>. However, the elements of the array are not created and <code>forEach</code> or <code>map</code> does nothing. Try it yourself: <code>Array(10).forEach(console.log)</code></p>
+		<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from">Array.from</a> allows us to create an array from another sequence - for example convert a string to an array like we did with letter counting. <code>Array.from(Array(10))</code> actually creates the elements and we could iterate over them (the elements are <code>undefined</code>).</p>
+		<p>Additionally, we can pass a function as the second argument - this function will be applied on every element of the newly created array. <code>Array.from(seq, f)</code> is equivalent to <code>Array.from(seq).map(f)</code> but more efficient because it does not create the intermediate array. Remember that the mapping function receives as arguments both the current element and the current index.</p>
+	</li>
+	<li>
+		<p>Let’s find the integers from 0 to 100 which are divisible by 13. Create a range <code>[0, ..., 99]</code> and filter it by divisibility by 13</p>
+	</li>
+	<li>
+		<p>Implement a function <code>randomInRange(min_val=0, max_val=100)</code> which returns a random float value between <code>min_val</code> and <code>max_val</code>.</p>
+	</li>
+	<li>
+		<p>Implement a function <code>randomArray(N, min_val=0, max_val=100)</code> which generates an array of <code>N</code> random values between <code>min_val</code> and <code>max_val</code>.</p>
+	</li>
+</ul>
+<h2 id="counting">Counting</h2>
+<ul>
+	<li>
+		<p>Create a function <code>countOccurences(string)</code> which counts the number of occurences of each letter in a string. For example <code>countOccurences(&quot;hello&quot;)</code> yields <code>{'h': 1, 'e': 1, 'l': 2, 'o': 1 }</code>. A string is not an array and it does not have the <code>forEach</code> or <code>map</code> methods, so to use them, convert a string to an array with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from">Array.from</a>, for example <code>let a = Array.from('a string!');</code>.</p>
+		<p>To store the counts, use an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a> which is key-value container with strings as keys (in our case, the key will be the letter).</p>
+		<p>To perform functional-style iteration over Objects, use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys"><code>Object.keys</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values"><code>Object.values</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries"><code>Object.entries</code></a>. Please remember that they have to be called <code>Object.entries(obj)</code> instead of <code>obj.entries()</code>.</p>
+	</li>
+	<li>
+		<p>Create the function <code>normalizeCounts</code> which takes the character counts outputted by <code>countOccurences</code>, and calculates normalized counts - that is divided by the total sum. Please calculate the sum using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce"><code>reduce</code></a>. For example: <code>normalizeCounts({'h': 1, 'e': 1, 'l': 2, 'o': 1})</code> yields <code>{'h': 0.2, 'e': 0.2, 'l': 0.4, 'o': 0.2}</code></p>
+	</li>
+	<li>
+		<p>Create <code>countOccurencesNormalized</code> - a function which given a string, first applies <code>countOccurences</code> and then normalizes the counts using <code>normalizeCounts</code>.</p>
+	</li>
+	<li>
+		<p>Visualize the results by calling <code>setCharacterCountingFunction(countOccurencesNormalized);</code> - look at <code>index.html</code>, now you should be able to count the distribution of characters in any text you input. You can pass a <code>colorCycle</code> with your colors as the second argument to color the bars.</p>
+	</li>
+</ul>
+<figure><img src="task_images/character_counting.png" width="640" /></figure>
+<h2 id="advanced-exercise.-throwing-balls-optional">Advanced exercise. Throwing balls (optional)</h2>
+<p>We will simulate a ball thrown at angle <span class="math inline"><em>b</em></span> with velocity <span class="math inline"><em>v</em><sub>0</sub></span>. The initial velocity <span class="math inline">(<em>v</em><sub><em>x</em></sub>, <em>v</em><sub><em>y</em></sub>)</span> is:</p>
+<p>
+	<br /><span class="math display"><em>v</em><sub><em>x</em></sub> = <em>v</em><sub>0</sub><em>c</em><em>o</em><em>s</em>(<em>b</em>)</span>
+	<br />
+	<br /><span class="math display"><em>v</em><sub><em>y</em></sub> = <em>v</em><sub>0</sub><em>s</em><em>i</em><em>n</em>(<em>b</em>)</span>
+	<br />
+</p>
+<p>The position of the ball at time <span class="math inline"><em>t</em></span> is given by:</p>
+<p>
+	<br /><span class="math display"><em>x</em>(<em>t</em>)=<em>v</em><sub><em>x</em></sub> * <em>t</em></span>
+	<br />
+	<br /><span class="math display"><em>y</em>(<em>t</em>)=<em>v</em><sub><em>y</em></sub> * <em>t</em> + (<em>a</em> * <em>t</em><sup>2</sup> * 0.5)</span>
+	<br />
+</p>
+<p>where <span class="math inline"><em>a</em></span> is the acceleration caused by gravity, usually -9.81 <span class="math inline"><em>m</em>/<em>s</em><sup>2</sup></span>.</p>
+<p>Implement a function <code>simulateBall(v0, angle, num_steps, dt, g)</code> such that:</p>
+<ul>
+	<li>
+		<p><code>v0</code> is the magnitude of the initial velocity</p>
+	</li>
+	<li>
+		<p>‘angle’ is the inclination angle in degrees, multiply by <code>DEG_TO_RAD = Math.PI / 180.</code> to get radians for the trigonometric functions,</p>
+	</li>
+	<li>
+		<p><code>num_steps</code> is the number of steps of the simulation, the default value should be 256,</p>
+	</li>
+	<li>
+		<p><code>dt</code> is the time that advances between steps, default value 0.05,</p>
+	</li>
+	<li>
+		<p><code>g</code> is the acceleration, default value -9.81,</p>
+	</li>
+	<li>
+		<p>it returns an array of ball positions at each time step,</p>
+	</li>
+	<li>
+		<p>each position is given as a array <code>[x, y]</code>,</p>
+	</li>
+</ul>
+<p>Use the <code>range</code> function to create the array of time points, then <code>map</code> them to the <code>[x, y]</code> values given by the equations above.</p>
+<ul>
+	<li>
+		<p>We want to finish the plot when the ball hits the ground (y=0), so please filter the point array to remove points with y below 0.</p>
+	</li>
+	<li>
+		<p>Visualize the ball trajectories using <code>plotBall</code> (the 2nd optional argument is the line color):</p>
+	</li>
+</ul>
+<pre><code>const ball_cc = colorCycle([&#39;hsl(160, 100%, 64%)&#39;, &#39;hsl(200, 100%, 64%)&#39;, &#39;hsl(240, 100%, 64%)&#39;, &#39;hsl(120, 100%, 64%)&#39;, &#39;hsl(80, 100%, 64%)&#39;]);
+plotBall(simulateBall(40, 60), ball_cc());
+plotBall(simulateBall(40, 30), ball_cc());
+plotBall(simulateBall(40, 45), ball_cc());</code></pre>
+<ul>
+	<li>Use <code>randomArray</code> to create 20 random angles between 0 deg and 90 deg, then plot the ball trajectories for each angle.</li>
+</ul>
+<figure><img src="task_images/plot_ball_one.png" width="640" /></figure>
+
+</body>
+</html>
