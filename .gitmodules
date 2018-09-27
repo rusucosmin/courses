@@ -22,3 +22,6 @@
 [submodule "fp/1-example-rusucosmin"]
 	path = fp/1-example-rusucosmin
 	url = https://github.com/lampepfl-courses/1-example-rusucosmin
+[submodule "ada/homework-0-romanians"]
+	path = ada/homework-0-romanians
+	url = https://github.com/epfl-ada-2018/homework-0-romanians
