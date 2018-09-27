@@ -25,3 +25,6 @@
 [submodule "ada/homework-0-romanians"]
 	path = ada/homework-0-romanians
 	url = https://github.com/epfl-ada-2018/homework-0-romanians
+[submodule "data-viz/dataviz-exercises"]
+	path = data-viz/dataviz-exercises
+	url = https://github.com/epfl-dataviz/dataviz-exercises
