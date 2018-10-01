@@ -28,3 +28,9 @@
 [submodule "data-viz/dataviz-exercises"]
 	path = data-viz/dataviz-exercises
 	url = https://github.com/epfl-dataviz/dataviz-exercises
+[submodule "fp/3-functional-sets-rusucosmin"]
+	path = fp/3-functional-sets-rusucosmin
+	url = https://github.com/lampepfl-courses/3-functional-sets-rusucosmin
+[submodule "ada/ADA2018-Homework"]
+	path = ada/ADA2018-Homework
+	url = https://github.com/epfl-ada-2018/ADA2018-Homework
