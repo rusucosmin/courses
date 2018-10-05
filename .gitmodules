@@ -34,3 +34,6 @@
 [submodule "ada/ADA2018-Homework"]
 	path = ada/ADA2018-Homework
 	url = https://github.com/epfl-ada-2018/ADA2018-Homework
+[submodule "fp/4-object-oriented-sets-rusucosmin"]
+	path = fp/4-object-oriented-sets-rusucosmin
+	url = https://github.com/lampepfl-courses/4-object-oriented-sets-rusucosmin
