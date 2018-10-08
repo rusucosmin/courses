@@ -18,22 +18,25 @@
 	url = https://github.com/rusucosmin/cryptography
 [submodule "fp/2-recursion-rusucosmin"]
 	path = fp/2-recursion-rusucosmin
-	url = https://github.com/lampepfl-courses/2-recursion-rusucosmin
+	url = git@github.com:lampepfl-courses/2-recursion-rusucosmin.git
 [submodule "fp/1-example-rusucosmin"]
 	path = fp/1-example-rusucosmin
-	url = https://github.com/lampepfl-courses/1-example-rusucosmin
+	url = git@github.com:lampepfl-courses/1-example-rusucosmin.git
 [submodule "ada/homework-0-romanians"]
 	path = ada/homework-0-romanians
-	url = https://github.com/epfl-ada-2018/homework-0-romanians
+	url = git@github.com:epfl-ada-2018/homework-0-romanians.git
 [submodule "data-viz/dataviz-exercises"]
 	path = data-viz/dataviz-exercises
-	url = https://github.com/epfl-dataviz/dataviz-exercises
+	url = git@github.com:epfl-dataviz/dataviz-exercises.git
 [submodule "fp/3-functional-sets-rusucosmin"]
 	path = fp/3-functional-sets-rusucosmin
-	url = https://github.com/lampepfl-courses/3-functional-sets-rusucosmin
+	url = git@github.com:lampepfl-courses/3-functional-sets-rusucosmin.git
 [submodule "ada/ADA2018-Homework"]
 	path = ada/ADA2018-Homework
-	url = https://github.com/epfl-ada-2018/ADA2018-Homework
+	url = git@github.com:epfl-ada-2018/ADA2018-Homework.git
 [submodule "fp/4-object-oriented-sets-rusucosmin"]
 	path = fp/4-object-oriented-sets-rusucosmin
-	url = https://github.com/lampepfl-courses/4-object-oriented-sets-rusucosmin
+	url = git@github.com:lampepfl-courses/4-object-oriented-sets-rusucosmin.git
+[submodule "ml/ML_course"]
+	path = ml/ML_course
+	url = git@github.com:epfml/ML_course.git
