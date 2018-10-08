@@ -65,3 +65,4 @@ DerivedData/
 !default.perspectivev3
 
 *.jar
+.ipynb_checkpoints
