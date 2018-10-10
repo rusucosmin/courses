@@ -40,3 +40,6 @@
 [submodule "ml/ML_course"]
 	path = ml/ML_course
 	url = git@github.com:epfml/ML_course.git
+[submodule "ntp"]
+	path = ntp
+	url = git@github.com:rusucosmin/ntp.git
