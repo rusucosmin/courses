@@ -43,3 +43,12 @@
 [submodule "ntp"]
 	path = ntp
 	url = git@github.com:rusucosmin/ntp.git
+[submodule "ada/homework-1-romanians_hw1"]
+	path = ada/homework-1-romanians_hw1
+	url = git@github.com:epfl-ada-2018/homework-1-romanians_hw1.git
+[submodule "fp/5-huffman-coding-rusucosmin"]
+	path = fp/5-huffman-coding-rusucosmin
+	url = git@github.com:lampepfl-courses/5-huffman-coding-rusucosmin.git
+[submodule "ml/epfml"]
+	path = ml/epfml
+	url = git@github.com:rusucosmin/epfml.git
