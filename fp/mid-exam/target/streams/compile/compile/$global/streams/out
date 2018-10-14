@@ -1,5 +1,0 @@
-[0m[[0m[33mwarn[0m] [0m[0m/Users/cosminrusu/courses/fp/mid-exam/src/main/scala/example/Hello.scala:3:8: Mid2016 has a main method with parameter type Array[String], but example.Mid2016 will not be a runnable program.[0m
-[0m[[0m[33mwarn[0m] [0m[0m  Reason: companion is a trait, which means no static forwarder can be generated.[0m
-[0m[[0m[33mwarn[0m] [0m[0mobject Mid2016 extends Mid2016 with App {[0m
-[0m[[0m[33mwarn[0m] [0m[0m       ^[0m
-[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m

@@ -1,9 +1,0 @@
-[0m[[0m[0minfo[0m] [0m[0m[32mHelloSpec:[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32mMid2016 scanLeft[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m- should return correct results[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32mMid2016 flatMap[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m- should return correct results[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32mReachable should be correctly implemented[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m- should return correct results[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32mCycle 3 should detect 3 cycles[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m- should return correct results[0m[0m
