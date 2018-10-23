@@ -52,3 +52,9 @@
 [submodule "ml/epfml"]
 	path = ml/epfml
 	url = git@github.com:rusucosmin/epfml.git
+[submodule "data-viz/dv"]
+	path = data-viz/dv
+	url = git@github.com:rusucosmin/dv.git
+[submodule "ada/homework-2-romanians-hw2"]
+	path = ada/homework-2-romanians-hw2
+	url = git@github.com:epfl-ada-2018/homework-2-romanians-hw2.git
