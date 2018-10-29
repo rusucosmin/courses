@@ -23,4 +23,33 @@ class HelloSpec extends FlatSpec with Matchers {
     Mid2016.cycles3(Set(Node(1)), List(Edge(Node(1), Node(2)), Edge(Node(2), Node(3)), Edge(Node(3), Node(1)))) shouldEqual Set(Node(1))
     Mid2016.cycles3(Set(Node(1), Node(2), Node(3)), List(Edge(Node(1), Node(2)), Edge(Node(2), Node(3)), Edge(Node(3), Node(1)))) shouldEqual Set(Node(1), Node(2), Node(3))
   }
+
+  "Difference on nil" should "be nil" in {
+    Mid2015.differences(Nil) shouldEqual Nil
+  }
+
+  "Difference on one-element list" should "be that element" in {
+    Mid2015.differences(List(1)) shouldEqual List(1)
+  }
+
+  "Difference on general list" should "be correct" in {
+    Mid2015.differences(List(1, 2)) shouldEqual List(1, 1)
+  }
+
+  "difference on longer test" should "be correct" in {
+    Mid2015.differences(List(1, -2, 3, -4, 5, -6)) shouldEqual List(1, -3, 5, -7, 9, -11)
+  }
+
+  "rebList1" should "work" in {
+    Mid2015.rebuildList(Nil) shouldEqual Nil
+  }
+
+  "rebList2" should "work" in {
+    Mid2015.rebuildList(List(1)) shouldEqual List(1)
+  }
+
+  "rebList3" should "work" in {
+    Mid2015.rebuildList(Mid2015.differences(List(1, -2, 3, -4, 5, -6))) shouldEqual List(1, -2, 3, -4, 5, -6)
+  }
+
 }

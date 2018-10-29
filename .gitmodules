@@ -58,3 +58,9 @@
 [submodule "ada/homework-2-romanians-hw2"]
 	path = ada/homework-2-romanians-hw2
 	url = git@github.com:epfl-ada-2018/homework-2-romanians-hw2.git
+[submodule "fp/6-anagrams-rusucosmin"]
+	path = fp/6-anagrams-rusucosmin
+	url = git@github.com:lampepfl-courses/6-anagrams-rusucosmin.git
+[submodule "fp/7-bloxorz-rusucosmin"]
+	path = fp/7-bloxorz-rusucosmin
+	url = git@github.com:lampepfl-courses/7-bloxorz-rusucosmin.git
