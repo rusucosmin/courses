@@ -1,4 +1,7 @@
 package example
+import mid2014._
+import mid2015._
+import mid2016._
 
 import org.scalatest._
 
@@ -52,4 +55,40 @@ class HelloSpec extends FlatSpec with Matchers {
     Mid2015.rebuildList(Mid2015.differences(List(1, -2, 3, -4, 5, -6))) shouldEqual List(1, -2, 3, -4, 5, -6)
   }
 
+  "minMax One element" should "work" in {
+    Mid2015.computeMinMax(TNode(Leaf, 1, Leaf)) shouldEqual (1, 1)
+  }
+
+  "minMax Two on left element" should "work" in {
+    Mid2015.computeMinMax(TNode(TNode(Leaf, 10, Leaf), 1, Leaf)) shouldEqual (1, 10)
+  }
+
+  "minMax Two on left and right element" should "work" in {
+    Mid2015.computeMinMax(TNode(TNode(Leaf, 10, Leaf), 1, TNode(Leaf, -10, Leaf))) shouldEqual (-10, 10)
+  }
+
+  "isBST" should "work" in {
+    Mid2015.isBinarySearchTree(TNode(TNode(Leaf, -10, Leaf), 1, TNode(Leaf, 10, Leaf))) shouldEqual true
+  }
+
+  "isBST false" should "work" in {
+    Mid2015.isBinarySearchTree(TNode(TNode(Leaf, 10, Leaf), 1, TNode(Leaf, 10, Leaf))) shouldEqual false
+  }
+
+  "Merge two lists" should "work" in {
+    (Mid2014.merge(List(1, 4, 7, 10, 11), List(2, 3, 5, 7, 12, 16))((x, y) => x <= y)) shouldEqual List(1, 2, 3, 4, 5, 7, 7, 10, 11, 12, 16)
+  }
+  "Merge two lists tail rec" should "work" in {
+    (Mid2014.merge2(List(1, 4, 7, 10, 11), List(2, 3, 5, 7, 12, 16))((x, y) => x <= y)) shouldEqual List(1, 2, 3, 4, 5, 7, 7, 10, 11, 12, 16)
+  }
+  "Stream in natural numbers first 3 numbers" should "work" in {
+    Mid2014.iterate(1)(_ + 1).take(3).toList shouldEqual List(1, 2, 3)
+  }
+  "Stream power of two" should "work" in {
+    Mid2014.iterate(1)(_ * 2).take(4).toList shouldEqual List(1, 2, 4, 8)
+  }
+  "Flatten a list" should "work" in {
+    val ls: List[Any] = List(5, List(84, 12), List(3, List(-4, 7)))
+    Mid2014.flatten(ls) shouldEqual List(5, 84, 12, 3, -4, 7)
+  }
 }
