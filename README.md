@@ -2,6 +2,18 @@
 
 **Courses from the Data Science master's at EPFL, Lausanne, Switzerland**
 
+## 1st semester
+
+* Applied Data Analysis (ada)
+* Data Visualization (data-viz)
+* Functional Programmin (fp)
+* Machine Learning (ml)
+* A Network Tour of Data Science (ntp)
+* Statistics
+* Markon Chains and Algorithmic Applications
+* Computational Complexity
+* Philosophy, epistemology and history of science I
+
 ~~**Courses from the Faculty of Mathematics and Computer Science, Babes-Bolyai University**~~
 
 ## 1st semester
