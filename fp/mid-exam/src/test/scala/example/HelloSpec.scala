@@ -2,6 +2,7 @@ package example
 import mid2014._
 import mid2015._
 import mid2016._
+import mid2017._
 
 import org.scalatest._
 
@@ -90,5 +91,54 @@ class HelloSpec extends FlatSpec with Matchers {
   "Flatten a list" should "work" in {
     val ls: List[Any] = List(5, List(84, 12), List(3, List(-4, 7)))
     Mid2014.flatten(ls) shouldEqual List(5, 84, 12, 3, -4, 7)
+  }
+  "2017 insert" should "work" in {
+    Mid2017.insert(1, Nil) shouldEqual List(1)
+    Mid2017.insert(1, List(2)) shouldEqual List(1, 2)
+    Mid2017.insert(1, List(0)) shouldEqual List(0, 1)
+    Mid2017.insert(100, List(1, 2, 3)) shouldEqual List(1, 2, 3, 100)
+  }
+  "2017 topK" should "work" in {
+    Mid2017.findKLargestElements(1)(Nil) shouldEqual Nil
+    Mid2017.findKLargestElements(1)(List(5, 2, 3, 4)) shouldEqual List(5)
+    Mid2017.findKLargestElements(2)(List(5, 2, 3, 4)) shouldEqual List(4, 5)
+    Mid2017.findKLargestElements(3)(List(5, 2, 3, 4)) shouldEqual List(3, 4, 5)
+    Mid2017.findKLargestElements(4)(List(5, 2, 3, 4)) shouldEqual List(2, 3, 4, 5)
+    Mid2017.findKLargestElements(5)(List(5, 2, 3, 4)) shouldEqual List(2, 3, 4, 5)
+  }
+
+  "A => Y is contravariant with A => X" should "be true" in {
+    val f: A => X = (x) => (new X());
+    val g: A => Y = f;
+  }
+
+  "A => Y and B => X is contravariantx" should "be true" in {
+    val f: B => X = (x) => (new X());
+    val g: A => Y = f;
+  }
+
+  "is covariante inherited?" should "answer" in {
+    val f: PureFunction[B, X] = new PureFunction()
+    val g: PureFunction[A, Y] = f;
+  }
+
+  "FixedChan[A, X] <: FixedChan[A, Y]" should "be true" in {
+    val x: FixedChan[A, X] = new FixedChan[A, X]();
+    val y: FixedChan[A, Y] = x
+  }
+
+  "FixedChan[A, X] x FixedChan[B, X]" should "be true" in {
+    //val x: FixedChan[A, X] = new FixedChan[B, X]();
+    //val x: FixedChan[B, X] = new FixedChan[A, X]();
+  }
+
+  "FixedChan[A, X] <: Chan[A, Y]" should "be true" in {
+    val x: FixedChan[A, X] = new FixedChan[A, X]();
+    val y: Chan[A, Y] = x
+  }
+
+  "Chan[A, Y] >: FixedChan[B, X]" should "be true" in {
+    val x: FixedChan[B, X] = new FixedChan[B, X]();
+    val y: Chan[A, Y] = x
   }
 }
