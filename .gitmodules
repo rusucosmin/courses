@@ -70,3 +70,6 @@
 [submodule "fp/mid-exam/ada/homework-3-romanians-hw2"]
 	path = homework-3-romanians-hw2
 	url = git@github.com:epfl-ada-2018/homework-3-romanians-hw2.git
+[submodule "ada/Project"]
+	path = ada/Project
+	url = git@github.com:alex-mocanu/Project.git
