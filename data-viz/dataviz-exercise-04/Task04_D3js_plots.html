@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Exercise X: ....</title>
+	<meta name="description" content="Exercise X: ...">
+	<meta name="author" content="Kirell Benzi, Krzysztof Lis, Volodymyr Miz">
+
+<style>
+* {
+	box-sizing: border-box;
+}
+
+body {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+
+	max-width: 60rem;
+	margin-left: auto;
+	margin-right: auto;
+
+	font-family: sans-serif;
+	font-size: 1.1rem;
+	line-height: 120%;
+
+	text-align: justify;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+	color: rgb(0, 44, 122);
+}
+h3, h4, h5, h6 {
+	font-weight: normal;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.4rem; }
+h4 { font-size: 1.25rem; }
+
+figure {
+	width: 100%;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+}
+
+body > img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+code {
+	color: rgb(0, 44, 122);
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="intro-to-d3js">Intro to D3JS</h1>
+<p>In this lab, we are going to build basic charts with D3. We will start with a scatter plot and then create a bar chart. Weather data is a suitable dataset for this exercise. Fetch some weather forecast for this week and get started.</p>
+<h2 id="preparing-the-data">Preparing the data</h2>
+<p>D3 needs data in the form of an array of objects, such as <code>[{'x': 1, 'y': 2}, {'x': 2, 'y': 5}</code>.</p>
+<p>We provide the example data in the variables <code>TEST_TEMPERATURES</code> and <code>DAYS</code>. Please convert this data into an array where each element is <code>{'y': temperature, 'x': number_of_day, 'name': day_name}</code>.</p>
+<h2 id="initialize-d3js">Initialize D3JS</h2>
+<p>To use D3 funcitons, first, you need to add the latest version of D3 library to your project. It is included in the exercise files, so one way to do this is to add it as a script to your HTML file.</p>
+<pre><code>&lt;script src=&quot;lib/d3.min.js&quot;&gt;&lt;/script&gt;</code></pre>
+<p>Alternatively you can use the CDN: <code>&lt;script src=&quot;https://d3js.org/d3.v5.min.js&quot;&gt;&lt;/script&gt;</code></p>
+<h2 id="scatter-plot">Scatter plot</h2>
+<p>First task is to create a simple full-screen scatter plot. Before you get started, we strongly encourage you to read this <a href="https://bost.ocks.org/mike/join/">blog post</a> by <a href="https://bost.ocks.org/mike/">Mike Bostock</a>, creator of D3. It explains a very basic, yet very important, concept of the library. You will be using it in all D3 projects. Also, it will tell you exactly how to build your first scatter plot.</p>
+<p>Please use the tutorial to add the circles for the data you have converted.</p>
+<h2 id="scales">Scales</h2>
+<p>If you used the <code>x</code> and <code>y</code> of the datapoints directly as SVG coordinates, you may notice that the points don’t cover the whole plot. We should rescale them.</p>
+<p>The SVG diagram has an internal coordinate space - it is in this space that we place our elements by specifying their <code>x</code> and <code>y</code>. The origin and size of that space is determined by the <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/viewBox">viewBox</a> property. For convenience, we used <code>viewBox=&quot;-10 -10 220 120&quot;</code> which means that the internal coordinate space of the SVG starts at <code>[-10, -10]</code> and its size is <code>[220, 120]</code>.</p>
+<p>Therefore the space is from <code>[-10, -10]</code> to <code>[210, 110]</code>. We will use the space from <code>[0, 0]</code> to <code>[200, 100]</code> for our plot, while the remaining space are the margins. In the bottom and left margins <code>(x=-10 to 0, y=100 to 110)</code> we will also place the labels.</p>
+<p>Please use <a href="https://github.com/d3/d3-scale/blob/master/README.md">D3 scales</a> to map between the range of our values to the space of the plot. The functions <a href="https://github.com/d3/d3-array#max"><code>d3.min</code> and <code>d3.max</code></a> can be helpful as well.</p>
+<p>Please remember that the SVG Y is 0 at top of the diagram, but scatter plots usually have 0 at the bottom.</p>
+<p><img src="https://mdn.mozillademos.org/files/224/Canvas_default_grid.png" width="320" /></p>
+
+<h2 id="colors">Colors</h2>
+	<p>Like in the previous exercise, please change the color of the points according to the temperature (17 and below is blue, 23 and above is red, default is white).</p>
+<h2 id="labels">Labels</h2>
+	<p>You have learned how to place elements with D3. If you feel confident, try creating text labels for the plot, as seen in the reference solution:</p>
+	<p><img src="task_images/scatter_plot_final.png" width="640" /></p>
+
+<h2 id="bar-chart-optional">Bar chart (optional)</h2>
+	<p>Now, create a bar chart. The scatter plot that we have just created only takes a part of the screen. When you resize the browser window, the bar chart should adjust accordingly. Adjust the coordinates with scales to fill the viewport. Once you have done this, feel free to experiment with scales in console.</p>
+
+</body>
+</html>

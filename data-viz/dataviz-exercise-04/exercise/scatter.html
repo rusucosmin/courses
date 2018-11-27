@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Exercise 04: D3.js</title>
+	<meta name="author" content="Kirell Benzi, Krzysztof Lis, Volodymyr Miz">
+
+	<link rel="stylesheet" href="style.css">
+	<script src="lib/d3.min.js"></script>
+</head>
+<body>
+
+<svg id="plot" viewBox="-10 -10 220 120" width="100%" height="auto">
+	<style>
+		.axis {
+			stroke-width: 1;
+			stroke: rgb(200, 200, 200);
+		}
+		text {
+			fill: rgb(200, 200, 200);
+			font-size: 4px;
+			text-anchor: middle;
+		}
+
+		circle {
+			fill: white;
+		}
+
+		.cold {
+			fill: rgb(79, 89, 250);
+		}
+
+		.warm {
+			fill: rgb(255, 80, 68);
+		}
+	</style>
+</svg>
+
+<!--
+D3.js fails to load in module mode
+<script type="module" src="lib/d3.min.js"></script>
+<script type="module" src="BarChart.js"></script>
+ -->
+<script src="lib/d3.min.js"></script>
+<!-- <script src="BarChart.js"></script> -->
+<script src="exercise.js"></script>
+</body>
+</html>

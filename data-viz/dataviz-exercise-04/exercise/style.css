@@ -1,0 +1,59 @@
+
+/*
+This CSS governs the appearance of our site.
+You can find the basic concepts of CSS here: https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/How_CSS_works
+*/
+
+/*
+This makes the border and padding be counted as part of the element's size.
+https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Box_model
+It switches from
+	https://mdn.mozillademos.org/files/13647/box-model-standard-small.png
+to
+	https://mdn.mozillademos.org/files/13649/box-model-alt-small.png
+*/
+* {
+	box-sizing: border-box;
+}
+
+/*
+Make the document fill the whole viewport, this overrides any weird defaults that browsers might have.
+*/
+html, body, figure {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+/* Default font and size */
+body {
+
+	width: 100vw;
+	height: 100vh;
+
+	/* center vertically */
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-content: center;
+
+	/* background behind the plot */
+	background: rgb(40, 40, 40);
+
+	/* default text */
+	font-family: sans-serif;
+	font-size: 1.1rem;
+}
+
+/*
+It is easier to read if the text is not too wide, so we limit the width.
+We use the class selector ".", so this style will be applied to elements with class="width-limited"
+
+The various units of measurement available in CSS:
+	https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Values_and_units
+*/
+
+svg {
+	margin: 1rem;
+}
