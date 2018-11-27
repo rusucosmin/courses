@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Exercise 3: Weather</title>
+	<meta name="description" content="Exercise 3: Weather">
+
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="style_weather.css">
+</head>
+<body>
+
+<nav>
+	<ul class="width-limited">
+		<li><a href="index.html">Home</a></li>
+	</ul>
+</nav>
+
+<header class="title-row">
+	<h1>Exercise 3: Weather</h1>
+</header>
+
+<main class="width-limited">
+
+	<button id="btn-part1">Write the temperatures!</button>
+
+	<h4>Ankh-Morpork (city name here)</h4>
+	<div id="weather-part1" class="temperatures">
+		Erase this and write the temperatures here.
+	</div>
+
+	<h4>Ankh-Morpork (now we print from the class)</h4>
+	<div id="weather-part2" class="temperatures">
+		Erase this and write the temperatures here.
+	</div>
+
+
+	<h4>Lausanne (now we print from <code>ForecastOnline</code>)</h4>
+	<div id="weather-part3" class="temperatures">
+		Erase this and write the temperatures here.
+	</div>
+</main>
+
+<div class="viz-row"> </div>
+
+<div class="width-limited">
+	<h3>Optional: Search by city</h3>
+	<input type="text" id="query-city" placeholder="city name" />
+	<button id="btn-city"> Search </button>
+
+	<div id="weather-city" class="temperatures">
+		Erase this and write the name + temperatures here.
+	</div>
+</div>
+
+<footer></footer>
+
+<script src="exercise_weather.js"></script>
+</body>
+</html>

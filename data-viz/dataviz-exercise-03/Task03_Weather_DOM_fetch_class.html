@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Exercise X: Weather forecasts with DOM API, fetch and JS classes</title>
+	<meta name="description" content="Exercise X: Weather forecasts with DOM API, fetch and JS classes">
+	<meta name="author" content="Kirell Benzi, Krzysztof Lis, Volodymyr Miz">
+
+<style>
+* {
+	box-sizing: border-box;
+}
+
+body {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+
+	max-width: 60rem;
+	margin-left: auto;
+	margin-right: auto;
+
+	font-family: sans-serif;
+	font-size: 1.1rem;
+	line-height: 120%;
+
+	text-align: justify;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+	color: rgb(0, 44, 122);
+}
+h3, h4, h5, h6 {
+	font-weight: normal;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.4rem; }
+h4 { font-size: 1.25rem; }
+
+figure {
+	width: 100%;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+}
+
+body > img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+code {
+	color: rgb(0, 44, 122);
+}
+</style>
+</head>
+
+<body>
+<h1 id="weather-forecasts-with-dom-api-fetch-and-js-classes">Weather forecasts with DOM API, fetch and JS classes</h1>
+<p>In this exercise we display weather forecasts. We use JavaScript to make the presentation interactive: download the data from the internet and display it dynamically.</p>
+<h2 id="dom-api">DOM API</h2>
+<p>The DOM API allows JavaScript to completely control (edit, add, remove) the HTML objects constituting the web page. Please look at the example in <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_object_model/Using_the_W3C_DOM_Level_1_Core">documentation</a>, we will be using similar operations.</p>
+<p>We start, as usual, with the page in <a href="exercise/index.html"><code>exercise/index.html</code></a>. Please edit the files <code>exercise/exercise_weather.js</code> and <code>exercise/style_weather.css</code> to complete the exercise.</p>
+<ul>
+	<li>
+		<p><strong>On Click</strong> - The page contains a button with the id <code>btn-part1</code>. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById">Find it</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">register a JS function to be executed</a> when the button is clicked. For now, the function should write “The button was clicked” to the console, so we can check if it executes properly upon click.</p>
+		<p><strong>Note - Ensure the DOM has been loaded:</strong> we should make sure that the HTML has been loaded (and therefore, the button and other elements already exist) before we execute our script. Use the provided function <code>whenDocumentLoaded</code> to achieve that <a href="https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded">(about DOMContentLoaded event)</a>.</p>
+	</li>
+	<li>
+		<p><strong>Show the temperatures</strong> - Given an array of forecast temperatures (such as the array <code>TEST_TEMPERATURES</code>), we want to display them in order. Create a function <code>showTemperatures(container_element, temperature_array)</code> such that:</p>
+		<ul>
+			<li>Clears the <code>container_element</code>’s content, for example by setting the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML"><code>innerHTML</code></a> to “”.</li>
+			<li>For each temperature value in <code>temperature_array</code>, it <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement">creates</a> a <code>&lt;p&gt;</code> element with the temperature value inside (for example <code>&lt;p&gt;13&lt;/p&gt;</code>). Please practoce a functional iteration method instead of an explicit <code>for</code>/<code>while</code> loop.</li>
+			<li>Places the <code>&lt;p&gt;</code>s in <code>container_element</code>.</li>
+		</ul>
+		<p>Use that function to display the temperatures from <code>TEST_TEMPERATURES</code> in the div with id <code>weather-part1</code>.</p>
+	</li>
+	<li>
+		<p><strong>Colors with CSS classes</strong> - Change the background color of the <code>&lt;p&gt;</code> depending on the temperature value. Create the classes <code>warm</code> and <code>cold</code> in <code>exercise/style_weather.css</code> with appropriate background colors. In your <code>showTemperatures</code> function, apply the appropriate CSS class to the created elements:</p>
+		<ul>
+			<li><code>warm</code> for temperature 23 C or higher,</li>
+			<li><code>cold</code> for temperature 17 C and lower.</li>
+		</ul>
+	</li>
+</ul>
+
+<img src="task_images/temperatures_with_color.png" width="640" />
+
+<h2 id="js-classes">JS Classes</h2>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes">Classes</a> allow us to organize our program around objects (“object-oriented programming”) and makes code easier to reuse - do the same actions with many objects. An object contains data (called properties) and functions (called methods).</p>
+<p>First, we convert the code from the previous part into a class.</p>
+<ul>
+	<li>
+		<p>Create a <code>Forecast</code> class, which has the following properties:</p>
+		<ul>
+			<li><code>container</code> - the element in which the temperatures will be written, the initial value should be given as an argument to the constructor,</li>
+			<li><code>temperatures</code> - current value of the temperature forecast, should be initialized to <code>[1,2,3,4,5,6,7]</code>.</li>
+		</ul>
+		<p>Thus we create the object as <code>new Forecast(container_div)</code>. Instantiate the class, giving it the div with id <code>weather-part2</code> as the container.</p>
+	</li>
+	<li>
+		<p>Add a <code>toString</code> method which writes its attributes to a string.</p>
+	</li>
+	<li>
+		<p>Add a <code>print</code> method which prints that string to the console.</p>
+	</li>
+	<li>
+		<p>Adapt <code>showTemperatures</code> to create a <code>show</code> method which takes no arguments and instead displays the object’s <code>temperatures</code> in its <code>container</code>.</p>
+	</li>
+	<li>
+		<p>Add a <code>reload</code> method which will be loading and displaying our data:</p>
+		<ul>
+			<li>sets the <code>temperatures</code> property to <code>TEST_TEMPERATURES</code> (we will change it to real data later),</li>
+			<li>calls <code>show</code>.</li>
+		</ul>
+	</li>
+	<li>
+		<p>Upon the click of the button, call the <code>reload</code> method. Check if the temperatures are properly displayed.</p>
+	</li>
+</ul>
+<p>Inheritance (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends"><code>extends</code></a>) allows us to create a sub-type with different behaviour (for example <code>class Dog extends Animal</code>). In our case, we will extend the <code>Forecast</code> class to change its data source: the child class <code>ForecastOnline</code> will download its data from the internet to provide a real forecast.</p>
+<ul>
+	<li>
+		<p>Create the class <code>ForecastOnline</code> which overrides the <code>reload</code> method and sets the temperature to <code>[2, 3, 4, 5, 6, 7, 8]</code> (we will get the real data in the next section). Instantiate <code>ForecastOnline</code> with div with id <code>weather-part3</code> and test if it shows the temperatures.</p>
+	</li>
+</ul>
+
+<img src="task_images/result_from_inheritance.png" width="640" />
+
+<h2 id="fetching-json-data-from-the-internet"><code>fetch</code>ing JSON data from the internet</h2>
+<p>The data displayed in a visualization is most often not part of the code. Instead it is stored in data files and downloaded separately from our server or an external service.</p>
+<p>This data can be downloaded using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">Fetch API</a>. Fetching is an asynchronous operation (we have to wait some time for the response), therefore it uses <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">JS Promises</a>. Please read the linked documentation to see the examples.</p>
+<p>We can get a forecast in the JSON format using Yahoo Weather, for example the query for Lausanne is:</p>
+<pre><code>http://query.yahooapis.com/v1/public/yql?format=json&amp;q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=&quot;Lausanne&quot;) and u=&quot;c&quot;</code></pre>
+<ul>
+	<li>
+		<p>Use <code>fetch</code> to download the JSON from this URL, convert the JSON to a JS object and store the result to a global variable. Experiment with that value in the developer console to find out how to get the temperatures.</p>
+	</li>
+	<li>
+		<p>Create a function <code>yahooToTemperatures</code> which will extract the temperatures from the data. Since the API provides <code>low</code> and <code>high</code> temperature bounds, please calculate the mean of those values and return it as the result.</p>
+	</li>
+	<li>
+		<p>In <code>ForecastOnline</code>’s <code>reload</code> method, download the forecast from the specified URL and store it in the <code>temperatures</code> property, then call <code>show</code>. Please remember that <code>show</code> has to be executed after the data is downloaded (when the promise fires).</p>
+	</li>
+</ul>
+<h2 id="optional-interactive-choice-of-the-city">Optional: Interactive choice of the city</h2>
+<p>If you feel confident with DOM, fetch and classes, let’s combine them all into a more advanced system.</p>
+<ul>
+	<li>
+		<p>Create a class <code>ForecastOnlineCity</code> which allows fetching the forecast for any city:</p>
+		<ul>
+			<li>
+				<p>Add some mechanism of inputting the city name, for example a method <code>setCity</code>.</p>
+			</li>
+			<li>
+				<p>Override <code>reload</code> to fetch the URL for the chosen city.</p>
+			</li>
+			<li>
+				<p>Override <code>show</code> to also display the name of the city. You can use <code>super.show()</code> to call the method in the parent class. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore"><code>insertBefore</code></a> can be useful to insert the city name before the temperature.</p>
+			</li>
+		</ul>
+	</li>
+	<li>
+		<p>Upon the click of the button with id <code>btn-city</code>, read the <code>.value</code> of the input with id <code>query-city</code>, then use your <code>ForecastOnlineCity</code> object to perform the query.</p>
+	</li>
+</ul>
+
+<img src="task_images/interactive.png" width="640" />
+
+</body>
+</html>

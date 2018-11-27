@@ -1,0 +1,47 @@
+
+/* Display the paragraphs of temperature-list in a row
+	https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+*/
+
+.temperatures {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+
+	font-size: 1.3rem;
+}
+
+.temperatures > * {
+	flex-grow: 1;
+
+	padding: 0.5rem; /* give it a bit of space to display the color */
+
+	text-align: center;
+	font-weight: bold;
+}
+
+#query-city {
+	padding: 0.25rem;
+
+	border: 2px blue solid;
+}
+
+#btn-city {
+	display: inline;
+	margin: 0;
+
+	border: 0;
+	background: none;
+	border-radius: 0;
+}
+
+.warm {
+	background-color: red;
+}
+
+.cold {
+	background-color: blue;
+}
+
+/* add the cold and warm classes here */
+

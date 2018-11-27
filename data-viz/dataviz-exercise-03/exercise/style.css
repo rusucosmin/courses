@@ -1,0 +1,215 @@
+
+/*
+This CSS governs the appearance of our site.
+You can find the basic concepts of CSS here: https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/How_CSS_works
+*/
+
+/*
+This makes the border and padding be counted as part of the element's size.
+https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Box_model
+It switches from
+	https://mdn.mozillademos.org/files/13647/box-model-standard-small.png
+to
+	https://mdn.mozillademos.org/files/13649/box-model-alt-small.png
+*/
+* {
+	box-sizing: border-box;
+}
+
+/*
+Make the document fill the whole viewport, this overrides any weird defaults that browsers might have.
+*/
+html, body, figure {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+/* Default font and size */
+body {
+	font-family: sans-serif;
+	font-size: 1.1rem;
+}
+
+/*
+It is easier to read if the text is not too wide, so we limit the width.
+We use the class selector ".", so this style will be applied to elements with class="width-limited"
+
+The various units of measurement available in CSS:
+	https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Values_and_units
+*/
+.width-limited {
+	max-width: 55rem;
+
+	/* Center horizontally: */
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Links: apply our theme color and remove underline */
+a {
+	color: rgb(0, 44, 122);
+	text-decoration: none;
+}
+
+/* Justify paragraphs */
+p {
+	text-align: justify;
+}
+
+/* Titles: set color and sizes */
+h1, h2, h3, h4, h5, h6
+{
+	color: rgb(0, 44, 122);
+}
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.25rem; }
+
+/* Top navigation bar */
+nav {
+	width: 100%;
+
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+
+/* Make the links in the navbar bold */
+nav a {
+	font-weight: bold;
+}
+
+/* Style of the list of links in the navbar */
+nav ul {
+	/* Clear defaults */
+	margin: 0;
+	padding: 0;
+
+	/* Remove list bullet points */
+	list-style-type: none;
+
+	/*
+	Flexbox is a modern mechanism for arranging elements
+		https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+	This will arrange the elements in a row
+	*/
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+}
+
+/* Space between links */
+nav li {
+	margin-right: 3rem;
+}
+
+
+/* The box with a dark background and our site's title */
+.title-row {
+	width: 100%;
+
+	/* Space above and below the title */
+	padding-top: 5rem;
+	padding-bottom: 5rem;
+
+	background-color: rgb(0, 44, 122);
+
+	/* Center the title using flexbox */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* Style of the title inside the box */
+.title-row h1 {
+	font-size: 2.5rem;
+	color: white;
+	font-variant: small-caps;
+}
+
+.viz-row {
+	width: 100%;
+	/* Center the title using flexbox */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	margin-top: 2rem;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+
+	background-color: rgb(50, 50, 50);
+}
+
+figure > * {
+	width: 100%;
+	height: auto;
+}
+
+
+footer {
+	padding-bottom: 5rem;
+}
+
+button {
+	display: block;
+
+	margin: 0.75rem;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0.75rem;
+
+	border: 2px blue solid;
+	border-radius: 1rem;
+
+	background: rgb(150, 200, 255);
+
+	font-weight: bold;
+	font-size: 1.5rem;
+
+}
+
+textarea {
+	width: 100%;
+	height: 30rem;
+
+	font-family: sans-serif;
+	font-size: 1rem;
+}
+
+#plot-occurrences {
+	height: 18rem;
+
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	align-items: stretch;
+
+	color: white;
+	font-size: 1.3rem;
+}
+
+#plot-occurrences > div {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+#plot-occurrences .bar {
+	width: 2rem;
+
+	margin-bottom: 0.4rem;
+
+	background: rgb(240, 50, 10);
+}
+
+.label-value {
+	margin-top: 2rem;
+	margin-bottom: 0.25rem;
+	transform: rotate(90deg);
+
+	font-size: 0.8rem;
+}
