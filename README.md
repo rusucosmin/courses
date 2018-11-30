@@ -9,12 +9,12 @@
 * Functional Programmin (fp)
 * Machine Learning (ml)
 * A Network Tour of Data Science (ntp)
-* Statistics
+* Statistics (statistics)
+* Philosophy, epistemology and history of science I
 ```
 //Markon Chains and Algorithmic Applications
 //Computational Complexity
 ```
-* Philosophy, epistemology and history of science I
 
 ~~**Courses from the Faculty of Mathematics and Computer Science, Babes-Bolyai University**~~
 

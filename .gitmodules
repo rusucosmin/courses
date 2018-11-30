@@ -85,3 +85,6 @@
 [submodule "ada/homework-3-romanians-hw2"]
 	path = ada/homework-3-romanians-hw2
 	url = https://github.com/epfl-ada-2018/homework-3-romanians-hw2
+[submodule "fp/10-interpreter-rusucosmin"]
+	path = fp/10-interpreter-rusucosmin
+	url = https://github.com/lampepfl-courses/10-interpreter-rusucosmin
