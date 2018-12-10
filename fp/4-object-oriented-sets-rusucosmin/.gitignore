@@ -1,0 +1,18 @@
+# General
+*.DS_Store
+*.swp
+*~
+
+# Dotty
+*.class
+*.tasty
+*.hasTasty
+
+# sbt
+target/
+
+# Dotty IDE
+/.dotty-ide-artifact
+/.dotty-ide.json
+
+submission.jar
