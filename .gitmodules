@@ -19,9 +19,6 @@
 [submodule "fp/2-recursion-rusucosmin"]
 	path = fp/2-recursion-rusucosmin
 	url = git@github.com:lampepfl-courses/2-recursion-rusucosmin.git
-[submodule "fp/1-example-rusucosmin"]
-	path = fp/1-example-rusucosmin
-	url = git@github.com:lampepfl-courses/1-example-rusucosmin.git
 [submodule "ada/homework-0-romanians"]
 	path = ada/homework-0-romanians
 	url = git@github.com:epfl-ada-2018/homework-0-romanians.git
