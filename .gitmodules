@@ -29,7 +29,7 @@
 	path = ml/ML_course
 	url = git@github.com:epfml/ML_course.git
 [submodule "ntp"]
-	path = ntp
+	path = ntds/ntp
 	url = git@github.com:rusucosmin/ntp.git
 [submodule "ada/homework-1-romanians_hw1"]
 	path = ada/homework-1-romanians_hw1

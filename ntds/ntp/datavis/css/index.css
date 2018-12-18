@@ -1,0 +1,42 @@
+.background {
+    fill: #0077be;
+}
+
+.countries {
+    fill: #b0d0ab;
+}
+
+.airports {
+    fill: #036;
+    stroke: #6cb0e0;
+    stroke-width: 0.5px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+}
+
+.airports-new {
+    fill: red;
+    stroke: red;
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+}
+
+.route {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 0.5;
+}
+
+div.tooltip {	
+    position: absolute;			
+    text-align: center;			
+    padding: 4px;
+    font: 12px sans-serif;
+    background: lightsteelblue;	
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;			
+}

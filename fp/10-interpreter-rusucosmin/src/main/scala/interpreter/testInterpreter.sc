@@ -7,6 +7,23 @@ import Lisp._
 // Uncomment to enable tracing of each evaluation step
 // trace = true
 
+var factorial = """
+(def factorial
+  (lambda (n)
+    (if (= n 0)
+      1
+      (* n (factorial (- n 1)))))
+  (factorial 5))
+"""
+
+println(evaluate(factorial))
+
+val lispEx2 = """
+  (def (derive x expr) expr (derive (cons (quote x) (cons (quote +) (cons (quote y) (cons (quote +) 2 (quote x)))))))
+"""
+
+println(evaluate(lispEx2))
+
 val differences = """
 def (differences l)
   (def (reverse L acc) acc
