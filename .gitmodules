@@ -55,3 +55,6 @@
 [submodule "ada/homework-3-romanians-hw2"]
 	path = ada/homework-3-romanians-hw2
 	url = https://github.com/epfl-ada-2018/homework-3-romanians-hw2
+[submodule "ntds/-f"]
+	path = ntds/-f
+	url = https://github.com/rusucosmin/ntp
