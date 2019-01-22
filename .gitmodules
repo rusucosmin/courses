@@ -58,3 +58,6 @@
 [submodule "ntds/-f"]
 	path = ntds/-f
 	url = https://github.com/rusucosmin/ntp
+[submodule "ada/DataCluedo"]
+	path = ada/DataCluedo
+	url = https://github.com/epfl-ada-2018/DataCluedo

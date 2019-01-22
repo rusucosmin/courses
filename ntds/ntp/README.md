@@ -1,17 +1,17 @@
-# ntp
-Network Tour Project ✈️
+# A network topology analysis of the airline industry
 
-## TODO
-* Add charts for analysing central quantities
-  a. Graph visualisation (bonus with maps)
-  b. Add scatter plot for probabilities of outbound and inbound degree
-  c. Add plot for the probability of the number of stops of flights
-  d. Plot Clustering coefficient
+## About the Repository
+
+This repository contains our work for the A Network Tour of Data Science
+course. The notebook 'Airline Analysis' contains our code for the original
+part of the course. 
+
+## About the project
+
+The network of airlines spans the entire globe and enables us to travel from Greenland to Australia with only a few stops in-between. This network is composed of subnetworks corresponding to individual airlines. In this project, we analyze these airline networks to gain insight into what the structure of an airline’s flight network tells us about the airline. We discover how the topology of airline networks correlates with their price class and geographical location. We also discover that these same topological features in combination with robustness measures strongly correlate with the airlines average delay times. Using this information, we find competitors and give recommendations on how airlines could form strategic partnerships to increase their competitive advantage, by increasing the robustness and reach of their network.
 
 
-*Proposition*: for data interpretation look at whether the data indicates that flight routes data indicates that it is a random network (even if we know it won't match) and to check for the scale free network property.
-
-## Install
+## How to run the code
 
 ```
 # Clone the repository
