@@ -2,6 +2,17 @@
 
 **Courses from the Data Science master's at EPFL, Lausanne, Switzerland**
 
+## 2nd semester
+
+* Student seminar: security protocols and applications (spa)
+* Applied biostatistics (ab)
+* Stochastic processes (sp)
+* Information security and privacy (isp)
+* Lab in data science (lds)
+* Philosophy, epistemology and history of science II
+* Projet de semestre en data science
+* Systems for data science (sds)
+
 ## 1st semester
 
 * Applied Data Analysis (ada)
