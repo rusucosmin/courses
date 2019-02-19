@@ -22,9 +22,8 @@
 * [A Network Tour of Data Science (ntp)](https://edu.epfl.ch/coursebook/en/a-network-tour-of-data-science-EE-558)
 * [Statistics for Data Science (statistics)](http://smat.epfl.ch/courses/datasci.php)
 * [Philosophy, epistemology and history of science I](http://edu.epfl.ch/coursebook/en/philosophy-epistemology-and-history-of-science-i-HUM-417-A)
-
-~~[Markon Chains and Algorithmic Applications](https://edu.epfl.ch/coursebook/en/markov-chains-and-algorithmic-applications-COM-516)~~
-~~[Computational Complexity](https://edu.epfl.ch/coursebook/en/computational-complexity-CS-524)~~
+* ~~[Markon Chains and Algorithmic Applications](https://edu.epfl.ch/coursebook/en/markov-chains-and-algorithmic-applications-COM-516)~~
+* ~~[Computational Complexity](https://edu.epfl.ch/coursebook/en/computational-complexity-CS-524)~~
 
 ~~**Courses from the Faculty of Mathematics and Computer Science, Babes-Bolyai University**~~
 
