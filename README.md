@@ -17,7 +17,7 @@
 
 * [Applied Data Analysis (ada)](https://edu.epfl.ch/coursebook/en/applied-data-analysis-CS-401)
 * [Data Visualization (data-viz)](https://edu.epfl.ch/coursebook/en/data-visualization-COM-480)
-* [Functional Programming (fp)](Philosophy, epistemology and history of science II)
+* [Functional Programming (fp)](https://edu.epfl.ch/coursebook/en/functional-programming-CS-210)
 * [Machine Learning (ml)](https://edu.epfl.ch/coursebook/en/machine-learning-CS-433)
 * [A Network Tour of Data Science (ntp)](https://edu.epfl.ch/coursebook/en/a-network-tour-of-data-science-EE-558)
 * [Statistics for Data Science (statistics)](http://smat.epfl.ch/courses/datasci.php)
