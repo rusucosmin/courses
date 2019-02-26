@@ -8,6 +8,9 @@ fork := true
 
 libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % Test
 
+libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.5"
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.5" % "test"
+
 testOptions in Test += Tests.Argument(TestFrameworks.JUnit, "-a", "-v")
 
 commonSourcePackages += "common"
@@ -16,3 +19,4 @@ courseId := "bRPXgjY9EeW6RApRXdjJPw"
 
 // In case we want to use a Dotty version before it's fully released
 resolvers += Resolver.sonatypeRepo("staging")
+resolvers += "Artima Maven Repository" at "http://repo.artima.com/releases"

@@ -61,3 +61,6 @@
 [submodule "ada/DataCluedo"]
 	path = ada/DataCluedo
 	url = https://github.com/epfl-ada-2018/DataCluedo
+[submodule "isp/labs/lab1/com402-hw5ex1"]
+	path = isp/labs/lab1/com402-hw5ex1
+	url = https://github.com/ceyhunalp/com402-hw5ex1

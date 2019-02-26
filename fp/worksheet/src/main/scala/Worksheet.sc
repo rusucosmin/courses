@@ -29,3 +29,10 @@ def trianglesTrans(edges: DirectedGraph): List[(NodeId, NodeId, NodeId)] =
   }
 triangles(List((1, 2), (2, 3), (3, 1)))
 trianglesTrans(List((1, 2), (2, 3), (3, 1)))
+
+
+import org.scalatest.Matchers._
+
+List(1, 2, 2, 3, 3, 3) should contain theSameElementsAs Vector(3, 2, 3, 1, 2, 3)
+
+

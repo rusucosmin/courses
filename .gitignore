@@ -177,3 +177,8 @@ venv.bak/
 *.data
 
 *.npy
+
+.metals/
+.bloop/
+
+*.zip
