@@ -1,0 +1,599 @@
+
+<!-- saved from url=(0081)https://moodle.epfl.ch/pluginfile.php/2563279/mod_resource/content/2/lab-w02.html -->
+<html class="gr__moodle_epfl_ch"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Applied Biostatistics</title>
+
+<style>
+body {
+	background: #FFFFFF;
+	color: #000000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 16;
+	margin-top: 2.5% ; 		 	
+	margin-bottom: 0 ; 		
+	margin-right: 5% ;	 
+	margin-left: 5% ;
+	font-weight: normal
+}
+
+.tablesort {
+	cursor: pointer;
+	behavior: url(tablesort.htc);
+	-moz-binding: url(tablesort.htc);
+}
+
+H1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24pt;
+	font-style: normal;
+	font-weight: normal;
+	color: #FFFFFF;
+	background: rgb(35,35,165);
+	text-align: center
+}
+
+H2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20pt;
+	font-style: normal;
+	font-weight: normal;
+	color: #FFFFFF;
+        background: rgb(35,35,165)
+}
+
+H2.index {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18pt;
+	font-style: normal;
+	font-weight: normal;
+	color: #FFFFFF;
+	background: #000000;
+	margin: 10pt 5%
+}
+
+H3 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	font-style: italic;
+	font-weight: bold;
+        text-decoration: underline;
+	color: rgb(35,35,165)
+}
+
+H4 {
+	font-family: T, Helvetica, sans-serif;
+	font-size: 12pt;
+	font-style: italic;
+	font-weight: bold;
+	color: rgb(35,35,165);
+	line-height: 16pt
+}
+
+RCMD {
+        margin-left: 0.5in;
+        font-size: 18;
+	font-family: "Courier New";
+	font-weight: bolder;
+	color: rgb(35,35,165)
+}
+
+RCMD0 {
+        font-size: 18;
+	font-family: "Courier New";
+	font-weight: bolder;
+	color: rgb(35,35,165)
+}
+
+
+LI {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt
+}
+
+A {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	text-decoration: none
+}
+
+.caption {
+	font-style: italic
+}
+
+.title2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	font-style: normal;
+	font-weight: bold;
+	color: #004080
+}
+
+.equation{
+  font-weight: bold;
+}
+
+
+.partitle {
+	font-family:verdana, arial;
+	font-weight: bold
+}
+
+XMP {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12pt
+}
+
+.function {
+	font-family:courier;
+	color:rgb(50,50,205);
+        font-weight: bold;
+	font-size: 12pt
+}
+
+.command {
+	font-family:verdana, arial;
+	color:red
+}
+
+
+TR {
+	font-family: Arial, Helvetica, Times, Helvetica, sans-serif;
+	font-size: 12pt;
+	font-style: normal;
+	padding: 0 0
+}
+
+TR.firstline {
+	color: #FFFFFF;
+	background: #000000;
+	text-align:center;
+	font-weight: bold
+}
+TR.ListBackTitle {
+	color: #FFFFFF;
+	background: #000000;
+	text-align:left;
+	font-weight: bold
+}
+TD {
+	background:#FFFFFF;
+	padding: 0 0
+}
+TD.ListBackMain {
+	background: #E0E0E0;
+	padding: 0 0
+}
+TD.firstcolumn {
+	padding: 5 10;
+	background: #C0C0C0;
+	text-align:right
+}
+TD.cellinside {
+	padding: 5 10;
+	background: #FFFFFF;
+	text-align:right
+}
+/* CORRELATION MATRIX TRAFFIC HIGHLIGHT*/
+TD.corvarname {
+	background-color:"#FFFFFF";
+	color:black;
+	height: 1.1cm;
+	text-align: right;
+	font-weight: bold
+}
+TD.corsep {
+	width: 0.5cm
+}
+TD.cordiag {
+	background-color:#fffff;
+	color:white
+}
+TD.cor0 {
+	background-color:"#FFFFFF";
+	color:black;
+	width: 1.1cm;
+	height: 1.1cm;
+	text-align: center
+}
+TD.cor1 {
+	background-color:"#E6E6E6";
+	color:black;
+	width: 1.1cm;
+	height: 1.1cm;
+	text-align: center
+}
+TD.cor2 {
+	background-color:"#CCCCCC";
+	color:black;
+	width: 1.1cm;
+	height: 1.1cm;
+	text-align: center
+}
+TD.cor3 {
+	background-color:"#B3B3B3";
+	color:black;
+	width: 1.1cm;
+	height: 1.1cm;
+	text-align: center
+}
+TD.cor4 {
+	background-color:"#999999";
+	color:black;
+	width: 1.1cm;
+	height: 1.1cm;
+	text-align: center
+}
+TD.cor5 {
+	background-color:"#808080";
+	color:white;
+	width: 1.1cm;
+	height: 1.1cm;
+	text-align: center
+}
+TD.cor6 {
+	background-color:"#666666";
+	color:white;
+	width: 1.1cm;
+	height: 1.1cm;
+	text-align: center
+}
+TD.cor7 {
+	background-color:"#4D4D4D";
+	color:white;
+	width: 1.1cm;
+	height: 1.1cm;
+	text-align: center
+}
+TD.cor8 {
+	background-color:"#333333";
+	color:white;
+	width: 1.1cm;
+	height: 1.1cm;
+	text-align: center
+}
+TD.cor9 {
+	background-color:"#1A1A1A";
+	color:yellow;
+	width: 1.1cm;
+	height: 1.1cm;
+	text-align: center
+}
+TD.cor10 {
+	background-color:"#000000";
+	color:yellow;
+	width: 1.1cm;
+	height: 1.1cm;
+	text-align: center
+}
+TD.cellinsideLeft {
+	padding: 5 5;
+	background: #FFFFFF;
+	text-align:left
+}
+
+</style>
+
+<style type="text/css">
+@font-face {
+  font-weight: 400;
+  font-style:  normal;
+  font-family: 'Inter-Loom';
+
+  src: url('https://cdn.useloom.com/assets/fonts/inter/Inter-UI-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-weight: 400;
+  font-style:  italic;
+  font-family: 'Inter-Loom';
+
+  src: url('https://cdn.useloom.com/assets/fonts/inter/Inter-UI-Italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 500;
+  font-style:  normal;
+  font-family: 'Inter-Loom';
+
+  src: url('https://cdn.useloom.com/assets/fonts/inter/Inter-UI-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-weight: 500;
+  font-style:  italic;
+  font-family: 'Inter-Loom';
+
+  src: url('https://cdn.useloom.com/assets/fonts/inter/Inter-UI-MediumItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 700;
+  font-style:  normal;
+  font-family: 'Inter-Loom';
+
+  src: url('https://cdn.useloom.com/assets/fonts/inter/Inter-UI-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-weight: 700;
+  font-style:  italic;
+  font-family: 'Inter-Loom';
+
+  src: url('https://cdn.useloom.com/assets/fonts/inter/Inter-UI-BoldItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 900;
+  font-style:  normal;
+  font-family: 'Inter-Loom';
+
+  src: url('https://cdn.useloom.com/assets/fonts/inter/Inter-UI-Black.woff2') format('woff2');
+}
+@font-face {
+  font-weight: 900;
+  font-style:  italic;
+  font-family: 'Inter-Loom';
+
+  src: url('https://cdn.useloom.com/assets/fonts/inter/Inter-UI-BlackItalic.woff2') format('woff2');
+}</style></head>
+
+<body bgcolor="#FFFFFF" data-gr-c-s-loaded="true">
+<h1>Linear Regression Analysis</h1>
+The purpose of this TP is to practice using <b><rcmd0>R</rcmd0></b> for linear modeling.
+We will apply linear regression to two problems with data in the <rcmd0>HSAUR</rcmd0> package. To carry out these analyses, first install and then load the <rcmd0>R</rcmd0> 
+packages <rcmd0>HSAUR3</rcmd0> and <rcmd0>gamair</rcmd0>.
+<p></p>
+
+As usual, make sure that you read the <b><rcmd0>help</rcmd0></b>
+for any new functions that you use.
+<p></p>
+
+<br>
+
+<h2>Install R</h2>
+
+<p style="text-align: justify;">
+If you have not done so already, install <b><rcmd0>R</rcmd0></b>
+on your computer. You can find the software at the
+<i>Comprehensive R Archive Network</i>, or <b><rcmd0>CRAN<rcmd0></rcmd0></rcmd0></b>.
+There is a Swiss mirror site at
+<a href="http://cran.ch.r-project.org/">http://cran.ch.r-project.org/</a>.
+If you go to that site, you will find several links under �Documentation� 
+(the fourth major entry on the left side).
+�Official� documentation is available under �Manuals�; 
+other helpful documentation is under �Contributed�.
+</p>
+
+<p style="text-align:justify">
+If you are not used to using <b><rcmd0>R</rcmd0></b>, or if you
+need a refresher, you can work on the first few sections 
+(<b><rcmd0>Basic R</rcmd0></b> and the <b><rcmd0>hellung</rcmd0></b>
+data of 
+<a href="http://lausanne.isb-sib.ch/~darlene/gda/tp/tp0.html">TP 0</a>)
+</p>
+
+<p style="text-align:justify">
+To proceed, you will need to start <b><rcmd0>R</rcmd0></b>.
+You can copy/paste the code below at the <rcmd0>R</rcmd0> prompt.
+</p>
+
+
+<h2>Hubble data</h2>
+
+<p>
+Here, these data will be used to estimate the age of the universe. The <rcmd0>hubble</rcmd0> data are found in the
+the <rcmd0>gamair</rcmd0> package:
+</p>
+
+
+<p>
+<b>
+<rcmd>library(gamair) </rcmd>
+<br>
+<rcmd>data(hubble) </rcmd>
+<br>
+<rcmd>names(hubble) </rcmd>
+<br>
+</b>
+</p>
+
+<p style="text-align: justify;">
+Make sure to read the help about the <rcmd0>hubble</rcmd0> data.
+</p>
+
+<p style="text-align: justify;">
+The function <b><rcmd0>plot</rcmd0></b> is used to make a scatterplot of
+velocity (y) vs. distance (x) \- read the help for
+<rcmd0>plot</rcmd0>
+to see how it is used.
+You can access the components of <rcmd0>hubble</rcmd0> 
+using the <rcmd0>$</rcmd0> operator: <i>i.e.</i> 
+<rcmd0>hubble$x</rcmd0> for the <rcmd0>"x"</rcmd0> component.
+</p>
+
+<p style="text-align: justify;">
+Now fit a linear model to predict velocity from distance. Here, we will fit <b>without</b> an intercept term (`-1'), as it does not make physical sense in this case.
+</p>
+
+<p>
+<b>
+<rcmd>hmod &lt;- lm(y ~ x - 1, data=hubble) </rcmd> 
+<br>
+</b>
+</p>
+
+<p>
+and extract the estimated model coefficient via:
+</p>
+
+<p>
+<b>
+<rcmd>coef(hmod)</rcmd>
+</b>
+</p>
+
+<p style="text-align: justify;">
+You can visualize the results with a number of plots:
+</p>
+
+<p>
+<b>
+<rcmd>layout(matrix(1:2,ncol=2))</rcmd>
+<br>
+<rcmd>plot(y ~ x, data = hubble)</rcmd>
+<br>
+<rcmd>abline(hmod)</rcmd>
+<br>
+<rcmd>plot(hmod, which = 1)</rcmd>
+</b>
+</p>
+
+<p style="text-align: justify;">
+You can have a look at some of the other plot types for 
+<rcmd0>lm</rcmd0> objects by varying `which' between 1 and 6
+(you can also read the help for the plot method on an <rcmd0>lm</rcmd0>  object, <rcmd0>plot.lm</rcmd0>).
+
+
+
+</p><p style="text-align: justify;">
+We can use the estimated coefficient to find an approximate value for the age of the universe.
+The Hubble constant has units of km^(-1) x sec^(-1) x Mpc^(-1).
+A mega-parsec (Mpc) is 3.09 x 10^(19) km,
+so we need to divide the estimated value <b>b1</b> by this amount to obtain Hubble's constant wiht units of sec^(-1).
+The approximate age of the universe in seconds will then be
+the <i>inverse</i> of this calculation (you will want to 
+divide Mpc by the number of seconds in a year to obtain
+a result in years.
+</p>
+
+
+<p style="text-align: justify;">
+Carry out the appropriate calculations in <rcmd0>R</rcmd0>;
+you should obtain a result of approximately <b>12.8
+billion years</b>.
+</p>
+
+<br>
+
+<h2>Cloud Seeding Data</h2>
+
+<p style="text-align: justify;">
+After loading the <rcmd0>HSAUR3</rcmd0> package, have a look at
+the <rcmd0>clouds</rcmd0> dataset.
+In this problem, we are interested in modeling rainfall
+as a function of seeding and other variables.
+</p>
+
+<p style="text-align: justify;">
+Construct boxplots of rainfall in each category
+for the dichotomous variables and scatterplots for the
+continuous variables:
+</p>
+
+<p>
+<b>
+<rcmd>data("clouds", package = "HSAUR3")</rcmd>
+<br>
+
+<rcmd>layout(matrix(1:2, nrow = 2))
+<br>
+<rcmd>bxpseeding &lt;- boxplot(rainfall ~ seeding, data = clouds,
+  ylab = "Rainfall", xlab = "Seeding")
+<br>
+<rcmd>bxpecho &lt;- boxplot(rainfall ~ echomotion, data = clouds,
+  ylab = "Rainfall", xlab = "Echo Motion")
+
+<br>
+<rcmd>layout(matrix(1:4, nrow = 2))
+<br>
+<rcmd>plot(rainfall ~ time, data = clouds) 
+<br>
+<rcmd>plot(rainfall ~ cloudcover, data = clouds)
+<br> 
+<rcmd>plot(rainfall ~ sne, data = clouds) 
+<br>
+<rcmd>plot(rainfall ~ prewetness, data = clouds) 
+<br>
+<rcmd>clouds.formula &lt;- rainfall ~ seeding + 
+     seeding:(sne + cloudcover + prewetness + echomotion) + time
+<br>
+<rcmd>clouds.lm &lt;- lm(clouds.formula, data = clouds)
+<br>
+</rcmd></rcmd></rcmd></rcmd></rcmd></rcmd></rcmd></rcmd></rcmd></rcmd></b>
+</p>
+
+<p style="text-align: justify;">
+Get a <b><rcmd0>summary</rcmd0></b>
+of the model results and extract the coefficients as you did above.
+</p>
+
+<p>
+What do these results suggest?
+</p>
+
+<p style="text-align: justify;">
+Using the <rcmd0>lm</rcmd0> plotting method, you can examine 
+diagnostic plots for these results to assess model assumptions
+and identify any influential points. You could instead
+access the residuals and fitted values and make plots
+with those directly if you want:
+</p>
+
+<p>
+<rcmd>clouds.resid &lt;- residuals(clouds.lm)
+<br>
+<rcmd>clouds.fitted &lt;- fitted(clouds.lm)
+</rcmd></rcmd></p>
+
+<p>
+We can also look at the regression relationship between 
+S-Ne and rainfall with and without seeding:
+</p>
+
+<p>
+<rcmd>layout(1)
+<br>
+<rcmd>psymb &lt;- as.numeric(clouds$seeding)
+<br>
+<rcmd>plot(rainfall ~ sne, data = clouds, pch = psymb, xlab = "S-Ne criterion")
+<br>
+<rcmd>abline(lm(rainfall ~ sne, data = clouds,
+    subset = seeding == "no"))
+<br>
+<rcmd>abline(lm(rainfall ~ sne, data = clouds,
+    subset = seeding == "yes"), lty = 2)
+<br>
+<rcmd>legend("topright", legend = c("No seeding", "Seeding"),
+    pch = 1:2, lty = 1:2, bty = "n")
+
+</rcmd></rcmd></rcmd></rcmd></rcmd></rcmd></p>
+
+<p>
+Make sure you can interpret this plot. Is there an interaction between seeding and S-Ne? Explain.
+<br>
+</p>
+
+<p>
+&nbsp;
+<br>
+&nbsp;
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body><loom-container id="lo-engage-ext-container"><loom-shadow classname="resolved"></loom-shadow></loom-container></html>
