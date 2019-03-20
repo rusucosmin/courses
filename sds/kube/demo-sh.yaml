@@ -1,0 +1,19 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: demo-sh
+spec:
+  volumes:
+    - name: demo-storage
+      persistentVolumeClaim:
+       claimName: cs449g7-scratch
+  containers:
+    - name: demo-container
+      image: alpine
+      volumeMounts:
+        - mountPath: /data
+          name: demo-storage
+      stdin: true
+      tty: true
+      command: ["/bin/sh"]
+

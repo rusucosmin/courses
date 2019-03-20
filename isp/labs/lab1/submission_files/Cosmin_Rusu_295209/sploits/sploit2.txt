@@ -1,0 +1,25 @@
+I starting by looking into the source code. And found the
+obvious frequent error of looping in a string array from
+0 to the length of the array (instead of length of array
+minus one). This off by one error will allow us to exploit
+this target.
+
+The way we can exploit this is basically by overriding the
+least significant byte of the ebp stored on the stack, making
+it so that after the end of the method, the return address
+will point to our shellcode.
+
+So we can just override the least significant byte of ebp.
+
+The buffer size is again 240, since we can only modify the
+least signincant byte, I'll put the shellcode at the the
+end of the buffer flow, right before the character that will
+override the LSB of the ebp.
+
+In the beginning I will fill all the buffer with 'A's, and then
+override with the shellcode.
+
+Now, because when returning the assembly code does a `pop`, we
+we have to modify the ebp to point to 8 bytes below the, we will
+subtract 8 bytes from the ebp pointer and that will be
+the address we want to change the LSB of ebp in the end.

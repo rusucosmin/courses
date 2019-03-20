@@ -1,0 +1,42 @@
+So I've started looking into the code, sniffing around.
+The first thing that I've looked is into the buff method
+and the condition in the if before the memcpy instruction
+seems to protect the buffer overflow.
+
+Then, I've looked over the documentation of
+strtoul, and I've saw that it returns an unsigned int,
+then it's converted to int. That's a vulnerability right
+there.
+
+Basically, what if I type in a big number that, when
+converted to interger it returns a negative number?
+That would be awesome because the if condition
+in the buffer would pass since negative numbers are always
+less than a positive one.
+
+But we must give a positive integer to the memcpy
+argument. That's also interesting to do because,
+if we have an integer big enough, when multipled
+by the sizeof(struct) (which is 20), it will
+become positive again.
+
+So I've modified a little bit the target because
+I was lazy to do the math, and saw that 2147483889
+when converted to integer, will become -2147483407,
+and when multipled by 20, 4820. Exactly what we need,
+because the array of struct is a 20 * 240 bytes buffer.
+
+Once again, I've added 'A's in the whole buffer,
+then put the shellcode at the begining of it, and
+I override the return address to the address of the shell
+(which is the same as the address of the buff).
+
+Basically from here, it's the same trick as sploit1,
+I've used gdb to get the address of the buff as follows:
+
+* gdb -e ./sploit3 -s /tmp/target3
+* b 20
+* r
+* x/a buf
+
+Converted to little endian and hard coded in my args[1].

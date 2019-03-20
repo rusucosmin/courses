@@ -1,0 +1,25 @@
+So we have a buffer overflow with a buffer size of 240.
+
+I've put the shellcode at the beginning of the buffer. Basically our memory looks like this:
+
+--------------
+|return addr |
+|  ebp       |
+|------------| <- start of buffer
+|------------|
+|------------|
+|------------|
+|------------|
+...
+|------------|
+|------------| <- end of buffer
+
+The total size of buffer is 240 characters.
+
+So, we need to get the address of buff and override the return address witht that buff address.
+
+I've used gdb to get the buff starting address and override the return addr with that address,
+and I've put 'A' elsewhere between.
+
+For gdb, I've put a breakpoint before the strcpy function (line 14), and then runned the command
+x/a buf to get the address of the buffer.

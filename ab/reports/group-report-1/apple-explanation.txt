@@ -1,0 +1,35 @@
+
+Source: A.S. Horne, F.G. Gregory (1928). "A Quantitaive Study of Fungal
+Invasion of the Apple Fruit, and Its Bearing on the Nature of Disease
+Resistance. - Part II. The Application of the Statistical Method to Certain
+Specific Problems", Proceedings of the Royal Society of London. Series B,
+Containing Papers of a Biological Character, Vol.102,#719,pp.444-466
+
+Description: Rate of fungal invasion of 5 varieties of apples for 7 fusarium
+strains.
+
+Varieties:
+1=Bramley's Seedling, 1925-26 @12C. 70 Days
+2=Bramley's Seedling, 1924-25 @12C. 103 Days
+3=Cox's Orange Pippin, 1924-25 @12C. 54 Days
+4=Cox's Orange Pippin, 1924-25 @3C. 138 Days
+5=Cox's Orange Pippin, 1925-26 @12C. 89 Days
+
+Fusarium Strains:
+1=A
+2=B11
+3=B111
+4=C1
+5=C21
+6=C3
+7=D
+
+
+Variables/Columns
+Variety    8
+Fusarium Strain   16
+Days    22-24
+Apple Weight (grams)   27-32
+Radius (cm)   36-40
+Fungal Radial Advance (cm)  44-48
+Rate of advance (cm/day)   51-56
