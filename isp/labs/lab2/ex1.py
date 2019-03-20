@@ -17,7 +17,6 @@ def superencryption(msg, key):
   aux = bytes(aux, 'utf-8')
   return base64.b64encode(aux)
 
-
 def checklogin(user, pwd, key):
   enc = superencryption(user, key)
   return enc == bytes(pwd, 'utf-8')
