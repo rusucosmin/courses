@@ -27,6 +27,9 @@ N = decode_int(N)
 def sha256(msg):
   return decode_int(hashlib.sha256(msg.encode('utf-8')).hexdigest())
 
+def sha256_hex(msg):
+  return hashlib.sha256(msg.encode('utf-8')).hexdigest()
+
 assert(decode_int(encode_int(100)) == 100)
 assert(decode_int(encode_int(200)) == 200)
 assert(decode_int(encode_int(1)) == 1)
@@ -44,6 +47,7 @@ async def hello():
         print(f"< salt = {salt}")
 
         a = decode_int(secrets.token_hex(16))
+        print(f"<    a = {a}")
         A = pow(g, a, N)
         await websocket.send(encode_int(A))
         print(f"> A = {A}")
@@ -55,13 +59,13 @@ async def hello():
         p = 'LQoFCBtOXRcbF1UhRRgTAU8NSA=='
 
         u = sha256(encode_int(A) + encode_int(B))
-        x = sha256(encode_int(salt) + encode_int(sha256(U + ":" + p)))
+        x = sha256(encode_int(salt) + sha256_hex(U + ":" + p))
 
         S = pow((B - pow(g, x, N) + N) % N, a + u * x, N)
         print(f"> S = {S}")
-        snd = sha256(encode_int(A) + encode_int(B) + encode_int(S))
+        snd = sha256_hex(encode_int(A) + encode_int(B) + encode_int(S))
 
-        await websocket.send(encode_int(snd))
+        await websocket.send(encode_str(snd))
         recv = await websocket.recv()
         print(recv)
 
