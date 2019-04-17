@@ -16,54 +16,15 @@
 [submodule "cryptography"]
 	path = cryptography
 	url = https://github.com/rusucosmin/cryptography
-[submodule "ada/homework-0-romanians"]
-	path = ada/homework-0-romanians
-	url = git@github.com:epfl-ada-2018/homework-0-romanians.git
-[submodule "data-viz/dataviz-exercises"]
-	path = data-viz/dataviz-exercises
-	url = git@github.com:epfl-dataviz/dataviz-exercises.git
-[submodule "ada/ADA2018-Homework"]
-	path = ada/ADA2018-Homework
-	url = git@github.com:epfl-ada-2018/ADA2018-Homework.git
-[submodule "ml/ML_course"]
-	path = ml/ML_course
-	url = git@github.com:epfml/ML_course.git
 [submodule "ntp"]
 	path = ntds/ntp
 	url = git@github.com:rusucosmin/ntp.git
-[submodule "ada/homework-1-romanians_hw1"]
-	path = ada/homework-1-romanians_hw1
-	url = git@github.com:epfl-ada-2018/homework-1-romanians_hw1.git
 [submodule "ml/epfml"]
 	path = ml/epfml
 	url = git@github.com:rusucosmin/epfml.git
-[submodule "data-viz/dv"]
-	path = data-viz/dv
-	url = git@github.com:rusucosmin/dv.git
-[submodule "ada/homework-2-romanians-hw2"]
-	path = ada/homework-2-romanians-hw2
-	url = git@github.com:epfl-ada-2018/homework-2-romanians-hw2.git
 [submodule "ada/Project"]
 	path = ada/Project
 	url = git@github.com:alex-mocanu/Project.git
-[submodule "ada/ADA2018-Tutorials"]
-	path = ada/ADA2018-Tutorials
-	url = https://github.com/epfl-ada-2018/ADA2018-Tutorials
-[submodule "ada/homework-4-romanians-hw2"]
-	path = ada/homework-4-romanians-hw2
-	url = https://github.com/epfl-ada-2018/homework-4-romanians-hw2
-[submodule "ada/homework-3-romanians-hw2"]
-	path = ada/homework-3-romanians-hw2
-	url = https://github.com/epfl-ada-2018/homework-3-romanians-hw2
-[submodule "ntds/-f"]
-	path = ntds/-f
+[submodule "ntds"]
+	path = ntds/
 	url = https://github.com/rusucosmin/ntp
-[submodule "ada/DataCluedo"]
-	path = ada/DataCluedo
-	url = https://github.com/epfl-ada-2018/DataCluedo
-[submodule "isp/labs/lab1/com402-hw5ex1"]
-	path = isp/labs/lab1/com402-hw5ex1
-	url = https://github.com/ceyhunalp/com402-hw5ex1
-[submodule "lds/homework1"]
-	path = lds/homework1
-	url = git@git-dslab.epfl.ch:abelian/homework1.git

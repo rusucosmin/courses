@@ -1,0 +1,3 @@
+YOUR_SCIPER=295209
+GRADE=5.5
+FEEDBACK=I was a little bit lost on the math side, so in the future I think it would be good if you can introduce non-familar people with the simple concepts.

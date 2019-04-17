@@ -1,0 +1,41 @@
+Ex1
+
+Since I was already familiar with Flask, this exercise was pretty straight-forward.
+I just had to lookup some documentation into how to set the status code in the
+response. For testing the requests, I've used Postman - a GUI interface for
+making requests.
+My implementation can be seen in ex1.py.
+
+Ex2
+
+Once again, this exercise was also pretty straight-forward if you read everything
+careful. I had some problems with encoding and decoding the integers and strings,
+but besides that, everything was very only about implementation.
+
+Ex3
+
+In thie exercise, once again, I had to see how to give cookies with Flask.
+Moreover, I had a problem that I didn not base64-encode the cookies and
+asked that on the forum. Thumbs up for the TAs for clearly helping me here.
+
+Initially, I've encoded only some parts of the cookies (user type), and did not
+got full points. So I figured I should get maximum points if I encode
+all the information. I've used the standard libraries for encryption and decryption.
+
+Ex4
+
+I've used NGINX before for my personal website and every added HTTPS support using
+Let's Encrypt, so once again, I was quite familiar with this task.
+
+Ex4 a
+
+I just Googled how to add https to nginx, quickly came across a helpful article, and added
+the neccesary lines of code to the nginx config file, after generating the certificate using
+openssl.
+
+Ex4 b
+
+For this task, I've Googled how to make a signed certificate request using openssl, runned
+the command, got the .csr file and sumbitted it to the DEDIS-CA. DEDIS-CA gave me
+back the signed certificate, and so I just updated the files on the Docker image, and restarted
+the server.
