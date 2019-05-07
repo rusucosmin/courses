@@ -43,9 +43,25 @@ def count_ratings(db, movies, rating_levels):
     k = len(movies)
     assert len(movies) == len(rating_levels) == k
 
-    # TODO: Write your code here.
+    epsilon = np.log(2) / k
+    lap_scale = 1 / epsilon
 
-    return []
+    q_ids = [movie + str(rating) for movie, rating in zip(movies, rating_levels)]
+
+    for m, r in zip(movies, rating_levels):
+      q_id = m + str(r)
+
+      if q_id in noise_cache:
+        continue
+
+      contor = 0
+      for i in range(len(db)):
+        if db[i][1] == m and db[i][3] >= r:
+          contor += 1
+
+      noise_cache[q_id] = np.random.laplace(contor, lap_scale)
+
+    return [noise_cache[q_ids[x]] for x in range(k)]
 
 
 if __name__ == "__main__":

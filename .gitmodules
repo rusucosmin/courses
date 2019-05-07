@@ -28,3 +28,9 @@
 [submodule "ntds"]
 	path = ntds/
 	url = https://github.com/rusucosmin/ntp
+[submodule "sds/hw"]
+	path = sds/hw
+	url = git@github.com:rusucosmin/hw.git
+[submodule "lds/final_project"]
+	path = lds/final_project
+	url = git@git-dslab.epfl.ch:abelian/final_project.git
