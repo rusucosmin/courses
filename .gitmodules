@@ -34,3 +34,6 @@
 [submodule "lds/final_project"]
 	path = lds/final_project
 	url = git@git-dslab.epfl.ch:abelian/final_project.git
+[submodule "ia/EPFL_IntelligentAgents"]
+	path = ia/EPFL_IntelligentAgents
+	url = https://github.com/msorins/EPFL_IntelligentAgents

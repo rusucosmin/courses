@@ -2,6 +2,13 @@
 
 **Courses from the Data Science master's at EPFL, Lausanne, Switzerland**
 
+## 3rd semester
+
+* [Cryptography and security (cas)](https://edu.epfl.ch/coursebook/en/cryptography-and-security-COM-401)
+* [Information theory and signal processing (itsp)](https://edu.epfl.ch/coursebook/en/information-theory-and-signal-processing-COM-406)
+* [Intelligent agents (ia)](https://edu.epfl.ch/coursebook/en/intelligent-agents-CS-430)
+* [Optional project in data science (op)](https://edu.epfl.ch/coursebook/en/optional-project-in-data-science-COM-508)
+
 ## 2nd semester
 
 * [Student seminar: security protocols and applications (spa)](http://edu.epfl.ch/coursebook/en/student-seminar-security-protocols-and-applications-COM-506)
