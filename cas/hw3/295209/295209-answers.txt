@@ -1,0 +1,7 @@
+Sciper = 295209
+Worked with (list all): 
+Q1_p = 45894534434791130311964339708021975821307604444960975655715039
+Q2_r = [1, 1, 2, 2, 2, 2, 2, 1, 2, 2, 1, 2, 1, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 0, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2]
+Q3_prime = 11309656784044988994800258097901871205626315383135188984097086241862271204306892711934852704993816827326645343922987633730003835291578988418330974435148631
+Q4_K = 26626846626646155608569733914783910143787220454331637563216453515335215769741782270259626687992862523394042891216841966910322426959800288927411609077882482889306983469739249193865881813966
+Q5_pt = "Revenge? Revenge! The King under Joyous is dead and where are his kin that dare seek revenge? Girion Lord of Lyres is dead, and I have eaten his people like a wolf among sheep, and where are his sons' sons that dare approach me? I kill where I wish and none dare resist. I laid low the warriors of old and their like is not in the world today. Then I was but young and tender. Now I am old and strong, strong, strong, Thief in Gulfs!"
