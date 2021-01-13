@@ -1,5 +1,8 @@
 # Courses
 
+# Are you looking for a job? We are hiring at @dutylabs. Please reach out to me!
+
+
 **Courses from the Data Science master's at EPFL, Lausanne, Switzerland**
 
 ## 3rd semester

@@ -37,3 +37,9 @@
 [submodule "ia/EPFL_IntelligentAgents"]
 	path = ia/EPFL_IntelligentAgents
 	url = https://github.com/msorins/EPFL_IntelligentAgents
+[submodule "thesis/bertviz"]
+	path = thesis/bertviz
+	url = https://github.com/jessevig/bertviz.git
+[submodule "dela-touch-typing"]
+	path = dela-touch-typing
+	url = git@github.com:mapaaa/dela-touch-typing.git

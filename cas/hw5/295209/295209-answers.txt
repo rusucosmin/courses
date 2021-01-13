@@ -1,0 +1,7 @@
+Sciper = 295209
+Worked with (list all):
+Q1_pwd = 
+Q2_h = "BmYu9sCQcw2T1mCP78qdJFqhkMWJ+Hk1ZqW09el4WO99OTdoHofk6pGtBtpUmmogcvZuLwMZGRFK38lHUbsaVqA0dKgtnQimY7S61Q=="
+Q3_w = "|aN;lWv_A%fT:0"
+Q4_hiding = 
+Q4_r = 
